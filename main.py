@@ -2,6 +2,7 @@ import os
 import os.path
 import random
 import time
+import re
 
 # from scripts.pddl_planner import PDDLPlanner
 from scripts.python_planner import PythonPlanner
@@ -147,13 +148,9 @@ def temp2():
     :return:
     """
     for num in range(1, 2):
-        im1 = f"/home/changmin/PycharmProjects/GPT_examples/data/bin_packing/property_search_database/obj{num}/obj{num}_side_base_image.jpg"
-        im2 = f"/home/changmin/PycharmProjects/GPT_examples/data/bin_packing/property_search_database/obj{num}/obj{num}_top_base_image.jpg"
+        im1 = f"/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/property_search_database/obj{num}/obj{num}_side_base_image.jpg"
+        im2 = f"/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/property_search_database/obj{num}/obj{num}_top_base_image.jpg"
         args = parse_args_v2()
-        image_number = 8
-        exp_number = 8
-        args.exp_name = f"20240418_train_problem{image_number}_{exp_number}"
-        args.input_image = f"train/problem{image_number}.jpg"
         args.max_predicates = random.randint(1, 6)
 
         # prompt
@@ -178,7 +175,7 @@ Object Name: color_dimension_shape object
 *Example: white_3D_cube object
 
 Descriptions about object
-*your descriptions in 300 words
+*your descriptions in 200 words
 
 """
         print(prompt)
@@ -196,7 +193,19 @@ Descriptions about object
         print(ans)
         print(f"time: {end_time - start_time} s ")
         print("-"*50)
+        print(parse_object_description(ans))
+
+
+def parse_object_description(input_string):
+    # Extract object name
+    name_match = re.search(r"Object Name: ([\w\d_]+) object", input_string)
+    if not name_match:
+        raise ValueError("Object name not found in the input string.")
+    object_name = name_match.group(1)
+
+    color, dimension, shape = object_name.split("_")
+    return {object_name: [color, dimension, shape]}
 
 
 if __name__ == '__main__':
-    temp3()
+    temp2()

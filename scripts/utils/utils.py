@@ -8,17 +8,20 @@ import numpy as np
 def parse_args_v2():
     parser = argparse.ArgumentParser()
 
-    # task and experiment setting
+    # task setting
     parser.add_argument("--task_name", type=str or int, default=None, help="domain name")
-    parser.add_argument("--exp_name", type=str, default=None, help="Experiment name")
+    parser.add_argument("--exp_name", type=str, default=None, help="experiment name")
+    parser.add_argument("--exp_number", type=int, default=0, help="experiment number")
     parser.add_argument("--is_save", type=bool, default=True, help="save the response")
+
+    # experiment setting
     parser.add_argument("--max_predicates", type=int, default=5, help="number of predicates you want to generate")
+    parser.add_argument("--use_database", type=bool, default=True, help="use exist database")
 
     # additional path
     parser.add_argument("--data_dir", type=str, default="/home/changmin/PycharmProjects/OPTPlan/data", help="")
     parser.add_argument("--json_dir", type=str, default="/home/changmin/PycharmProjects/OPTPlan/data/json", help="")
     parser.add_argument("--result_dir", type=str, default="/home/changmin/PycharmProjects/OPTPlan/new_result/train", help="")
-    parser.add_argument("--input_image", type=str, default=None, help="image name from data_dir")
 
     # json_dir
     parser.add_argument("--api_json", type=str, default=None, help="")

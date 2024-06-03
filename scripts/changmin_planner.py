@@ -1,6 +1,7 @@
 import json
 import os
 import subprocess
+import re
 from datetime import datetime
 
 import cv2
@@ -23,9 +24,9 @@ class ChangminPlanner:
         self.exp_name = args.exp_name
 
         if args.exp_number:
-            self.exp_number = args.exp_number
+            self.exp_number = str(args.exp_number)
         else:
-            self.exp_number = 0
+            self.exp_number = str(0)
 
         self.is_save = args.is_save
         self.max_predicates = args.max_predicates
@@ -51,6 +52,7 @@ class ChangminPlanner:
 
         # additional path
         self.database_path = os.path.join(self.data_dir, self.task, "property_search_dataset")
+        self.database = {}
 
         # read json data
         self.example_data = self.get_json_data(self.example_json)
@@ -496,26 +498,37 @@ class ChangminPlanner:
             json.dump(self.state, file, indent=4)
             file.close()
 
-    def initialize_database(self):
-        for object_num in range(1, 31):
-            root = os.path.join(self.database_path, f"obj{object_num}")
-            data_path = list_file(root)
-            data_path = sort_files(data_path)
+    def initialize_database(self, object_num):
+        root = os.path.join(self.database_path, f"obj{object_num}")
+        data_path = list_file(root)
+        data_path = sort_files(data_path)
 
-            is_push, is_fold, is_pull = False, False, False
-            for data_name in data_path:
-                if "push" in data_name:
-                    is_push = True
-                    continue
-                if "fold" in data_name:
-                    is_fold = True
-                    continue
-                if "pull" in data_name:
-                    is_pull = True
-                    continue
+        is_push, is_fold, is_pull = False, False, False
+        for data_name in data_path:
+            if "push" in data_name:
+                is_push = True
+                continue
+            if "fold" in data_name:
+                is_fold = True
+                continue
+            if "pull" in data_name:
+                is_pull = True
+                continue
 
-            system_message, prompt = self.load_prompt.load_verification_module([is_push, is_fold, is_pull])
-            self.gpt_interface_vision.reset_message()
-            self.gpt_interface_vision.add_message(role="system", content=system_message, image_url=False)
-            self.gpt_interface_vision.add_message(role="user", content=prompt, image_url=data_path)
+        system_message, prompt = self.load_prompt.load_verification_module([is_push, is_fold, is_pull])
+        self.gpt_interface_vision.reset_message()
+        self.gpt_interface_vision.add_message(role="system", content=system_message, image_url=False)
+        self.gpt_interface_vision.add_message(role="user", content=prompt, image_url=data_path)
+        answer = self.gpt_interface_vision.run_prompt()
+
+        def parse_object_description(input_string):
+            # Extract object name
+            name_match = re.search(r"Object Name: ([\w\d_]+) object", input_string)
+            if not name_match:
+                raise ValueError("Object name not found in the input string.")
+            object_name = name_match.group(1)
+
+            color, dimension, shape = object_name.split("_")
+            return {object_name: [color, dimension, shape]}
+        object_data = parse_object_description(answer)
 
