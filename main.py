@@ -11,7 +11,7 @@ from scripts.utils.utils import parse_args_v2
 def main():
     """
     --task_name
-    bin_packing
+    bin_packing, 이건 새로운 커밋용 수정이야. 하하하
 
     --exp_name
     packing_all
