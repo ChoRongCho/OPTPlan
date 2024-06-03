@@ -10,7 +10,7 @@ from tabulate import tabulate
 from scripts.gpt_model.gpt_interface import GPTInterpreter
 from scripts.temp_robot.robot_predicates_prove import RobotProve
 from scripts.utils.prompt_function import PromptSet
-from scripts.utils.utils import parse_input
+from scripts.utils.utils import parse_input, list_file, sort_files
 from scripts.visual_interpreting.visual_interpreter import FindObjects
 from scripts.utils.models import WorldDomain
 
@@ -19,8 +19,14 @@ class ChangminPlanner:
     def __init__(self, args):
 
         # task and experiment setting
-        self.task = args.task_name
+        self.task = args.task_name  # bin_packing
         self.exp_name = args.exp_name
+
+        if args.exp_number:
+            self.exp_number = args.exp_number
+        else:
+            self.exp_number = 0
+
         self.is_save = args.is_save
         self.max_predicates = args.max_predicates
         self.patience_repeat = 3
@@ -30,23 +36,28 @@ class ChangminPlanner:
         self.args = args
         self.json_dir = args.json_dir
         self.data_dir = args.data_dir
+        self.result_dir = os.path.join(args.result_dir, self.exp_name + "_try" + self.exp_number)
 
-        # additional path
-        self.result_dir = os.path.join(args.result_dir, self.exp_name)
-        self.domain_image = os.path.join(self.data_dir, self.task, args.input_image)
+        # domain path
+        self.image_side = os.path.join(self.data_dir, self.task, "task_planning", self.exp_name, "side_observation_1.png")
+        self.image_top = os.path.join(self.data_dir, self.task, "task_planning", self.exp_name, "top_observation_1.png")
+        self.domain_image = [self.image_top, self.image_side]
+        self.task_json = os.path.join(self.data_dir, self.task, "task_planning", self.exp_name, "instructions.json")
 
         # json_dir
         self.api_json = os.path.join(self.json_dir, args.api_json)
         self.example_json = os.path.join(self.json_dir, args.example_prompt_json)
         self.robot_json = os.path.join(self.json_dir, args.robot_json)
-        self.task_json = os.path.join(self.json_dir, args.task_json)
+
+        # additional path
+        self.database_path = os.path.join(self.data_dir, self.task, "property_search_dataset")
 
         # read json data
         self.example_data = self.get_json_data(self.example_json)
         self.robot_data = self.get_json_data(self.robot_json)
         self.task_data = self.get_json_data(self.task_json)
 
-        self.task_description = self.task_data["script"]["task_description"]
+        self.task_description = self.task_data["task_description"]
         self.api_key, self.setting = self.get_api_key()
 
         # Initialize Class for planning
@@ -80,7 +91,6 @@ class ChangminPlanner:
         self.table = [["Project Time", datetime.now()],
                       ["Task", self.task],
                       ["Exp_Name", self.exp_name],
-                      ["Input Image", self.args.input_image],
                       ["API JSON", self.args.api_json],
                       ["Example Prompt", self.args.example_prompt_json],
                       ["Max Predicates", self.args.max_predicates]]
@@ -174,7 +184,6 @@ class ChangminPlanner:
         push_img, fold_img, pull_img = self.robot.identifying_properties()
         self.gpt_interface_vision.add_message(role="system", content=self.robot.database.system_message)
         self.gpt_interface_vision.add_message(role="user")
-
 
     def get_predicates(self, detected_object, detected_object_types, active_predicates):
         """
@@ -486,3 +495,27 @@ class ChangminPlanner:
         with open(json_state_path, "w") as file:
             json.dump(self.state, file, indent=4)
             file.close()
+
+    def initialize_database(self):
+        for object_num in range(1, 31):
+            root = os.path.join(self.database_path, f"obj{object_num}")
+            data_path = list_file(root)
+            data_path = sort_files(data_path)
+
+            is_push, is_fold, is_pull = False, False, False
+            for data_name in data_path:
+                if "push" in data_name:
+                    is_push = True
+                    continue
+                if "fold" in data_name:
+                    is_fold = True
+                    continue
+                if "pull" in data_name:
+                    is_pull = True
+                    continue
+
+            system_message, prompt = self.load_prompt.load_verification_module([is_push, is_fold, is_pull])
+            self.gpt_interface_vision.reset_message()
+            self.gpt_interface_vision.add_message(role="system", content=system_message, image_url=False)
+            self.gpt_interface_vision.add_message(role="user", content=prompt, image_url=data_path)
+

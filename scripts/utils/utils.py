@@ -15,18 +15,15 @@ def parse_args_v2():
     parser.add_argument("--max_predicates", type=int, default=5, help="number of predicates you want to generate")
 
     # additional path
-    parser.add_argument("--data_dir", type=str, default="/home/changmin/PycharmProjects/GPT_examples/data", help="")
-    parser.add_argument("--json_dir", type=str, default="/home/changmin/PycharmProjects/GPT_examples/data/json",
-                        help="")
-    parser.add_argument("--result_dir", type=str,
-                        default="/home/changmin/PycharmProjects/GPT_examples/new_result/train", help="")
+    parser.add_argument("--data_dir", type=str, default="/home/changmin/PycharmProjects/OPTPlan/data", help="")
+    parser.add_argument("--json_dir", type=str, default="/home/changmin/PycharmProjects/OPTPlan/data/json", help="")
+    parser.add_argument("--result_dir", type=str, default="/home/changmin/PycharmProjects/OPTPlan/new_result/train", help="")
     parser.add_argument("--input_image", type=str, default=None, help="image name from data_dir")
 
     # json_dir
     parser.add_argument("--api_json", type=str, default=None, help="")
     parser.add_argument("--example_prompt_json", type=str, default=None, help="")
     parser.add_argument("--robot_json", type=str, default=None, help="")
-    parser.add_argument("--task_json", type=str, default=None, help="")
 
     # related to problem generation and refinement
     parser.add_argument("--seed", type=int, default=42, help="random seed")

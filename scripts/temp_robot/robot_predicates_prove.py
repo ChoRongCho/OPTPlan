@@ -75,7 +75,7 @@ class RobotProve(Robot):
 
     def identifying_properties(self, images: list or False = False):
         if not images:
-            # self.database_path 내의 모든 이미지를 data로 불러오
+            # self.database_path 내의 모든 이미지를 data로 불러오기
             pass
         skills = self.database.skill_predicates_pair.keys()
         # push

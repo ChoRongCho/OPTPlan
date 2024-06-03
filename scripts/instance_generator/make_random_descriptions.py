@@ -89,7 +89,7 @@ def select_rules(base_rule, rule_list, sim_rule1, sim_rule2, sim_rule3):
 
 
 def main():
-    root_folder = '/home/changmin/PycharmProjects/GPT_examples/data/bin_packing/task_planning'
+    root_folder = '/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/task_planning'
     total_json = {}
 
     # Creating folders and saving JSON files.
@@ -98,13 +98,15 @@ def main():
         folder_path = os.path.join(root_folder, folder_name)
 
         data = {
-            "task": "bin_packing",
-            "goals": select_goals(base_goal_list, goal_list),
-            "rules": select_rules(base_rule, rule_list, sim_rule1, sim_rule2, sim_rule3)
+            "bin_packing": {
+                "task_description": "packing objects into the bin",
+                "goals": select_goals(base_goal_list, goal_list),
+                "rules": select_rules(base_rule, rule_list, sim_rule1, sim_rule2, sim_rule3)
+            }
         }
         total_json[folder_name] = {
-            "goal": data["goals"],
-            "rule": data["rules"]
+            "goal": data["bin_packing"]["goals"],
+            "rule": data["bin_packing"]["rules"]
         }
 
         # make folder

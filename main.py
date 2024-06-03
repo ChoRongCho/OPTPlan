@@ -88,7 +88,7 @@ def sort_files(file_list):
 
 def temp3():
     for obj_num in range(2, 3):
-        root = f"/home/changmin/PycharmProjects/GPT_examples/data/bin_packing/property_search_database/obj{obj_num}"
+        root = f"/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/property_search_database/obj{obj_num}"
         data_path = list_file(root)
         data_path = sort_files(data_path)
 
@@ -146,7 +146,7 @@ def temp2():
     obj3: soft, not foldable elastic
     :return:
     """
-    for num in range(1, 9):
+    for num in range(1, 2):
         im1 = f"/home/changmin/PycharmProjects/GPT_examples/data/bin_packing/property_search_database/obj{num}/obj{num}_side_base_image.jpg"
         im2 = f"/home/changmin/PycharmProjects/GPT_examples/data/bin_packing/property_search_database/obj{num}/obj{num}_top_base_image.jpg"
         args = parse_args_v2()
@@ -181,7 +181,7 @@ Descriptions about object
 *your descriptions in 300 words
 
 """
-
+        print(prompt)
         # make plan
         planner = PythonPlanner(args=args)
         # print(system_message)
@@ -199,4 +199,4 @@ Descriptions about object
 
 
 if __name__ == '__main__':
-    temp2()
+    temp3()

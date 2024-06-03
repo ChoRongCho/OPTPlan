@@ -202,6 +202,9 @@ class Robot:
         :return:
         """
         n = 1
+        system_message = "You are a vision AI that describes the shape and color of an object. " + \
+                         "You should look at a picture of a given object and explain its size and color."
+
         prompt = "\nThe first image is a original image of object. Please refer to this image and answer. \n\n"
         end_message = f"""Please answer with the template below:  
 
@@ -241,7 +244,7 @@ Reason:
             n += 2
             prompt += m3
         prompt += end_message
-        return prompt
+        return system_message, prompt
 
 
 class PromptSetPDDL:
