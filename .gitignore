@@ -1,0 +1,13 @@
+class_pracc.py
+main_two.py
+data/json/setting.json
+data/json/setting_creative.json
+my_personal.json
+.vscode/
+response/my_vision
+response/20240220_robot_action
+response/test1
+response/test2
+response/domain_test
+my_memos/
+scripts/instance_generator
