@@ -6,5 +6,7 @@ response/20240220_robot_action
 response/test1
 response/test2
 response/domain_test
+data/json/setting.json
+data/json/setting_creative.json
 my_memos/
 scripts/instance_generator
