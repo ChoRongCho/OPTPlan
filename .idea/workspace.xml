@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d200a544-aab7-4e00-9f81-e79a11b7bcc1" name="Changes" comment="commit 20240604" />
+    <list default="true" id="d200a544-aab7-4e00-9f81-e79a11b7bcc1" name="Changes" comment="commit 20240604">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,6 +51,11 @@
     "last_opened_file_path": "/home/changmin/PycharmProjects/OPTPlan/data/json"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/json" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="class_pracc" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OPTPlan" />
@@ -114,8 +121,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.class_pracc" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.class_pracc" />
       <item itemvalue="Python.make_random_descriptions" />
     </list>
     <recent_temporary>
@@ -134,6 +141,15 @@
       <option name="presentableId" value="Default" />
       <updated>1717393953802</updated>
     </task>
+    <task id="LOCAL-00001" summary="commit 20240604">
+      <option name="closed" value="true" />
+      <created>1717473693663</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1717473693663</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -142,6 +158,11 @@
         <entry key="Branch">
           <value>
             <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="HEAD" />
