@@ -29,6 +29,7 @@ def parse_args_v2():
     parser.add_argument("--robot_json", type=str, default=None, help="")
 
     # related to problem generation and refinement
+    parser.add_argument("--mkdb", type=bool, default=False, help="make database")
     parser.add_argument("--seed", type=int, default=42, help="random seed")
 
     args = parser.parse_args()
@@ -103,7 +104,6 @@ def list_file(directory):
 
 
 def sort_files(file_list):
-    # 키워드와 우선순위 매핑
     keyword_order = {
         'base': 0,
         'push': 1,
@@ -111,13 +111,22 @@ def sort_files(file_list):
         'pull': 3
     }
 
-    # 파일명에서 키워드 추출 및 정렬
     def get_keyword(file_name):
         for keyword in keyword_order:
             if keyword in file_name:
                 return keyword_order[keyword], file_name
-        return len(keyword_order), file_name  # 키워드가 없으면 마지막에 정렬
+        return len(keyword_order), file_name
 
     # 파일 목록 정렬
     sorted_files = sorted(file_list, key=get_keyword)
     return sorted_files
+
+
+def subdir_list(folder_path):
+    all_list = []
+    for item in os.listdir(folder_path):
+        item_path = os.path.join(folder_path, item)
+        if os.path.isdir(item_path):
+            if "obj" in item_path:
+                all_list.append(item_path)
+    return all_list

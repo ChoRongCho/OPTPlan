@@ -1,4 +1,5 @@
 from typing import List
+
 from scripts.utils.utils import int_to_ordinal
 
 
@@ -191,7 +192,7 @@ class Robot:
         prompt += f"Create and return a goal state of objects for {self.task}. \n"
         return prompt
 
-    def load_verification_module(self, available_actions: list[bool]):
+    def load_verification_message(self, available_actions: list[bool]):
         """
         prompt: base image
         m1: push

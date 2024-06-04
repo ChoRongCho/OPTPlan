@@ -6,6 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d200a544-aab7-4e00-9f81-e79a11b7bcc1" name="Changes" comment="commit 20240604">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/database.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/database.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/changmin_planner.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/changmin_planner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/temp_robot/robot_predicates_prove.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/temp_robot/robot_predicates_prove.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/utils/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +17,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -48,7 +57,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/changmin/PycharmProjects/OPTPlan/data/json"
+    "last_opened_file_path": "/home/changmin/PycharmProjects/OPTPlan"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -56,7 +65,7 @@
       <recent name="$PROJECT_DIR$/data/json" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.class_pracc">
     <configuration name="class_pracc" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OPTPlan" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -149,7 +158,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717473693663</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="commit 20240604">
+      <option name="closed" value="true" />
+      <created>1717474148988</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1717474148988</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

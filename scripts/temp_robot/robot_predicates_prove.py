@@ -1,4 +1,5 @@
 import os
+
 from scripts.temp_robot.robot import Robot
 from scripts.utils.utils import list_file, sort_files
 
@@ -67,11 +68,8 @@ class RobotProve(Robot):
                 is_pull = True
                 continue
 
-
-
     def get_datapath(self, name):
         pass
-
 
     def identifying_properties(self, images: list or False = False):
         if not images:
@@ -97,5 +95,3 @@ class RobotProve(Robot):
                 pull_image.append(image)
 
         return push_image, fold_image, pull_image
-
-

@@ -11,7 +11,7 @@ from tabulate import tabulate
 from scripts.gpt_model.gpt_interface import GPTInterpreter
 from scripts.temp_robot.robot_predicates_prove import RobotProve
 from scripts.utils.prompt_function import PromptSet
-from scripts.utils.utils import parse_input, list_file, sort_files
+from scripts.utils.utils import parse_input, list_file, sort_files, subdir_list
 from scripts.visual_interpreting.visual_interpreter import FindObjects
 from scripts.utils.models import WorldDomain
 
@@ -52,6 +52,7 @@ class ChangminPlanner:
 
         # additional path
         self.database_path = os.path.join(self.data_dir, self.task, "property_search_dataset")
+        self.object_list = []
         self.database = {}
 
         # read json data
@@ -88,6 +89,20 @@ class ChangminPlanner:
         self.world_model = WorldDomain
         self.state = {}
         self.print_args()
+
+        if self.args.mkdb:
+            # make Database using object image
+            self.object_list = subdir_list(self.database_path)
+            for root in self.object_list:
+                self.initialize_database(root)
+
+                # save database
+                if args.is_save:
+                    pass
+
+        else:
+            # use exist database
+            self.database = self.get_json_data(os.path.join(self.database_path, "database.json"))
 
     def print_args(self):
         self.table = [["Project Time", datetime.now()],
@@ -182,10 +197,10 @@ class ChangminPlanner:
 
         return active_predicates, detected_object_predicates
 
-    def temp_get_obj_predicates(self):
-        push_img, fold_img, pull_img = self.robot.identifying_properties()
-        self.gpt_interface_vision.add_message(role="system", content=self.robot.database.system_message)
-        self.gpt_interface_vision.add_message(role="user")
+    # def temp_get_obj_predicates(self):
+    #     push_img, fold_img, pull_img = self.robot.identifying_properties()
+    #     self.gpt_interface_vision.add_message(role="system", content=self.robot.database.system_message)
+    #     self.gpt_interface_vision.add_message(role="user")
 
     def get_predicates(self, detected_object, detected_object_types, active_predicates):
         """
@@ -498,8 +513,8 @@ class ChangminPlanner:
             json.dump(self.state, file, indent=4)
             file.close()
 
-    def initialize_database(self, object_num):
-        root = os.path.join(self.database_path, f"obj{object_num}")
+    def initialize_database(self, root):
+        # root = os.path.join(self.database_path, f"obj{object_num}")
         data_path = list_file(root)
         data_path = sort_files(data_path)
 
@@ -515,7 +530,8 @@ class ChangminPlanner:
                 is_pull = True
                 continue
 
-        system_message, prompt = self.load_prompt.load_verification_module([is_push, is_fold, is_pull])
+        # Use LLMs for object property verification
+        system_message, prompt = self.load_prompt.load_verification_message([is_push, is_fold, is_pull])
         self.gpt_interface_vision.reset_message()
         self.gpt_interface_vision.add_message(role="system", content=system_message, image_url=False)
         self.gpt_interface_vision.add_message(role="user", content=prompt, image_url=data_path)
@@ -531,4 +547,5 @@ class ChangminPlanner:
             color, dimension, shape = object_name.split("_")
             return {object_name: [color, dimension, shape]}
         object_data = parse_object_description(answer)
+        self.database.update(object_data)
 
