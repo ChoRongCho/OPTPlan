@@ -93,53 +93,43 @@ def temp3():
         data_path = list_file(root)
         data_path = sort_files(data_path)
 
+        base_image = []
+        action_image = []
+        for name in data_path:
+            if "base" in name:
+                base_image.append(name)
+            else:
+                action_image.append(name)
+
         i, j, k = False, False, False
         # push image
-        for data_name in data_path:
-            if "push" in data_name:
+        for action in action_image:
+            if "push" in action:
                 i = True
                 continue
-            if "fold" in data_name:
+            if "fold" in action:
                 j = True
                 continue
-            if "pull" in data_name:
+            if "pull" in action:
                 k = True
                 continue
 
-        system_message = f"You're working to verify the object's properties through images." + \
-                         f"This table defines the physical properties of the object we are investigating." + \
-                         f"Answer the questions below in accordance with this criterion. \n"
-        system_message += """
----------------  -------------------------------------------------------
-Predicates List  Definition
-is_fragile       the fact of tending to break or be damaged easily
-is_rigid         the fact of being very strict and difficult to change
-is_soft          the quality of changing shape easily when pressed
-is_foldable      the ability to bend without breaking
-is_elastic       the quality of returning to its original size and shape
----------------  -------------------------------------------------------
-"""
         args = parse_args_v2()
-        image_number = 8
-        exp_number = 8
-        args.exp_name = f"20240418_train_problem{image_number}_{exp_number}"
-        args.input_image = f"train/problem{image_number}.jpg"
-        args.max_predicates = random.randint(1, 6)
-        #
         # # make plan
         planner = PythonPlanner(args=args)
-        prompt = planner.load_prompt.load_verification_module([i, j, k])
+        system_message, prompt = planner.load_prompt.load_verification_message([i, j, k])
+        print(prompt)
         print("-" * 90)
-        print(data_path)
-        planner.gpt_interface_vision.reset_message()
-        planner.gpt_interface_vision.add_message(role="system", content=system_message, image_url=False)
-        planner.gpt_interface_vision.add_message(role="user", content=prompt, image_url=data_path)
-
-        start_time = time.time()
-        ans = planner.gpt_interface_vision.run_prompt()
-        end_time = time.time()
-        print(ans)
-        print(f"time: {end_time - start_time} s ")
+        # print(data_path)
+        # planner.gpt_interface_vision.reset_message()
+        # planner.gpt_interface_vision.add_message(role="system", content=system_message, image_url=False)
+        # planner.gpt_interface_vision.add_message(role="user", content=prompt, image_url=data_path)
+        #
+        # start_time = time.time()
+        # ans = planner.gpt_interface_vision.run_prompt()
+        # end_time = time.time()
+        # print(ans)
+        # print(f"time: {end_time - start_time} s ")
 
 
 def temp2():
@@ -208,4 +198,4 @@ def parse_object_description(input_string):
 
 
 if __name__ == '__main__':
-    temp2()
+    temp3()

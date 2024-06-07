@@ -90,19 +90,19 @@ class ChangminPlanner:
         self.state = {}
         self.print_args()
 
-        if self.args.mkdb:
-            # make Database using object image
-            self.object_list = subdir_list(self.database_path)
-            for root in self.object_list:
-                self.initialize_database(root)
-
-                # save database
-                if args.is_save:
-                    pass
-
-        else:
-            # use exist database
-            self.database = self.get_json_data(os.path.join(self.database_path, "database.json"))
+        # if self.args.mkdb:
+        #     # make Database using object image
+        #     self.object_list = subdir_list(self.database_path)
+        #     for root in self.object_list:
+        #         self.initialize_database(root)
+        #
+        #         # save database
+        #         if args.is_save:
+        #             pass
+        #
+        # else:
+        #     # use exist database
+        #     self.database = self.get_json_data(os.path.join(self.database_path, "database.json"))
 
     def print_args(self):
         self.table = [["Project Time", datetime.now()],
@@ -545,7 +545,7 @@ class ChangminPlanner:
             object_name = name_match.group(1)
 
             color, dimension, shape = object_name.split("_")
-            return {object_name: [color, dimension, shape]}
+            return {object_name: {"color": color, "dimension": dimension, "shape": shape, "properties": []}}
         object_data = parse_object_description(answer)
         self.database.update(object_data)
 

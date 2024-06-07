@@ -1,0 +1,12 @@
+{
+    "task": "bin_packing",
+    "goals": {
+        "1": "Packing all items into the box.",
+        "2": "If there is a rigid object, don't pack it into the box"
+    },
+    "rules": {
+        "1": "you should never pick and place a box",
+        "2": "when fold a object, the object must be foldable",
+        "3": "before place a elastic object, push a elastic object first"
+    }
+}

@@ -203,10 +203,21 @@ class Robot:
         :return:
         """
         n = 1
-        system_message = "You are a vision AI that describes the shape and color of an object. " + \
-                         "You should look at a picture of a given object and explain its size and color."
+        system_message = f"You're working to verify the object's properties through images." + \
+                         f"This table defines the physical properties of the object we are investigating." + \
+                         f"Answer the questions below in accordance with this criterion. \n"
+        system_message += """
+---------------  -------------------------------------------------------
+Predicates List  Definition
+is_fragile       the fact of tending to break or be damaged easily
+is_rigid         the fact of being very strict and difficult to change
+is_soft          the quality of changing shape easily when pressed
+is_foldable      the ability to bend without breaking
+is_elastic       the quality of returning to its original size and shape
+---------------  -------------------------------------------------------
+"""
 
-        prompt = "\nThe first image is a original image of object. Please refer to this image and answer. \n\n"
+        prompt = "\nThe first image is a original image of object. Please refer to this image and answer. \n"
         end_message = f"""Please answer with the template below:  
 
 Answer
@@ -216,7 +227,7 @@ Answer
 **elastic: True or False
 
 Reason:
--Describe a object and feel free to write down your reasons in less than 300 words
+-Describe a object and feel free to write down your reasons in less than 200 words
 
 """
         if available_actions[0]:  # push
@@ -245,6 +256,36 @@ Reason:
             n += 2
             prompt += m3
         prompt += end_message
+        return system_message, prompt
+
+    def load_naming_message(self):
+        """
+        from images, the llm module makes judge of its shape and color
+        """
+        system_message = f"You are a vision AI that describes the shape and color of an object for {self.task}. " + \
+                         "You should look at a picture of a given object and explain its size and color."
+        prompt = "The first image is when you see the object from the side " + \
+                 "and the next image is when you see the object from the top. \n" + \
+                 "Define the shape and color of the object through this image. \n" + \
+                 "Use the simple classification table below for the shape of the object. \n" + \
+                 """
+-----  ----------------------------------------------             
+Shape  Examples
+1D     linear or ring
+2D     flat rectangle, circle, etc
+3D     cube, cuboid, cylinder, cone, polyhedron, etc
+-----  ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+Object Name: color_dimension_shape object
+*Example: white_3D_cube object
+
+Descriptions about object
+*your descriptions in 200 words
+
+"""
         return system_message, prompt
 
 

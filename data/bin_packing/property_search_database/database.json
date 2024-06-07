@@ -1,5 +1,10 @@
 {
   "bin_packing": {
-
+    "name": {
+      "color": "",
+      "dimension": "",
+      "shape": "",
+      "properties" : []
+    }
   }
 }

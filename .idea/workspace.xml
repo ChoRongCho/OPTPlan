@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d200a544-aab7-4e00-9f81-e79a11b7bcc1" name="Changes" comment="commit 20240604">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/database.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/database.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/database.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/database.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/changmin_planner.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/changmin_planner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/temp_robot/robot_predicates_prove.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/temp_robot/robot_predicates_prove.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/utils/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/utils/prompt_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/utils/prompt_function.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,8 +64,11 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/data/json" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/bin_packing/property_search_database" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.class_pracc">
+  <component name="RunManager" selected="Python.main">
     <configuration name="class_pracc" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OPTPlan" />
       <option name="INTERPRETER_OPTIONS" value="" />
