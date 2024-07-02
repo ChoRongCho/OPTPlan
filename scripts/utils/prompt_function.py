@@ -14,11 +14,17 @@ class PromptSet:
         prompt += "What objects or tools are here? \n"
         return prompt
 
-    def load_prompt_get_predicates(self, detected_object, detected_object_types, max_predicates):
+    def load_prompt_object_class(self, object_dict, max_predicates):
+        system_message = "You are an assistant who organizes the properties of objects in task planning for bin_packing." + \
+                         "Your role is to create an object property that has a Boolean value required for task planning." + \
+                         "I'll tell you the rules you need to follow here. \n" + \
+                         "1. You should never make a predicate beyond the given max_predicates. \n" + \
+                         "2. You should follow the template below. " + \
+                         ""
         prompt = f"We are now going to do a {self.task} task whose goal is {self.task_description}"
         prompt += "There are many objects in this domain, " + \
-                  "this is object information that comes from image observation. \n"
-        prompt += f"1. {detected_object_types} \n2. {detected_object}\n"
+                  "this is an object information that comes from image observations. \n"
+        prompt += f"1. {object_dict} \n\n"
         prompt += f"""from dataclasses import dataclass
 
 
@@ -27,24 +33,28 @@ class Object:
     # Basic dataclass
     index: int
     name: str
-    location: tuple
-    size: tuple
-    color: str or bool
-    object_type: str
+    color: str
+    shape: str
+    object_type: str  # box or obj
 
     # Object physical properties predicates
 
-    # {self.task} Predicates (max {max_predicates})\n"""
+    # {self.task} predicates expressed as a boolean (max {max_predicates})\n"""
         prompt += "However, we cannot do complete planning with this dataclass predicate alone" + \
-                  f" that means we have to add another predicates that fully describe the {self.task}."
+                  f" that means we have to add another predicates that fully describe the {self.task}. \n"
 
-        return prompt
+        return system_message, prompt
 
     def load_prompt_robot_action(self,
                                  object_class_python_script,
                                  robot_action,
                                  task_instruction):
-        prompt = f"We are now going to do a {self.task} task whose goal is packing all objects in the bin. \n"
+
+        system_message = "You are an action designer that strictly defines what the robot's action brings to the state." + \
+                         "You should look at the definition of the robot's action and write the preconditions of the action and its effects in Python scripts accordingly." + \
+                         "Also, you should follow the template below. "
+
+        prompt = f"We are now going to do a {self.task} task which means {self.task_description}. \n"
         prompt += "We have a basic python structure describing the available robot actions. \n"
         prompt += f"""{object_class_python_script}\n\n"""
         prompt += """
@@ -77,22 +87,18 @@ class Robot:
     def state_base(self):
         self.robot_base_pose = True
     
-    # bin_packing
     def pick(self, obj):
         # make a preconditions for actions
         print(f"Pick {obj.name}")
         
-    # bin_packing
     def place(self, obj, bins):
         # make a preconditions for actions
         print(f"Place {obj.name} in {bins.name}")
     
-    # bin_packing
     def push(self, obj):
         # make a preconditions for actions
         print(f"Push {obj.name}")
     
-    # bin_packing
     def fold(self, obj):
         # make a preconditions for actions
         print(f"Fold {obj.name}")
@@ -101,7 +107,7 @@ class Robot:
         # make a preconditions for actions
         print(f"Out {obj.name} from {obj.name}")\n\n"""
 
-        prompt += "I want to modify the preconditions and effects of the robot actions based on the rules. \n"
+        prompt += "I want to modify the preconditions and effects of the robot actions based on the given rules that is similar to PDDL stream. \n"
         prompt += f"""
 {robot_action}
 {task_instruction}\n"""
@@ -110,23 +116,74 @@ class Robot:
         prompt += f"For example, if you place an object in hand, obj.in_bin=False. \n"
         prompt += "However, if there are predicates that are mentioned in the rules but not in the object class, " + \
                   "do not reflect those predictions in the rules."
-        return prompt
+        prompt += """
+Answer:
+# only write a Robot python class here without example instantiation
+
+        
+Reason:
+# Explain in less than 300 words why you made such robot action
+"""
+        return system_message, prompt
 
     def load_prompt_init_state(self,
-                               detected_object,
-                               detected_object_types,
-                               detected_object_predicates,
-                               object_class_python_script):
+                               object_dict,
+                               object_python,
+                               robot_python):
+
+        system_message = "You are going to organize the given content in a table. These tasks are for defining initial states. " + \
+                         "You should define the basic and physical predicates of objects resulting from objects' properties. " + \
+                         "Also, you should follow the template below. "
+
         prompt = f"We are now making initial state of the {self.task}. We get these information from the observation. \n\n"
-        prompt += f"{detected_object}\nNote! [cx: center of bbox, cy: center of bbox, w: bbox width, h: bbox height] \n"
-        prompt += f"{detected_object_types}\n"
-        prompt += f"{detected_object_predicates}\n\n"
-        prompt += f"""{object_class_python_script}"""
+        prompt += f"{object_dict}\n"
+        prompt += f"{object_python}\n"
+        prompt += f"{robot_python}\n\n"
 
-        prompt += "\nUsing above information, fill all the object class. If there is no information of the predicate," + \
-                  " assume it as a False. If the values of the predictions of an object overlap with the default, don't write them down."
+        prompt += "Using above information, Please organize the initial state of the domain in a table. \n\n"
+        prompt += """
+### 1. Init Table
+# fill your table
 
-        return prompt
+### 2. Notes:
+# Fill your notes
+
+### 3. Python Codes
+# make init state into python code
+# don't include the object classes or robot class, make only objects and bin 
+# example 
+object0 = Object(index=0, name='black_3D_cuboid', color='black', shape='3D_cuboid', object_type='obj', is_soft=True, init_pose='out_box')
+...
+
+"""
+
+        return system_message, prompt
+
+    def load_prompt_goal_state(self, init_state_table, goals, rules):
+
+        system_message = "You are going to organize the given content in a table. These tasks are for defining a goal state. " + \
+                         "You should define the basic and physical predicates of objects resulting from rules and goals of bin_packing task. " + \
+                         "Also, you should follow the template below. "
+
+        prompt = (f"We are now making goal state of the {self.task}. "
+                  f"Your goal is to redefine the goal state given in natural language into a table. \n\n")
+        prompt += f"This is an init state table. \n"
+        prompt += f"{init_state_table}\n\n"
+        prompt += f"Our goal is listed below. \n"
+        prompt += f"{goals}\n"
+        prompt += f"And, this is rules that when you do actions. \n"
+        prompt += f"{rules}\n\n"
+
+        prompt += "\nUsing above information, Please organize the goal state of the domain in a table. \n\n"
+        prompt += """
+### 1. Goal Table
+# fill your table similar with initial state
+
+### 2. Notes:
+# Fill your notes
+"""
+
+        return system_message, prompt
 
     def load_prompt_planning(self,
                              object_class_python_script,
@@ -157,7 +214,7 @@ class Robot:
         prompt += f"Below is the Python code for it. \n\n"
         prompt += python_script + " \n"
 
-        prompt += "And this is a result. \n"
+        prompt += "And this is a old_result. \n"
         prompt += planning_output + " \n"
 
         prompt += "We find that there is an error in the robot action part that describes the preconditions and " + \
@@ -170,7 +227,7 @@ class Robot:
         prompt += f"Below is the Python code for it. \n\n"
         prompt += python_script + " \n"
 
-        prompt += "And this is a result. \n"
+        prompt += "And this is a old_result. \n"
         prompt += planning_output + " \n"
 
         prompt += "There are some planning errors in this code that is represented as Cannot. \n" + \
@@ -182,28 +239,11 @@ class Robot:
 
         return prompt
 
-    def load_prompt_gs_encoding(self, init_state_table, goal_instructions, task_instruction):
-        prompt = f"{init_state_table}\n\n"
-        prompt += f"This is an. initial state of {self.task} task. \n"
-        prompt += "We are now doing a bin_packing and our goal is listed below. \n\n"
-        prompt += f"{goal_instructions}\n\n"
-        prompt += "And, this is rules that when you do actions. \n"
-        prompt += f"{task_instruction}\n"
-        prompt += f"Create and return a goal state of objects for {self.task}. \n"
-        return prompt
 
-    def load_verification_message(self, available_actions: list[bool]):
-        """
-        prompt: base image
-        m1: push
-        m2: fold
-        m3: pull
-        m4: make template
-        :param available_actions:
-        :return:
-        """
-        n = 1
-        system_message = f"You're working to verify the object's properties through images." + \
+
+    def load_verification_message(self, available_actions: list[bool], object_name):
+        n = 2
+        system_message = f"You're working to verify the object's properties through images for {self.task}." + \
                          f"This table defines the physical properties of the object we are investigating." + \
                          f"Answer the questions below in accordance with this criterion. \n"
         system_message += """
@@ -217,9 +257,9 @@ is_elastic       the quality of returning to its original size and shape
 ---------------  -------------------------------------------------------
 """
 
-        prompt = "\nThe first image is a original image of object. Please refer to this image and answer. \n"
+        prompt = f"\nThe first two images are original images of {object_name}. Please refer to this image and answer. \n"
         end_message = f"""Please answer with the template below:  
-
+---
 Answer
 **rigid: True or False
 **soft: True or False
@@ -228,7 +268,7 @@ Answer
 
 Reason:
 -Describe a object and feel free to write down your reasons in less than 200 words
-
+---
 """
         if available_actions[0]:  # push
             m1 = "We will show the image when the robot does the action 'push' on the object." + \
@@ -263,6 +303,36 @@ Reason:
         from images, the llm module makes judge of its shape and color
         """
         system_message = f"You are a vision AI that describes the shape and color of an object for {self.task}. " + \
+                         "You should look at a picture of given objects and explain their size and color."
+        prompt = "The first image is when you see the object from the side " + \
+                 "and the next image is when you see the object from the top. \n" + \
+                 "Define the shape and color of the object through this image. \n" + \
+                 "Use the simple classification table below for the shape of the object. \n" + \
+                 """
+-----  ----------------------------------------------             
+Shape  Examples
+1D     linear or ring
+2D     flat rectangle, circle, ring etc
+3D     cube, cuboid, cylinder, cone, polyhedron, etc
+-----  ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box: # if there is nothing, fill it blank
+object out box: brown_3D_cuboid, black_3D_circle, blue_1D_ring  # this is an example
+box: white_box # only color
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+"""
+        return system_message, prompt
+
+    def load_naming_module_single(self):
+        system_message = f"You are a vision AI that describes the shape and color of an object for {self.task}. " + \
                          "You should look at a picture of a given object and explain its size and color."
         prompt = "The first image is when you see the object from the side " + \
                  "and the next image is when you see the object from the top. \n" + \
@@ -272,19 +342,18 @@ Reason:
 -----  ----------------------------------------------             
 Shape  Examples
 1D     linear or ring
-2D     flat rectangle, circle, etc
+2D     flat rectangle, circle, ring etc
 3D     cube, cuboid, cylinder, cone, polyhedron, etc
 -----  ----------------------------------------------
 
 Please answer with the template below:
 
-Answer
-Object Name: color_dimension_shape object
-*Example: white_3D_cube object
+---
+Answer: red_3D_cuboid or black_2D_circle or blue_1D_ring or etc  # these are examples for your answer format
 
-Descriptions about object
+Descriptions about objects in the scene
 *your descriptions in 200 words
-
+---
 """
         return system_message, prompt
 
@@ -318,7 +387,7 @@ class PromptSetPDDL:
 
         ; object property predicates
 
-        ; result of object property after action
+        ; old_result of object property after action
         
     )\n\n
 """
@@ -378,7 +447,7 @@ class PromptSetPDDL:
         prompt += f"Below is the Python code for it. \n\n"
         prompt += python_script + " \n"
 
-        prompt += "And this is a result. \n"
+        prompt += "And this is a old_result. \n"
         prompt += planning_output + " \n"
 
         prompt += "We find that there is an error in the robot action part that describes the preconditions and " + \
@@ -391,7 +460,7 @@ class PromptSetPDDL:
         prompt += f"Below is the Python code for it. \n\n"
         prompt += python_script + " \n"
 
-        prompt += "And this is a result. \n"
+        prompt += "And this is a old_result. \n"
         prompt += planning_output + " \n"
 
         prompt += "There are some planning errors in this code that is represented as Cannot. \n" + \

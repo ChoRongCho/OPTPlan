@@ -4,7 +4,7 @@ is_save: True
 max_predicates: 5
 data_dir: /home/changmin/PycharmProjects/GPT_examples/data
 json_dir: /home/changmin/PycharmProjects/GPT_examples/data/json
-result_dir: /home/changmin/PycharmProjects/GPT_examples/result/val
+result_dir: /home/changmin/PycharmProjects/GPT_examples/old_result/val
 input_image: val/problem12.jpg
 api_json: setting.json
 example_prompt_json: prompt_examples_python.json

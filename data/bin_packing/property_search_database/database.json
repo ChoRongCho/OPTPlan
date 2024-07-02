@@ -1,10 +1,65 @@
 {
-  "bin_packing": {
-    "name": {
-      "color": "",
-      "dimension": "",
-      "shape": "",
-      "properties" : []
+    "bin_packing": {
+        "white_3D_cylinder": {
+            "color": "white",
+            "dimension": "3D",
+            "shape": "cylinder",
+            "properties": [
+                "is_soft"
+            ]
+        },
+        "yellow_3D_cuboid": {
+            "color": "yellow",
+            "dimension": "3D",
+            "shape": "cuboid",
+            "properties": [
+                "is_soft"
+            ]
+        },
+        "white_2D_ring": {
+            "color": "white",
+            "dimension": "2D",
+            "shape": "ring",
+            "properties": [
+                "is_soft",
+                "is_foldable",
+                "is_elastic"
+            ]
+        },
+        "gray_1D_ring": {
+            "color": "gray",
+            "dimension": "1D",
+            "shape": "ring",
+            "properties": [
+                "is_foldable",
+                "is_elastic"
+            ]
+        },
+        "transparent_2D_flat_rectangle": {
+            "color": "transparent",
+            "dimension": "2D",
+            "shape": "flat_rectangle",
+            "properties": [
+                "is_soft",
+                "is_elastic"
+            ]
+        },
+        "yellow_3D_cylinder": {
+            "color": "yellow",
+            "dimension": "3D",
+            "shape": "cylinder",
+            "properties": [
+                "is_rigid"
+            ]
+        },
+        "yellow_2D_flat_rectangle": {
+            "color": "yellow",
+            "dimension": "2D",
+            "shape": "flat_rectangle",
+            "properties": [
+                "is_soft",
+                "is_foldable"
+            ]
+        }
     }
-  }
 }

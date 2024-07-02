@@ -26,29 +26,17 @@ class RobotProve(Robot):
         ]
         self.data_path = "/home/changmin/PycharmProjects/GPT_examples/data/bin_packing/predicates_prove"
 
-    def get_object_predicates(self, info: dict) -> list:
-        """
+    def get_object_predicates(self, database: dict, info: dict) -> list:
+        target_name = info['name']
+        name_list = list(database.keys())
 
-        :param info: {'white box': [509, 210, 231, 323]}
-        :return: list ['pred1', 'pred2', 'pred3']
-        """
-        name = list(info.keys())[0]
-        name_database = list(self.database.object_database.keys())
-
-        if name in name_database:
-            print("Load dataset predicates")
-            info = self.database.object_database.get(name)
-            predicates = info.get("predicates")
+        if target_name in name_list:
+            predicates = database[target_name]["properties"]
             return predicates
-
         else:
-            print("Active Prove")
-
-            # take image
-            images = ["", "", ""]
-
-            self.gpt_prove_object(info, images)
-            return [False]
+            # random mode
+            predicates = self.random_active_search(info)
+            return predicates
 
     def gpt_prove_object(self, info, images):
         name = list(info.keys())[0]

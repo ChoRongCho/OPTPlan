@@ -1,0 +1,21 @@
+The Init State
+# Create objects based on the initial state table
+object0 = Object(index=0, name='yellow_3D_cuboid', color='yellow', shape='3D_cuboid', object_type='obj', is_fragile=False, is_foldable=True, is_elastic=False, is_soft=True, is_in_box=False, is_heavy=False)
+object1 = Object(index=1, name='black_3D_cylinder', color='black', shape='3D_cylinder', object_type='obj', is_fragile=True, is_foldable=False, is_elastic=False, is_soft=False, is_in_box=False, is_heavy=False)
+object2 = Object(index=2, name='blue_1D_ring', color='blue', shape='1D_ring', object_type='obj', is_fragile=True, is_foldable=False, is_elastic=True, is_soft=False, is_in_box=False, is_heavy=False)
+object3 = Object(index=3, name='white_box', color='white', shape='box', object_type='box', is_fragile=False, is_foldable=False, is_elastic=False, is_soft=True, is_in_box=True, is_heavy=False)
+
+# List of objects
+objects = [object0, object1, object2, object3]
+
+# Create the robot
+robot = Robot()
+
+
+The Goal State
+| Index | Name             | Color  | Shape      | Object Type | Is Fragile | Is Foldable | Is Elastic | Is Soft | Is In Box | Is Heavy | Goal Pose |
+|-------|------------------|--------|------------|-------------|------------|-------------|------------|---------|-----------|----------|-----------|
+| 0     | yellow_3D_cuboid | yellow | 3D_cuboid  | obj         | False      | True        | False      | True    | True      | False    | in_box    |
+| 1     | black_3D_cylinder| black  | 3D_cylinder| obj         | True       | False       | False      | False   | True      | False    | in_box    |
+| 2     | blue_1D_ring     | blue   | 1D_ring    | obj         | True       | False       | True       | False   | True      | False    | in_box    |
+| 3     | white_box        | white  | box        | box         | False      | False       | False      | True    | True      | False    | box       |
