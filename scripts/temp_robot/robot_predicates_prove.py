@@ -22,9 +22,8 @@ class RobotProve(Robot):
             "obj5",
             "obj6",
             "obj7",
-            "obj8"
         ]
-        self.data_path = "/home/changmin/PycharmProjects/GPT_examples/data/bin_packing/predicates_prove"
+        self.data_path = "/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/predicates_prove"
 
     def get_object_predicates(self, database: dict, info: dict) -> list:
         target_name = info['name']
@@ -36,6 +35,7 @@ class RobotProve(Robot):
         else:
             # random mode
             predicates = self.random_active_search(info)
+            print(f"Can't find {target_name} in database. Random predicates are assigned. ")
             return predicates
 
     def gpt_prove_object(self, info, images):

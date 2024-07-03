@@ -3,13 +3,14 @@
         "task_description": "packing objects into the box called bin. ",
         "goals": {
             "1": "Packing all items into the box.",
-            "2": "If there is a elastic object, don't pack it into the box"
+            "2": "If there is a fragile object, don't pack it into the box",
+            "3": "If there is a yellow object, don't pack it into the box"
         },
         "rules": {
             "1": "avoid handling and moving any box",
             "2": "before place a elastic object, push a elastic object first",
-            "3": "when fold a object, the object must be foldable",
-            "4": "when push a object, neither fragile and rigid objects are permitted, but only soft objects are permitted"
+            "3": "when fold a foldable object, the fragile object must be in the bin ",
+            "4": "do not place a fragile object if there is no elastic object in the bin"
         }
     }
 }

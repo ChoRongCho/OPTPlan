@@ -51,6 +51,7 @@ class Object:
                                  task_instruction):
 
         system_message = "You are an action designer that strictly defines what the robot's action brings to the state." + \
+                         "When you define robot action, you should make it by referring only to the given rule." + \
                          "You should look at the definition of the robot's action and write the preconditions of the action and its effects in Python scripts accordingly." + \
                          "Also, you should follow the template below. "
 
@@ -87,27 +88,27 @@ class Robot:
     def state_base(self):
         self.robot_base_pose = True
     
-    def pick(self, obj):
-        # make a preconditions for actions
+    def pick(self, obj, bin):
+        # make a preconditions for actions using if phrase
         print(f"Pick {obj.name}")
         
-    def place(self, obj, bins):
+    def place(self, obj, bin):
         # make a preconditions for actions
         print(f"Place {obj.name} in {bins.name}")
     
-    def push(self, obj):
+    def push(self, obj, bin): 
         # make a preconditions for actions
         print(f"Push {obj.name}")
     
-    def fold(self, obj):
+    def fold(self, obj, bin):
         # make a preconditions for actions
         print(f"Fold {obj.name}")
     
-    def out(self, obj, bins):
+    def out(self, obj, bin):
         # make a preconditions for actions
         print(f"Out {obj.name} from {obj.name}")\n\n"""
 
-        prompt += "I want to modify the preconditions and effects of the robot actions based on the given rules that is similar to PDDL stream. \n"
+        prompt += "I want to create the preconditions and effects of the robot actions based on the given rules that is similar to PDDL stream. \n"
         prompt += f"""
 {robot_action}
 {task_instruction}\n"""
@@ -152,7 +153,8 @@ Reason:
 # make init state into python code
 # don't include the object classes or robot class, make only objects and bin 
 # example 
-object0 = Object(index=0, name='black_3D_cuboid', color='black', shape='3D_cuboid', object_type='obj', is_soft=True, init_pose='out_box')
+object0 = Object(index=0, name='black_3D_cuboid', color='black', shape='3D_cuboid', ...)
+object1 = Object(index=1, name='white_2D_circle', color='white', shape='2D_circle', ...)
 ...
 
 """
@@ -191,8 +193,14 @@ object0 = Object(index=0, name='black_3D_cuboid', color='black', shape='3D_cuboi
                              init_state_python_script,
                              init_state_table,
                              goal_state_table,
-                             robot_action,
-                             task_instruction):
+                             rules):
+
+        system_message = (f"You are a direct Python planner and you need to complete the {self.task} task planning"
+                          f" using the given robot action and objects. ")
+        system_message += ("You need to create an action sequence so that the init state reach to the goal state according to the given rules. "
+                           "This action sequence should use robot class.")
+        system_message += "Also, you should follow the template below. "
+
         prompt = f"{object_class_python_script}\n\n"
         prompt += f"{robot_class_python_script}\n\n"
         prompt += f"{init_state_python_script}\n\n"
@@ -200,14 +208,24 @@ object0 = Object(index=0, name='black_3D_cuboid', color='black', shape='3D_cuboi
         prompt += "if __name__ == '__main__':\n\t# packing all object in the box\n\t# make a plan\n"
 
         # prompt += f"Your goal is {self.task_description}. \n"
-        prompt += "You must follow the rule: \n"
-        prompt += f"""
-{robot_action}
-{task_instruction}\n"""
+        prompt += "You must follow the rules: \n"
+        prompt += f"{rules}\n"
 
-        prompt += "Make a plan under the if __name__ == '__main__':. \nYou must make a correct order. \n"
-        prompt += f"{init_state_table}\n\n{goal_state_table}\n"
-        return prompt
+        prompt += "Make a plan under the if __name__ == '__main__':. \nYou must make a correct action sequence. \n"
+        prompt += f"{init_state_table}\n\n{goal_state_table}\n\n"
+
+        prompt += """
+if __name__ == "__main__":
+    # Using goal table, Describe the final state of each object
+     
+    # make your order
+    
+    # after making all actions, fill your reasons according to the rules
+    
+    # check if the goal state is satisfied using goal state table 
+"""
+
+        return system_message, prompt
 
     def load_prompt_action_feedback(self, python_script, planning_output):
         prompt = f"We made a plan for a {self.task} and our goal is {self.task_description}. \n"
@@ -239,8 +257,6 @@ object0 = Object(index=0, name='black_3D_cuboid', color='black', shape='3D_cuboi
 
         return prompt
 
-
-
     def load_verification_message(self, available_actions: list[bool], object_name):
         n = 2
         system_message = f"You're working to verify the object's properties through images for {self.task}." + \
@@ -248,12 +264,13 @@ object0 = Object(index=0, name='black_3D_cuboid', color='black', shape='3D_cuboi
                          f"Answer the questions below in accordance with this criterion. \n"
         system_message += """
 ---------------  -------------------------------------------------------
-Predicates List  Definition
+Predicates List  Definition(a noun form)
 is_fragile       the fact of tending to break or be damaged easily
 is_rigid         the fact of being very strict and difficult to change
-is_soft          the quality of changing shape easily when pressed
+is_soft          the quality of changing shape easily when pressed (only 3D object)
 is_foldable      the ability to bend without breaking
 is_elastic       the quality of returning to its original size and shape
+is_flexible      the ability to change or be changed easily (only 2D and 1D object)
 ---------------  -------------------------------------------------------
 """
 
@@ -265,17 +282,19 @@ Answer
 **soft: True or False
 **foldable: True or False
 **elastic: True or False
+**flexible: True or False
 
 Reason:
--Describe a object and feel free to write down your reasons in less than 200 words
+-Describe a object and feel free to write down your reasons for each properties in less than 50 words
 ---
 """
         if available_actions[0]:  # push
             m1 = "We will show the image when the robot does the action 'push' on the object." + \
                  f"\nThe {int_to_ordinal(n + 1)} image is just before the robot pushes the object. \n" + \
                  f"The {int_to_ordinal(n + 2)} image is the image when the robot is pushing the object. \n" + \
-                 f"If there is a significant deformation in the shape of the object, the object is soft, else it is rigid. " + \
-                 f"Does this object have soft or rigid properties? \n\n"
+                 f"If there is a significant deformation in the shape of the object, the object is soft(3D) or flexible(2D and 1D), else it is rigid. " + \
+                 f"You have to keep in mind that soft and flexible are incompatible depending on the dimension of the object. \n" + \
+                 f"Does this object have soft(flexible) or rigid properties? \n\n"
             n += 2
             prompt += m1
 
@@ -292,7 +311,9 @@ Reason:
         if available_actions[2]:  # pull
             m3 = "We will show the image when the robot does the action 'pull' on the object." + \
                  f"\nThe {int_to_ordinal(n + 1)} image shows before the robot pulls an unknown object. \n" + \
-                 f"The {int_to_ordinal(n + 2)} image shows while the robot pulls an object. Does this object have elastic properties? \n"
+                 (f"The {int_to_ordinal(n + 2)} image shows while the robot pulls an object. "
+                  f"If an object changes in size more than twice and come back to its original shape, it can be said to be elastic."
+                  f"Does this object have elastic properties? \n")
             n += 2
             prompt += m3
         prompt += end_message
@@ -311,8 +332,8 @@ Reason:
                  """
 -----  ----------------------------------------------             
 Shape  Examples
-1D     linear or ring
-2D     flat rectangle, circle, ring etc
+1D     linear or ring <- if there is a space in the center like string
+2D     flat rectangle, circle <- if there is no space in the center etc
 3D     cube, cuboid, cylinder, cone, polyhedron, etc
 -----  ----------------------------------------------
 
@@ -341,15 +362,15 @@ Descriptions about objects in the scene
                  """
 -----  ----------------------------------------------             
 Shape  Examples
-1D     linear or ring
-2D     flat rectangle, circle, ring etc
+1D     linear or ring <- if there is a space in the center like string
+2D     flat rectangle, circle <- if there is no space in the center etc
 3D     cube, cuboid, cylinder, cone, polyhedron, etc
 -----  ----------------------------------------------
 
 Please answer with the template below:
 
 ---
-Answer: red_3D_cuboid or black_2D_circle or blue_1D_ring or etc  # these are examples for your answer format
+Answer: red_3D_cuboid, black_2D_circle or blue_1D_ring or etc  # these are examples for your answer format
 
 Descriptions about objects in the scene
 *your descriptions in 200 words
@@ -413,13 +434,6 @@ class PromptSetPDDL:
         prompt += f"Here are robot actions and rules for bin_packing task. \n" + \
                   f"{robot_action}\n{task_instruction}\n"
         prompt += "Please add or modify the pddl predicates that are needed to be used for rules and actions. \n"
-        return prompt
-
-    def load_prompt_robot_action(self,
-                                 grounded_predicates,
-                                 robot_action,
-                                 task_instruction):
-        prompt = ""
         return prompt
 
     def load_prompt_planning(self,

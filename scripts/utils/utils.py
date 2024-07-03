@@ -12,7 +12,8 @@ def parse_args_v2():
     parser.add_argument("--task_name", type=str or int, default=None, help="domain name")
     parser.add_argument("--exp_name", type=int, default=None, help="experiment name 1, 2, ..., 36")
     parser.add_argument("--exp_number", type=int, default=0, help="experiment number for result1, result2")
-    parser.add_argument("--is_save", type=bool, default=True, help="save the response")
+    parser.add_argument("--is_save", type=int, default=1, help="save the response")
+    parser.add_argument("--is_random", type=int, default=0, help="save the response")
 
     # experiment setting
     parser.add_argument("--max_predicates", type=int, default=2, help="number of predicates you want to generate")

@@ -1,10 +1,9 @@
 import json
 import os
 import subprocess
-from datetime import datetime
 import time
+from datetime import datetime
 
-import cv2
 from openai import OpenAI
 from tabulate import tabulate
 
@@ -32,6 +31,7 @@ class ChangminPlanner:
         self.max_predicates = args.max_predicates
         self.patience_repeat = 1
         self.planning_repeat = 0
+        self.random_mode = args.is_random
 
         # basic path
         self.args = args
@@ -51,7 +51,7 @@ class ChangminPlanner:
         self.robot_json = os.path.join(self.json_dir, args.robot_json)
 
         # additional path
-        self.database_path = os.path.join(self.data_dir, self.task, "property_search_database")
+        self.database_path = os.path.join(self.data_dir, self.task)
         self.object_list = []
         self.db = {}
 
@@ -93,14 +93,14 @@ class ChangminPlanner:
 
         if self.args.mkdb:
             # make Database using object image
-            for obj_num in range(1, 9):
+            for obj_num in range(1, 8):
                 self.initialize_database(obj_num)
             if args.is_save:
                 self.save_db()
 
         else:
             # use exist database
-            self.database = self.get_json_data(os.path.join(self.database_path, "database.json"))
+            self.database = self.get_json_data(os.path.join(self.database_path, "manual_object_gt.json"))
 
     def print_args(self):
         self.table = [["Project Time", datetime.now()],
@@ -248,10 +248,8 @@ Reason:
         robot_class_python_script = extract_predicates(answer, "class Robot")
 
         self.question.append(prompt)
-        self.answer.append(robot_class_python_script)
+        self.answer.append(answer)
         return robot_class_python_script
-        # except:
-        #     raise Exception("Making expected answer went wrong. ")
 
     def get_init_state(self,
                        object_dict,
@@ -322,71 +320,60 @@ Reason:
                              goal_state_table):
 
         self.gpt_interface_pddl.reset_message()
-        prompt = self.load_prompt.load_prompt_planning(object_class_python_script=object_class_python_script,
-                                                       robot_class_python_script=robot_class_python_script,
-                                                       init_state_python_script=init_state_python_script,
-                                                       init_state_table=init_state_table,
-                                                       goal_state_table=goal_state_table,
-                                                       robot_action=self.task_data["rules"],
-                                                       task_instruction=self.task_data["goals"])
+        system_message, prompt = self.load_prompt.load_prompt_planning(
+            object_class_python_script=object_class_python_script,
+            robot_class_python_script=robot_class_python_script,
+            init_state_python_script=init_state_python_script,
+            init_state_table=init_state_table,
+            goal_state_table=goal_state_table,
+            rules=self.task_data["rules"])
 
+        self.gpt_interface_pddl.add_message(role="system", content=system_message, image_url=False)
         self.gpt_interface_pddl.add_message(role="user", content=prompt, image_url=False)
 
-        planning_python_script = self.gpt_interface_pddl.run_prompt()
+        answer = self.gpt_interface_pddl.run_prompt()
         self.question.append(prompt)
-        self.answer.append(planning_python_script)
+        self.answer.append(answer)
+
+        def extract_code(input_str, target):
+            start = input_str.find(target) + len(target)
+            end = input_str.find("```", start)
+            result = input_str[start:end].strip()
+            return result
+
+        planning_python_script = extract_code(answer, "python\n")
         return planning_python_script
 
     def make_plan(self):
-        times = [time.time()]
-        # Detect Object and make action predicates for objects
+        # detect Object and make action predicates for objects
         detected_object_dict, detected_object_list = self.detect_object()
-        times.append(time.time())
-
-        active_predicates, object_dict = self.get_predicates(detected_object_dict)
-        times.append(time.time())
+        active_predicates, object_dict = self.get_predicates(detected_object_dict, random_mode=self.random_mode)
 
         # integrate objects physical predicates to other predicates
         object_class_python_script = self.get_object_class(object_dict=object_dict,
                                                            active_predicates=active_predicates)
-        times.append(time.time())
 
-        # # make robot action conditions
+        # make robot action conditions
         robot_class_python_script = self.get_robot_action_conditions(object_class_python_script)
-        times.append(time.time())
 
+        # make a init state
         init_state_table, init_state_code = self.get_init_state(object_dict=object_dict,
                                                                 object_python=object_class_python_script,
                                                                 robot_python=robot_class_python_script)
-        times.append(time.time())
 
-        # simple goal state description
+        # make a goal state
         goal_state_table = self.get_goal_state(init_state_table=init_state_table)
-        times.append(time.time())
 
+        # direct planning from objects
         planning_python_script = self.planning_from_domain(object_class_python_script=object_class_python_script,
                                                            robot_class_python_script=robot_class_python_script,
                                                            init_state_python_script=init_state_code,
                                                            init_state_table=init_state_table,
                                                            goal_state_table=goal_state_table)
-        times.append(time.time())
 
-        print("-" * 99)
-        print("\n---\nDetected_Obj_Dict: \n", detected_object_dict)
-        print("\n---\nDetected_Obj_List: \n", detected_object_list)
-        print("\n---\nActive_Predicates: \n", active_predicates)
-        print("\n---\nObject_Dict: \n", object_dict)
-        print("\n\n\n")
-        print("\n---\nObject Python script: \n", object_class_python_script)
-        print("\n---\nRobot Python script: \n", robot_class_python_script)
-        print("\n---\nState Python script: \n", init_state_code)
-        print("\n\n\n")
-        print("\nInit_State_Table: \n", init_state_table)
-        print("\n\nGoal_State_Table: \n", goal_state_table)
-        print("\n\n", times)
         if self.is_save:
+            self.check_result_folder()
             self.log_conversation()
-            # self.state_parsing(init_state_table, goal_state_table)
             table_path = os.path.join(self.result_dir, "table.txt")
             with open(table_path, "w") as file:
                 file.write("The Init State\n")
@@ -404,9 +391,13 @@ Reason:
                 file.write(str(planning_python_script) + "\n")
                 file.close()
 
+            with open(os.path.join(self.result_dir, "object.json"), 'w') as file:
+                json.dump(object_dict, file, indent=4)
+
     def log_conversation(self):
         # log question and answer
         log_txt_path = os.path.join(self.result_dir, "prompt.txt")
+
         with open(log_txt_path, "w") as file:
             file.write(tabulate(self.table))
             file.write("\n")
@@ -581,7 +572,7 @@ Reason:
         answer1 = self.gpt_interface_vision.run_prompt()
 
         def extract_name(input_str):
-            # Answer 부분을 찾아서 추출
+            # extract Answer part
             start = input_str.find("Answer:") + len("Answer:")
             end = input_str.find("\n", start)
             name = input_str[start:end].strip()
@@ -598,14 +589,14 @@ Reason:
         answer2 = self.gpt_interface_vision.run_prompt()
 
         def extract_predicates(input_str, target):
-            # Answer 부분을 찾아서 추출
+            # extract Answer part
             start = input_str.find(target) + len(target)
             end = input_str.find("\n", start)
             is_predicate = input_str[start:end].strip()
             return is_predicate
 
         predicates = []
-        for target_pred in ["rigid", "soft", "foldable", "elastic"]:
+        for target_pred in ["rigid", "soft", "foldable", "elastic", "flexible"]:
             is_target = extract_predicates(answer2, target_pred)
             if "True" in is_target:
                 predicates.append("is_" + target_pred)
@@ -639,3 +630,12 @@ Reason:
                 file.write(a)
             file.write("\n\n")
             file.close()
+
+    def object_dict_save(self):
+        json_path = os.path.join(self.data_dir, self.task, "planning", self.exp_name)
+
+        detected_object_dict, detected_object_list = self.detect_object()
+        _, object_dict = self.get_predicates(detected_object_dict)
+
+        with open(os.path.join(json_path, "planning_object_gt.json"), 'w') as file:
+            json.dump(object_dict, file, indent=4)

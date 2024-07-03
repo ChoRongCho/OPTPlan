@@ -5,261 +5,160 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d200a544-aab7-4e00-9f81-e79a11b7bcc1" name="Changes" comment="commit 20240604">
-      <change afterPath="$PROJECT_DIR$/data/bin_packing/planning_object_gt.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/bin_packing/manual_object_gt.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/cfg1.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/cfg1.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance1/capture_side_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance1/capture_top_1.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance1/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance1/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance10/capture_side_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance10/capture_top_10.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance10/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance10/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance11/capture_side_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance11/capture_top_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance10/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance10/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance10/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance10/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance11/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance11/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance12/capture_side_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance12/capture_top_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance11/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance11/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance11/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance11/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance12/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance12/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance13/capture_side_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance13/capture_top_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance12/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance12/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance12/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance12/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance13/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance13/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance14/capture_side_14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance14/capture_top_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance13/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance13/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance13/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance13/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance14/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance14/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance15/capture_side_15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance15/capture_top_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance14/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance14/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance14/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance14/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance15/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance15/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance16/capture_side_16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance16/capture_top_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance15/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance15/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance15/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance15/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance16/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance16/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance17/capture_side_17.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance17/capture_top_17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance16/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance16/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance16/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance16/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance17/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance17/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance18/capture_side_18.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance18/capture_top_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance17/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance17/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance17/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance17/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance18/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance18/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance19/capture_side_19.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance19/capture_top_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance18/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance18/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance18/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance18/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance19/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance19/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance2/capture_side_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance2/capture_top_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance2/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance2/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance20/capture_side_20.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance20/capture_top_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance19/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance19/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance19/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance19/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance20/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance20/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance21/capture_side_21.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance21/capture_top_21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance20/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance20/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance20/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance20/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance21/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance21/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance22/capture_side_22.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance22/capture_top_22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance21/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance21/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance21/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance21/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance22/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance22/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance23/capture_side_23.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance23/capture_top_23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance22/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance22/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance22/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance22/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance23/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance23/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance24/capture_side_24.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance24/capture_top_24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance23/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance23/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance23/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance23/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance24/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance24/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance25/capture_side_25.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance25/capture_top_25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance24/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance24/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance24/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance24/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance25/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance25/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance26/capture_side_26.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance26/capture_top_26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance25/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance25/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance25/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance25/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance26/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance26/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance27/capture_side_27.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance27/capture_top_27.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance26/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance26/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance26/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance26/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance27/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance27/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance28/capture_side_28.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance28/capture_top_28.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance27/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance27/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance27/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance27/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance28/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance28/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance29/capture_side_29.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance29/capture_top_29.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance28/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance28/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance28/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance28/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance29/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance29/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance3/capture_side_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance3/capture_top_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance3/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance3/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance30/capture_side_30.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance30/capture_top_30.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance29/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance29/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance29/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance29/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance30/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance30/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance31/capture_side_31.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance31/capture_top_31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance30/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance30/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance30/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance30/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance31/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance31/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance32/capture_side_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance32/capture_top_32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance31/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance31/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance31/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance31/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance32/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance32/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance33/capture_side_33.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance33/capture_top_33.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance32/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance32/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance32/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance32/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance33/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance33/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance34/capture_side_34.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance34/capture_top_34.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance33/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance33/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance33/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance33/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance34/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance34/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance35/capture_side_35.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance35/capture_top_35.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance34/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance34/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance34/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance34/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance35/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance35/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance36/capture_side_36.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance36/capture_top_36.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance36/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance36/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance4/capture_side_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance4/capture_top_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance4/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance4/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance5/capture_side_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance5/capture_top_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance35/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance35/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance35/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance35/top_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance36/instructions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance36/side_observation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance36/top_observation.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance5/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance5/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance6/capture_side_6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance6/capture_top_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance5/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance5/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance5/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance5/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance6/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance6/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance7/capture_side_7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance7/capture_top_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance6/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance6/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance6/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance6/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance7/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance7/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance8/capture_side_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance8/capture_top_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance7/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance7/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance7/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance7/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance8/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance8/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance9/capture_side_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance9/capture_top_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance8/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance8/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance8/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance8/top_observation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance9/instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance9/instructions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/total_instructions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/total_instructions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance9/side_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance9/side_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning/instance9/top_observation.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning/instance9/top_observation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/planning_object_gt.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/planning_object_gt.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/database.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/database.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem1_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem1_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem1_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem1_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem1_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem1_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem5_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem5_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem5_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem5_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem5_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem5_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem7_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem7_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem7_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem7_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem7_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem7_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_10/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_10/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_10/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_10/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_10/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_10/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_11/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_11/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_11/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_11/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_11/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_11/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_12/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_12/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_12/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_12/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_12/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_12/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_13/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_13/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_13/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_13/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_13/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_13/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_14/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_14/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_14/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_14/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_14/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_14/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_15/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_15/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_15/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_15/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_15/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_15/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_16/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_16/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_16/feedback_prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_16/feedback_prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_16/feedback_prompt_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_16/feedback_prompt_1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_16/feedback_prompt_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_16/feedback_prompt_2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_16/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_16/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_16/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_16/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_17/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_17/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_17/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_17/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_17/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_17/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_18/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_18/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_18/feedback_prompt_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_18/feedback_prompt_1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_18/feedback_prompt_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_18/feedback_prompt_2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_18/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_18/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_18/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_18/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_19/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_19/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_19/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_19/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_19/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_19/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_2/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_2/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_2/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_2/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_2/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_2/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_3/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_3/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_3/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_3/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_3/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_3/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_4/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_4/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_4/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_4/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_4/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_4/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_5/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_5/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_5/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_5/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_5/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_5/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_7/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_7/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_7/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_7/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_7/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_7/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_8/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_8/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_8/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_8/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_8/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_8/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_9/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_9/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_9/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_9/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240226_train_problem8_9/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240226_train_problem8_9/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240228_train_problem8_20/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240228_train_problem8_20/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240228_train_problem8_20/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240228_train_problem8_20/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240228_train_problem8_20/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240228_train_problem8_20/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem14_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem14_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem14_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem14_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem14_1/planning_result.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem14_1/planning_result.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem14_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem14_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem14_2/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem14_2/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem14_2/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem14_2/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem14_2/planning_result.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem14_2/planning_result.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem14_2/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem14_2/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem14_3/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem14_3/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem14_3/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem14_3/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem14_3/planning_result.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem14_3/planning_result.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem14_3/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem14_3/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem15_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem15_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem15_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem15_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem15_1/planning_result.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem15_1/planning_result.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem15_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem15_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem6_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem6_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem6_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem6_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem6_1/planning_result.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem6_1/planning_result.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/train/20240308_val_problem6_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/train/20240308_val_problem6_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem10_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem10_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem10_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem10_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem10_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem10_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem11_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem11_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem11_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem11_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem11_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem11_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem12_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem12_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem12_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem12_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem12_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem12_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem13_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem13_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem13_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem13_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem13_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem13_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem14_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem14_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem14_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem14_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem14_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem14_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem15_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem15_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem15_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem15_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem15_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem15_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem17_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem17_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem17_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem17_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem17_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem17_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem2_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem2_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem2_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem2_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem2_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem2_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem3_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem3_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem3_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem3_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem3_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem3_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem4_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem4_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem4_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem4_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem4_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem4_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem6_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem6_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem6_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem6_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem6_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem6_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem9_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem9_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem9_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem9_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240226_validation_problem9_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240226_validation_problem9_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240311_val_problem12_1/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240311_val_problem12_1/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240311_val_problem12_1/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240311_val_problem12_1/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240311_val_problem12_1/planning_result.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240311_val_problem12_1/planning_result.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240311_val_problem12_1/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240311_val_problem12_1/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240311_val_problem12_2/annotated_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240311_val_problem12_2/annotated_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240311_val_problem12_2/planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240311_val_problem12_2/planning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240311_val_problem12_2/planning_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240311_val_problem12_2/planning_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240311_val_problem12_2/planning_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240311_val_problem12_2/planning_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240311_val_problem12_2/planning_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240311_val_problem12_2/planning_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240311_val_problem12_2/planning_result.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240311_val_problem12_2/planning_result.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240311_val_problem12_2/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240311_val_problem12_2/prompt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/val/20240311_val_problem12_2/temp_planning.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_result/val/20240311_val_problem12_2/temp_planning.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/database_reason.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/database_reason.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_side_base_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_side_base_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_side_fold_1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_side_fold_1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_side_fold_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_side_fold_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_side_fold_3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_side_fold_3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_side_push_1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_side_push_1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_side_push_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_side_push_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_top_base_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj2/obj2_top_base_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj3/obj3_side_base_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj3/obj3_side_base_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj3/obj3_side_fold_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj3/obj3_side_fold_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj3/obj3_side_fold_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj3/obj3_side_push_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj3/obj3_side_push_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj3/obj3_top_base_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj3/obj3_top_base_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj4/obj4_side_base_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj4/obj4_side_base_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj4/obj4_top_base_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj4/obj4_top_base_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj4/obj4_top_pull_1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj4/obj4_top_pull_1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj4/obj4_top_pull_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj4/obj4_top_pull_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj4/obj4_top_pull_3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj4/obj4_top_pull_3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj5/obj5_side_base_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj5/obj5_side_base_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj5/obj5_top_base_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj5/obj5_top_base_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj5/obj5_top_pull_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj5/obj5_top_pull_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj5/obj5_top_pull_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj6/obj6_side_base_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj6/obj6_side_base_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj6/obj6_side_fold_1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj6/obj6_side_fold_1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj6/obj6_side_fold_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj6/obj6_side_fold_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj6/obj6_side_fold_3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj6/obj6_side_fold_3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj6/obj6_top_base_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj6/obj6_top_base_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj7/obj7_side_base_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj7/obj7_side_base_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj7/obj7_side_fold_1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj7/obj7_side_fold_1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj7/obj7_side_fold_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj7/obj7_side_fold_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj7/obj7_side_fold_3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj7/obj7_side_fold_3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj7/obj7_side_push_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj7/obj7_side_push_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj7/obj7_top_base_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj7/obj7_top_base_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj8/obj8_side_base_image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj8/obj8_side_fold_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj8/obj8_side_fold_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj8/obj8_side_fold_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bin_packing/property_search_database/obj8/obj8_top_base_image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/instance1/result0/planning.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/instance1/result0/prompt.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/instance1/result0/table.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/instance2/result0/side_annotated_image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/instance2/result0/top_annotated_image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/instance26/result0/side_annotated_image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/instance26/result0/top_annotated_image.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/changmin_planner.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/changmin_planner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/temp_robot/robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/temp_robot/robot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/temp_robot/robot_predicates_prove.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/temp_robot/robot_predicates_prove.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/utils/pddl_syntax_validator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/utils/pddl_val.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/utils/prompt_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/utils/prompt_function.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/utils/utils.py" afterDir="false" />
     </list>
@@ -327,7 +226,7 @@
       <recent name="$PROJECT_DIR$/data/bin_packing/property_search_database" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main_two">
+  <component name="RunManager" selected="Python.planning">
     <configuration name="class_pracc" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OPTPlan" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -383,7 +282,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_two.py" />
-      <option name="PARAMETERS" value="--task_name bin_packing --exp_name 1 --exp_number 0 --is_save True --api_json setting.json --example_prompt_json prompt_examples_python.json --robot_json robot.json" />
+      <option name="PARAMETERS" value="--task_name bin_packing --exp_name 1 --exp_number 0 --is_save 1 --api_json setting.json --example_prompt_json prompt_examples_python.json --robot_json robot.json" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -391,7 +290,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="make_random_descriptions" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="make_gt" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OPTPlan" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -400,10 +299,10 @@
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/instance_generator" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/instance_generator/make_random_descriptions.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/instance_generator/make_gt.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -433,18 +332,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="planning" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="OPTPlan" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/result/instance1/result0" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/result/instance1/result0/planning.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.main_two" />
       <item itemvalue="Python.move_data" />
+      <item itemvalue="Python.make_gt" />
+      <item itemvalue="Python.planning" />
+      <item itemvalue="Python.main_two" />
       <item itemvalue="Python.class_pracc" />
-      <item itemvalue="Python.make_random_descriptions" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.planning" />
         <item itemvalue="Python.main_two" />
         <item itemvalue="Python.class_pracc" />
-        <item itemvalue="Python.make_random_descriptions" />
+        <item itemvalue="Python.make_gt" />
         <item itemvalue="Python.move_data" />
       </list>
     </recent_temporary>

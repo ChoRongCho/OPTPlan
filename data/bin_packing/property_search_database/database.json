@@ -5,7 +5,8 @@
             "dimension": "3D",
             "shape": "cylinder",
             "properties": [
-                "is_soft"
+                "is_soft",
+                "is_elastic"
             ]
         },
         "yellow_3D_cuboid": {
@@ -16,32 +17,31 @@
                 "is_soft"
             ]
         },
-        "white_2D_ring": {
+        "white_1D_ring": {
             "color": "white",
-            "dimension": "2D",
-            "shape": "ring",
-            "properties": [
-                "is_soft",
-                "is_foldable",
-                "is_elastic"
-            ]
-        },
-        "gray_1D_ring": {
-            "color": "gray",
             "dimension": "1D",
             "shape": "ring",
             "properties": [
-                "is_foldable",
-                "is_elastic"
+                "is_elastic",
+                "is_flexible"
             ]
         },
-        "transparent_2D_flat_rectangle": {
+        "blue_1D_ring": {
+            "color": "blue",
+            "dimension": "1D",
+            "shape": "ring",
+            "properties": [
+                "is_elastic",
+                "is_flexible"
+            ]
+        },
+        "transparent_2D_circle": {
             "color": "transparent",
             "dimension": "2D",
-            "shape": "flat_rectangle",
+            "shape": "circle",
             "properties": [
-                "is_soft",
-                "is_elastic"
+                "is_elastic",
+                "is_flexible"
             ]
         },
         "yellow_3D_cylinder": {
@@ -57,8 +57,8 @@
             "dimension": "2D",
             "shape": "flat_rectangle",
             "properties": [
-                "is_soft",
-                "is_foldable"
+                "is_foldable",
+                "is_flexible"
             ]
         }
     }

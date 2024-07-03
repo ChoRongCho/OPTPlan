@@ -8,8 +8,7 @@
         "rules": {
             "1": "you should never pick and place a box",
             "2": "when fold a foldable object, the fragile object must be in the bin ",
-            "3": "when place a rigid objects in the bin, the soft objects must be in the bin before",
-            "4": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the objectwhen push a object, neither fragile and rigid objects are permitted"
+            "3": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the object, neither fragile and rigid objects are permitted"
         }
     }
 }
