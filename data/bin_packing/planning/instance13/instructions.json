@@ -2,14 +2,15 @@
     "bin_packing": {
         "task_description": "packing objects into the box called bin. ",
         "goals": {
-            "1": "Packing all items into the box.",
-            "2": "If there are yellow object and black object together, don't pack a black object into the box"
+            "1": "Storing all objects in the container.",
+            "2": "If there are yellow object and black object together, don't pack a black object into the box",
+            "3": "If there is a fragile object, don't pack it into the box"
         },
         "rules": {
-            "1": "you should never pick and place a box",
-            "2": "when fold a object, the object must be foldable",
-            "3": "when place a rigid objects in the bin, the soft objects must be in the bin before",
-            "4": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the objectwhen push a object, neither fragile and rigid objects are permitted"
+            "1": "avoid handling and moving any box",
+            "2": "when fold a foldable object, the fragile object must be in the bin ",
+            "3": "when place a fragile objects, the soft objects must be in the bin",
+            "4": "when push a object, neither fragile and rigid objects are permitted, but only soft objects are permitted"
         }
     }
 }

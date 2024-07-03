@@ -2,13 +2,13 @@
     "bin_packing": {
         "task_description": "packing objects into the box called bin. ",
         "goals": {
-            "1": "Packing all items into the box.",
-            "2": "If there is a black object, don't pack it into the box"
+            "1": "Fitting all belongings into the bin"
         },
         "rules": {
             "1": "it is prohibited to lift and relocate a container",
-            "2": "when fold a foldable object, the fragile object must be in the bin ",
-            "3": "when push a object, neither fragile and rigid objects are permitted, but only soft objects are permitted"
+            "2": "when place a rigid objects in the bin, the soft objects must be in the bin before",
+            "3": "when a rigid object in the bin at the initial state, out of the rigid object and replace it into the bin ",
+            "4": "when push a object, neither fragile and rigid objects are permitted, but only soft objects are permitted"
         }
     }
 }

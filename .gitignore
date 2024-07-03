@@ -10,3 +10,6 @@ data/json/setting.json
 data/json/setting_creative.json
 my_memos/
 scripts/instance_generator
+scripts/visual_interpreting
+/data/temp_dataset
+/data/temp_dataset2

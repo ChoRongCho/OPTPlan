@@ -216,13 +216,17 @@ object1 = Object(index=1, name='white_2D_circle', color='white', shape='2D_circl
 
         prompt += """
 if __name__ == "__main__":
-    # Using goal table, Describe the final state of each object
-     
-    # make your order
+    # First, using goal table, describe the final state of each object
+    ...
+    
+    # Second, make your order
+    ... 
     
     # after making all actions, fill your reasons according to the rules
+    ...
     
-    # check if the goal state is satisfied using goal state table 
+    # check if the goal state is satisfying goal state table
+    ... 
 """
 
         return system_message, prompt

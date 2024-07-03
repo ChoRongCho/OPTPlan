@@ -1,15 +1,13 @@
 import json
 import os
 import subprocess
-import time
 from datetime import datetime
 
 from openai import OpenAI
 from tabulate import tabulate
 
-from scripts.gpt_model.gpt_interface import GPTInterpreter
-from scripts.temp_robot.robot_predicates_prove import RobotProve
-from scripts.utils.models import WorldDomain
+from scripts.llm_interface.gpt_interface import GPTInterpreter
+from scripts.robot.robot_predicates_prove import RobotProve
 from scripts.utils.prompt_function import PromptSet
 from scripts.utils.utils import parse_input, list_file, sort_files, dict_parsing
 from scripts.visual_interpreting.visual_interpreter import FindObjects
@@ -75,10 +73,10 @@ class ChangminPlanner:
                                                    example_data=self.example_data,
                                                    setting=self.setting,
                                                    version="vision")
-        self.gpt_interface_pddl = GPTInterpreter(api_key=self.api_key,
+        self.gpt_interface_text = GPTInterpreter(api_key=self.api_key,
                                                  example_data=self.example_data,
                                                  setting=self.setting,
-                                                 version="pddl")
+                                                 version="text")
         self.grounding_dino = FindObjects(is_save=self.is_save)
         self.load_prompt = PromptSet(task=self.task, task_description=self.task_description)
         self.robot = RobotProve(name=self.robot_data["name"],
@@ -86,7 +84,6 @@ class ChangminPlanner:
                                 actions=self.robot_data["actions"])
 
         # init state, goal state, def_table
-        self.world_model = WorldDomain
         self.state = {}
         self.print_args()
         self.object_dict = {}
@@ -177,7 +174,7 @@ class ChangminPlanner:
         return active_predicates, self.object_dict
 
     def get_object_class(self, object_dict, active_predicates):
-        self.gpt_interface_pddl.reset_message()
+        self.gpt_interface_text.reset_message()
 
         # load prompt
         system_message, prompt = self.load_prompt.load_prompt_object_class(object_dict=object_dict,
@@ -201,13 +198,13 @@ Reason:
 # Explain in less than 200 words why you made such predicates
 """
         # add message
-        self.gpt_interface_pddl.add_message(role="system", content=system_message, image_url=False)
-        self.gpt_interface_pddl.add_message(role="user", content=prompt, image_url=False)
+        self.gpt_interface_text.add_message(role="system", content=system_message, image_url=False)
+        self.gpt_interface_text.add_message(role="user", content=prompt, image_url=False)
 
         # run prompt
         for i in range(self.patience_repeat):
             try:
-                answer = self.gpt_interface_pddl.run_prompt()
+                answer = self.gpt_interface_text.run_prompt()
 
                 def extract_predicates(input_str, target):
                     start = input_str.find(target) + len(target)
@@ -224,7 +221,7 @@ Reason:
                 raise Exception("Making expected answer went wrong. ")
 
     def get_robot_action_conditions(self, object_class_python_script):
-        self.gpt_interface_pddl.reset_message()
+        self.gpt_interface_text.reset_message()
 
         # load prompt
         system_message, prompt = self.load_prompt.load_prompt_robot_action(
@@ -233,11 +230,11 @@ Reason:
             task_instruction=self.task_data["rules"])
 
         # add message
-        self.gpt_interface_pddl.add_message(role="system", content=system_message, image_url=False)
-        self.gpt_interface_pddl.add_message(role="user", content=prompt, image_url=False)
+        self.gpt_interface_text.add_message(role="system", content=system_message, image_url=False)
+        self.gpt_interface_text.add_message(role="user", content=prompt, image_url=False)
 
         # run prompt
-        answer = self.gpt_interface_pddl.run_prompt()
+        answer = self.gpt_interface_text.run_prompt()
 
         def extract_predicates(input_str, target):
             start = input_str.find(target)
@@ -256,16 +253,16 @@ Reason:
                        object_python,
                        robot_python):
 
-        self.gpt_interface_pddl.reset_message()
+        self.gpt_interface_text.reset_message()
         system_message, prompt = self.load_prompt.load_prompt_init_state(object_dict=object_dict,
                                                                          object_python=object_python,
                                                                          robot_python=robot_python)
 
-        self.gpt_interface_pddl.add_message(role="system", content=system_message, image_url=False)
-        self.gpt_interface_pddl.add_message(role="user", content=prompt, image_url=False)
+        self.gpt_interface_text.add_message(role="system", content=system_message, image_url=False)
+        self.gpt_interface_text.add_message(role="user", content=prompt, image_url=False)
 
         # run prompt
-        answer = self.gpt_interface_pddl.run_prompt()
+        answer = self.gpt_interface_text.run_prompt()
         self.question.append(prompt)
         self.answer.append(answer)
 
@@ -286,7 +283,7 @@ Reason:
         return init_state_table, init_state_code
 
     def get_goal_state(self, init_state_table):
-        self.gpt_interface_pddl.reset_message()
+        self.gpt_interface_text.reset_message()
 
         # load prompt
         system_message, prompt = self.load_prompt.load_prompt_goal_state(init_state_table,
@@ -294,11 +291,11 @@ Reason:
                                                                          self.task_data["rules"])
 
         # add message
-        self.gpt_interface_pddl.add_message(role="system", content=system_message, image_url=False)
-        self.gpt_interface_pddl.add_message(role="user", content=prompt, image_url=False)
+        self.gpt_interface_text.add_message(role="system", content=system_message, image_url=False)
+        self.gpt_interface_text.add_message(role="user", content=prompt, image_url=False)
 
         # run prompt
-        answer = self.gpt_interface_pddl.run_prompt()
+        answer = self.gpt_interface_text.run_prompt()
         self.question.append(prompt)
         self.answer.append(answer)
 
@@ -319,7 +316,7 @@ Reason:
                              init_state_table,
                              goal_state_table):
 
-        self.gpt_interface_pddl.reset_message()
+        self.gpt_interface_text.reset_message()
         system_message, prompt = self.load_prompt.load_prompt_planning(
             object_class_python_script=object_class_python_script,
             robot_class_python_script=robot_class_python_script,
@@ -328,10 +325,10 @@ Reason:
             goal_state_table=goal_state_table,
             rules=self.task_data["rules"])
 
-        self.gpt_interface_pddl.add_message(role="system", content=system_message, image_url=False)
-        self.gpt_interface_pddl.add_message(role="user", content=prompt, image_url=False)
+        self.gpt_interface_text.add_message(role="system", content=system_message, image_url=False)
+        self.gpt_interface_text.add_message(role="user", content=prompt, image_url=False)
 
-        answer = self.gpt_interface_pddl.run_prompt()
+        answer = self.gpt_interface_text.run_prompt()
         self.question.append(prompt)
         self.answer.append(answer)
 
@@ -356,7 +353,7 @@ Reason:
         # make robot action conditions
         robot_class_python_script = self.get_robot_action_conditions(object_class_python_script)
 
-        # make a init state
+        # make an init state
         init_state_table, init_state_code = self.get_init_state(object_dict=object_dict,
                                                                 object_python=object_class_python_script,
                                                                 robot_python=robot_class_python_script)
@@ -454,23 +451,23 @@ Reason:
                 file.close()
 
     def robot_action_feedback(self, python_script, planning_output):
-        self.gpt_interface_pddl.reset_message()
+        self.gpt_interface_text.reset_message()
         prompt = self.load_prompt.load_prompt_action_feedback(python_script=python_script,
                                                               planning_output=planning_output)
-        self.gpt_interface_pddl.add_example_prompt("robot_feedback")
-        self.gpt_interface_pddl.add_message(role="user", content=prompt, image_url=False)
-        robot_action_feedback = self.gpt_interface_pddl.run_prompt()
+        self.gpt_interface_text.add_example_prompt("robot_feedback")
+        self.gpt_interface_text.add_message(role="user", content=prompt, image_url=False)
+        robot_action_feedback = self.gpt_interface_text.run_prompt()
         return robot_action_feedback
 
     def direct_planner_feedback(self, python_script, planning_output):
-        self.gpt_interface_pddl.reset_message()
+        self.gpt_interface_text.reset_message()
         prompt = self.load_prompt.load_prompt_planner_feedback(python_script=python_script,
                                                                planning_output=planning_output,
                                                                robot_action=self.robot_data["actions"],
                                                                task_instruction=self.task_data["instructions"])
-        # self.gpt_interface_pddl.add_example_prompt("planner_feedback")
-        self.gpt_interface_pddl.add_message(role="user", content=prompt, image_url=False)
-        planner_feedback = self.gpt_interface_pddl.run_prompt()
+        # self.gpt_interface_text.add_example_prompt("planner_feedback")
+        self.gpt_interface_text.add_message(role="user", content=prompt, image_url=False)
+        planner_feedback = self.gpt_interface_text.run_prompt()
 
         return prompt, planner_feedback
 
@@ -493,9 +490,9 @@ Reason:
 
     def just_chat(self, message, role="user", image_url=False):
         if not image_url:
-            self.gpt_interface_pddl.reset_message()
-            self.gpt_interface_pddl.add_message(role=role, content=message, image_url=False)
-            answer = self.gpt_interface_pddl.run_prompt()
+            self.gpt_interface_text.reset_message()
+            self.gpt_interface_text.add_message(role=role, content=message, image_url=False)
+            answer = self.gpt_interface_text.run_prompt()
             return answer
         else:
             self.gpt_interface_vision.reset_message()
@@ -505,11 +502,11 @@ Reason:
 
     def append_chat(self, message, role="user", is_reset=False):
         if is_reset:
-            self.gpt_interface_pddl.reset_message()
-        self.gpt_interface_pddl.add_message(role=role, content=message, image_url=False)
+            self.gpt_interface_text.reset_message()
+        self.gpt_interface_text.add_message(role=role, content=message, image_url=False)
 
     def run_chat(self):
-        answer = self.gpt_interface_pddl.run_prompt()
+        answer = self.gpt_interface_text.run_prompt()
         return answer
 
     def state_parsing(self, init_state_table, goal_state_table):
