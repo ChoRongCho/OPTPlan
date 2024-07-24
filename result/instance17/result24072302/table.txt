@@ -1,0 +1,23 @@
+The Init State
+| Index | Name             | Shape      | Color  | Object Type | Pushed | Folded | In Bin Objects | In Box | Out Box | Is Elastic | Is Rigid | Is Fragile | Is Soft |
+|-------|------------------|------------|--------|-------------|--------|--------|----------------|--------|---------|------------|----------|------------|---------|
+| 0     | yellow_3D_cuboid | 3D_cuboid  | yellow | obj         | False  | False  | []             | False  | True    | True       | False    | False      | True    |
+| 1     | white_2D_ring    | 2D_ring    | white  | obj         | False  | False  | []             | False  | True    | True       | False    | False      | False   |
+| 2     | blue_1D_linear   | 1D_linear  | blue   | obj         | False  | False  | []             | False  | True    | True       | True     | False      | False   |
+| 3     | white_2D_circle  | 2D_circle  | white  | obj         | False  | False  | []             | True   | False   | True       | False    | True       | False   |
+| 4     | white_box        | box        | white  | box         | False  | False  | []             | False  | False   | False      | False    | False      | False   |
+
+
+The Goal State
+| Index | Name             | Shape      | Color  | Object Type | Pushed | Folded | In Bin Objects | In Box | Out Box | Is Elastic | Is Rigid | Is Fragile | Is Soft |
+|-------|------------------|------------|--------|-------------|--------|--------|----------------|--------|---------|------------|----------|------------|---------|
+| 0     | yellow_3D_cuboid | 3D_cuboid  | yellow | obj         | False  | False  | [0]            | False  | False   | True       | False    | False      | True    |
+| 1     | white_2D_ring    | 2D_ring    | white  | obj         | False  | False  | [1]            | False  | False   | True       | False    | False      | False   |
+| 2     | blue_1D_linear   | 1D_linear  | blue   | obj         | False  | False  | []             | False  | True    | True       | True     | False      | False   |
+| 3     | white_2D_circle  | 2D_circle  | white  | obj         | False  | False  | [3]            | False  | False   | True       | False    | True       | False   |
+| 4     | white_box        | box        | white  | box         | False  | False  | []             | False  | False   | False      | False    | False      | False   |
+
+
+		Initialize time:  1.3316
+		Planning time:  54.822
+		Total time:  56.1536

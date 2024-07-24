@@ -1,0 +1,19 @@
+The Init State
+| Index | Name               | Shape        | Color  | Predicates         | Init Pose | Is Rigid | Is Foldable | Is In Box | Is Packable | Object Type |
+|-------|--------------------|--------------|--------|--------------------|-----------|----------|-------------|-----------|-------------|-------------|
+| 0     | yellow_3D_cylinder | 3D_cylinder  | yellow | is_rigid           | out_box   | True     | False       | False     | True        | obj         |
+| 1     | yellow_2D_rectangle| 2D_rectangle | yellow | is_foldable        | out_box   | False    | True        | False     | True        | obj         |
+| 2     | white_box          | box          | white  |                    | box       | False    | False       | True      | False       | box         |
+
+
+The Goal State
+| Index | Name               | Shape        | Color  | Predicates         | Goal Pose | Is Rigid | Is Foldable | Is In Box | Is Packable | Object Type |
+|-------|--------------------|--------------|--------|--------------------|-----------|----------|-------------|-----------|-------------|-------------|
+| 0     | yellow_3D_cylinder | 3D_cylinder  | yellow | is_rigid           | in_box    | True     | False       | True      | True        | obj         |
+| 1     | yellow_2D_rectangle| 2D_rectangle | yellow | is_foldable        | in_box    | False    | True        | True      | True        | obj         |
+| 2     | white_box          | box          | white  |                    | box       | False    | False       | True      | False       | box         |
+
+
+Initialize time:  1.422
+Planning time:  62.785
+Total time:  64.2071

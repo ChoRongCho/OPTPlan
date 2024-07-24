@@ -1,0 +1,14 @@
+Pick blue_1D_ring
+Cannot Place blue_1D_ring in white_box - No blue object in bin
+Cannot Pick black_3D_cylinder
+Cannot Place black_3D_cylinder - Not holding the object
+Cannot Pick_Out yellow_2D_rectangle from white_box
+Cannot Place yellow_2D_rectangle - Not holding the object
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance8/result24071521/planning.py", line 163, in <module>
+    assert object0 in bin.in_bin == False
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+

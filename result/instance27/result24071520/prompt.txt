@@ -1,0 +1,804 @@
+--------------  ---------------------------
+Project Time    2024-07-16 09:20:00.673919
+Task            bin_packing
+Exp_Name        instance27
+API JSON        setting.json
+Example Prompt  prompt_examples_python.json
+Max Predicates  2
+--------------  ---------------------------
+--------------------------------------------------
+Q: The first image is when you see the object from the side and the next image is when you see the object from the top. 
+Define the shape and color of the object through this image. 
+Use the simple classification table below for the shape of the object. 
+You should match dimension and shape. For example, 2D_ring, 3D_circle are not acceptable. 
+
+
+-----  ----------------------------------------------             
+Dim    Shape   
+1D     linear or ring (<- if there is a space in the center like string)
+2D     rectangle, circle (<- if there is no space in the center etc)
+3D     cube, cuboid, cylinder, cone, polyhedron, etc
+-----  ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box: # if there is nothing, fill it blank
+object out box: brown_3D_cuboid, black_3D_circle, blue_1D_ring  # this is an example
+box: white_box # only color
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+
+
+A: 
+Answer
+---
+object in box: yellow_3D_cuboid
+object out box: white_3D_cylinder, transparent_3D_cylinder
+box: white_box
+---
+
+Descriptions about objects in the scene
+In the scene, there are several objects both inside and outside a white box. The white box has a lattice design and contains a yellow 3D cuboid object. Outside the box, there are two objects: a white 3D cylinder and a transparent 3D cylinder. The white 3D cylinder has a fluted design, resembling a cupcake liner or a small bowl. The transparent 3D cylinder appears to be a small plastic container or cup. The objects are placed on a perforated white surface, which provides a clear view of their shapes and colors. The white box is positioned towards the left side of the images, while the white 3D cylinder and the transparent 3D cylinder are placed in front of it. The images provide both side and top views, allowing for a comprehensive understanding of the objects' dimensions and colors.
+----------------------------------------------------------------------------------------------------
+
+Q: We are now going to do a bin_packing task whose goal is packing objects into the box called bin. There are many objects in this domain, this is an object information that comes from image observations. 
+1. {0: {'name': 'white_3D_cylinder', 'shape': '3D_cylinder', 'color': 'white', 'predicates': ['is_soft', 'is_elastic'], 'init_pose': 'out_box'}, 1: {'name': 'transparent_3D_cylinder', 'shape': '3D_cylinder', 'color': 'transparent', 'predicates': ['is_elastic'], 'init_pose': 'out_box'}, 2: {'name': 'yellow_3D_cuboid', 'shape': '3D_cuboid', 'color': 'yellow', 'predicates': ['is_soft'], 'init_pose': 'in_box'}, 3: {'name': 'white_box', 'shape': 'box', 'color': 'white', 'predicates': [], 'init_pose': 'box'}} 
+
+from dataclasses import dataclass
+
+
+@dataclass
+class Object:
+    # Basic dataclass
+    index: int
+    name: str
+    color: str
+    shape: str
+    object_type: str  # box or obj
+    
+    # Basic Effect Robot Action Predicates for object_type = obj
+    pushed: bool
+    folded: bool
+    
+    # Bin Predicates for object_type = bin
+    in_bin: list
+    
+    # Object physical properties predicates
+    
+
+    # bin_packing predicates expressed as a boolean (max 2)
+However, we cannot do complete planning with this dataclass predicate alone that means we have to add another predicates that fully describe the bin_packing. 
+Also you have to add predicates such as is_soft, and is_elastic. 
+Add more predicates needed for bin_packing to class Object. 
+
+Answer:
+# only write a code here without example instantiation
+
+Reason:
+# Explain in less than 200 words why you made such predicates
+
+
+A: 
+from dataclasses import dataclass
+
+@dataclass
+class Object:
+    # Basic dataclass
+    index: int
+    name: str
+    color: str
+    shape: str
+    object_type: str  # box or obj
+    
+    # Basic Effect Robot Action Predicates for object_type = obj
+    pushed: bool
+    folded: bool
+    
+    # Bin Predicates for object_type = bin
+    in_bin: list
+    
+    # Object physical properties predicates
+    is_soft: bool
+    is_elastic: bool
+    
+    # bin_packing predicates expressed as a boolean (max 2)
+    is_fragile: bool
+    is_heavy: bool
+----------------------------------------------------------------------------------------------------
+
+Q: We are now going to do a bin_packing task which means packing objects into the box called bin. . 
+We have a basic python structure describing the available robot actions. 
+from dataclasses import dataclass
+
+@dataclass
+class Object:
+    # Basic dataclass
+    index: int
+    name: str
+    color: str
+    shape: str
+    object_type: str  # box or obj
+    
+    # Basic Effect Robot Action Predicates for object_type = obj
+    pushed: bool
+    folded: bool
+    
+    # Bin Predicates for object_type = bin
+    in_bin: list
+    
+    # Object physical properties predicates
+    is_soft: bool
+    is_elastic: bool
+    
+    # bin_packing predicates expressed as a boolean (max 2)
+    is_fragile: bool
+    is_heavy: bool
+
+
+class Robot:
+    # Define skills
+    def __init__(self,
+                 name: str = "UR5",
+                 goal: str = None,
+                 actions: dict = None):
+        self.name = name
+        self.goal = goal
+        self.actions = actions
+    
+        self.robot_handempty = True
+        self.robot_now_holding = False
+        self.robot_base_pose = True
+    
+    # basic state
+    def state_handempty(self):
+        self.robot_handempty = True
+        self.robot_base_pose = False
+    
+    # basic state
+    def state_holding(self, objects):
+        self.robot_handempty = False
+        self.robot_now_holding = objects
+        self.robot_base_pose = False
+    
+    # basic state
+    def state_base(self):
+        self.robot_base_pose = True
+    
+    def pick(self, obj, bin):
+        # make a preconditions for actions using if-else phrase
+        print(f"Pick {obj.name}")
+        print(f"Cannot Pick {obj.name}")
+        
+    def place(self, obj, bin):
+        # make a preconditions for actions
+        print(f"Place {obj.name} in {bins.name}")
+        bins.in_bin.append(obj)
+        ...
+    
+    def push(self, obj, bin): 
+        # make a preconditions for actions
+        print(f"Push {obj.name}")
+        obj.pushed
+        ...
+    
+    def fold(self, obj, bin):
+        # make a preconditions for actions
+        print(f"Fold {obj.name}")
+        obj.folded
+        ...
+    
+    def pick_out(self, obj, bin):
+        # make a preconditions for actions
+        print(f"Pick_Out {obj.name} from {bin.name}")
+        bins.in_bin.remove(obj)
+        ...
+
+I want to create the preconditions and effects of the robot actions based on the given rules that is similar to PDDL stream. 
+
+{'pick': "pick an {object} not in the {bin}, it dose not include 'place' action", 'place': 'place an {object} on the {bin or not bin}', 'push': 'push an {object} downward in the bin, hand must be empty when pushing', 'fold': 'fold an {object}, hand must be empty when folding', 'pick_out': 'pick an {object} in {bin} and place an {object} on {not_bin}. After the action, the robot hand must be empty'}
+{'1': 'you should never pick and place a box', '2': 'when place a rigid objects in the bin, the soft objects must be in the bin before', '3': 'do not place a fragile object if there is no elastic object in the bin', '4': 'when push a object, neither fragile and rigid objects are permitted, but only soft objects are permitted'}
+Please make more action conditions and effect of the robot and objects state that used for bin_packing. 
+For example, if you place an object in hand, obj.in_bin=False. 
+However, if there are predicates that are mentioned in the rules but not in the object class, do not reflect those predictions in the rules.
+Answer:
+# only write a Robot python class here without example instantiation
+```python
+
+
+```
+
+Reason:
+# Explain in less than 300 words why you made such robot action
+
+
+A: 
+```python
+from dataclasses import dataclass
+
+@dataclass
+class Object:
+    index: int
+    name: str
+    color: str
+    shape: str
+    object_type: str  # box or obj
+    
+    pushed: bool = False
+    folded: bool = False
+    
+    in_bin: list = None
+    
+    is_soft: bool = False
+    is_elastic: bool = False
+    
+    is_fragile: bool = False
+    is_heavy: bool = False
+
+
+class Robot:
+    def __init__(self, name: str = "UR5", goal: str = None, actions: dict = None):
+        self.name = name
+        self.goal = goal
+        self.actions = actions
+    
+        self.robot_handempty = True
+        self.robot_now_holding = None
+        self.robot_base_pose = True
+    
+    def state_handempty(self):
+        self.robot_handempty = True
+        self.robot_now_holding = None
+        self.robot_base_pose = False
+    
+    def state_holding(self, obj):
+        self.robot_handempty = False
+        self.robot_now_holding = obj
+        self.robot_base_pose = False
+    
+    def state_base(self):
+        self.robot_base_pose = True
+    
+    def pick(self, obj, bin):
+        if obj.object_type == 'obj' and obj not in bin.in_bin and self.robot_handempty:
+            print(f"Pick {obj.name}")
+            self.state_holding(obj)
+        else:
+            print(f"Cannot Pick {obj.name}")
+    
+    def place(self, obj, bin):
+        if obj.object_type == 'obj' and self.robot_now_holding == obj:
+            if obj.is_soft or (not obj.is_soft and any(o.is_soft for o in bin.in_bin)):
+                if not obj.is_fragile or (obj.is_fragile and any(o.is_elastic for o in bin.in_bin)):
+                    print(f"Place {obj.name} in {bin.name}")
+                    bin.in_bin.append(obj)
+                    self.state_handempty()
+                else:
+                    print(f"Cannot Place {obj.name} - No elastic object in bin")
+            else:
+                print(f"Cannot Place {obj.name} - No soft object in bin")
+        else:
+            print(f"Cannot Place {obj.name}")
+    
+    def push(self, obj, bin):
+        if obj.object_type == 'obj' and obj.is_soft and self.robot_handempty:
+            print(f"Push {obj.name}")
+            obj.pushed = True
+        else:
+            print(f"Cannot Push {obj.name}")
+    
+    def fold(self, obj, bin):
+        if obj.object_type == 'obj' and self.robot_handempty:
+            print(f"Fold {obj.name}")
+            obj.folded = True
+        else:
+            print(f"Cannot Fold {obj.name}")
+    
+    def pick_out(self, obj, bin):
+        if obj.object_type == 'obj' and obj in bin.in_bin and self.robot_handempty:
+            print(f"Pick_Out {obj.name} from {bin.name}")
+            bin.in_bin.remove(obj)
+            self.state_holding(obj)
+        else:
+            print(f"Cannot Pick_Out {obj.name}")
+```
+
+Reason:
+The robot actions are designed to adhere strictly to the given rules and constraints for bin packing. The preconditions ensure that actions are only performed when the state of the robot and objects meet specific criteria. For example, the `pick` action can only be performed if the object is not already in the bin and the robot's hand is empty. The `place` action has additional checks to ensure that soft objects are placed before rigid ones and that fragile objects are only placed if there is an elastic object in the bin. The `push` and `fold` actions require the robot's hand to be empty and are restricted to soft objects. The `pick_out` action ensures that the object is in the bin and the robot's hand is empty before picking it out. These conditions and effects ensure that the robot's actions are consistent with the rules and constraints provided.
+----------------------------------------------------------------------------------------------------
+
+Q: We are now making initial state of the bin_packing. We get these information from the observation. 
+
+{0: {'name': 'white_3D_cylinder', 'shape': '3D_cylinder', 'color': 'white', 'predicates': ['is_soft', 'is_elastic'], 'init_pose': 'out_box'}, 1: {'name': 'transparent_3D_cylinder', 'shape': '3D_cylinder', 'color': 'transparent', 'predicates': ['is_elastic'], 'init_pose': 'out_box'}, 2: {'name': 'yellow_3D_cuboid', 'shape': '3D_cuboid', 'color': 'yellow', 'predicates': ['is_soft'], 'init_pose': 'in_box'}, 3: {'name': 'white_box', 'shape': 'box', 'color': 'white', 'predicates': [], 'init_pose': 'box'}}
+from dataclasses import dataclass
+
+@dataclass
+class Object:
+    # Basic dataclass
+    index: int
+    name: str
+    color: str
+    shape: str
+    object_type: str  # box or obj
+    
+    # Basic Effect Robot Action Predicates for object_type = obj
+    pushed: bool
+    folded: bool
+    
+    # Bin Predicates for object_type = bin
+    in_bin: list
+    
+    # Object physical properties predicates
+    is_soft: bool
+    is_elastic: bool
+    
+    # bin_packing predicates expressed as a boolean (max 2)
+    is_fragile: bool
+    is_heavy: bool
+class Robot:
+    def __init__(self, name: str = "UR5", goal: str = None, actions: dict = None):
+        self.name = name
+        self.goal = goal
+        self.actions = actions
+    
+        self.robot_handempty = True
+        self.robot_now_holding = None
+        self.robot_base_pose = True
+    
+    def state_handempty(self):
+        self.robot_handempty = True
+        self.robot_now_holding = None
+        self.robot_base_pose = False
+    
+    def state_holding(self, obj):
+        self.robot_handempty = False
+        self.robot_now_holding = obj
+        self.robot_base_pose = False
+    
+    def state_base(self):
+        self.robot_base_pose = True
+    
+    def pick(self, obj, bin):
+        if obj.object_type == 'obj' and obj not in bin.in_bin and self.robot_handempty:
+            print(f"Pick {obj.name}")
+            self.state_holding(obj)
+        else:
+            print(f"Cannot Pick {obj.name}")
+    
+    def place(self, obj, bin):
+        if obj.object_type == 'obj' and self.robot_now_holding == obj:
+            if obj.is_soft or (not obj.is_soft and any(o.is_soft for o in bin.in_bin)):
+                if not obj.is_fragile or (obj.is_fragile and any(o.is_elastic for o in bin.in_bin)):
+                    print(f"Place {obj.name} in {bin.name}")
+                    bin.in_bin.append(obj)
+                    self.state_handempty()
+                else:
+                    print(f"Cannot Place {obj.name} - No elastic object in bin")
+            else:
+                print(f"Cannot Place {obj.name} - No soft object in bin")
+        else:
+            print(f"Cannot Place {obj.name}")
+    
+    def push(self, obj, bin):
+        if obj.object_type == 'obj' and obj.is_soft and self.robot_handempty:
+            print(f"Push {obj.name}")
+            obj.pushed = True
+        else:
+            print(f"Cannot Push {obj.name}")
+    
+    def fold(self, obj, bin):
+        if obj.object_type == 'obj' and self.robot_handempty:
+            print(f"Fold {obj.name}")
+            obj.folded = True
+        else:
+            print(f"Cannot Fold {obj.name}")
+    
+    def pick_out(self, obj, bin):
+        if obj.object_type == 'obj' and obj in bin.in_bin and self.robot_handempty:
+            print(f"Pick_Out {obj.name} from {bin.name}")
+            bin.in_bin.remove(obj)
+            self.state_holding(obj)
+        else:
+            print(f"Cannot Pick_Out {obj.name}")
+
+Using above information, Please organize the initial state of the domain in a table. 
+
+
+### 1. Init Table
+# fill your table
+
+### 2. Notes:
+# Fill your notes
+
+### 3. Python Codes
+# make init state into python code
+# don't include the object classes or robot class, make only objects and bin 
+# example 
+object0 = Object(index=0, name='black_3D_cuboid', color='black', shape='3D_cuboid', ...)
+object1 = Object(index=1, name='white_2D_circle', color='white', shape='2D_circle', ...)
+...
+
+
+
+A: 
+### 1. Init Table
+
+| Index | Name                    | Shape       | Color       | Object Type | Pushed | Folded | In Bin   | Is Soft | Is Elastic | Is Fragile | Is Heavy | Init Pose |
+|-------|-------------------------|-------------|-------------|-------------|--------|--------|----------|---------|------------|------------|----------|-----------|
+| 0     | white_3D_cylinder       | 3D_cylinder | white       | obj         | False  | False  | []       | True    | True       | False      | False    | out_box   |
+| 1     | transparent_3D_cylinder | 3D_cylinder | transparent | obj         | False  | False  | []       | False   | True       | False      | False    | out_box   |
+| 2     | yellow_3D_cuboid        | 3D_cuboid   | yellow      | obj         | False  | False  | []       | True    | False      | False      | False    | in_box    |
+| 3     | white_box               | box         | white       | bin         | False  | False  | [2]      | False   | False      | False      | False    | box       |
+
+### 2. Notes:
+- The `white_3D_cylinder` is soft and elastic, and it is initially out of the box.
+- The `transparent_3D_cylinder` is elastic but not soft, and it is initially out of the box.
+- The `yellow_3D_cuboid` is soft but not elastic, and it is initially in the box.
+- The `white_box` is a bin and contains the `yellow_3D_cuboid` initially.
+
+### 3. Python Codes
+
+```python
+object0 = Object(
+    index=0, 
+    name='white_3D_cylinder', 
+    color='white', 
+    shape='3D_cylinder', 
+    object_type='obj', 
+    pushed=False, 
+    folded=False, 
+    in_bin=[], 
+    is_soft=True, 
+    is_elastic=True, 
+    is_fragile=False, 
+    is_heavy=False
+)
+
+object1 = Object(
+    index=1, 
+    name='transparent_3D_cylinder', 
+    color='transparent', 
+    shape='3D_cylinder', 
+    object_type='obj', 
+    pushed=False, 
+    folded=False, 
+    in_bin=[], 
+    is_soft=False, 
+    is_elastic=True, 
+    is_fragile=False, 
+    is_heavy=False
+)
+
+object2 = Object(
+    index=2, 
+    name='yellow_3D_cuboid', 
+    color='yellow', 
+    shape='3D_cuboid', 
+    object_type='obj', 
+    pushed=False, 
+    folded=False, 
+    in_bin=[], 
+    is_soft=True, 
+    is_elastic=False, 
+    is_fragile=False, 
+    is_heavy=False
+)
+
+object3 = Object(
+    index=3, 
+    name='white_box', 
+    color='white', 
+    shape='box', 
+    object_type='bin', 
+    pushed=False, 
+    folded=False, 
+    in_bin=[object2], 
+    is_soft=False, 
+    is_elastic=False, 
+    is_fragile=False, 
+    is_heavy=False
+)
+```
+----------------------------------------------------------------------------------------------------
+
+Q: We are now making goal state of the bin_packing. Your goal is to redefine the goal state given in natural language into a table. 
+
+This is an init state table. 
+| Index | Name                    | Shape       | Color       | Object Type | Pushed | Folded | In Bin   | Is Soft | Is Elastic | Is Fragile | Is Heavy | Init Pose |
+|-------|-------------------------|-------------|-------------|-------------|--------|--------|----------|---------|------------|------------|----------|-----------|
+| 0     | white_3D_cylinder       | 3D_cylinder | white       | obj         | False  | False  | []       | True    | True       | False      | False    | out_box   |
+| 1     | transparent_3D_cylinder | 3D_cylinder | transparent | obj         | False  | False  | []       | False   | True       | False      | False    | out_box   |
+| 2     | yellow_3D_cuboid        | 3D_cuboid   | yellow      | obj         | False  | False  | []       | True    | False      | False      | False    | in_box    |
+| 3     | white_box               | box         | white       | bin         | False  | False  | [2]      | False   | False      | False      | False    | box       |
+
+Our goal is listed below. 
+{'1': 'Packing all items into the box.', '2': "If there are foldable object and soft object together, don't pack a foldable object into the box"}
+And, this is rules that when you do actions. 
+{'1': 'you should never pick and place a box', '2': 'when place a rigid objects in the bin, the soft objects must be in the bin before', '3': 'do not place a fragile object if there is no elastic object in the bin', '4': 'when push a object, neither fragile and rigid objects are permitted, but only soft objects are permitted'}
+
+
+Using above information, Please organize the goal state of the domain in a table. 
+
+
+### 1. Goal Table
+# fill your table similar with initial state
+
+### 2. Notes:
+# Fill your notes
+
+
+A: 
+### 1. Goal Table
+
+| Index | Name                    | Shape       | Color       | Object Type | Pushed | Folded | In Bin   | Is Soft | Is Elastic | Is Fragile | Is Heavy | Goal Pose |
+|-------|-------------------------|-------------|-------------|-------------|--------|--------|----------|---------|------------|------------|----------|-----------|
+| 0     | white_3D_cylinder       | 3D_cylinder | white       | obj         | False  | False  | [3]      | True    | True       | False      | False    | in_box    |
+| 1     | transparent_3D_cylinder | 3D_cylinder | transparent | obj         | False  | False  | [3]      | False   | True       | False      | False    | in_box    |
+| 2     | yellow_3D_cuboid        | 3D_cuboid   | yellow      | obj         | False  | False  | [3]      | True    | False      | False      | False    | in_box    |
+| 3     | white_box               | box         | white       | bin         | False  | False  | [0, 1, 2]| False   | False      | False      | False    | box       |
+
+### 2. Notes:
+1. All items must be packed into the box.
+2. Foldable objects should not be packed into the box if there are soft objects together.
+3. The box itself should not be picked and placed.
+4. Soft objects must be placed in the bin before rigid objects.
+5. Fragile objects should not be placed in the bin unless there is an elastic object already in the bin.
+6. Only soft objects are permitted to be pushed; neither fragile nor rigid objects are allowed to be pushed.
+----------------------------------------------------------------------------------------------------
+
+Q: from dataclasses import dataclass
+
+@dataclass
+class Object:
+    # Basic dataclass
+    index: int
+    name: str
+    color: str
+    shape: str
+    object_type: str  # box or obj
+    
+    # Basic Effect Robot Action Predicates for object_type = obj
+    pushed: bool
+    folded: bool
+    
+    # Bin Predicates for object_type = bin
+    in_bin: list
+    
+    # Object physical properties predicates
+    is_soft: bool
+    is_elastic: bool
+    
+    # bin_packing predicates expressed as a boolean (max 2)
+    is_fragile: bool
+    is_heavy: bool
+
+class Robot:
+    def __init__(self, name: str = "UR5", goal: str = None, actions: dict = None):
+        self.name = name
+        self.goal = goal
+        self.actions = actions
+    
+        self.robot_handempty = True
+        self.robot_now_holding = None
+        self.robot_base_pose = True
+    
+    def state_handempty(self):
+        self.robot_handempty = True
+        self.robot_now_holding = None
+        self.robot_base_pose = False
+    
+    def state_holding(self, obj):
+        self.robot_handempty = False
+        self.robot_now_holding = obj
+        self.robot_base_pose = False
+    
+    def state_base(self):
+        self.robot_base_pose = True
+    
+    def pick(self, obj, bin):
+        if obj.object_type == 'obj' and obj not in bin.in_bin and self.robot_handempty:
+            print(f"Pick {obj.name}")
+            self.state_holding(obj)
+        else:
+            print(f"Cannot Pick {obj.name}")
+    
+    def place(self, obj, bin):
+        if obj.object_type == 'obj' and self.robot_now_holding == obj:
+            if obj.is_soft or (not obj.is_soft and any(o.is_soft for o in bin.in_bin)):
+                if not obj.is_fragile or (obj.is_fragile and any(o.is_elastic for o in bin.in_bin)):
+                    print(f"Place {obj.name} in {bin.name}")
+                    bin.in_bin.append(obj)
+                    self.state_handempty()
+                else:
+                    print(f"Cannot Place {obj.name} - No elastic object in bin")
+            else:
+                print(f"Cannot Place {obj.name} - No soft object in bin")
+        else:
+            print(f"Cannot Place {obj.name}")
+    
+    def push(self, obj, bin):
+        if obj.object_type == 'obj' and obj.is_soft and self.robot_handempty:
+            print(f"Push {obj.name}")
+            obj.pushed = True
+        else:
+            print(f"Cannot Push {obj.name}")
+    
+    def fold(self, obj, bin):
+        if obj.object_type == 'obj' and self.robot_handempty:
+            print(f"Fold {obj.name}")
+            obj.folded = True
+        else:
+            print(f"Cannot Fold {obj.name}")
+    
+    def pick_out(self, obj, bin):
+        if obj.object_type == 'obj' and obj in bin.in_bin and self.robot_handempty:
+            print(f"Pick_Out {obj.name} from {bin.name}")
+            bin.in_bin.remove(obj)
+            self.state_holding(obj)
+        else:
+            print(f"Cannot Pick_Out {obj.name}")
+
+object0 = Object(
+    index=0, 
+    name='white_3D_cylinder', 
+    color='white', 
+    shape='3D_cylinder', 
+    object_type='obj', 
+    pushed=False, 
+    folded=False, 
+    in_bin=[], 
+    is_soft=True, 
+    is_elastic=True, 
+    is_fragile=False, 
+    is_heavy=False
+)
+
+object1 = Object(
+    index=1, 
+    name='transparent_3D_cylinder', 
+    color='transparent', 
+    shape='3D_cylinder', 
+    object_type='obj', 
+    pushed=False, 
+    folded=False, 
+    in_bin=[], 
+    is_soft=False, 
+    is_elastic=True, 
+    is_fragile=False, 
+    is_heavy=False
+)
+
+object2 = Object(
+    index=2, 
+    name='yellow_3D_cuboid', 
+    color='yellow', 
+    shape='3D_cuboid', 
+    object_type='obj', 
+    pushed=False, 
+    folded=False, 
+    in_bin=[], 
+    is_soft=True, 
+    is_elastic=False, 
+    is_fragile=False, 
+    is_heavy=False
+)
+
+object3 = Object(
+    index=3, 
+    name='white_box', 
+    color='white', 
+    shape='box', 
+    object_type='bin', 
+    pushed=False, 
+    folded=False, 
+    in_bin=[object2], 
+    is_soft=False, 
+    is_elastic=False, 
+    is_fragile=False, 
+    is_heavy=False
+)
+
+if __name__ == '__main__':
+	# packing all object in the box
+	# make a plan
+You must follow the rules: 
+{'1': 'you should never pick and place a box', '2': 'when place a rigid objects in the bin, the soft objects must be in the bin before', '3': 'do not place a fragile object if there is no elastic object in the bin', '4': 'when push a object, neither fragile and rigid objects are permitted, but only soft objects are permitted'}
+Make a plan under the if __name__ == '__main__':. 
+You must make a correct action sequence. 
+
+This is a initial state of all objects. 
+| Index | Name                    | Shape       | Color       | Object Type | Pushed | Folded | In Bin   | Is Soft | Is Elastic | Is Fragile | Is Heavy | Init Pose |
+|-------|-------------------------|-------------|-------------|-------------|--------|--------|----------|---------|------------|------------|----------|-----------|
+| 0     | white_3D_cylinder       | 3D_cylinder | white       | obj         | False  | False  | []       | True    | True       | False      | False    | out_box   |
+| 1     | transparent_3D_cylinder | 3D_cylinder | transparent | obj         | False  | False  | []       | False   | True       | False      | False    | out_box   |
+| 2     | yellow_3D_cuboid        | 3D_cuboid   | yellow      | obj         | False  | False  | []       | True    | False      | False      | False    | in_box    |
+| 3     | white_box               | box         | white       | bin         | False  | False  | [2]      | False   | False      | False      | False    | box       |
+
+And this is a goal state of all objects. 
+| Index | Name                    | Shape       | Color       | Object Type | Pushed | Folded | In Bin   | Is Soft | Is Elastic | Is Fragile | Is Heavy | Goal Pose |
+|-------|-------------------------|-------------|-------------|-------------|--------|--------|----------|---------|------------|------------|----------|-----------|
+| 0     | white_3D_cylinder       | 3D_cylinder | white       | obj         | False  | False  | [3]      | True    | True       | False      | False    | in_box    |
+| 1     | transparent_3D_cylinder | 3D_cylinder | transparent | obj         | False  | False  | [3]      | False   | True       | False      | False    | in_box    |
+| 2     | yellow_3D_cuboid        | 3D_cuboid   | yellow      | obj         | False  | False  | [3]      | True    | False      | False      | False    | in_box    |
+| 3     | white_box               | box         | white       | bin         | False  | False  | [0, 1, 2]| False   | False      | False      | False    | box       |
+
+
+if __name__ == "__main__":
+    # First, using goal table, describe the final state of each object
+    ...
+    
+    # Second, make your order, you should be aware of the robot action effects such as 'push' or 'pick_out etc'. 
+    # a) Initialize the robot
+    robot = Robot()
+
+    # b) Define the bin (box), this is an example. 
+    bin = object5
+    
+    # Third, after making all actions, fill your reasons according to the rules
+    ...
+    
+    # Fourth, check if the goal state is satisfying goal state table. Use a template below. These are examples. 
+    assert object0.is_in_box == True or False
+    assert object1.is_in_box == True or False
+    assert object2.is_in_box == True or False
+    assert object3.is_in_box == True or False
+    assert object4.is_in_box == True or False
+    print("All task planning is done") 
+
+
+A: 
+```python
+if __name__ == "__main__":
+    # First, using goal table, describe the final state of each object
+    # Goal state:
+    # object0 (white_3D_cylinder) -> in white_box
+    # object1 (transparent_3D_cylinder) -> in white_box
+    # object2 (yellow_3D_cuboid) -> in white_box (already in the box)
+    # object3 (white_box) -> contains [object0, object1, object2]
+
+    # Second, make your order, you should be aware of the robot action effects such as 'push' or 'pick_out etc'. 
+    # a) Initialize the robot
+    robot = Robot()
+
+    # b) Define the bin (box)
+    bin = object3
+
+    # Third, after making all actions, fill your reasons according to the rules
+    # Step 1: Pick and place the white_3D_cylinder (soft and elastic) into the white_box
+    robot.pick(object0, bin)
+    robot.place(object0, bin)
+
+    # Step 2: Pick and place the transparent_3D_cylinder (rigid) into the white_box
+    # This is allowed because there is already a soft object (white_3D_cylinder) in the bin
+    robot.pick(object1, bin)
+    robot.place(object1, bin)
+
+    # Fourth, check if the goal state is satisfying goal state table. Use a template below. These are examples.
+    assert object0 in bin.in_bin
+    assert object1 in bin.in_bin
+    assert object2 in bin.in_bin  # already in the box
+    assert bin.in_bin == [object2, object0, object1]  # order may vary but all objects should be in the bin
+
+    print("All task planning is done")
+```
+
+### Explanation of the Plan:
+1. **Pick and Place `white_3D_cylinder`**:
+   - The `white_3D_cylinder` is a soft and elastic object, so it can be placed in the bin without any restrictions.
+   - The robot picks the `white_3D_cylinder` and places it in the `white_box`.
+
+2. **Pick and Place `transparent_3D_cylinder`**:
+   - The `transparent_3D_cylinder` is a rigid object. According to the rules, a rigid object can only be placed in the bin if there is already a soft object in the bin.
+   - Since the `white_3D_cylinder` (a soft object) is already in the bin, the robot can pick and place the `transparent_3D_cylinder` in the `white_box`.
+
+3. **Check Goal State**:
+   - The final state of the objects is checked to ensure they match the goal state.
+   - The `white_box` should contain `white_3D_cylinder`, `transparent_3D_cylinder`, and `yellow_3D_cuboid`.
+
+By following these steps, the robot successfully completes the bin packing task while adhering to the given rules.
+----------------------------------------------------------------------------------------------------
+

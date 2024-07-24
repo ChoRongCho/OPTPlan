@@ -1,0 +1,6 @@
+Pick brown_3D_cuboid
+Place brown_3D_cuboid in white_box
+All objects are in the correct final state.
+
+
+

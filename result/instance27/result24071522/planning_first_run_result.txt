@@ -1,0 +1,12 @@
+Pick white_3D_cylinder
+Place white_3D_cylinder in white_box
+Pick transparent_3D_cylinder
+Cannot Place transparent_3D_cylinder in white_box due to rigidity rules
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance27/result24071522/planning.py", line 191, in <module>
+    assert object1 in bin.in_bin
+           ^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+

@@ -7,8 +7,7 @@
         "rules": {
             "1": "it is prohibited to lift and relocate a container",
             "2": "when place a rigid objects in the bin, the soft objects must be in the bin before",
-            "3": "when a rigid object in the bin at the initial state, out of the rigid object and replace it into the bin ",
-            "4": "when push a object, neither fragile and rigid objects are permitted, but only soft objects are permitted"
+            "4": "if there is a foldable object, fold the object on the platform not in the bin"
         }
     }
 }

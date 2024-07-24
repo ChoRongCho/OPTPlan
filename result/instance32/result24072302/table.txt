@@ -1,0 +1,23 @@
+The Init State
+| Index | Name              | Color  | Shape       | Object Type | Pushed | Folded | In Bin Objects | Is Rigid | Is Fragile | Is Elastic | In Box |
+|-------|-------------------|--------|-------------|-------------|--------|--------|----------------|----------|------------|------------|--------|
+| 0     | green_3D_cylinder | green  | 3D_cylinder | obj         | False  | False  | None           | True     | True       | False      | False  |
+| 1     | yellow_3D_cylinder| yellow | 3D_cylinder | obj         | False  | False  | None           | True     | False      | False      | False  |
+| 2     | blue_1D_linear    | blue   | 1D_linear   | obj         | False  | False  | None           | True     | False      | False      | False  |
+| 3     | white_2D_ring     | white  | 2D_ring     | obj         | False  | False  | None           | False    | False      | True       | True   |
+| 4     | white_box         | white  | box         | box         | False  | False  | []             | False    | False      | False      | True   |
+
+
+The Goal State
+| Index | Name              | Color  | Shape       | Object Type | Pushed | Folded | In Bin Objects | Is Rigid | Is Fragile | Is Elastic | In Box |
+|-------|-------------------|--------|-------------|-------------|--------|--------|----------------|----------|------------|------------|--------|
+| 0     | green_3D_cylinder | green  | 3D_cylinder | obj         | False  | False  | None           | True     | True       | False      | True   |
+| 1     | yellow_3D_cylinder| yellow | 3D_cylinder | obj         | False  | False  | None           | True     | False      | False      | False  |
+| 2     | blue_1D_linear    | blue   | 1D_linear   | obj         | False  | False  | None           | True     | False      | False      | True   |
+| 3     | white_2D_ring     | white  | 2D_ring     | obj         | False  | False  | None           | False    | False      | True       | True   |
+| 4     | white_box         | white  | box         | box         | False  | False  | [green_3D_cylinder, blue_1D_linear, white_2D_ring] | False    | False      | False      | True   |
+
+
+		Initialize time:  1.3124
+		Planning time:  56.3193
+		Total time:  57.6317

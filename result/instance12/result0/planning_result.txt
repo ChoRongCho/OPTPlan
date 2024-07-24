@@ -1,0 +1,6 @@
+Pick green_3D_cylinder
+Place green_3D_cylinder in bin
+Goal state achieved successfully!
+
+
+

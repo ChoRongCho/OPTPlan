@@ -1,0 +1,13 @@
+Cannot Pick_Out black_3D_cylinder
+Pick brown_3D_cuboid
+Place brown_3D_cuboid in white_box
+Cannot Pick black_3D_cylinder
+Cannot Place black_3D_cylinder
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance18/result24071522/planning.py", line 192, in <module>
+    assert bin.in_bin == [object0, object1]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+

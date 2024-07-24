@@ -31,6 +31,7 @@ def parse_args_v2():
 
     # related to problem generation and refinement
     parser.add_argument("--mkdb", type=bool, default=False, help="make database")
+    parser.add_argument("--max_feedback", type=int, default=1, help="number of max replanning")
     parser.add_argument("--seed", type=int, default=42, help="random seed")
 
     args = parser.parse_args()
@@ -186,3 +187,18 @@ def dict_parsing(input_dict):
         index += 1
 
     return output_dict
+
+
+def feedback_error_decoder(error):
+    error = error.decode('utf-8')
+    if "SyntaxError" in error:
+        pass
+    elif "AssertionError" in error:
+        pass
+    elif "TypeError" in error:
+        pass
+    elif "ValueError" in error:
+        pass
+    else:
+        pass
+

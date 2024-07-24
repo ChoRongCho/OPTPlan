@@ -1,0 +1,9 @@
+Fold yellow_2D_rectangle
+Pick yellow_2D_rectangle
+Place yellow_2D_rectangle in white_box
+Pick yellow_3D_cylinder
+Place yellow_3D_cylinder in white_box
+All task planning is done
+
+
+

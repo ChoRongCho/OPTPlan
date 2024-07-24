@@ -1,0 +1,21 @@
+The Init State
+| Index | Name              | Shape       | Color  | Object Type | Pushed | Folded | In Bin | Is Soft | Is Rigid | Is In Box | Is Out Box |
+|-------|-------------------|-------------|--------|-------------|--------|--------|--------|---------|----------|-----------|------------|
+| 0     | yellow_3D_cylinder| 3D_cylinder | yellow | obj         | False  | False  | []     | False   | True     | False     | True       |
+| 1     | black_3D_circle   | 3D_circle   | black  | obj         | False  | False  | []     | False   | True     | False     | True       |
+| 2     | brown_3D_cuboid   | 3D_cuboid   | brown  | obj         | False  | False  | []     | True    | False    | True      | False      |
+| 3     | white_box         | box         | white  | bin         | False  | False  | [2]    | False   | False    | True      | False      |
+
+
+The Goal State
+| Index | Name              | Shape       | Color  | Object Type | Pushed | Folded | In Bin | Is Soft | Is Rigid | Is In Box | Is Out Box |
+|-------|-------------------|-------------|--------|-------------|--------|--------|--------|---------|----------|-----------|------------|
+| 0     | yellow_3D_cylinder| 3D_cylinder | yellow | obj         | False  | False  | [3]    | False   | True     | False     | True       |
+| 1     | black_3D_circle   | 3D_circle   | black  | obj         | False  | False  | [3]    | False   | True     | False     | True       |
+| 2     | brown_3D_cuboid   | 3D_cuboid   | brown  | obj         | False  | False  | [3]    | True    | False    | True      | False      |
+| 3     | white_box         | box         | white  | bin         | False  | False  | [0, 1] | False   | False    | True      | False      |
+
+
+		Initialize time:  1.3798
+		Planning time:  64.8983
+		Total time:  66.278

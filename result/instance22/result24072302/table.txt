@@ -1,0 +1,21 @@
+The Init State
+| Index | Name              | Shape       | Color  | Predicates               | Init Pose | In Box | Object Type | Pushed | Folded | Is Rigid | Is Elastic | Is Soft | In Bin Objects |
+|-------|-------------------|-------------|--------|--------------------------|-----------|--------|-------------|--------|--------|-----------|------------|---------|----------------|
+| 0     | yellow_3D_cylinder| 3D_cylinder | yellow | is_rigid                 | out_box   | False  | obj         | False  | False  | True      | False      | False   | []             |
+| 1     | black_3D_cylinder | 3D_cylinder | black  | is_rigid                 | out_box   | False  | obj         | False  | False  | True      | False      | False   | []             |
+| 2     | brown_3D_cuboid   | 3D_cuboid   | brown  | is_soft, is_elastic      | in_box    | True   | obj         | False  | False  | False     | True       | True    | []             |
+| 3     | white_box         | box         | white  |                          | box       | True   | box         | False  | False  | False     | False      | False   | [brown_3D_cuboid] |
+
+
+The Goal State
+| Index | Name              | Shape       | Color  | Predicates               | Init Pose | In Box | Object Type | Pushed | Folded | Is Rigid | Is Elastic | Is Soft | In Bin Objects |
+|-------|-------------------|-------------|--------|--------------------------|-----------|--------|-------------|--------|--------|-----------|------------|---------|----------------|
+| 0     | yellow_3D_cylinder| 3D_cylinder | yellow | is_rigid                 | out_box   | False  | obj         | False  | False  | True      | False      | False   | []             |
+| 1     | black_3D_cylinder | 3D_cylinder | black  | is_rigid                 | out_box   | False  | obj         | False  | False  | True      | False      | False   | []             |
+| 2     | brown_3D_cuboid   | 3D_cuboid   | brown  | is_soft, is_elastic      | in_box    | True   | obj         | False  | False  | False     | True       | True    | []             |
+| 3     | white_box         | box         | white  |                          | box       | True   | box         | False  | False  | False     | False      | False   | [brown_3D_cuboid] |
+
+
+		Initialize time:  1.3593
+		Planning time:  46.7207
+		Total time:  48.08

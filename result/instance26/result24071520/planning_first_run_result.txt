@@ -1,0 +1,13 @@
+Push red_3D_polyhedron
+Cannot Place red_3D_polyhedron
+Fold transparent_3D_cylinder
+Pick transparent_3D_cylinder
+Place transparent_3D_cylinder in white_box
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance26/result24071520/planning.py", line 202, in <module>
+    assert object0 in bin.in_bin
+           ^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+

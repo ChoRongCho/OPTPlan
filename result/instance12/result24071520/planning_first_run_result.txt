@@ -1,0 +1,10 @@
+Pick green_3D_cylinder
+Cannot Place green_3D_cylinder in white_box
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance12/result24071520/planning.py", line 182, in <module>
+    assert object0 in bin.in_bin == False
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+

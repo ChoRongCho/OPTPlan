@@ -1,0 +1,25 @@
+The Init State
+| Index | Name             | Shape      | Color  | Predicates                        | Init Pose | Pushed | Folded | In Box | Is Packable | Is Soft | Is Foldable | Is Elastic | Is Fragile | Is Rigid | Object Type | In Bin Objects |
+|-------|------------------|------------|--------|-----------------------------------|-----------|--------|--------|--------|-------------|---------|-------------|------------|------------|----------|--------------|----------------|
+| 0     | yellow_3D_cuboid | 3D_cuboid  | yellow | is_soft, is_elastic               | out_box   | False  | False  | False  | True        | True    | False       | True       | False      | False    | obj          | []             |
+| 1     | white_3D_cylinder| 3D_cylinder| white  | is_soft, is_elastic               | out_box   | False  | False  | False  | True        | True    | False       | True       | False      | False    | obj          | []             |
+| 2     | blue_1D_linear   | 1D_linear  | blue   | is_foldable, is_elastic           | out_box   | False  | False  | False  | True        | False   | True        | True       | False      | False    | obj          | []             |
+| 3     | white_2D_ring    | 2D_ring    | white  | is_elastic                        | in_box    | False  | False  | True   | True        | False   | False       | True       | False      | False    | obj          | []             |
+| 4     | green_3D_cylinder| 3D_cylinder| green  | is_rigid, is_fragile              | in_box    | False  | False  | True   | True        | False   | False       | False      | True       | True     | obj          | []             |
+| 5     | white_box        | box        | white  |                                   | box       | False  | False  | False  | False       | False   | False       | False      | False      | False    | box          | [3, 4]         |
+
+
+The Goal State
+| Index | Name             | Shape      | Color  | Predicates                        | Init Pose | Pushed | Folded | In Box | Is Packable | Is Soft | Is Foldable | Is Elastic | Is Fragile | Is Rigid | Object Type | In Bin Objects |
+|-------|------------------|------------|--------|-----------------------------------|-----------|--------|--------|--------|-------------|---------|-------------|------------|------------|----------|--------------|----------------|
+| 0     | yellow_3D_cuboid | 3D_cuboid  | yellow | is_soft, is_elastic               | out_box   | False  | False  | True   | True        | True    | False       | True       | False      | False    | obj          | []             |
+| 1     | white_3D_cylinder| 3D_cylinder| white  | is_soft, is_elastic               | out_box   | False  | False  | True   | True        | True    | False       | True       | False      | False    | obj          | []             |
+| 2     | blue_1D_linear   | 1D_linear  | blue   | is_foldable, is_elastic           | out_box   | False  | False  | False  | True        | False   | True        | True       | False      | False    | obj          | []             |
+| 3     | white_2D_ring    | 2D_ring    | white  | is_elastic                        | in_box    | False  | False  | True   | True        | False   | False       | True       | False      | False    | obj          | []             |
+| 4     | green_3D_cylinder| 3D_cylinder| green  | is_rigid, is_fragile              | out_box   | False  | False  | True   | True        | False   | False       | False      | True       | True     | obj          | []             |
+| 5     | white_box        | box        | white  |                                   | box       | False  | False  | False  | False       | False   | False       | False      | False      | False    | box          | [0, 1, 3, 4]   |
+
+
+		Initialize time:  1.3814
+		Planning time:  56.5893
+		Total time:  57.9707

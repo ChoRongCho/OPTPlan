@@ -1,0 +1,23 @@
+The Init State
+| Index | Name                  | Shape         | Color       | Predicates                        | Init Pose | Object Type | Pushed | Folded | In Bin Objects | In Box | Is Packed | Is Elastic | Is Soft | Is Foldable |
+|-------|-----------------------|---------------|-------------|-----------------------------------|-----------|-------------|--------|--------|----------------|--------|-----------|------------|---------|-------------|
+| 0     | transparent_3D_cylinder | 3D_cylinder   | transparent | is_elastic                        | out_box   | obj         | False  | False  | []             | False  | False     | True       | False   | False       |
+| 1     | black_2D_ring         | 2D_ring       | black       | is_foldable, is_soft              | out_box   | obj         | False  | False  | []             | False  | False     | False      | True    | True        |
+| 2     | blue_1D_linear        | 1D_linear     | blue        | is_foldable, is_elastic           | out_box   | obj         | False  | False  | []             | False  | False     | True       | False   | True        |
+| 3     | yellow_2D_rectangle   | 2D_rectangle  | yellow      | is_foldable                       | in_box    | obj         | False  | False  | []             | True   | False     | False      | False   | True        |
+| 4     | white_box             | box           | white       |                                   | box       | box         | False  | False  | [3]            | False  | False     | False      | False   | False       |
+
+
+The Goal State
+| Index | Name                  | Shape         | Color       | Predicates                        | Init Pose | Object Type | Pushed | Folded | In Bin Objects | In Box | Is Packed | Is Elastic | Is Soft | Is Foldable |
+|-------|-----------------------|---------------|-------------|-----------------------------------|-----------|-------------|--------|--------|----------------|--------|-----------|------------|---------|-------------|
+| 0     | transparent_3D_cylinder | 3D_cylinder   | transparent | is_elastic                        | in_bin    | obj         | False  | False  | []             | False  | True      | True       | False   | False       |
+| 1     | black_2D_ring         | 2D_ring       | black       | is_foldable, is_soft              | in_bin    | obj         | False  | False  | []             | False  | True      | False      | True    | True        |
+| 2     | blue_1D_linear        | 1D_linear     | blue        | is_foldable, is_elastic           | in_bin    | obj         | False  | False  | []             | False  | True      | True       | False   | True        |
+| 3     | yellow_2D_rectangle   | 2D_rectangle  | yellow      | is_foldable                       | in_bin    | obj         | False  | False  | []             | False  | True      | False      | False   | True        |
+| 4     | white_box             | box           | white       |                                   | box       | box         | False  | False  | []             | False  | False     | False      | False   | False       |
+
+
+		Initialize time:  1.34
+		Planning time:  51.0886
+		Total time:  52.4286

@@ -1,0 +1,21 @@
+The Init State
+| Index | Name              | Shape         | Color | Object Type | Pushed | Folded | In Bin Objects | Is In Box | Is Out Box | Is Rigid | Is Elastic | Is Soft |
+|-------|-------------------|---------------|-------|-------------|--------|--------|----------------|-----------|------------|----------|------------|---------|
+| 0     | black_3D_cylinder | 3D_cylinder   | black | obj         | False  | False  | []             | False     | True       | True     | False      | False   |
+| 1     | white_3D_cylinder | 3D_cylinder   | white | obj         | False  | False  | []             | False     | True       | False    | True       | True    |
+| 2     | red_3D_polyhedron | 3D_polyhedron | red   | obj         | False  | False  | []             | True      | False      | False    | False      | True    |
+| 3     | white_box         | box           | white | box         | False  | False  | [2]            | False     | False      | False    | False      | False   |
+
+
+The Goal State
+| Index | Name              | Shape         | Color | Object Type | Pushed | Folded | In Bin Objects | Is In Box | Is Out Box | Is Rigid | Is Elastic | Is Soft |
+|-------|-------------------|---------------|-------|-------------|--------|--------|----------------|-----------|------------|----------|------------|---------|
+| 0     | black_3D_cylinder | 3D_cylinder   | black | obj         | True   | False  | []             | True      | False      | True     | False      | False   |
+| 1     | white_3D_cylinder | 3D_cylinder   | white | obj         | True   | False  | []             | True      | False      | False    | True       | True    |
+| 2     | red_3D_polyhedron | 3D_polyhedron | red   | obj         | False  | False  | []             | False     | True       | False    | False      | True    |
+| 3     | white_box         | box           | white | box         | False  | False  | [0, 1]         | False     | False      | False    | False      | False   |
+
+
+		Initialize time:  1.3289
+		Planning time:  58.5841
+		Total time:  59.913

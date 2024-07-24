@@ -1,0 +1,8 @@
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance6/result24071520/planning.py", line 133, in <module>
+    bin = object5
+          ^^^^^^^
+NameError: name 'object5' is not defined. Did you mean: 'object0'?
+
+

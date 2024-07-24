@@ -3,13 +3,12 @@
         "task_description": "packing objects into the box called bin. ",
         "goals": {
             "1": "Packing all items into the box.",
-            "2": "If there are yellow object and black object together, don't pack a black object into the box"
+            "2": "If there are yellow object and blue object together, don't pack a blue object into the box"
         },
         "rules": {
             "1": "it is prohibited to lift and relocate a container",
-            "2": "when fold a object, the object must be foldable",
-            "3": "do not place a fragile object if there is no elastic object in the bin",
-            "4": "when a soft object in the bin at the initial state, out of the soft object and replace it into the bin "
+            "2": "do not place a fragile object if there is no soft object in the bin",
+            "3": "when a fragile object in the bin at the initial state, out of the fragile object and replace it into the bin "
         }
     }
 }

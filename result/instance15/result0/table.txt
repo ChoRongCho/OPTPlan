@@ -1,0 +1,25 @@
+The Init State
+| Index | Name              | Shape       | Color  | Predicates                  | Init Pose |
+|-------|-------------------|-------------|--------|-----------------------------|-----------|
+| 0     | yellow_3D_cuboid  | 3D_cuboid   | yellow | is_soft                     | out_box   |
+| 1     | white_3D_cylinder | 3D_cylinder | white  | is_soft, is_elastic         | out_box   |
+| 2     | blue_1D_ring      | 1D_ring     | blue   | is_elastic                  | out_box   |
+| 3     | white_1D_ring     | 1D_ring     | white  | is_elastic                  | in_box    |
+| 4     | green_3D_cylinder | 3D_cylinder | green  | is_rigid, is_fragile        | in_box    |
+| 5     | white_box         | box         | white  |                             | box       |
+
+
+The Goal State
+| Index | Name              | Shape       | Color  | Predicates                  | Goal Pose |
+|-------|-------------------|-------------|--------|-----------------------------|-----------|
+| 0     | yellow_3D_cuboid  | 3D_cuboid   | yellow | is_soft                     | in_box    |
+| 1     | white_3D_cylinder | 3D_cylinder | white  | is_soft, is_elastic         | in_box    |
+| 2     | blue_1D_ring      | 1D_ring     | blue   | is_elastic                  | out_box   |
+| 3     | white_1D_ring     | 1D_ring     | white  | is_elastic                  | in_box    |
+| 4     | green_3D_cylinder | 3D_cylinder | green  | is_rigid, is_fragile        | in_box    |
+| 5     | white_box         | box         | white  |                             | box       |
+
+
+Initialize time:  1.4029
+Planning time:  60.399
+Total time:  61.8019

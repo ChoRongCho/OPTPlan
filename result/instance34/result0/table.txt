@@ -1,0 +1,23 @@
+The Init State
+| Index | Name               | Shape         | Color  | Predicates                        | Init Pose |
+|-------|--------------------|---------------|--------|-----------------------------------|-----------|
+| 0     | red_3D_polyhedron  | 3D_polyhedron | red    | is_soft                           | out_box   |
+| 1     | yellow_3D_cylinder | 3D_cylinder   | yellow | is_rigid                          | out_box   |
+| 2     | white_1D_ring      | 1D_ring       | white  | is_elastic                        | in_box    |
+| 3     | black_1D_ring      | 1D_ring       | black  | is_foldable, is_fragile           | in_box    |
+| 4     | white_box          | box           | white  |                                   | box       |
+
+
+The Goal State
+| Index | Name               | Shape         | Color  | Predicates                        | Goal Pose |
+|-------|--------------------|---------------|--------|-----------------------------------|-----------|
+| 0     | red_3D_polyhedron  | 3D_polyhedron | red    | is_soft                           | in_box    |
+| 1     | yellow_3D_cylinder | 3D_cylinder   | yellow | is_rigid                          | in_box    |
+| 2     | white_1D_ring      | 1D_ring       | white  | is_elastic                        | in_box    |
+| 3     | black_1D_ring      | 1D_ring       | black  | is_foldable, is_fragile           | in_box    |
+| 4     | white_box          | box           | white  |                                   | box       |
+
+
+Initialize time:  1.3793
+Planning time:  61.5642
+Total time:  62.9434

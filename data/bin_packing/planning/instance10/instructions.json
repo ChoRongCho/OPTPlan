@@ -8,8 +8,7 @@
         },
         "rules": {
             "1": "you should never pick and place a box",
-            "2": "when fold a object, the object must be foldable",
-            "3": "when fold a foldable object, the fragile object must be in the bin "
+            "2": "when fold a foldable object, the fragile object must be in the bin "
         }
     }
 }

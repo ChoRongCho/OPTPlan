@@ -21,8 +21,7 @@
       "dimension": "1D",
       "shape": "ring",
       "properties": [
-        "is_elastic",
-        "is_flexible"
+        "is_elastic"
       ]
     },
     "yellow_3D_cylinder": {
@@ -38,8 +37,7 @@
       "dimension": "2D",
       "shape": "ring",
       "properties": [
-        "is_elastic",
-        "is_flexible"
+        "is_elastic"
       ]
     },
     "red_3D_polyhedron": {
@@ -55,8 +53,7 @@
       "dimension": "3D",
       "shape": "cylinder",
       "properties": [
-        "is_elastic",
-        "is_flexible"
+        "is_elastic"
       ]
     },
     "yellow_2D_rectangle": {
@@ -64,8 +61,7 @@
       "dimension": "2D",
       "shape": "rectangle",
       "properties": [
-        "is_foldable",
-        "is_flexible"
+        "is_foldable"
       ]
     },
     "green_3D_cylinder": {
@@ -73,7 +69,8 @@
       "dimension": "3D",
       "shape": "cylinder",
       "properties": [
-        "is_rigid"
+        "is_rigid",
+        "is_fragile"
       ]
     },
     "white_3D_cylinder": {
@@ -90,7 +87,6 @@
       "dimension": "2D",
       "shape": "circle",
       "properties": [
-        "is_flexible",
         "is_elastic"
       ]
     },

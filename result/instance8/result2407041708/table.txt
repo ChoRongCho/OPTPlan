@@ -1,0 +1,23 @@
+The Init State
+| Index | Name                  | Shape        | Color       | Object Type | Is Elastic | Is Rigid | Is Foldable | Is In Box | Is Fragile |
+|-------|-----------------------|--------------|-------------|-------------|------------|----------|-------------|-----------|------------|
+| 0     | transparent_3D_cylinder | 3D_cylinder  | transparent | obj         | True       | False    | False       | False     | False      |
+| 1     | black_3D_cylinder     | 3D_cylinder  | black       | obj         | False      | True     | False       | False     | False      |
+| 2     | blue_1D_ring          | 1D_ring      | blue        | obj         | True       | False    | False       | False     | False      |
+| 3     | yellow_2D_rectangle   | 2D_rectangle | yellow      | obj         | False      | False    | True        | True      | False      |
+| 4     | white_box             | box          | white       | box         | False      | False    | False       | True      | False      |
+
+
+The Goal State
+| Index | Name                  | Shape        | Color       | Object Type | Is Elastic | Is Rigid | Is Foldable | Is In Box | Is Fragile |
+|-------|-----------------------|--------------|-------------|-------------|------------|----------|-------------|-----------|------------|
+| 0     | transparent_3D_cylinder | 3D_cylinder  | transparent | obj         | True       | False    | False       | False     | False      |
+| 1     | black_3D_cylinder     | 3D_cylinder  | black       | obj         | False      | True     | False       | True      | False      |
+| 2     | blue_1D_ring          | 1D_ring      | blue        | obj         | True       | False    | False       | True      | False      |
+| 3     | yellow_2D_rectangle   | 2D_rectangle | yellow      | obj         | False      | False    | True        | True      | False      |
+| 4     | white_box             | box          | white       | box         | False      | False    | False       | True      | False      |
+
+
+		Initialize time:  1.5154
+		Planning time:  60.5964
+		Total time:  62.1117

@@ -1,0 +1,13 @@
+Cannot Pick_Out white_1D_ring from white_box
+Pick red_3D_polyhedron
+Place red_3D_polyhedron in white_box
+Pick yellow_3D_cylinder
+Place yellow_3D_cylinder in white_box
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance34/result24071522/planning.py", line 154, in <module>
+    assert object3 in bin.in_bin  # black_3D_cylinder should be in white_box
+           ^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+

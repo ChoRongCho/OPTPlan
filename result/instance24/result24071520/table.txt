@@ -1,0 +1,19 @@
+The Init State
+| Index | Name                | Color  | Shape        | Object Type | Pushed | Folded | In Bin | Is Rigid | Is Foldable | Is In Box | Is Out Box |
+|-------|---------------------|--------|--------------|-------------|--------|--------|--------|----------|-------------|-----------|------------|
+| 0     | yellow_2D_rectangle | yellow | 2D_rectangle | obj         | False  | False  | []     | False    | True        | False     | True       |
+| 1     | yellow_3D_cylinder  | yellow | 3D_cylinder  | obj         | False  | False  | []     | True     | False       | False     | True       |
+| 2     | white_box           | white  | box          | box         | N/A    | N/A    | []     | N/A      | N/A         | True      | False      |
+
+
+The Goal State
+| Index | Name                | Color  | Shape        | Object Type | Pushed | Folded | In Bin | Is Rigid | Is Foldable | Is In Box | Is Out Box |
+|-------|---------------------|--------|--------------|-------------|--------|--------|--------|----------|-------------|-----------|------------|
+| 0     | yellow_2D_rectangle | yellow | 2D_rectangle | obj         | True   | False  | [2]    | False    | True        | False     | False      |
+| 1     | yellow_3D_cylinder  | yellow | 3D_cylinder  | obj         | False  | False  | [2]    | True     | False       | False     | False      |
+| 2     | white_box           | white  | box          | box         | N/A    | N/A    | [0, 1] | N/A      | N/A         | True      | False      |
+
+
+		Initialize time:  1.3366
+		Planning time:  63.4721
+		Total time:  64.8086

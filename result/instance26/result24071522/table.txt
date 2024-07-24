@@ -1,0 +1,21 @@
+The Init State
+| Index | Name                    | Shape         | Color       | Object Type | Pushed | Folded | In Bin | Is Elastic | Is Soft | Is Fragile | Is Heavy | Init Pose |
+|-------|-------------------------|---------------|-------------|-------------|--------|--------|--------|------------|---------|------------|----------|-----------|
+| 0     | red_3D_polyhedron       | 3D_polyhedron | red         | obj         | False  | False  | []     | False      | True    | False      | False    | out_box   |
+| 1     | transparent_3D_cylinder | 3D_cylinder   | transparent | obj         | False  | False  | []     | True       | False   | False      | False    | out_box   |
+| 2     | brown_3D_cuboid         | 3D_cuboid     | brown       | obj         | False  | False  | []     | False      | True    | False      | False    | in_box    |
+| 3     | white_box               | box           | white       | bin         | False  | False  | [2]    | False      | False   | False      | False    | box       |
+
+
+The Goal State
+| Index | Name                    | Shape         | Color       | Object Type | Pushed | Folded | In Bin | Is Elastic | Is Soft | Is Fragile | Is Heavy | Goal Pose |
+|-------|-------------------------|---------------|-------------|-------------|--------|--------|--------|------------|---------|------------|----------|-----------|
+| 0     | red_3D_polyhedron       | 3D_polyhedron | red         | obj         | False  | False  | [3]    | False      | True    | False      | False    | in_box    |
+| 1     | transparent_3D_cylinder | 3D_cylinder   | transparent | obj         | False  | False  | [3]    | True       | False   | False      | False    | in_box    |
+| 2     | brown_3D_cuboid         | 3D_cuboid     | brown       | obj         | False  | False  | [3]    | False      | True    | False      | False    | in_box    |
+| 3     | white_box               | box           | white       | bin         | False  | False  | [0, 1, 2] | False      | False   | False      | False    | box       |
+
+
+		Initialize time:  1.5531
+		Planning time:  56.5486
+		Total time:  58.1017

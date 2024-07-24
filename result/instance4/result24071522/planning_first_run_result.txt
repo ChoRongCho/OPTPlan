@@ -1,0 +1,13 @@
+Pick_Out yellow_3D_cuboid from white_box
+Cannot Pick blue_1D_ring
+Cannot Place blue_1D_ring
+Cannot Pick white_1D_ring
+Cannot Place white_1D_ring
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance4/result24071522/planning.py", line 145, in <module>
+    assert object0 in bin.in_bin
+           ^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+

@@ -2,8 +2,7 @@
     "bin_packing": {
         "task_description": "packing objects into the box called bin. ",
         "goals": {
-            "1": "Storing all objects in the container.",
-            "2": "If there is a rigid object, don't pack it into the box"
+            "1": "Storing all objects in the container."
         },
         "rules": {
             "1": "it is prohibited to lift and relocate a container",

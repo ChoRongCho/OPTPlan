@@ -7,9 +7,8 @@
         },
         "rules": {
             "1": "never attempt to pick up and set down an object named box",
-            "2": "when fold a foldable object, the fragile object must be in the bin ",
-            "3": "do not place a fragile object if there is no elastic object in the bin",
-            "4": "when a rigid object in the bin at the initial state, out of the rigid object and replace it into the bin "
+            "2": "do not place a fragile object if there is no elastic object in the bin",
+            "3": "when a rigid object in the bin at the initial state, out of the rigid object and replace it into the bin "
         }
     }
 }

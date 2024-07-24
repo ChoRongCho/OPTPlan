@@ -1,0 +1,21 @@
+The Init State
+| Index | Name                      | Shape            | Color       | Type | Is_Rigid | Is_Soft | Is_Elastic | Is_In_Box | Is_Out_Box |
+|-------|---------------------------|------------------|-------------|------|----------|---------|------------|-----------|------------|
+| 0     | red_3D_polyhedron         | 3D_polyhedron    | red         | obj  | False    | True    | False      | False     | True       |
+| 1     | transparent_3D_cylinder   | 3D_cylinder      | transparent | obj  | False    | False   | True       | False     | True       |
+| 2     | yellow_2D_flat_rectangle  | 2D_flat_rectangle| yellow      | obj  | True     | False   | True       | True      | False      |
+| 3     | white_box                 | box              | white       | box  | False    | False   | False      | True      | False      |
+
+
+The Goal State
+| Index | Name                      | Shape            | Color       | Type | Is_Rigid | Is_Soft | Is_Elastic | Is_In_Box | Is_Out_Box |
+|-------|---------------------------|------------------|-------------|------|----------|---------|------------|-----------|------------|
+| 0     | red_3D_polyhedron         | 3D_polyhedron    | red         | obj  | False    | True    | False      | True      | False      |
+| 1     | transparent_3D_cylinder   | 3D_cylinder      | transparent | obj  | False    | False   | True       | True      | False      |
+| 2     | yellow_2D_flat_rectangle  | 2D_flat_rectangle| yellow      | obj  | True     | False   | True       | True      | False      |
+| 3     | white_box                 | box              | white       | box  | False    | False   | False      | True      | False      |
+
+
+Initialize time:  1.4508
+Planning time:  59.1056
+Total time:  60.5564

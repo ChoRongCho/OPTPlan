@@ -1,0 +1,10 @@
+Cannot Fold yellow_2D_rectangle
+Pick white_3D_cylinder
+Place white_3D_cylinder in white_box
+Push white_3D_cylinder
+Pick green_3D_cylinder
+Place green_3D_cylinder in white_box
+All task planning is done
+
+
+

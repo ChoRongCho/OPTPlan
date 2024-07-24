@@ -1,0 +1,23 @@
+The Init State
+| Index | Name              | Shape       | Color  | Object Type | Pushed | Folded | In Bin   | Is Rigid | Is Elastic | Is Fragile | Is Heavy | Is Large | Init Pose |
+|-------|-------------------|-------------|--------|-------------|--------|--------|----------|----------|------------|------------|----------|----------|-----------|
+| 0     | yellow_3D_cylinder| 3D_cylinder | yellow | obj         | False  | False  | []       | True     | False      | False      | False    | False    | out_box   |
+| 1     | white_1D_ring     | 1D_ring     | white  | obj         | False  | False  | []       | False    | True       | False      | False    | False    | out_box   |
+| 2     | blue_1D_ring      | 1D_ring     | blue   | obj         | False  | False  | []       | False    | True       | False      | False    | False    | out_box   |
+| 3     | brown_2D_circle   | 2D_circle   | brown  | obj         | False  | False  | [3]      | False    | True       | True       | False    | False    | in_box    |
+| 4     | white_box         | box         | white  | bin         | False  | False  | [3]      | False    | False      | False      | False    | False    | box       |
+
+
+The Goal State
+| Index | Name              | Shape       | Color  | Object Type | Pushed | Folded | In Bin   | Is Rigid | Is Elastic | Is Fragile | Is Heavy | Is Large | Goal Pose |
+|-------|-------------------|-------------|--------|-------------|--------|--------|----------|----------|------------|------------|----------|----------|-----------|
+| 0     | yellow_3D_cylinder| 3D_cylinder | yellow | obj         | False  | False  | [4]      | True     | False      | False      | False    | False    | in_box    |
+| 1     | white_1D_ring     | 1D_ring     | white  | obj         | False  | False  | [4]      | False    | True       | False      | False    | False    | in_box    |
+| 2     | blue_1D_ring      | 1D_ring     | blue   | obj         | False  | False  | [4]      | False    | True       | False      | False    | False    | in_box    |
+| 3     | brown_2D_circle   | 2D_circle   | brown  | obj         | False  | False  | [4]      | False    | True       | True       | False    | False    | in_box    |
+| 4     | white_box         | box         | white  | bin         | False  | False  | [0, 1, 2, 3] | False    | False      | False      | False    | False    | box       |
+
+
+		Initialize time:  1.4079
+		Planning time:  50.8792
+		Total time:  52.2871

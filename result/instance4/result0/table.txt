@@ -1,0 +1,21 @@
+The Init State
+| Index | Name             | Color  | Shape        | Object Type | Is Elastic | Is Foldable | Is In Box | Is Packable |
+|-------|------------------|--------|--------------|-------------|------------|-------------|-----------|-------------|
+| 0     | blue_1D_ring     | blue   | 1D_ring      | obj         | True       | False       | False     | True        |
+| 1     | white_1D_ring    | white  | 1D_ring      | obj         | True       | False       | False     | True        |
+| 2     | yellow_2D_rectangle | yellow | 2D_rectangle | obj         | False      | True        | True      | True        |
+| 3     | white_box        | white  | box          | box         | False      | False       | True      | False       |
+
+
+The Goal State
+| Index | Name             | Color  | Shape        | Object Type | Is Elastic | Is Foldable | Is In Box | Is Packable |
+|-------|------------------|--------|--------------|-------------|------------|-------------|-----------|-------------|
+| 0     | blue_1D_ring     | blue   | 1D_ring      | obj         | True       | False       | True      | True        |
+| 1     | white_1D_ring    | white  | 1D_ring      | obj         | True       | False       | True      | True        |
+| 2     | yellow_2D_rectangle | yellow | 2D_rectangle | obj         | False      | True        | True      | True        |
+| 3     | white_box        | white  | box          | box         | False      | False       | True      | False       |
+
+
+Initialize time:  1.351
+Planning time:  58.6683
+Total time:  60.0193

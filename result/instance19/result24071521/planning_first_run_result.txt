@@ -1,0 +1,16 @@
+Cannot Pick_Out black_3D_cylinder from white_box
+Pick brown_3D_cuboid
+Place brown_3D_cuboid in white_box
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance19/result24071521/planning.py", line 156, in <module>
+    robot.push(object0, bin)
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance19/result24071521/planning.py", line 75, in push
+    if self.robot_handempty and obj.is_soft and obj in bin.in_bin and not any(o.is_rigid for o in bin.in_bin):
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance19/result24071521/planning.py", line 75, in <genexpr>
+    if self.robot_handempty and obj.is_soft and obj in bin.in_bin and not any(o.is_rigid for o in bin.in_bin):
+                                                                              ^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'is_rigid'
+
+

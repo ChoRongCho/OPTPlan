@@ -1,0 +1,9 @@
+Pick green_3D_cylinder
+Place green_3D_cylinder in white_box
+Fold white_3D_cylinder
+Pick transparent_3D_cone
+Place transparent_3D_cone in white_box
+All task planning is done
+
+
+

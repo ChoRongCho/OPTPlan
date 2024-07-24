@@ -1,0 +1,6 @@
+Pick transparent_3D_cylinder
+Place transparent_3D_cylinder in white_box
+Goal state achieved successfully!
+
+
+

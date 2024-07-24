@@ -1,0 +1,23 @@
+The Init State
+| Index | Name              | Shape       | Color  | Object Type | Pushed | Folded | In Bin | Is Elastic | Is Fragile | Is Soft | Is Rigid | Is Heavy | Is Large | Init Pose |
+|-------|-------------------|-------------|--------|-------------|--------|--------|--------|------------|------------|---------|----------|----------|----------|-----------|
+| 0     | white_3D_cylinder | 3D_cylinder | white  | obj         | False  | False  | []     | True       | False      | True    | False    | False    | False    | out_box   |
+| 1     | brown_3D_cuboid   | 3D_cuboid   | brown  | obj         | False  | False  | []     | False      | False      | True    | False    | False    | False    | out_box   |
+| 2     | green_3D_cylinder | 3D_cylinder | green  | obj         | False  | False  | []     | False      | True       | False   | True     | False    | False    | out_box   |
+| 3     | yellow_3D_cylinder| 3D_cylinder | yellow | obj         | False  | False  | []     | False      | False      | False   | True     | False    | False    | in_box    |
+| 4     | white_box         | box         | white  | bin         | False  | False  | []     | False      | False      | False   | False    | False    | False    | box       |
+
+
+The Goal State
+| Index | Name              | Shape       | Color  | Object Type | Pushed | Folded | In Bin | Is Elastic | Is Fragile | Is Soft | Is Rigid | Is Heavy | Is Large | Goal Pose |
+|-------|-------------------|-------------|--------|-------------|--------|--------|--------|------------|------------|---------|----------|----------|----------|-----------|
+| 0     | white_3D_cylinder | 3D_cylinder | white  | obj         | False  | False  | [4]    | True       | False      | True    | False    | False    | False    | in_box    |
+| 1     | brown_3D_cuboid   | 3D_cuboid   | brown  | obj         | False  | False  | [4]    | False      | False      | True    | False    | False    | False    | in_box    |
+| 2     | green_3D_cylinder | 3D_cylinder | green  | obj         | False  | False  | [4]    | False      | True       | False   | True     | False    | False    | in_box    |
+| 3     | yellow_3D_cylinder| 3D_cylinder | yellow | obj         | False  | False  | [4]    | False      | False      | False   | True     | False    | False    | in_box    |
+| 4     | white_box         | box         | white  | bin         | False  | False  | []     | False      | False      | False   | False    | False    | False    | box       |
+
+
+		Initialize time:  1.3974
+		Planning time:  55.1041
+		Total time:  56.5015

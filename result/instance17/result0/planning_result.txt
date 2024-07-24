@@ -1,0 +1,9 @@
+Pick_Out white_2D_circle from white_box
+Place white_2D_circle in white_box
+Push brown_3D_cuboid
+Pick white_1D_ring
+Place white_1D_ring in white_box
+All objects are in their goal states.
+
+
+

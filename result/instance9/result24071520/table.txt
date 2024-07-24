@@ -1,0 +1,19 @@
+The Init State
+| Index | Name              | Shape       | Color | Object Type | Pushed | Folded | In Bin | Is Soft | Is Rigid | Is Elastic | Is Fragile | Is Heavy | Is Large | Init Pose |
+|-------|-------------------|-------------|-------|-------------|--------|--------|--------|---------|----------|------------|------------|----------|----------|-----------|
+| 0     | green_3D_cylinder | 3D_cylinder | green | obj         | False  | False  | []     | False   | True     | False      | True       | False    | False    | out_box   |
+| 1     | white_3D_cylinder | 3D_cylinder | white | obj         | False  | False  | []     | True    | False    | True       | False      | False    | False    | out_box   |
+| 2     | white_box         | box         | white | box         | False  | False  | []     | False   | False    | False      | False      | False    | False    | box       |
+
+
+The Goal State
+| Index | Name              | Shape       | Color | Object Type | Pushed | Folded | In Bin | Is Soft | Is Rigid | Is Elastic | Is Fragile | Is Heavy | Is Large | Goal Pose |
+|-------|-------------------|-------------|-------|-------------|--------|--------|--------|---------|----------|------------|------------|----------|----------|-----------|
+| 0     | green_3D_cylinder | 3D_cylinder | green | obj         | False  | False  | [box]  | False   | True     | False      | True       | False    | False    | in_box    |
+| 1     | white_3D_cylinder | 3D_cylinder | white | obj         | False  | False  | [box]  | True    | False    | True       | False      | False    | False    | in_box    |
+| 2     | white_box         | box         | white | box         | False  | False  | []     | False   | False    | False      | False      | False    | False    | box       |
+
+
+		Initialize time:  1.3386
+		Planning time:  61.4459
+		Total time:  62.7845

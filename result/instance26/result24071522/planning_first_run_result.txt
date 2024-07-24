@@ -1,0 +1,12 @@
+Push red_3D_polyhedron
+Fold transparent_3D_cylinder
+Pick transparent_3D_cylinder
+Place transparent_3D_cylinder in white_box
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance26/result24071522/planning.py", line 134, in <module>
+    assert set(bin.in_bin) == {object0, object1, object2}
+           ^^^^^^^^^^^^^^^
+TypeError: unhashable type: 'Object'
+
+

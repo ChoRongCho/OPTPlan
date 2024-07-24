@@ -1,0 +1,21 @@
+The Init State
+| Index | Name             | Shape      | Color  | Predicates            | Init Pose | Object Type | Pushed | Folded | In Bin Objects | Is Elastic | Is Soft | In Box |
+|-------|------------------|------------|--------|-----------------------|-----------|-------------|--------|--------|----------------|------------|---------|--------|
+| 0     | yellow_3D_cuboid | 3D_cuboid  | yellow | is_soft, is_elastic   | out_box   | obj         | False  | False  | []             | True       | True    | False  |
+| 1     | white_3D_cylinder| 3D_cylinder| white  | is_soft, is_elastic   | out_box   | obj         | False  | False  | []             | True       | True    | False  |
+| 2     | brown_3D_cuboid  | 3D_cuboid  | brown  | is_soft, is_elastic   | out_box   | obj         | False  | False  | []             | True       | True    | False  |
+| 3     | white_box        | box        | white  |                       | box       | box         | False  | False  | []             | False      | False   | True   |
+
+
+The Goal State
+| Index | Name             | Shape      | Color  | Predicates            | Init Pose | Object Type | Pushed | Folded | In Bin Objects | Is Elastic | Is Soft | In Box |
+|-------|------------------|------------|--------|-----------------------|-----------|-------------|--------|--------|----------------|------------|---------|--------|
+| 0     | yellow_3D_cuboid | 3D_cuboid  | yellow | is_soft, is_elastic   | in_box    | obj         | False  | False  | []             | True       | True    | True   |
+| 1     | white_3D_cylinder| 3D_cylinder| white  | is_soft, is_elastic   | out_box   | obj         | False  | False  | []             | True       | True    | False  |
+| 2     | brown_3D_cuboid  | 3D_cuboid  | brown  | is_soft, is_elastic   | in_box    | obj         | False  | False  | []             | True       | True    | True   |
+| 3     | white_box        | box        | white  |                       | box       | box         | False  | False  | [0, 2]         | False      | False   | True   |
+
+
+		Initialize time:  1.3887
+		Planning time:  52.1627
+		Total time:  53.5513

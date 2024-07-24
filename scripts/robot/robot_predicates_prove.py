@@ -23,8 +23,10 @@ class RobotProve(Robot):
             "obj6",
             "obj7",
         ]
-        self.replace_color_yellow = ["yellow", "orange", "brown"]
-        self.replace_color_white = ["white", "beige"]
+        self.replace_color_yellow = ["orange", "brown"]
+        self.replace_color_white = ["beige"]
+        self.replace_color_blue = ["gray"]
+        self.replace_shape = ["3D_circle", "2D_flat_rectangle"]
 
         self.data_path = "/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/predicates_prove"
 
@@ -35,13 +37,31 @@ class RobotProve(Robot):
         # replace a color of the objects
         for color in self.replace_color_yellow:
             if color in target_name:
+                print(f"Replace {target_name} color {color} into yellow")
                 target_name = target_name.replace(color, "yellow")
-                print(f"Replace color {color} into yellow")
                 break
+
         for color in self.replace_color_white:
             if color in target_name:
+                print(f"Replace {target_name} color {color} into white")
                 target_name = target_name.replace(color, "white")
-                print(f"Replace color {color} into white")
+                break
+
+        for color in self.replace_color_blue:
+            if color in target_name:
+                print(f"Replace {target_name} color {color} into blue")
+                target_name = target_name.replace(color, "blue")
+                break
+
+        for shape in self.replace_shape:
+            if shape in target_name and shape == self.replace_shape[0]:
+                print(f"Replace {target_name} shape {shape} into 3D_cylinder")
+                target_name = target_name.replace(shape, "3D_cylinder")
+
+                break
+            elif shape in target_name and shape == self.replace_shape[1]:
+                print(f"Replace {target_name} shape {shape} into 2D_rectangle")
+                target_name = target_name.replace(shape, "2D_rectangle")
                 break
 
         if target_name in name_list:

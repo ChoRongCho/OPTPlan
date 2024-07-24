@@ -1,0 +1,23 @@
+The Init State
+| Index | Name             | Shape     | Color  | Object Type | Pushed | Folded | In Bin | Is Soft | Is Elastic | Is Fragile | Is In Box | Is Out Box |
+|-------|------------------|-----------|--------|-------------|--------|--------|--------|---------|------------|------------|-----------|------------|
+| 0     | yellow_3D_cuboid | 3D_cuboid | yellow | obj         | False  | False  | []     | True    | False      | False      | False     | True       |
+| 1     | white_1D_ring    | 1D_ring   | white  | obj         | False  | False  | []     | False   | True       | False      | False     | True       |
+| 2     | blue_1D_ring     | 1D_ring   | blue   | obj         | False  | False  | []     | False   | True       | False      | False     | True       |
+| 3     | white_2D_circle  | 2D_circle | white  | obj         | False  | False  | []     | False   | False      | True       | True      | False      |
+| 4     | white_box        | box       | white  | bin         | False  | False  | []     | False   | False      | False      | True      | False      |
+
+
+The Goal State
+| Index | Name             | Shape     | Color  | Object Type | Pushed | Folded | In Bin       | Is Soft | Is Elastic | Is Fragile | Is In Box | Is Out Box |
+|-------|------------------|-----------|--------|-------------|--------|--------|--------------|---------|------------|------------|-----------|------------|
+| 0     | yellow_3D_cuboid | 3D_cuboid | yellow | obj         | False  | False  | [white_box]  | True    | False      | False      | False     | True       |
+| 1     | white_1D_ring    | 1D_ring   | white  | obj         | False  | False  | [white_box]  | False   | True       | False      | False     | True       |
+| 2     | blue_1D_ring     | 1D_ring   | blue   | obj         | False  | False  | []           | False   | True       | False      | False     | True       |
+| 3     | white_2D_circle  | 2D_circle | white  | obj         | False  | False  | [white_box]  | False   | False      | True       | True      | False      |
+| 4     | white_box        | box       | white  | bin         | False  | False  | [yellow_3D_cuboid, white_1D_ring, white_2D_circle] | False   | False      | False      | True      | False      |
+
+
+		Initialize time:  1.3382
+		Planning time:  63.2992
+		Total time:  64.6374

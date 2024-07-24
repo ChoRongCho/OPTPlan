@@ -1,0 +1,13 @@
+Push red_3D_polyhedron
+Pick yellow_3D_cylinder
+Place yellow_3D_cylinder in white_box
+Pick green_3D_cylinder
+Place green_3D_cylinder in white_box
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance33/result0/planning.py", line 136, in <module>
+    assert object3.is_in_box == False
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+

@@ -1,9 +1,9 @@
 import os
 import subprocess
-from scripts.changmin_planner import ChangminPlanner
+from scripts.opt_planner import OPTPlanner
 
 
-class PythonPlanner(ChangminPlanner):
+class PythonPlanner(OPTPlanner):
     def __init__(self, args):
         super().__init__(args=args)
         self.args = args
@@ -26,12 +26,18 @@ class PythonPlanner(ChangminPlanner):
         else:
             planning_output = output.decode('utf-8') + "\n"
         if self.is_save:
-            file_path = os.path.join(self.result_dir, "planning_result.txt")
+            file_path = os.path.join(self.result_dir, "planning_first_run_result.txt")
             with open(file_path, "w") as file:
                 file.write(str(planning_output) + "\n\n")
                 file.close()
         return planning_output
 
     def feedback(self):
-        for i in range(2):
-            self.planning_feedback()
+        # for i in range(self.max_replanning):
+        for i in range(self.max_replanning):
+            print(f"Start Feedback ...{i}")
+            is_feed = self.planning_feedback()
+            if not is_feed:
+                print("Re-Planning is done. ")
+                break
+        print("Maximum replanning number exceeded. ")

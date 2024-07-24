@@ -1,21 +1,21 @@
 The Init State
-| Index | Name              | Shape      | Color  | Predicates                  | Init Pose | is_rigid | is_soft | is_flexible | is_elastic | is_in_box | is_out_box |
-|-------|-------------------|------------|--------|-----------------------------|-----------|----------|---------|-------------|------------|-----------|------------|
-| 0     | yellow_3D_cuboid  | 3D_cuboid  | yellow | is_soft                     | out_box   | False    | True    | False       | False      | False     | True       |
-| 1     | black_3D_cylinder | 3D_cylinder| black  | is_rigid                    | out_box   | True     | False   | False       | False      | False     | True       |
-| 2     | blue_1D_ring      | 1D_ring    | blue   | is_elastic, is_flexible     | out_box   | False    | False   | True        | True       | False     | True       |
-| 3     | white_box         | box        | white  |                             | box       | False    | False   | False       | False      | True      | False      |
+| Index | Name              | Shape       | Color  | Object Type | Pushed | Folded | Is Soft | Is Elastic | Is Rigid | In Box | Fits In Box | Init Pose |
+|-------|-------------------|-------------|--------|-------------|--------|--------|---------|------------|----------|--------|-------------|-----------|
+| 0     | yellow_3D_cuboid  | 3D_cuboid   | yellow | obj         | False  | False  | True    | False      | False    | False  | False       | out_box   |
+| 1     | black_3D_cylinder | 3D_cylinder | black  | obj         | False  | False  | False   | False      | True     | False  | False       | out_box   |
+| 2     | blue_1D_ring      | 1D_ring     | blue   | obj         | False  | False  | False   | True       | False    | False  | False       | out_box   |
+| 3     | white_box         | box         | white  | box         | False  | False  | False   | False      | False    | True   | True        | box       |
 
 
 The Goal State
-| Index | Name              | Shape      | Color  | Predicates                  | Goal Pose | is_rigid | is_soft | is_flexible | is_elastic | is_in_box | is_out_box |
-|-------|-------------------|------------|--------|-----------------------------|-----------|----------|---------|-------------|------------|-----------|------------|
-| 0     | yellow_3D_cuboid  | 3D_cuboid  | yellow | is_soft                     | in_box    | False    | True    | False       | False      | True      | False      |
-| 1     | black_3D_cylinder | 3D_cylinder| black  | is_rigid                    | in_box    | True     | False   | False       | False      | True      | False      |
-| 2     | blue_1D_ring      | 1D_ring    | blue   | is_elastic, is_flexible     | out_box   | False    | False   | True        | True       | False     | True       |
-| 3     | white_box         | box        | white  |                             | box       | False    | False   | False       | False      | True      | False      |
+| Index | Name              | Shape       | Color  | Object Type | Pushed | Folded | Is Soft | Is Elastic | Is Rigid | In Box | Fits In Box | Init Pose |
+|-------|-------------------|-------------|--------|-------------|--------|--------|---------|------------|----------|--------|-------------|-----------|
+| 0     | yellow_3D_cuboid  | 3D_cuboid   | yellow | obj         | True   | False  | True    | False      | False    | True   | True        | in_box    |
+| 1     | black_3D_cylinder | 3D_cylinder | black  | obj         | False  | False  | False   | False      | True     | True   | True        | in_box    |
+| 2     | blue_1D_ring      | 1D_ring     | blue   | obj         | False  | False  | False   | True       | False    | False  | False       | out_box   |
+| 3     | white_box         | box         | white  | box         | False  | False  | False   | False      | False    | True   | True        | box       |
 
 
-Initialize time:  1.607
-Planning time:  46.8032
-Total time:  48.4102
+		Initialize time:  1.6558
+		Planning time:  57.7431
+		Total time:  59.3989

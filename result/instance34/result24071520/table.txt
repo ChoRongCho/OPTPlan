@@ -1,0 +1,23 @@
+The Init State
+| Index | Name               | Shape         | Color  | Object Type | Pushed | Folded | In Bin | Is Rigid | Is Soft | Is Elastic | Is In Box | Is Out Box |
+|-------|--------------------|---------------|--------|-------------|--------|--------|--------|----------|---------|------------|-----------|------------|
+| 0     | red_3D_polyhedron  | 3D_polyhedron | red    | obj         | False  | False  | []     | False    | True    | False      | False     | True       |
+| 1     | yellow_3D_cylinder | 3D_cylinder   | yellow | obj         | False  | False  | []     | True     | False   | False      | False     | True       |
+| 2     | white_1D_ring      | 1D_ring       | white  | obj         | False  | False  | []     | False    | False   | True       | True      | False      |
+| 3     | black_3D_cylinder  | 3D_cylinder   | black  | obj         | False  | False  | []     | True     | False   | False      | True      | False      |
+| 4     | white_box          | box           | white  | bin         | False  | False  | []     | False    | False   | False      | False     | False      |
+
+
+The Goal State
+| Index | Name               | Shape         | Color  | Object Type | Pushed | Folded | In Bin       | Is Rigid | Is Soft | Is Elastic | Is In Box | Is Out Box |
+|-------|--------------------|---------------|--------|-------------|--------|--------|--------------|----------|---------|------------|-----------|------------|
+| 0     | red_3D_polyhedron  | 3D_polyhedron | red    | obj         | False  | False  | [white_box]  | False    | True    | False      | True      | False      |
+| 1     | yellow_3D_cylinder | 3D_cylinder   | yellow | obj         | False  | False  | [white_box]  | True     | False   | False      | True      | False      |
+| 2     | white_1D_ring      | 1D_ring       | white  | obj         | False  | False  | []           | False    | False   | True       | False     | True       |
+| 3     | black_3D_cylinder  | 3D_cylinder   | black  | obj         | False  | False  | [white_box]  | True     | False   | False      | True      | False      |
+| 4     | white_box          | box           | white  | bin         | False  | False  | []           | False    | False   | False      | False     | False      |
+
+
+		Initialize time:  1.3342
+		Planning time:  71.7806
+		Total time:  73.1148

@@ -1,0 +1,25 @@
+The Init State
+| Index | Name              | Shape       | Color  | Object Type | Init Pose | Is Soft | Is Elastic | Is Fragile | Is Rigid | Pushed | Folded | In Bin |
+|-------|-------------------|-------------|--------|-------------|-----------|---------|------------|------------|----------|--------|--------|--------|
+| 0     | yellow_3D_cuboid  | 3D_cuboid   | yellow | obj         | out_box   | True    | False      | False      | False    | False  | False  | []     |
+| 1     | white_3D_cylinder | 3D_cylinder | white  | obj         | out_box   | True    | True       | False      | False    | False  | False  | []     |
+| 2     | blue_1D_ring      | 1D_ring     | blue   | obj         | out_box   | False   | True       | False      | False    | False  | False  | []     |
+| 3     | white_1D_ring     | 1D_ring     | white  | obj         | in_box    | False   | True       | False      | False    | False  | False  | [3]    |
+| 4     | green_3D_cylinder | 3D_cylinder | green  | obj         | in_box    | False   | False      | True       | True     | False  | False  | [4]    |
+| 5     | white_box         | box         | white  | bin         | box       | False   | False      | False      | False    | False  | False  | [3, 4] |
+
+
+The Goal State
+| Index | Name              | Shape       | Color  | Object Type | Init Pose | Is Soft | Is Elastic | Is Fragile | Is Rigid | Pushed | Folded | In Bin |
+|-------|-------------------|-------------|--------|-------------|-----------|---------|------------|------------|----------|--------|--------|--------|
+| 0     | yellow_3D_cuboid  | 3D_cuboid   | yellow | obj         | in_box    | True    | False      | False      | False    | False  | False  | [5]    |
+| 1     | white_3D_cylinder | 3D_cylinder | white  | obj         | in_box    | True    | True       | False      | False    | False  | False  | [5]    |
+| 2     | blue_1D_ring      | 1D_ring     | blue   | obj         | out_box   | False   | True       | False      | False    | False  | False  | []     |
+| 3     | white_1D_ring     | 1D_ring     | white  | obj         | in_box    | False   | True       | False      | False    | False  | False  | [5]    |
+| 4     | green_3D_cylinder | 3D_cylinder | green  | obj         | in_box    | False   | False      | True       | True     | False  | False  | [5]    |
+| 5     | white_box         | box         | white  | bin         | box       | False   | False      | False      | False    | False  | False  | [0, 1, 3, 4] |
+
+
+		Initialize time:  1.3959
+		Planning time:  100.793
+		Total time:  102.189

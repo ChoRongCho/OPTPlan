@@ -1,0 +1,21 @@
+The Init State
+| Index | Name                | Shape       | Color       | is_soft | is_elastic | is_rigid | is_fragile | init_pose | is_in_box | is_packable |
+|-------|---------------------|-------------|-------------|---------|------------|----------|------------|-----------|-----------|-------------|
+| 0     | white_3D_cylinder   | 3D_cylinder | white       | True    | True       | False    | False      | out_box   | False     | True        |
+| 1     | green_3D_cylinder   | 3D_cylinder | green       | False   | False      | True     | True       | out_box   | False     | True        |
+| 2     | transparent_3D_cone | 3D_cone     | transparent | True    | False      | False    | False      | out_box   | False     | True        |
+| 3     | white_box           | box         | white       | False   | False      | False    | False      | box       | True      | False       |
+
+
+The Goal State
+| Index | Name                | Shape       | Color       | is_soft | is_elastic | is_rigid | is_fragile | goal_pose | is_in_box | is_packable |
+|-------|---------------------|-------------|-------------|---------|------------|----------|------------|-----------|-----------|-------------|
+| 0     | white_3D_cylinder   | 3D_cylinder | white       | True    | True       | False    | False      | out_box   | False     | False       |
+| 1     | green_3D_cylinder   | 3D_cylinder | green       | False   | False      | True     | True       | in_box    | True      | True        |
+| 2     | transparent_3D_cone | 3D_cone     | transparent | True    | False      | False    | False      | in_box    | True      | True        |
+| 3     | white_box           | box         | white       | False   | False      | False    | False      | box       | True      | False       |
+
+
+Initialize time:  1.4809
+Planning time:  64.3492
+Total time:  65.8301

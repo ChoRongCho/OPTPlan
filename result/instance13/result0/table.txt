@@ -1,0 +1,21 @@
+The Init State
+| Index | Name                  | Color       | Shape       | Object Type | Is Foldable | Is Elastic | Is In Box | Is Fragile | Init Pose |
+|-------|-----------------------|-------------|-------------|-------------|-------------|------------|-----------|------------|-----------|
+| 0     | yellow_2D_rectangle   | yellow      | 2D_rectangle| obj         | True        | False      | False     | False      | out_box   |
+| 1     | white_1D_ring         | white       | 1D_ring     | obj         | False       | True       | False     | False      | out_box   |
+| 2     | transparent_2D_circle | transparent | 2D_circle   | obj         | False       | True       | False     | False      | out_box   |
+| 3     | white_box             | white       | box         | box         | False       | False      | True      | False      | box       |
+
+
+The Goal State
+| Index | Name                  | Color       | Shape       | Object Type | Is Foldable | Is Elastic | Is In Box | Is Fragile | Goal Pose |
+|-------|-----------------------|-------------|-------------|-------------|-------------|------------|-----------|------------|-----------|
+| 0     | yellow_2D_rectangle   | yellow      | 2D_rectangle| obj         | True        | False      | True      | False      | in_box    |
+| 1     | white_1D_ring         | white       | 1D_ring     | obj         | False       | True       | True      | False      | in_box    |
+| 2     | transparent_2D_circle | transparent | 2D_circle   | obj         | False       | True       | False     | False      | out_box   |
+| 3     | white_box             | white       | box         | box         | False       | False      | True      | False      | box       |
+
+
+Initialize time:  1.3505
+Planning time:  61.2563
+Total time:  62.6068

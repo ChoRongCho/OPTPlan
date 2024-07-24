@@ -1,0 +1,45 @@
+{
+    "0": {
+        "name": "yellow_3D_cuboid",
+        "shape": "3D_cuboid",
+        "color": "yellow",
+        "predicates": [
+            "is_soft"
+        ],
+        "init_pose": "out_box"
+    },
+    "1": {
+        "name": "red_3D_polyhedron",
+        "shape": "3D_polyhedron",
+        "color": "red",
+        "predicates": [
+            "is_soft"
+        ],
+        "init_pose": "out_box"
+    },
+    "2": {
+        "name": "white_1D_ring",
+        "shape": "1D_ring",
+        "color": "white",
+        "predicates": [
+            "is_elastic"
+        ],
+        "init_pose": "in_box"
+    },
+    "3": {
+        "name": "black_1D_ring",
+        "shape": "1D_ring",
+        "color": "black",
+        "predicates": [
+            "is_foldable"
+        ],
+        "init_pose": "in_box"
+    },
+    "4": {
+        "name": "white_box",
+        "shape": "box",
+        "color": "white",
+        "predicates": [],
+        "init_pose": "box"
+    }
+}

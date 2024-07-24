@@ -1,0 +1,11 @@
+Push yellow_3D_cuboid
+Push red_3D_polyhedron
+Pick_Out white_1D_ring from white_box
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance35/result0/planning.py", line 142, in <module>
+    assert object3.is_in_box == False and object3.is_out_box == True
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+

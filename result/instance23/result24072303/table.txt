@@ -1,0 +1,21 @@
+The Init State
+| Index | Name               | Shape         | Color  | Object Type | Is Soft | Is Rigid | Is Elastic | Init Pose | In Bin Objects | Is In Box | Is Out Box |
+|-------|--------------------|---------------|--------|-------------|---------|----------|------------|-----------|----------------|-----------|------------|
+| 0     | red_3D_polyhedron  | 3D_polyhedron | red    | obj         | True    | False    | False      | out_box   | []             | False     | True       |
+| 1     | green_2D_circle    | 2D_circle     | green  | obj         | False   | True     | False      | out_box   | []             | False     | True       |
+| 2     | yellow_3D_cuboid   | 3D_cuboid     | yellow | obj         | True    | False    | True       | in_box    | []             | True      | False      |
+| 3     | white_box          | box           | white  | box         | False   | False    | False      | box       | [2]            | False     | False      |
+
+
+The Goal State
+| Index | Name               | Shape         | Color  | Object Type | Is Soft | Is Rigid | Is Elastic | Goal Pose | In Bin Objects | Is In Box | Is Out Box |
+|-------|--------------------|---------------|--------|-------------|---------|----------|------------|-----------|----------------|-----------|------------|
+| 0     | red_3D_polyhedron  | 3D_polyhedron | red    | obj         | True    | False    | False      | in_box    | []             | True      | False      |
+| 1     | green_2D_circle    | 2D_circle     | green  | obj         | False   | True     | False      | in_box    | []             | True      | False      |
+| 2     | yellow_3D_cuboid   | 3D_cuboid     | yellow | obj         | True    | False    | True       | in_box    | []             | True      | False      |
+| 3     | white_box          | box           | white  | box         | False   | False    | False      | box       | [0, 1, 2]       | False     | False      |
+
+
+		Initialize time:  1.3472
+		Planning time:  54.7034
+		Total time:  56.0506

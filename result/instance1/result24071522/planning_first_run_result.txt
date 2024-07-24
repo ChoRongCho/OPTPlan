@@ -1,0 +1,13 @@
+Pick yellow_3D_cuboid
+Place yellow_3D_cuboid in white_box
+Push yellow_3D_cuboid
+Pick black_3D_cylinder
+Place black_3D_cylinder in white_box
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance1/result24071522/planning.py", line 145, in <module>
+    assert object3.in_bin == []
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+

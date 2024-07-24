@@ -11,13 +11,13 @@ class Object:
 
     # Object physical properties predicates
     is_rigid: bool = False
-    is_flexible: bool = False
     is_soft: bool = False
     is_elastic: bool = False
 
     # bin_packing predicates expressed as a boolean (max 2)
     is_in_box: bool = False
-    is_out_box: bool = True
+    is_fragile: bool = False
+
 
 class Robot:
     # Define skills
@@ -51,79 +51,92 @@ class Robot:
     
     def pick(self, obj, bin):
         # Preconditions
-        if obj.object_type != 'box' and obj.is_out_box and self.robot_handempty:
+        if obj.object_type != 'box' and not obj.is_in_box and self.robot_handempty:
             # Effects
             self.state_holding(obj)
-            obj.is_out_box = False
-            obj.is_in_box = False
             print(f"Pick {obj.name}")
     
     def place(self, obj, bin):
         # Preconditions
         if self.robot_now_holding == obj:
+            if obj.is_rigid and not any(o.is_soft for o in bin.objects):
+                return
+            if obj.is_fragile and not any(o.is_elastic for o in bin.objects):
+                return
             # Effects
-            self.state_handempty()
             obj.is_in_box = True
-            obj.is_out_box = False
+            self.state_handempty()
             print(f"Place {obj.name} in {bin.name}")
     
     def push(self, obj, bin): 
         # Preconditions
-        if obj.is_soft and self.robot_handempty and obj.is_in_box:
+        if self.robot_handempty and obj.is_soft and obj.is_in_box:
+            if any(o.is_fragile for o in bin.objects if o.is_on_top_of(obj)):
+                return
             # Effects
             print(f"Push {obj.name}")
     
     def fold(self, obj, bin):
         # Preconditions
-        if obj.is_flexible and self.robot_handempty and obj.is_in_box:
+        if self.robot_handempty and obj.is_soft:
             # Effects
             print(f"Fold {obj.name}")
     
-    def out(self, obj, bin):
+    def pick_out(self, obj, bin):
         # Preconditions
         if obj.is_in_box and self.robot_handempty:
             # Effects
-            self.state_holding(obj)
             obj.is_in_box = False
-            obj.is_out_box = True
-            print(f"Out {obj.name} from {bin.name}")
+            self.state_holding(obj)
+            self.state_handempty()
+            print(f"Pick_Out {obj.name} from {bin.name}")
+
     def dummy(self):
         pass
 
 
-object0 = Object(index=0, name='yellow_3D_cuboid', color='yellow', shape='3D_cuboid', object_type='obj', is_soft=True, is_out_box=True)
-object1 = Object(index=1, name='black_3D_cylinder', color='black', shape='3D_cylinder', object_type='obj', is_rigid=True, is_out_box=True)
-object2 = Object(index=2, name='blue_1D_ring', color='blue', shape='1D_ring', object_type='obj', is_flexible=True, is_elastic=True, is_out_box=True)
-object3 = Object(index=3, name='white_box', color='white', shape='box', object_type='box', is_in_box=True, is_out_box=False)
+# Create objects based on the initial state
+object0 = Object(index=0, name='yellow_3D_cuboid', color='yellow', shape='3D_cuboid', object_type='obj', is_soft=True, is_in_box=False)
+object1 = Object(index=1, name='black_3D_cylinder', color='black', shape='3D_cylinder', object_type='obj', is_rigid=True, is_in_box=False)
+object2 = Object(index=2, name='blue_1D_ring', color='blue', shape='1D_ring', object_type='obj', is_elastic=True, is_in_box=False)
+object3 = Object(index=3, name='white_box', color='white', shape='box', object_type='box', is_in_box=True)
+
+# Create a list of objects for easy access
+objects = [object0, object1, object2, object3]
+
+# Initialize the robot
+robot = Robot()
 
 if __name__ == "__main__":
-    # Initialize the robot
-    robot = Robot()
+    # First, using goal table, describe the final state of each object
+    # Goal: 
+    # object0 (yellow_3D_cuboid) -> in_box
+    # object1 (black_3D_cylinder) -> in_box
+    # object2 (blue_1D_ring) -> out_box
+    # object3 (white_box) -> box (already in box)
 
-    # Plan to pack all objects in the box
-    # Step 1: Pick the blue_1D_ring and place it in the white_box
-    robot.pick(object2, object3)
-    robot.place(object2, object3)
-
-    # Step 2: Pick the yellow_3D_cuboid and place it in the white_box
+    # Second, make your order, you should be aware of the robot action effects such as 'push' or 'pick_out etc'.
+    # Plan:
+    # 1. Pick yellow_3D_cuboid
     robot.pick(object0, object3)
+    # 2. Place yellow_3D_cuboid in white_box
     robot.place(object0, object3)
+    # 3. Pick black_3D_cylinder
+    robot.pick(object1, object3)
+    # 4. Place black_3D_cylinder in white_box
+    robot.place(object1, object3)
 
-    # Step 3: Push the yellow_3D_cuboid to make more space in the bin
-    robot.push(object0, object3)
+    # after making all actions, fill your reasons according to the rules
+    # Reasoning:
+    # 1. Pick yellow_3D_cuboid: The yellow_3D_cuboid is a soft object and can be picked up.
+    # 2. Place yellow_3D_cuboid in white_box: The yellow_3D_cuboid is placed in the box first as per rule 2.
+    # 3. Pick black_3D_cylinder: The black_3D_cylinder is a rigid object and can be picked up.
+    # 4. Place black_3D_cylinder in white_box: The black_3D_cylinder is placed in the box after the soft object as per rule 2.
 
-    # Note: The black_3D_cylinder is not placed in the box because it is rigid and there is no space left after placing the other objects.
-
-    # Final state of each object
-    print(f"Final state of {object0.name}: is_in_box={object0.is_in_box}, is_out_box={object0.is_out_box}")
-    print(f"Final state of {object1.name}: is_in_box={object1.is_in_box}, is_out_box={object1.is_out_box}")
-    print(f"Final state of {object2.name}: is_in_box={object2.is_in_box}, is_out_box={object2.is_out_box}")
-    print(f"Final state of {object3.name}: is_in_box={object3.is_in_box}, is_out_box={object3.is_out_box}")
-
-    # Check if the goal state is satisfied
-    assert object0.is_in_box == True and object0.is_out_box == False
-    assert object1.is_in_box == False and object1.is_out_box == True
-    assert object2.is_in_box == True and object2.is_out_box == False
-    assert object3.is_in_box == True and object3.is_out_box == False
-
-    print("Goal state is satisfied.")
+    # check if the goal state is satisfying goal state table
+    assert object0.is_in_box == True, "yellow_3D_cuboid should be in the box"
+    assert object1.is_in_box == True, "black_3D_cylinder should be in the box"
+    assert object2.is_in_box == False, "blue_1D_ring should be out of the box"
+    assert object3.is_in_box == True, "white_box should be in the box"
+    
+    print("All objects are in their goal states.")

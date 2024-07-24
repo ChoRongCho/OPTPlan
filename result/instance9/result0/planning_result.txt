@@ -1,0 +1,9 @@
+Fold white_3D_cylinder
+Pick white_3D_cylinder
+Place white_3D_cylinder in white_box
+Pick green_3D_cylinder
+Place green_3D_cylinder in white_box
+All objects are in the correct final state.
+
+
+

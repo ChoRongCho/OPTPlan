@@ -7,9 +7,10 @@
         },
         "rules": {
             "1": "never attempt to pick up and set down an object named box",
-            "2": "when place a rigid objects in the bin, the soft objects must be in the bin before",
-            "3": "when fold a object, the object must be foldable",
-            "4": "when a rigid object in the bin at the initial state, out of the rigid object and replace it into the bin "
+            "2": "when place a rigid object in the bin, the soft object must be in the bin before",
+            "3": "if there is a foldable object in bin, out and fold the object on the platform and replace the object. ",
+            "4": "when a rigid object in the bin at the initial state, out of the rigid object and replace it into the bin ",
+            "5": "if there are soft objects, pick, place and push them into the bin "
         }
     }
 }

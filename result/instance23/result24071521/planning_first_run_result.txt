@@ -1,0 +1,9 @@
+Fold red_3D_polyhedron
+Pick red_3D_polyhedron
+Place red_3D_polyhedron in white_box
+Pick green_3D_circle
+Place green_3D_circle in white_box
+All task planning is done
+
+
+

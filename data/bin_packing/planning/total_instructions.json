@@ -8,7 +8,7 @@
             "1": "never attempt to pick up and set down an object named box",
             "2": "when place a rigid objects in the bin, the soft objects must be in the bin before",
             "3": "do not place a fragile object if there is no elastic object in the bin",
-            "4": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the objectwhen push a object, neither fragile and rigid objects are permitted"
+            "4": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the object"
         }
     },
     "instance2": {
@@ -20,7 +20,7 @@
         "rule": {
             "1": "don't pick and place a box called bin",
             "2": "when fold a object, the object must be foldable",
-            "3": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the objectwhen push a object, neither fragile and rigid objects are permitted"
+            "3": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the object"
         }
     },
     "instance3": {
@@ -162,7 +162,7 @@
             "1": "you should never pick and place a box",
             "2": "when fold a object, the object must be foldable",
             "3": "when place a rigid objects in the bin, the soft objects must be in the bin before",
-            "4": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the objectwhen push a object, neither fragile and rigid objects are permitted"
+            "4": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the object"
         }
     },
     "instance15": {
@@ -219,7 +219,7 @@
             "1": "you should never pick and place a box",
             "2": "when fold a foldable object, the fragile object must be in the bin ",
             "3": "when place a rigid objects in the bin, the soft objects must be in the bin before",
-            "4": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the objectwhen push a object, neither fragile and rigid objects are permitted"
+            "4": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the object"
         }
     },
     "instance20": {
@@ -278,7 +278,7 @@
         "rule": {
             "1": "don't pick and place a box called bin",
             "2": "when place a rigid objects in the bin, the soft objects must be in the bin before",
-            "3": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the objectwhen push a object, neither fragile and rigid objects are permitted"
+            "3": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the object"
         }
     },
     "instance25": {
@@ -340,7 +340,7 @@
             "1": "never attempt to pick up and set down an object named box",
             "2": "when fold a foldable object, the fragile object must be in the bin ",
             "3": "do not place a fragile object if there is no elastic object in the bin",
-            "4": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the objectwhen push a object, neither fragile and rigid objects are permitted"
+            "4": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the object"
         }
     },
     "instance30": {
@@ -352,7 +352,7 @@
             "1": "don't pick and place a box called bin",
             "2": "when fold a object, the object must be foldable",
             "3": "when a rigid object in the bin at the initial state, out of the rigid object and replace it into the bin ",
-            "4": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the objectwhen push a object, neither fragile and rigid objects are permitted"
+            "4": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the object"
         }
     },
     "instance31": {

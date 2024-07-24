@@ -1,0 +1,6 @@
+Pick white_3D_cylinder
+Place white_3D_cylinder in white_box
+All task planning is done
+
+
+

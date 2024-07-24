@@ -3,13 +3,10 @@
         "task_description": "packing objects into the box called bin. ",
         "goals": {
             "1": "Storing all objects in the container.",
-            "2": "If there is a 1D object, don't pack it into the box",
-            "3": "If there are yellow object and black object together, don't pack a black object into the box"
+            "2": "If there is a 1D object, don't pack it into the box"
         },
         "rules": {
-            "1": "don't pick and place a box called bin",
-            "2": "when fold a object, the object must be foldable",
-            "3": "you must push a soft object to make more space in the bin, however, if there is a fragile object on the soft object, you must not push the object"
+            "1": "don't pick and place a box called bin"
         }
     }
 }

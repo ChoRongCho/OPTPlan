@@ -4,14 +4,14 @@
         "shape": "3D_cylinder",
         "color": "yellow",
         "predicates": [
-            "is_soft"
+            "is_rigid"
         ],
         "init_pose": "out_box"
     },
     "1": {
-        "name": "beige_1D_ring",
+        "name": "white_1D_ring",
         "shape": "1D_ring",
-        "color": "beige",
+        "color": "white",
         "predicates": [
             "is_elastic"
         ],
@@ -22,7 +22,6 @@
         "shape": "1D_ring",
         "color": "blue",
         "predicates": [
-            "is_fragile",
             "is_elastic"
         ],
         "init_pose": "out_box"
@@ -32,6 +31,7 @@
         "shape": "2D_circle",
         "color": "black",
         "predicates": [
+            "is_fragile",
             "is_elastic"
         ],
         "init_pose": "in_box"
@@ -40,9 +40,7 @@
         "name": "white_box",
         "shape": "box",
         "color": "white",
-        "predicates": [
-            "is_foldable"
-        ],
+        "predicates": [],
         "init_pose": "box"
     }
 }

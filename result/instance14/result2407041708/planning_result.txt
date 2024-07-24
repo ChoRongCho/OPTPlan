@@ -1,0 +1,15 @@
+Pick white_3D_cylinder
+Place white_3D_cylinder in white_box
+Push white_3D_cylinder
+Pick black_3D_cylinder
+Place black_3D_cylinder in white_box
+Pick_Out white_1D_ring from white_box
+Pick_Out blue_1D_ring from white_box
+Pick white_1D_ring
+Place white_1D_ring in white_box
+Pick blue_1D_ring
+Place blue_1D_ring in white_box
+All task planning is done
+
+
+

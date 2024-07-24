@@ -1,0 +1,55 @@
+# Wrong Part
+4. Planning State
+
+# Analysis using given error
+# a) The preconditions for the actions in the Robot class satisfy the given rules.
+# b) The effects of the actions in the Robot class are correct.
+# c) There are no syntax errors in the action codes.
+# d) The goal state at the assert part is correct.
+# e) The order of robot actions is incorrect. Specifically, the soft object (yellow_3D_cuboid) should be pushed before being placed in the bin.
+# f) There are unnecessary actions. The `push` action should be performed before placing the soft object in the bin.
+
+# Modified Code
+```python
+if __name__ == "__main__":
+    # First, using goal table, describe the final state of each object
+    # Goal state:
+    # object0 (yellow_3D_cuboid) -> is_in_box: True, is_out_box: False
+    # object1 (white_1D_ring) -> is_in_box: True, is_out_box: False
+    # object2 (blue_1D_ring) -> is_in_box: False, is_out_box: True
+    # object3 (white_2D_circle) -> is_in_box: True, is_out_box: False
+    # object4 (white_box) -> is_in_box: True, is_out_box: False (unchanged)
+
+    # Second, make your order, you should be aware of the robot action effects such as 'push' or 'pick_out etc'. 
+    # a) Initialize the robot
+    robot = Robot()
+
+    # b) Define the bin (box)
+    bin = object4
+
+    # Third, after making all actions, fill your reasons according to the rules
+    # Rule 1: Never pick and place a box
+    # Rule 3: When placing soft objects, the soft objects must be pushed before packed in the bin
+    # Rule 4: When a rigid object is in the bin at the initial state, take it out and replace it into the bin
+
+    # Step 1: Pick out the rigid object (white_2D_circle) and place it back
+    robot.pick_out(object3, bin)
+    robot.place(object3, bin)
+
+    # Step 2: Pick and push the soft object (yellow_3D_cuboid) before placing it in the bin
+    robot.pick(object0, bin)
+    robot.push(object0, bin)
+    robot.place(object0, bin)
+
+    # Step 3: Pick and place the elastic object (white_1D_ring) in the bin
+    robot.pick(object1, bin)
+    robot.place(object1, bin)
+
+    # Fourth, check if the goal state is satisfying goal state table. Use a template below. These are examples. 
+    assert object0.is_in_box == True
+    assert object1.is_in_box == True
+    assert object2.is_in_box == False
+    assert object3.is_in_box == True
+    assert object4.is_in_box == True
+    print("All task planning is done")
+```

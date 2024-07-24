@@ -1,0 +1,10 @@
+Push red_3D_polyhedron
+Fold transparent_3D_cylinder
+
+Traceback (most recent call last):
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance26/result2407041708/planning.py", line 123, in <module>
+    assert object1.is_in_box == True
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+

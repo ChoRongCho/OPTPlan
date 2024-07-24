@@ -1,0 +1,21 @@
+The Init State
+| Index | Name             | Shape       | Color | Predicates       | Init Pose | Object Type | Pushed | Folded | In Bin Objects | Is Rigid | Is Elastic | In Box |
+|-------|------------------|-------------|-------|------------------|-----------|-------------|--------|--------|----------------|----------|------------|--------|
+| 0     | black_3D_cylinder| 3D_cylinder | black | is_rigid         | out_box   | obj         | False  | False  | None           | True     | False      | False  |
+| 1     | blue_2D_ring     | 2D_ring     | blue  | None             | out_box   | obj         | False  | False  | None           | False    | False      | False  |
+| 2     | white_2D_ring    | 2D_ring     | white | is_elastic       | in_box    | obj         | False  | False  | None           | False    | True       | True   |
+| 3     | white_box        | box         | white | None             | box       | box         | False  | False  | []             | False    | False      | False  |
+
+
+The Goal State
+| Index | Name             | Shape       | Color | Predicates       | Init Pose | Object Type | Pushed | Folded | In Bin Objects | Is Rigid | Is Elastic | In Box |
+|-------|------------------|-------------|-------|------------------|-----------|-------------|--------|--------|----------------|----------|------------|--------|
+| 0     | black_3D_cylinder| 3D_cylinder | black | is_rigid         | in_box    | obj         | False  | False  | None           | True     | False      | True   |
+| 1     | blue_2D_ring     | 2D_ring     | blue  | None             | in_box    | obj         | False  | False  | None           | False    | False      | True   |
+| 2     | white_2D_ring    | 2D_ring     | white | is_elastic       | in_box    | obj         | False  | False  | None           | False    | True       | True   |
+| 3     | white_box        | box         | white | None             | box       | box         | False  | False  | [0, 1, 2]      | False    | False      | False  |
+
+
+		Initialize time:  1.35
+		Planning time:  57.187
+		Total time:  58.537

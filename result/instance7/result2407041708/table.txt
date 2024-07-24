@@ -1,0 +1,23 @@
+The Init State
+| Index | Name                | Shape         | Color  | Predicates          | Init Pose | Is Elastic | Is Foldable | Is Soft | Is In Box | Is Packable | Object Type |
+|-------|---------------------|---------------|--------|---------------------|-----------|------------|-------------|---------|-----------|-------------|-------------|
+| 0     | yellow_2D_rectangle | 2D_rectangle  | yellow | is_foldable         | out_box   | False      | True        | False   | False     | True        | obj         |
+| 1     | brown_3D_cuboid     | 3D_cuboid     | brown  | is_soft             | out_box   | False      | False       | True    | False     | True        | obj         |
+| 2     | blue_1D_ring        | 1D_ring       | blue   | is_elastic          | out_box   | True       | False       | False   | False     | True        | obj         |
+| 3     | red_3D_polyhedron   | 3D_polyhedron | red    | is_soft             | in_box    | False      | False       | True    | True      | True        | obj         |
+| 4     | white_box           | box           | white  |                     | box       | False      | False       | False   | False     | False       | box         |
+
+
+The Goal State
+| Index | Name                | Shape         | Color  | Predicates          | Goal Pose | Is Elastic | Is Foldable | Is Soft | Is In Box | Is Packable | Object Type |
+|-------|---------------------|---------------|--------|---------------------|-----------|------------|-------------|---------|-----------|-------------|-------------|
+| 0     | yellow_2D_rectangle | 2D_rectangle  | yellow | is_foldable         | out_box   | False      | True        | False   | False     | True        | obj         |
+| 1     | brown_3D_cuboid     | 3D_cuboid     | brown  | is_soft             | in_box    | False      | False       | True    | True      | True        | obj         |
+| 2     | blue_1D_ring        | 1D_ring       | blue   | is_elastic          | in_box    | True       | False       | False   | True      | True        | obj         |
+| 3     | red_3D_polyhedron   | 3D_polyhedron | red    | is_soft             | in_box    | False      | False       | True    | True      | True        | obj         |
+| 4     | white_box           | box           | white  |                     | box       | False      | False       | False   | False     | False       | box         |
+
+
+		Initialize time:  1.3691
+		Planning time:  49.2954
+		Total time:  50.6645

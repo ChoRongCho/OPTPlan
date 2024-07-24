@@ -1,0 +1,23 @@
+The Init State
+| Index | Name            | Shape      | Color | Predicates          | Init Pose | Is Soft | Is Elastic | Is In Box | Is Fragile |
+|-------|-----------------|------------|-------|---------------------|-----------|---------|------------|-----------|------------|
+| 0     | brown_3D_cuboid | 3D_cuboid  | brown | is_soft             | out_box   | True    | False      | False     | False      |
+| 1     | white_1D_ring   | 1D_ring    | white | is_elastic          | out_box   | False   | True       | False     | False      |
+| 2     | blue_1D_ring    | 1D_ring    | blue  | is_elastic          | out_box   | False   | True       | False     | False      |
+| 3     | white_2D_circle | 2D_circle  | white | is_elastic          | in_box    | False   | True       | True      | False      |
+| 4     | white_box       | box        | white |                     | box       | False   | False      | False     | False      |
+
+
+The Goal State
+| Index | Name            | Shape      | Color | Predicates          | Goal Pose | Is Soft | Is Elastic | Is In Box | Is Fragile |
+|-------|-----------------|------------|-------|---------------------|-----------|---------|------------|-----------|------------|
+| 0     | brown_3D_cuboid | 3D_cuboid  | brown | is_soft             | in_box    | True    | False      | True      | False      |
+| 1     | white_1D_ring   | 1D_ring    | white | is_elastic          | in_box    | False   | True       | True      | False      |
+| 2     | blue_1D_ring    | 1D_ring    | blue  | is_elastic          | out_box   | False   | True       | False     | False      |
+| 3     | white_2D_circle | 2D_circle  | white | is_elastic          | in_box    | False   | True       | True      | False      |
+| 4     | white_box       | box        | white |                     | box       | False   | False      | False     | False      |
+
+
+Initialize time:  1.3656
+Planning time:  57.3951
+Total time:  58.7607

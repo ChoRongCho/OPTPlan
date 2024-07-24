@@ -1,0 +1,19 @@
+The Init State
+| Index | Name                   | Shape       | Color       | Predicates            | Init Pose | Object Type | In Bin | Pushed | Folded | In Bin Objects | Is Elastic | Is Soft |
+|-------|------------------------|-------------|-------------|-----------------------|-----------|-------------|--------|--------|--------|----------------|------------|---------|
+| 0     | yellow_3D_cuboid       | 3D_cuboid   | yellow      | is_soft, is_elastic   | out_box   | obj         | False  | False  | False  | []             | True       | True    |
+| 1     | transparent_3D_cylinder| 3D_cylinder | transparent | is_elastic            | out_box   | obj         | False  | False  | False  | []             | True       | False   |
+| 2     | white_box              | box         | white       |                       | box       | box         | False  | False  | False  | []             | False      | False   |
+
+
+The Goal State
+| Index | Name                   | Shape       | Color       | Predicates            | Init Pose | Object Type | In Bin | Pushed | Folded | In Bin Objects | Is Elastic | Is Soft |
+|-------|------------------------|-------------|-------------|-----------------------|-----------|-------------|--------|--------|--------|----------------|------------|---------|
+| 0     | yellow_3D_cuboid       | 3D_cuboid   | yellow      | is_soft, is_elastic   | out_box   | obj         | False  | False  | False  | []             | True       | True    |
+| 1     | transparent_3D_cylinder| 3D_cylinder | transparent | is_elastic            | out_box   | obj         | True   | False  | False  | []             | True       | False   |
+| 2     | white_box              | box         | white       |                       | box       | box         | False  | False  | False  | [1]            | False      | False   |
+
+
+		Initialize time:  1.4172
+		Planning time:  49.2308
+		Total time:  50.648

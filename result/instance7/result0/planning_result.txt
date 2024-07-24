@@ -1,0 +1,7 @@
+
+  File "/home/changmin/PycharmProjects/OPTPlan/result/instance7/result0/planning.py", line 88
+    The robot actions are designed to follow the given rules strictly. The preconditions ensure that actions are only performed when the robot is in the correct state and the objects meet the necessary criteria. For example, the robot cannot pick a box or place an object if it is not holding it. The effects update the state of the robot and objects to reflect the changes caused by the actions. This ensures that the robot's behavior is predictable and consistent with the rules provided
+                                                                                                                                                                                                                                                                                                                                                                                                                                        ^
+SyntaxError: unterminated string literal (detected at line 88)
+
+
