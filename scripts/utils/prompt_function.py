@@ -8,11 +8,69 @@ class PromptSet:
         self.task = task
         self.task_description = task_description
 
-    def load_prompt_detect_object(self):
-        prompt = f"We are now doing a {self.task} task. \n"
-        prompt += "This is a first observation where I work in. \n"
-        prompt += "What objects or tools are here? \n"
-        return prompt
+    def load_naming_message(self):
+        """
+        from images, the llm module makes judge of its shape and color
+        """
+        # Use 1D, 2D, 3D definition of ChatGPT
+        system_message = f"You are a vision AI that describes the shape and color of an object for {self.task}. " + \
+                         "You should look at a picture of given objects and explain their size and color." + \
+                         "Also, classify objects using the given classification table rather than your common sense."
+        prompt = "The first image is when you see the object from the side " + \
+                 "and the next image is when you see the object from the top. \n" + \
+                 "Define the shape and color of the object through this image. \n" + \
+                 "Use the simple classification table below for the shape of the object. \n" + \
+                 "You should match dimension and shape. For example, 3D_circle is not acceptable. \n\n" + \
+                 """
+----- ----------------------------- ----------------------------------------------             
+Dim   Description                   Shape
+1D    related to lines or length    linear
+2D    related to plane or flatness  rectangle, circle, ring
+3D    related to volume             cube, cuboid, cylinder, cone, polyhedron, etc
+----- ----------------------------- ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box: # if there is nothing, fill it blank
+object out box: brown_3D_cuboid, black_3D_circle  # this is an example
+box: white_box # only color
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+"""
+        return system_message, prompt
+
+    def load_naming_module_single(self):
+        system_message = f"You are a vision AI that describes the shape and color of an object for {self.task}. " + \
+                         ("You should look at a picture of a given object and explain its size and color. "
+                          "Also, classify objects using the given classification table rather than your common sense.")
+        prompt = "The first image is when you see the object from the side " + \
+                 "and the next image is when you see the object from the top. \n" + \
+                 "Define the shape and color of the object through this image. \n" + \
+                 "Use the simple classification table below for the shape of the object. \n" + \
+                 "You should match a dimension and shape. For example, 2D_ring, 3D_circle are not acceptable. \n\n" + \
+                 """
+----- ----------------------------- ----------------------------------------------             
+Dim   Description                   Shape
+1D    related to lines or length    linear
+2D    related to plane or flatness  rectangle, circle, ring
+3D    related to volume             cube, cuboid, cylinder, cone, polyhedron, etc
+----- ----------------------------- ----------------------------------------------
+
+Please answer with the template below:
+
+---
+Answer: red_3D_cuboid, black_2D_ring or etc  # these are examples for your answer format
+
+Descriptions about the object in the scene
+*your descriptions in 200 words
+---
+"""
+        return system_message, prompt
 
     def load_prompt_object_class(self, object_dict, max_predicates):
         system_message = f"You are an AI assistant who organizes the properties of objects in task planning for {self.task}." + \
@@ -385,70 +443,6 @@ Reason:
             n += 3
             prompt += m3
         prompt += end_message
-        return system_message, prompt
-
-    def load_naming_message(self):
-        """
-        from images, the llm module makes judge of its shape and color
-        """
-        # Use 1D, 2D, 3D definition of ChatGPT
-        system_message = f"You are a vision AI that describes the shape and color of an object for {self.task}. " + \
-                         "You should look at a picture of given objects and explain their size and color." + \
-                         "Also, classify objects using the given classification table rather than your common sense."
-        prompt = "The first image is when you see the object from the side " + \
-                 "and the next image is when you see the object from the top. \n" + \
-                 "Define the shape and color of the object through this image. \n" + \
-                 "Use the simple classification table below for the shape of the object. \n" + \
-                 "You should match dimension and shape. For example, 3D_circle is not acceptable. \n\n" + \
-                 """
------ ----------------------------- ----------------------------------------------             
-Dim   Description                   Shape
-1D    related to lines or length    linear
-2D    related to plane or flatness  rectangle, circle, ring
-3D    related to volume             cube, cuboid, cylinder, cone, polyhedron, etc
------ ----------------------------- ----------------------------------------------
-
-Please answer with the template below:
-
-Answer
----
-object in box: # if there is nothing, fill it blank
-object out box: brown_3D_cuboid, black_3D_circle  # this is an example
-box: white_box # only color
----
-
-Descriptions about objects in the scene
-*your descriptions in 200 words
-
-"""
-        return system_message, prompt
-
-    def load_naming_module_single(self):
-        system_message = f"You are a vision AI that describes the shape and color of an object for {self.task}. " + \
-                         ("You should look at a picture of a given object and explain its size and color. "
-                          "Also, classify objects using the given classification table rather than your common sense.")
-        prompt = "The first image is when you see the object from the side " + \
-                 "and the next image is when you see the object from the top. \n" + \
-                 "Define the shape and color of the object through this image. \n" + \
-                 "Use the simple classification table below for the shape of the object. \n" + \
-                 "You should match a dimension and shape. For example, 2D_ring, 3D_circle are not acceptable. \n\n" + \
-                 """
------ ----------------------------- ----------------------------------------------             
-Dim   Description                   Shape
-1D    related to lines or length    linear
-2D    related to plane or flatness  rectangle, circle, ring
-3D    related to volume             cube, cuboid, cylinder, cone, polyhedron, etc
------ ----------------------------- ----------------------------------------------
-
-Please answer with the template below:
-
----
-Answer: red_3D_cuboid, black_2D_ring or etc  # these are examples for your answer format
-
-Descriptions about the object in the scene
-*your descriptions in 200 words
----
-"""
         return system_message, prompt
 
 

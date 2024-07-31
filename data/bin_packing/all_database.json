@@ -18,7 +18,7 @@
                 "is_elastic"
             ]
         },
-        "white_2D_ring": {
+        "white_2D_loop": {
             "color": "white",
             "dimension": "2D",
             "shape": "ring",
@@ -26,7 +26,7 @@
                 "is_elastic"
             ]
         },
-        "blue_2D_ring": {
+        "blue_2D_loop": {
             "color": "blue",
             "dimension": "1D",
             "shape": "linear",

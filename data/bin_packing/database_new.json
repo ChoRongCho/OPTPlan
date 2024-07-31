@@ -1,0 +1,12 @@
+{
+    "bin_packing": {
+        "black_2D_loop": {
+            "color": "black",
+            "dimension": "2D",
+            "shape": "loop",
+            "properties": [
+                "is_elastic"
+            ]
+        }
+    }
+}

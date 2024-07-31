@@ -1,0 +1,18 @@
+The Init State
+| Index | Name              | Shape        | Color  | Predicates                  | Init Pose |
+|-------|-------------------|--------------|--------|-----------------------------|-----------|
+| 0     | white_3D_cylinder | 3D_cylinder  | white  | is_soft, is_elastic         | out_box   |
+| 1     | green_3D_cylinder | 3D_cylinder  | green  | is_rigid, is_fragile        | out_box   |
+| 2     | yellow_2D_rectangle| 2D_rectangle| yellow | is_foldable                 | in_box    |
+| 3     | green_2D_rectangle| 2D_rectangle | green  | is_rigid, is_elastic        | in_box    |
+| 4     | white_box         | box          | white  |                             | box       |
+
+
+The Goal State
+| Index | Name              | Shape        | Color  | Predicates                  | Goal Pose |
+|-------|-------------------|--------------|--------|-----------------------------|-----------|
+| 0     | white_3D_cylinder | 3D_cylinder  | white  | is_soft, is_elastic         | in_box    |
+| 1     | green_3D_cylinder | 3D_cylinder  | green  | is_rigid, is_fragile        | in_box    |
+| 2     | yellow_2D_rectangle| 2D_rectangle| yellow | is_foldable                 | in_box    |
+| 3     | green_2D_rectangle| 2D_rectangle | green  | is_rigid, is_elastic        | in_box    |
+| 4     | white_box         | box          | white  |                             | box       |
