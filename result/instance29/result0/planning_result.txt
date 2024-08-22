@@ -1,7 +1,0 @@
-Push red_3D_polyhedron
-Pick white_3D_cylinder
-Place white_3D_cylinder in white_box
-All objects are in their goal states.
-
-
-

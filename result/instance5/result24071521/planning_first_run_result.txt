@@ -1,9 +1,0 @@
-Pick brown_3D_cuboid
-Place brown_3D_cuboid in white_box
-Push blue_1D_ring
-Pick blue_1D_ring
-Place blue_1D_ring in white_box
-All task planning is done
-
-
-

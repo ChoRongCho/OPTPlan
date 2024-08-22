@@ -1,9 +1,0 @@
-Pick white_1D_ring
-Place white_1D_ring in white_box
-Fold yellow_2D_rectangle
-Pick yellow_2D_rectangle
-Place yellow_2D_rectangle in white_box
-All task planning is done
-
-
-

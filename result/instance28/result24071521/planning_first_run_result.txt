@@ -1,8 +1,0 @@
-Pick white_3D_cone
-Place white_3D_cone in white_box
-Pick black_3D_cylinder
-Place black_3D_cylinder in white_box
-All task planning is done
-
-
-

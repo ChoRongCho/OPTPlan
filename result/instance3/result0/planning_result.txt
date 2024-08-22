@@ -1,8 +1,0 @@
-Pick yellow_3D_cylinder
-Place yellow_3D_cylinder in bin
-Pick red_3D_polyhedron
-Place red_3D_polyhedron in bin
-All objects are in their goal states.
-
-
-

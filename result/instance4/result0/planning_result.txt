@@ -1,8 +1,0 @@
-Pick blue_1D_ring
-Place blue_1D_ring in white_box
-Pick white_1D_ring
-Place white_1D_ring in white_box
-All objects are correctly packed in the box.
-
-
-

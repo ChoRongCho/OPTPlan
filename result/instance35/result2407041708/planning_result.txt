@@ -1,7 +1,0 @@
-Push yellow_3D_cuboid
-Push red_3D_polyhedron
-Pick_Out white_1D_ring from white_box
-All task planning is done
-
-
-

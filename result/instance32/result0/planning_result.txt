@@ -1,8 +1,0 @@
-Pick green_3D_cylinder
-Place green_3D_cylinder in white_box
-Pick blue_1D_ring
-Place blue_1D_ring in white_box
-All objects are in their correct final states.
-
-
-

@@ -1,8 +1,0 @@
-Pick yellow_3D_cylinder
-Place yellow_3D_cylinder in white_box
-Pick red_3D_polyhedron
-Place red_3D_polyhedron in white_box
-All task planning is done
-
-
-

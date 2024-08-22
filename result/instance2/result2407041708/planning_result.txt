@@ -1,7 +1,0 @@
-Pick black_3D_cylinder
-Place black_3D_cylinder in white_box
-Pick_Out white_1D_ring from white_box
-All task planning is done
-
-
-

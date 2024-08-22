@@ -1,7 +1,0 @@
-
-  File "/home/changmin/PycharmProjects/OPTPlan/result/instance24/result0/planning.py", line 87
-    The robot actions are designed to follow the given rules and constraints for bin packing. Each action has specific preconditions that must be met before the action can be executed, ensuring that the robot operates within the defined rules. For example, the robot cannot pick a box, must have an empty hand to push or fold objects, and must follow specific rules for placing objects in the bin. The effects of each action update the state of the robot and objects, ensuring that the system's state remains consistent and accurate. This approach ensures that the robot can effectively and safely perform bin packing tasks
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ^
-SyntaxError: unterminated string literal (detected at line 87)
-
-

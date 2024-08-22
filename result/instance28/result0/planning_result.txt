@@ -1,8 +1,0 @@
-
-Traceback (most recent call last):
-  File "/home/changmin/PycharmProjects/OPTPlan/result/instance28/result0/planning.py", line 109, in <module>
-    goal_state = {
-                 ^
-TypeError: unhashable type: 'Object'
-
-
