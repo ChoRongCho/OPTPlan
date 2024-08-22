@@ -1,0 +1,54 @@
+--------------  ---------------------------
+Project Time    2024-08-15 22:05:14.478956
+Task            bin_packing
+Exp_Name        instance34
+API JSON        setting.json
+Example Prompt  prompt_examples_python.json
+Max Predicates  2
+--------------  ---------------------------
+--------------------------------------------------
+Q: 
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.  
+Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
+You need to identify the corresponding pairs of objects in each image, and then distinguish their colors, dimensions, and shapes. 
+Define the shape and color of the object through these images. 
+Use the simple classification table below for the shape of the object. 
+You should match dimension and shape. For example, 3D_circle is not acceptable. 
+
+----- ----------------------------- ----------------------------------------------             
+Dim   Description                   Shape
+1D    related to lines or length    line
+2D    related to plane or flatness  rectangle, circle, loop, triangle, polygon
+3D    related to volume             cone, cube, cuboid, cylinder, polyhedron, pyramid, sphere
+----- ----------------------------- ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box:  # if nothing is in the box, leave this answer blank
+object out box: brown_3D_cuboid, black_3D_circle  # this is an example
+box: white_box # specify only the color of the box 
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+
+
+A: 
+Answer
+---
+object in box: 
+object out box: red_3D_sphere, yellow_3D_cylinder
+box: white_box
+---
+
+Descriptions about objects in the scene:
+In the provided images, there are three main objects and a white box. The first object is a red plush toy with yellow wings, which can be classified as a red_3D_sphere due to its overall rounded shape. The second object is a yellow cylindrical container, which is a yellow_3D_cylinder. The third object is a white box with a lattice design, which is simply referred to as a white_box. 
+
+In the first image, the red plush toy is positioned to the left of the white box, and the yellow cylindrical container is above the box. The white box is empty. In the second image, the same objects are visible from a side view. The red plush toy is lying down next to the white box, and the yellow cylindrical container is in front of the box. The white box remains empty in both images. 
+
+The red plush toy has a vibrant red color with yellow accents, and the yellow cylindrical container has a bright yellow color with a transparent section. The white box has a lattice design and is clearly visible in both images.
+----------------------------------------------------------------------------------------------------
+

@@ -1,0 +1,21 @@
+The Init State
+| Index | Name                  | Shape       | Color       | Object Type | Pushed | Folded | In Bin Objects | Is Fragile | Is Rigid | Is Elastic | Is Soft | In Box | Out Box |
+|-------|-----------------------|-------------|-------------|-------------|--------|--------|----------------|------------|----------|------------|---------|--------|---------|
+| 0     | yellow_3D_cuboid      | 3D_cuboid   | yellow      | obj         | False  | False  | []             | False      | False    | True       | True    | False  | True    |
+| 1     | black_1D_linear       | 1D_linear   | black       | obj         | False  | False  | []             | True       | True     | False      | False   | False  | True    |
+| 2     | transparent_3D_cylinder| 3D_cylinder | transparent | obj         | False  | False  | []             | False      | False    | True       | False   | True   | False   |
+| 3     | white_box             | box         | white       | box         | False  | False  | [2]            | False      | False    | False      | False   | True   | False   |
+
+
+The Goal State
+| Index | Name                  | Shape       | Color       | Object Type | Pushed | Folded | In Bin Objects | Is Fragile | Is Rigid | Is Elastic | Is Soft | In Box | Out Box |
+|-------|-----------------------|-------------|-------------|-------------|--------|--------|----------------|------------|----------|------------|---------|--------|---------|
+| 0     | yellow_3D_cuboid      | 3D_cuboid   | yellow      | obj         | False  | False  | []             | False      | False    | True       | True    | True   | False   |
+| 1     | black_1D_linear       | 1D_linear   | black       | obj         | False  | False  | []             | True       | True     | False      | False   | True   | False   |
+| 2     | transparent_3D_cylinder| 3D_cylinder | transparent | obj         | False  | False  | []             | False      | False    | True       | False   | True   | False   |
+| 3     | white_box             | box         | white       | box         | False  | False  | [0, 1, 2]      | False      | False    | False      | False   | True   | False   |
+
+
+		Initialize time:  1.3274
+		Planning time:  45.0565
+		Total time:  46.3839

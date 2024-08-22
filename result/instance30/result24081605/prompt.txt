@@ -1,0 +1,60 @@
+--------------  ---------------------------
+Project Time    2024-08-15 22:10:50.181608
+Task            bin_packing
+Exp_Name        instance30
+API JSON        setting.json
+Example Prompt  prompt_examples_python.json
+Max Predicates  2
+--------------  ---------------------------
+--------------------------------------------------
+Q: 
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.  
+Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
+You need to identify the corresponding pairs of objects in each image, and then distinguish their colors, dimensions, and shapes. 
+Define the shape and color of the object through these images. 
+Use the simple classification table below for the shape of the object. 
+You should match dimension and shape. For example, 3D_circle is not acceptable. 
+
+----- ----------------------------- ----------------------------------------------             
+Dim   Description                   Shape
+1D    related to lines or length    line
+2D    related to plane or flatness  rectangle, circle, loop, triangle, polygon
+3D    related to volume             cone, cube, cuboid, cylinder, polyhedron, pyramid, sphere
+----- ----------------------------- ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box:  # if nothing is in the box, leave this answer blank
+object out box: brown_3D_cuboid, black_3D_circle  # this is an example
+box: white_box # specify only the color of the box 
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+
+
+A: 
+Answer
+---
+object in box: black_2D_loop
+object out box: red_3D_polyhedron, yellow_2D_rectangle
+box: white_box
+---
+
+Descriptions about objects in the scene
+The images show a scene with several objects. The first image provides a top view, while the second image offers a side view of the same objects. 
+
+1. **Red 3D Polyhedron**: This object is a red plush toy resembling a dragon. It has a complex shape with wings and a tail, making it best classified as a polyhedron. It is located outside the box in both images.
+   
+2. **Yellow 2D Rectangle**: This object is a flat, yellow rectangular piece of fabric or paper. It is also outside the box in both images.
+
+3. **Black 2D Loop**: This object is a black circular loop, possibly a roll of tape. It is located inside the white box in both images.
+
+4. **White Box**: The box itself is white and has a lattice design on its sides. It contains the black 2D loop.
+
+The objects are clearly distinguishable by their colors and shapes, and their positions are consistent between the two images.
+----------------------------------------------------------------------------------------------------
+

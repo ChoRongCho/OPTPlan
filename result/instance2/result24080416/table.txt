@@ -1,0 +1,21 @@
+The Init State
+| Index | Name             | Shape       | Color | Predicates                    | Init Pose | Pushed | Folded | In Bin Objects | Is Foldable | Is Fragile | Is Rigid | Is Elastic | In Box | Out Box |
+|-------|------------------|-------------|-------|-------------------------------|-----------|--------|--------|----------------|-------------|------------|----------|------------|--------|---------|
+| 0     | black_3D_cylinder| 3D_cylinder | black | is_rigid                      | out_box   | False  | False  | []             | False       | False      | True     | False      | False  | True    |
+| 1     | white_2D_ring    | 2D_ring     | white | is_elastic                    | out_box   | False  | False  | []             | False       | False      | False    | True       | False  | True    |
+| 2     | black_2D_ring    | 2D_ring     | black | is_fragile, is_foldable       | in_box    | False  | False  | []             | True        | True       | False    | False      | True   | False   |
+| 3     | white_box        | box         | white |                               | box       | False  | False  | [black_2D_ring]| False       | False      | False    | False      | False  | False   |
+
+
+The Goal State
+| Index | Name             | Shape       | Color | Predicates                    | Init Pose | Pushed | Folded | In Bin Objects | Is Foldable | Is Fragile | Is Rigid | Is Elastic | In Box | Out Box |
+|-------|------------------|-------------|-------|-------------------------------|-----------|--------|--------|----------------|-------------|------------|----------|------------|--------|---------|
+| 0     | black_3D_cylinder| 3D_cylinder | black | is_rigid                      | in_box    | False  | False  | []             | False       | False      | True     | False      | True   | False   |
+| 1     | white_2D_ring    | 2D_ring     | white | is_elastic                    | in_box    | False  | False  | []             | False       | False      | False    | True       | True   | False   |
+| 2     | black_2D_ring    | 2D_ring     | black | is_fragile, is_foldable       | in_box    | False  | True   | []             | True        | True       | False    | False      | True   | False   |
+| 3     | white_box        | box         | white |                               | box       | False  | False  | [black_2D_ring, black_3D_cylinder, white_2D_ring]| False       | False      | False    | False      | False  | False   |
+
+
+		Initialize time:  1.3891
+		Planning time:  39.9887
+		Total time:  41.3778

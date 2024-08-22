@@ -1,0 +1,21 @@
+The Init State
+| Index | Name                | Shape       | Color      | Predicates                  | Init Pose | Pushed | Folded | In Box | Can Be Packed | Is Soft | Is Rigid | Is Fragile | Is Elastic | In Bin Objects |
+|-------|---------------------|-------------|------------|-----------------------------|-----------|--------|--------|--------|---------------|---------|----------|------------|------------|----------------|
+| 0     | transparent_3D_cylinder | 3D_cylinder | transparent | is_elastic                  | out_box   | False  | False  | False  | True          | False   | False    | False      | True       | []             |
+| 1     | green_3D_cylinder   | 3D_cylinder | green      | is_rigid, is_fragile         | out_box   | False  | False  | False  | True          | False   | True     | True       | False      | []             |
+| 2     | white_3D_cylinder   | 3D_cylinder | white      | is_soft, is_elastic          | out_box   | False  | False  | False  | True          | True    | False    | False      | True       | []             |
+| 3     | white_3D_cuboid     | 3D_cuboid   | white      | is_fragile                   | box       | False  | False  | True   | True          | False   | False    | True       | False      | [3]            |
+
+
+The Goal State
+| Index | Name                | Shape       | Color      | Predicates                  | Init Pose | Pushed | Folded | In Box | Can Be Packed | Is Soft | Is Rigid | Is Fragile | Is Elastic | In Bin Objects |
+|-------|---------------------|-------------|------------|-----------------------------|-----------|--------|--------|--------|---------------|---------|----------|------------|------------|----------------|
+| 0     | transparent_3D_cylinder | 3D_cylinder | transparent | is_elastic                  | box       | False  | False  | True   | True          | False   | False    | False      | True       | [0]            |
+| 1     | green_3D_cylinder   | 3D_cylinder | green      | is_rigid, is_fragile         | box       | False  | False  | True   | True          | False   | True     | True       | False      | [1]            |
+| 2     | white_3D_cylinder   | 3D_cylinder | white      | is_soft, is_elastic          | box       | False  | False  | True   | True          | True    | False    | False      | True       | [2]            |
+| 3     | white_3D_cuboid     | 3D_cuboid   | white      | is_fragile                   | box       | False  | False  | True   | True          | False   | False    | True       | False      | [3]            |
+
+
+		Initialize time:  1.73
+		Planning time:  45.3055
+		Total time:  47.0355

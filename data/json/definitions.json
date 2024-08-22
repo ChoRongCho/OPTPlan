@@ -20,8 +20,8 @@
 "Polyhedron: A three-dimensional object with flat polygonal faces, straight edges, and vertices,\n"],
 
     "dimension":[
-    "1D: One-dimensional object\n",
-    "2D: Two-dimensional object\n",
+    "1D: One-dimensional object, such as thin and sharp thing\n",
+    "2D: Two-dimensional object, without height\n",
     "3D: Three-dimensional object\n"],
 
     "properties": [
@@ -31,5 +31,5 @@
     "is_foldable: the object can be folded without being damaged.\n",
     "is_elastic: the object can return to its original shape after being stretched or compressed.\n"
     ]
-}
+    }
 }

@@ -1,0 +1,50 @@
+--------------  ---------------------------
+Project Time    2024-08-15 21:43:53.741436
+Task            bin_packing
+Exp_Name        instance14
+API JSON        setting.json
+Example Prompt  prompt_examples_python.json
+Max Predicates  2
+--------------  ---------------------------
+--------------------------------------------------
+Q: 
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.  
+Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
+You need to identify the corresponding pairs of objects in each image, and then distinguish their colors, dimensions, and shapes. 
+Define the shape and color of the object through these images. 
+Use the simple classification table below for the shape of the object. 
+You should match dimension and shape. For example, 3D_circle is not acceptable. 
+
+----- ----------------------------- ----------------------------------------------             
+Dim   Description                   Shape
+1D    related to lines or length    line
+2D    related to plane or flatness  rectangle, circle, loop, triangle, polygon
+3D    related to volume             cone, cube, cuboid, cylinder, polyhedron, pyramid, sphere
+----- ----------------------------- ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box:  # if nothing is in the box, leave this answer blank
+object out box: brown_3D_cuboid, black_3D_circle  # this is an example
+box: white_box # specify only the color of the box 
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+
+
+A: 
+Answer
+---
+object in box: white_2D_loop, black_2D_loop
+object out box: white_3D_cylinder, black_3D_cylinder
+box: white_box
+---
+
+Descriptions about objects in the scene
+The images show a scene with several objects. In the first image, there is a white box located at the bottom right. Inside the box, there are two loops: one is white and the other is black. These loops are flat and circular, fitting the 2D loop classification. Outside the box, there are two cylindrical objects. One is a white cylinder, which appears to be a bowl or cup, and the other is a black cylinder, which looks like a roll of tape. Both of these objects have volume and fit the 3D cylinder classification. The white box itself is also visible in both images, and it has a lattice design on its sides.
+----------------------------------------------------------------------------------------------------
+

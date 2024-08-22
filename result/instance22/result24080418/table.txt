@@ -1,0 +1,19 @@
+The Init State
+| Index | Name              | Shape       | Color  | Object Type | Pushed | Folded | In Bin Objects | Is Rigid | In Box | Is Packable | Init Pose |
+|-------|-------------------|-------------|--------|-------------|--------|--------|----------------|----------|--------|-------------|-----------|
+| 0     | yellow_3D_cylinder| 3D_cylinder | yellow | obj         | False  | False  | []             | True     | False  | True        | out_box   |
+| 1     | black_3D_cylinder | 3D_cylinder | black  | obj         | False  | False  | []             | True     | False  | True        | out_box   |
+| 2     | white_box         | box         | white  | box         | False  | False  | []             | False    | True   | True        | box       |
+
+
+The Goal State
+| Index | Name              | Shape       | Color  | Object Type | Pushed | Folded | In Bin Objects | Is Rigid | In Box | Is Packable | Init Pose |
+|-------|-------------------|-------------|--------|-------------|--------|--------|----------------|----------|--------|-------------|-----------|
+| 0     | yellow_3D_cylinder| 3D_cylinder | yellow | obj         | False  | False  | []             | True     | True   | True        | in_box    |
+| 1     | black_3D_cylinder | 3D_cylinder | black  | obj         | False  | False  | []             | True     | True   | True        | in_box    |
+| 2     | white_box         | box         | white  | box         | False  | False  | [0, 1]         | False    | True   | True        | box       |
+
+
+		Initialize time:  1.2833
+		Planning time:  37.1074
+		Total time:  38.3908

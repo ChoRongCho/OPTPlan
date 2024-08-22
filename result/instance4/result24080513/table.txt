@@ -1,0 +1,21 @@
+The Init State
+| Index | Name           | Shape     | Color  | Predicates            | Init Pose | Object Type | Pushed | Folded | In Bin Objects | Is Soft | Is Elastic | In Box | Out Box |
+|-------|----------------|-----------|--------|-----------------------|-----------|-------------|--------|--------|----------------|---------|------------|--------|---------|
+| 0     | white_2D_loop  | 2D_loop   | white  | ['is_elastic']        | out_box   | obj         | False  | False  | None           | False   | True       | False  | True    |
+| 1     | black_2D_loop  | 2D_loop   | black  | ['is_elastic']        | out_box   | obj         | False  | False  | None           | False   | True       | False  | True    |
+| 2     | yellow_3D_cuboid| 3D_cuboid| yellow | ['is_soft', 'is_elastic']| in_box | obj         | False  | False  | None           | True    | True       | True   | False   |
+| 3     | white_box      | box       | white  | []                    | box       | box         | False  | False  | None           | False   | False      | False  | False   |
+
+
+The Goal State
+| Index | Name           | Shape     | Color  | Predicates            | Init Pose | Object Type | Pushed | Folded | In Bin Objects | Is Soft | Is Elastic | In Box | Out Box |
+|-------|----------------|-----------|--------|-----------------------|-----------|-------------|--------|--------|----------------|---------|------------|--------|---------|
+| 0     | white_2D_loop  | 2D_loop   | white  | ['is_elastic']        | in_box    | obj         | False  | False  | None           | False   | True       | True   | False   |
+| 1     | black_2D_loop  | 2D_loop   | black  | ['is_elastic']        | in_box    | obj         | False  | False  | None           | False   | True       | True   | False   |
+| 2     | yellow_3D_cuboid| 3D_cuboid| yellow | ['is_soft', 'is_elastic']| in_box | obj         | False  | False  | None           | True    | True       | True   | False   |
+| 3     | white_box      | box       | white  | []                    | box       | box         | False  | False  | None           | False   | False      | False  | False   |
+
+
+		Initialize time:  1.3027
+		Planning time:  35.7189
+		Total time:  37.0216

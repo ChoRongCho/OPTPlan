@@ -40,9 +40,9 @@ class NewPlanner:
         self.result_dir = os.path.join(args.result_dir, self.exp_name, "result" + self.exp_number)
 
         # domain path
-        self.image_side = os.path.join(self.data_dir, self.task, "planning", self.exp_name, f"side_observation.png")
-        self.image_top = os.path.join(self.data_dir, self.task, "planning", self.exp_name, f"top_observation.png")
-        self.domain_image = [self.image_side, self.image_top]
+        self.image_side = os.path.join(self.data_dir, self.task, "planning_new", self.exp_name, f"side_observation.png")
+        self.image_top = os.path.join(self.data_dir, self.task, "planning_new", self.exp_name, f"top_observation.png")
+        self.domain_image = [self.image_top, self.image_side]
 
         # json_dir
         self.api_json = os.path.join(self.json_dir, args.api_json)
@@ -192,13 +192,19 @@ class NewPlanner:
                     prompt += predicate + ", "
         else:
             prompt += "We don't have to consider physical properties of the object."
+
+        prompt += "You are free to add more predicates for bin_packing to class Object if necessary. \n"
         prompt += f"Add more predicates needed for {self.task} to class Object. \n"
         prompt += """
+Please answer using the template below:
+---template start---
 Answer:
+```python
 # only write a code here without example instantiation
-
+```
 Reason:
-# Explain in less than 200 words why you made such predicates
+# Explain in less than 200 words and why you made such predicates
+---template end---
 """
         # add message
         self.gpt_interface_text.add_message(role="system", content=system_message, image_url=False)
@@ -342,6 +348,14 @@ Reason:
 
         planning_python_script = extract_code(answer, "python\n")
         return planning_python_script
+
+    def only_detection(self):
+        detected_object_dict, detected_object_list = self.detect_object()
+        active_predicates, object_dict = self.get_predicates(detected_object_dict, random_mode=self.random_mode)
+        if self.is_save:
+            self.check_result_folder()
+            self.log_conversation()
+        return active_predicates, object_dict
 
     def make_plan(self):
         # detect Object and make action predicates for objects

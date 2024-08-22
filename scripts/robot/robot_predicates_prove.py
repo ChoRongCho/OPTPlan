@@ -34,7 +34,7 @@ class RobotProve(Robot):
         target_name: str = info['name']
         name_list = list(database.keys())
 
-        # replace a color of the objects
+        """# replace a color of the objects
         for color in self.replace_color_yellow:
             if color in target_name:
                 print(f"Replace {target_name} color {color} into yellow")
@@ -62,7 +62,7 @@ class RobotProve(Robot):
             elif shape in target_name and shape == self.replace_shape[1]:
                 print(f"Replace {target_name} shape {shape} into 2D_rectangle")
                 target_name = target_name.replace(shape, "2D_rectangle")
-                break
+                break"""
 
         if target_name in name_list:
             predicates = database[target_name]["properties"]

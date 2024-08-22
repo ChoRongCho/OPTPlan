@@ -1,0 +1,37 @@
+{
+    "0": {
+        "name": "brown_3D_cuboid",
+        "shape": "3D_cuboid",
+        "color": "brown",
+        "predicates": [
+            "is_soft",
+            "is_elastic"
+        ],
+        "init_pose": "out_box"
+    },
+    "1": {
+        "name": "white_2D_circle",
+        "shape": "2D_circle",
+        "color": "white",
+        "predicates": [
+            "is_fragile"
+        ],
+        "init_pose": "out_box"
+    },
+    "2": {
+        "name": "black_2D_loop",
+        "shape": "2D_loop",
+        "color": "black",
+        "predicates": [
+            "is_elastic"
+        ],
+        "init_pose": "in_box"
+    },
+    "3": {
+        "name": "white_box",
+        "shape": "box",
+        "color": "white",
+        "predicates": [],
+        "init_pose": "box"
+    }
+}

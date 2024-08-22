@@ -1,0 +1,23 @@
+The Init State
+| Index | Name                    | Color       | Shape         | Object Type | Pushed | Folded | In Bin Objects | Is Foldable | Is Elastic | Is Rigid | In Box | Out Box |
+|-------|-------------------------|-------------|---------------|-------------|--------|--------|----------------|-------------|------------|----------|--------|---------|
+| 0     | black_2D_circle         | black       | 2D_circle     | obj         | False  | False  | []             | False       | False      | True     | False  | True    |
+| 1     | blue_1D_loop            | blue        | 1D_loop       | obj         | False  | False  | []             | False       | False      | True     | False  | True    |
+| 2     | transparent_3D_cylinder | transparent | 3D_cylinder   | obj         | False  | False  | []             | False       | True       | False    | False  | True    |
+| 3     | yellow_2D_rectangle     | yellow      | 2D_rectangle  | obj         | False  | False  | []             | True        | False      | False    | True   | False   |
+| 4     | white_box               | white       | box           | box         | False  | False  | []             | False       | False      | False    | True   | False   |
+
+
+The Goal State
+| Index | Name                    | Color       | Shape         | Object Type | Pushed | Folded | In Bin Objects | Is Foldable | Is Elastic | Is Rigid | In Box | Out Box |
+|-------|-------------------------|-------------|---------------|-------------|--------|--------|----------------|-------------|------------|----------|--------|---------|
+| 0     | black_2D_circle         | black       | 2D_circle     | obj         | False  | False  | []             | False       | False      | True     | True   | False   |
+| 1     | blue_1D_loop            | blue        | 1D_loop       | obj         | False  | False  | []             | False       | False      | True     | True   | False   |
+| 2     | transparent_3D_cylinder | transparent | 3D_cylinder   | obj         | False  | False  | []             | False       | True       | False    | True   | False   |
+| 3     | yellow_2D_rectangle     | yellow      | 2D_rectangle  | obj         | False  | False  | []             | True        | False      | False    | True   | False   |
+| 4     | white_box               | white       | box           | box         | False  | False  | [0, 1, 2, 3]   | False       | False      | False    | True   | False   |
+
+
+		Initialize time:  1.3222
+		Planning time:  39.5191
+		Total time:  40.8413

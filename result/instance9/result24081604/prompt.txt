@@ -1,0 +1,56 @@
+--------------  ---------------------------
+Project Time    2024-08-15 22:01:00.586845
+Task            bin_packing
+Exp_Name        instance9
+API JSON        setting.json
+Example Prompt  prompt_examples_python.json
+Max Predicates  2
+--------------  ---------------------------
+--------------------------------------------------
+Q: 
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.  
+Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
+You need to identify the corresponding pairs of objects in each image, and then distinguish their colors, dimensions, and shapes. 
+Define the shape and color of the object through these images. 
+Use the simple classification table below for the shape of the object. 
+You should match dimension and shape. For example, 3D_circle is not acceptable. 
+
+----- ----------------------------- ----------------------------------------------             
+Dim   Description                   Shape
+1D    related to lines or length    line
+2D    related to plane or flatness  rectangle, circle, loop, triangle, polygon
+3D    related to volume             cone, cube, cuboid, cylinder, polyhedron, pyramid, sphere
+----- ----------------------------- ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box:  # if nothing is in the box, leave this answer blank
+object out box: brown_3D_cuboid, black_3D_circle  # this is an example
+box: white_box # specify only the color of the box 
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+
+
+A: 
+Answer
+---
+object in box: yellow_2D_triangle
+object out box: green_3D_cylinder, white_3D_cuboid
+box: white_box
+---
+
+Descriptions about objects in the scene
+The images show a scene with several objects. In the first image, a top view, and the second image, a side view, the objects correspond one-to-one between the two images.
+
+1. **Green 3D Cylinder**: This object is green and cylindrical. It is located near the center of the first image and at the bottom right in the second image.
+2. **White 3D Cuboid**: This object is white and cuboid-shaped. It is located to the left in the first image and to the right in the second image.
+3. **Yellow 2D Triangle**: This object is yellow and triangular. It is inside the white box in both images.
+
+The white box is visible in both images, containing the yellow 2D triangle. The green 3D cylinder and the white 3D cuboid are outside the box. The white box has a lattice design and is positioned on the right side of the images.
+----------------------------------------------------------------------------------------------------
+

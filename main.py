@@ -1,201 +1,110 @@
-import os
 import os.path
-import random
 import time
-import re
 
-# from scripts.pddl_planner import PDDLPlanner
 from scripts.python_planner import PythonPlanner
-from scripts.utils.utils import parse_args_v2
+from scripts.utils.utils import parse_args_v2, save2csv
 
 
 def main():
-    """
-    --task_name
-    bin_packing, 이건 새로운 커밋용 수정이야. 하하하
-
-    --exp_name
-    packing_all
-
-    --input_image
-    problem1.jpg
-
-    --api_json
-    setting.json
-
-    --example_prompt_json
-    prompt_examples_python.json
-
-    --robot_json
-    robot.json
-
-    --task_json
-    task_instruction.json
-    :return:
-    """
-
+    begin_time = time.time()
     args = parse_args_v2()
-    image_number = 8
-    exp_number = 8
-    args.exp_name = f"20240418_train_problem{image_number}_{exp_number}"
-    args.input_image = f"train/problem{image_number}.jpg"
-    args.max_predicates = random.randint(1, 6)
+    max_time = 0
+    min_time = 1000000000
+    for j in range(24081610, 24081611):
+        result_csv_path = os.path.join("/home/changmin/PycharmProjects/OPTPlan/result", f"exp{j}_results.csv")
+        args.exp_number = j
+        test_dict = {}
+        for i in range(1, 37):  # 37
+            print("-" * 50)
+            print(f"Start a number {i} experiment")
+            args.exp_name = i
+            start_time = time.time()
 
-    # make plan
-    planner = PythonPlanner(args=args)
-    content = f"""This table defines the physical properties of the object we are investigating.
-Answer the questions below in accordance with this criterion.
-"""
-    content += "\nThe first image shows before the robot presses an unknown object. " + \
-               "The second image shows after the robot presses an object. Does this object have soft properties?" + \
-               "Answer with the template below \nAnswer: \nReason: "
+            # planner = PythonPlanner(args=args)
+            planner = PythonPlanner(args=args)
 
-    role = "user"
-    print(content)
-    image_dir = "/data/bin_packing/property_search_database/my_data/obj1_side"
-    image_url1 = os.path.join(image_dir, "Capture_obj1_frame671.jpg")
-    image_url2 = os.path.join(image_dir, "Capture_obj1_frame901.jpg")
-    image_url = [image_url1, image_url2]
-    answer = planner.just_chat(message=content, role=role, image_url=image_url)
-    print(answer)
+            time1 = time.time()
+            # planner.plan()
+            """-----------Detection Module-----------"""
+            _, object_dict = planner.only_detection()
+            test_dict[f"instance{i}"] = {}
+            for k, data in object_dict.items():
+                test_dict[f"instance{i}"][data['name']] = data['init_pose']
+            """--------------------------------------"""
+            time2 = time.time()
 
+            table_path = os.path.join(planner.result_dir, "table.txt")
+            with open(table_path, 'a') as file:
+                file.write("\n\n")
+                file.write(f"\t\tInitialize time:  {round(time1 - start_time, 4)}\n")
+                file.write(f"\t\tPlanning time:  {round(time2 - time1, 4)}\n")
+                file.write(f"\t\tTotal time:  {round(time2 - start_time, 4)}\n")
+                file.close()
 
-def list_file(directory):
-    entries = os.listdir(directory)
-    files = [os.path.join(directory, entry) for entry in entries if os.path.isfile(os.path.join(directory, entry))]
-    return files
+            if time2 - time1 > max_time:
+                max_time = round(time2 - time1, 4)
+            if time2 - time1 < min_time:
+                min_time = round(time2 - time1, 4)
 
-
-def sort_files(file_list):
-    # 키워드와 우선순위 매핑
-    keyword_order = {
-        'base': 0,
-        'push': 1,
-        'fold': 2,
-        'pull': 3
-    }
-
-    # 파일명에서 키워드 추출 및 정렬
-    def get_keyword(file_name):
-        for keyword in keyword_order:
-            if keyword in file_name:
-                return keyword_order[keyword], file_name
-        return len(keyword_order), file_name  # 키워드가 없으면 마지막에 정렬
-
-    # 파일 목록 정렬
-    sorted_files = sorted(file_list, key=get_keyword)
-    return sorted_files
-
-
-def temp3():
-    for obj_num in range(2, 3):
-        root = f"/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/property_search_database/obj{obj_num}"
-        data_path = list_file(root)
-        data_path = sort_files(data_path)
-
-        base_image = []
-        action_image = []
-        for name in data_path:
-            if "base" in name:
-                base_image.append(name)
-            else:
-                action_image.append(name)
-
-        i, j, k = False, False, False
-        # push image
-        for action in action_image:
-            if "push" in action:
-                i = True
-                continue
-            if "fold" in action:
-                j = True
-                continue
-            if "pull" in action:
-                k = True
-                continue
-
-        args = parse_args_v2()
-        # # make plan
-        planner = PythonPlanner(args=args)
-        system_message, prompt = planner.load_prompt.load_verification_message([i, j, k])
-        print(prompt)
-        print("-" * 90)
-        # print(data_path)
-        # planner.gpt_interface_vision.reset_message()
-        # planner.gpt_interface_vision.add_message(role="system", content=system_message, image_url=False)
-        # planner.gpt_interface_vision.add_message(role="user", content=prompt, image_url=data_path)
-        #
-        # start_time = time.time()
-        # ans = planner.gpt_interface_vision.run_prompt()
-        # end_time = time.time()
-        # print(ans)
-        # print(f"time: {end_time - start_time} s ")
-
-
-def temp2():
-    """
-    obj3: soft, not foldable elastic
-    :return:
-    """
-    for num in range(1, 2):
-        im1 = f"/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/property_search_database/obj{num}/obj{num}_side_base_image.jpg"
-        im2 = f"/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/property_search_database/obj{num}/obj{num}_top_base_image.jpg"
-        args = parse_args_v2()
-        args.max_predicates = random.randint(1, 6)
-
-        # prompt
-        system_message = "You are a vision AI that describes the shape and color of an object. " + \
-                         "You should look at a picture of a given object and explain its size and color."
-        prompt = "The first image is when you see the object from the side " + \
-                 "and the next image is when you see the object from the top. \n" + \
-                 "Define the shape and color of the object through this image. \n" + \
-                 "Use the simple classification table below for the shape of the object. \n" + \
-                 """
------  ----------------------------------------------             
-Shape  Examples
-1D     linear or ring
-2D     flat rectangle, circle, etc
-3D     cube, cuboid, cylinder, cone, polyhedron, etc
------  ----------------------------------------------
-
-Please answer with the template below:
-
-Answer
-Object Name: color_dimension_shape object
-*Example: white_3D_cube object
-
-Descriptions about object
-*your descriptions in 200 words
-
-"""
-        print(prompt)
-        # make plan
-        planner = PythonPlanner(args=args)
-        # print(system_message)
-        # print(prompt)
-        planner.gpt_interface_vision.reset_message()
-        planner.gpt_interface_vision.add_message(role="system", content=system_message, image_url=False)
-        planner.gpt_interface_vision.add_message(role="user", content=prompt, image_url=[im1, im2])
-
-        start_time = time.time()
-        ans = planner.gpt_interface_vision.run_prompt()
         end_time = time.time()
-        print(ans)
-        print(f"time: {end_time - start_time} s ")
-        print("-"*50)
-        print(parse_object_description(ans))
+        save2csv(data=test_dict, filename=result_csv_path)
+
+    #     print("\n")
+    #     print("-"*99)
+    #     print("\tTotal consumed time (s): ", round(end_time-begin_time, 4))
+    #     print("\tAverage consumed time (s): ", round((end_time-begin_time)/36, 4))
+    # print("Max Consumed Time: ", max_time)
+    # print("Min Consumed Time: ", min_time)
 
 
-def parse_object_description(input_string):
-    # Extract object name
-    name_match = re.search(r"Object Name: ([\w\d_]+) object", input_string)
-    if not name_match:
-        raise ValueError("Object name not found in the input string.")
-    object_name = name_match.group(1)
+def plan_result():
+    args = parse_args_v2()
+    positive = 0
+    negative = 0
+    for j in range(24080116, 24080117):
+        args.exp_number = j
+        for i in range(2, 3):
+            args.exp_name = i
+            planner = PythonPlanner(args=args)
+            planning_output = planner.run()
+            print(planning_output)
+            print("-"*99)
+            if "Error" in planning_output:
+                negative += 1
+            else:
+                positive += 1
+        print(f"Positive:{positive}, Negative: {negative}, Total: {positive+negative}")
+        print(f"Positive Rate: {round(positive/(positive+negative)*100, 4)}")
 
-    color, dimension, shape = object_name.split("_")
-    return {object_name: [color, dimension, shape]}
+
+def object_save():
+    args = parse_args_v2()
+    for i in range(1, 36):
+        print(i)
+        args.exp_name = i
+        planner = PythonPlanner(args=args)
+        planner.object_dict_save()
+
+
+def re_planning():
+    args = parse_args_v2()
+    planner = PythonPlanner(args=args)
+    planner.feedback()
+
+
+def new_test():
+    args = parse_args_v2()
+    args.mkdb = True
+    for i in range(9, 10):
+        args.exp_name = i
+        # args.mkdb = True
+        start_time = time.time()
+
+        # planner = PythonPlanner(args=args)
+        planner = PythonPlanner(args=args)
+        time1 = time.time()
+        # planner.plan()
 
 
 if __name__ == '__main__':
-    temp3()
+    main()

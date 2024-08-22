@@ -1,0 +1,21 @@
+The Init State
+| Index | Name           | Shape     | Color  | Predicates            | Init Pose | Pushed | Folded | In Bin Objects | Is Soft | Is Elastic | In Box | Is Packable |
+|-------|----------------|-----------|--------|-----------------------|-----------|--------|--------|----------------|---------|------------|--------|-------------|
+| 0     | blue_2D_ring   | 2D_ring   | blue   | []                    | out_box   | False  | False  | []             | False   | False      | False  | True        |
+| 1     | white_2D_ring  | 2D_ring   | white  | ['is_elastic']        | out_box   | False  | False  | []             | False   | True       | False  | True        |
+| 2     | yellow_3D_cuboid| 3D_cuboid| yellow | ['is_soft', 'is_elastic'] | in_box | False  | False  | []             | True    | True       | True   | True        |
+| 3     | white_box      | box       | white  | []                    | box       | False  | False  | [2]            | False   | False      | True   | False       |
+
+
+The Goal State
+| Index | Name           | Shape     | Color  | Predicates            | Init Pose | Pushed | Folded | In Bin Objects | Is Soft | Is Elastic | In Box | Is Packable |
+|-------|----------------|-----------|--------|-----------------------|-----------|--------|--------|----------------|---------|------------|--------|-------------|
+| 0     | blue_2D_ring   | 2D_ring   | blue   | []                    | in_box    | False  | False  | []             | False   | False      | True   | True        |
+| 1     | white_2D_ring  | 2D_ring   | white  | ['is_elastic']        | in_box    | False  | False  | []             | False   | True       | True   | True        |
+| 2     | yellow_3D_cuboid| 3D_cuboid| yellow | ['is_soft', 'is_elastic'] | in_box | False  | False  | []             | True    | True       | True   | True        |
+| 3     | white_box      | box       | white  | []                    | box       | False  | False  | [0, 1, 2]      | False   | False      | True   | False       |
+
+
+		Initialize time:  1.7848
+		Planning time:  83.9623
+		Total time:  85.7471

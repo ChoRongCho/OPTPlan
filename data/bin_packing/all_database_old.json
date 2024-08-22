@@ -1,0 +1,100 @@
+{
+    "bin_packing": {
+        "white_3D_cylinder": {
+            "color": "white",
+            "dimension": "3D",
+            "shape": "cylinder",
+            "properties": [
+                "is_soft",
+                "is_elastic"
+            ]
+        },
+        "yellow_3D_cuboid": {
+            "color": "yellow",
+            "dimension": "3D",
+            "shape": "cuboid",
+            "properties": [
+                "is_soft",
+                "is_elastic"
+            ]
+        },
+        "white_2D_ring": {
+            "color": "white",
+            "dimension": "2D",
+            "shape": "ring",
+            "properties": [
+                "is_elastic"
+            ]
+        },
+        "blue_2D_ring": {
+            "color": "blue",
+            "dimension": "1D",
+            "shape": "linear",
+            "properties": [
+            ]
+        },
+        "transparent_2D_circle": {
+            "color": "transparent",
+            "dimension": "2D",
+            "shape": "circle",
+            "properties": [
+                "is_elastic"
+            ]
+        },
+        "yellow_3D_cylinder": {
+            "color": "yellow",
+            "dimension": "3D",
+            "shape": "cylinder",
+            "properties": [
+                "is_rigid"
+            ]
+        },
+        "yellow_2D_rectangle": {
+            "color": "yellow",
+            "dimension": "2D",
+            "shape": "rectangle",
+            "properties": [
+                "is_foldable"
+            ]
+        },
+        "black_3D_cylinder": {
+      "color": "black",
+      "dimension": "3D",
+      "shape": "cylinder",
+      "properties": [
+        "is_rigid"
+      ]
+    },
+        "red_3D_polyhedron": {
+      "color": "red",
+      "dimension": "3D",
+      "shape": "polyhedron",
+      "properties": [
+        "is_soft"
+      ]
+    },
+        "transparent_3D_cylinder": {
+      "color": "transparent",
+      "dimension": "3D",
+      "shape": "cylinder",
+      "properties": [
+        "is_elastic"
+      ]
+    },
+        "green_3D_cylinder": {
+      "color": "green",
+      "dimension": "3D",
+      "shape": "cylinder",
+      "properties": [
+        "is_rigid",
+        "is_fragile"
+      ]
+    },
+        "white_box": {
+      "color": "white",
+      "dimension": "box",
+      "shape": "",
+      "properties": []
+    }
+    }
+}

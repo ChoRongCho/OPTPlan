@@ -1,0 +1,50 @@
+--------------  ---------------------------
+Project Time    2024-08-15 21:54:10.396911
+Task            bin_packing
+Exp_Name        instance5
+API JSON        setting.json
+Example Prompt  prompt_examples_python.json
+Max Predicates  2
+--------------  ---------------------------
+--------------------------------------------------
+Q: 
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.  
+Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
+You need to identify the corresponding pairs of objects in each image, and then distinguish their colors, dimensions, and shapes. 
+Define the shape and color of the object through these images. 
+Use the simple classification table below for the shape of the object. 
+You should match dimension and shape. For example, 3D_circle is not acceptable. 
+
+----- ----------------------------- ----------------------------------------------             
+Dim   Description                   Shape
+1D    related to lines or length    line
+2D    related to plane or flatness  rectangle, circle, loop, triangle, polygon
+3D    related to volume             cone, cube, cuboid, cylinder, polyhedron, pyramid, sphere
+----- ----------------------------- ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box:  # if nothing is in the box, leave this answer blank
+object out box: brown_3D_cuboid, black_3D_circle  # this is an example
+box: white_box # specify only the color of the box 
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+
+
+A: 
+Answer
+---
+object in box: transparent_3D_cylinder
+object out box: yellow_3D_cuboid, blue_2D_loop
+box: white_box
+---
+
+Descriptions about objects in the scene:
+The scene contains a few distinct objects. The first object is a yellow 3D cuboid, which appears to be a sponge. It is rectangular in shape and has a volume, making it a cuboid. The second object is a blue 2D loop, which is a circular band or loop lying flat on the surface. The third object is a transparent 3D cylinder, which is a small bottle placed inside a white box. The box itself is white and has a lattice design on its sides. The objects are arranged on a flat surface, with the yellow cuboid and blue loop outside the box, and the transparent cylinder inside the box.
+----------------------------------------------------------------------------------------------------
+

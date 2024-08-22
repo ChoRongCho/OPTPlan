@@ -1,0 +1,57 @@
+--------------  ---------------------------
+Project Time    2024-08-15 22:02:34.091589
+Task            bin_packing
+Exp_Name        instance18
+API JSON        setting.json
+Example Prompt  prompt_examples_python.json
+Max Predicates  2
+--------------  ---------------------------
+--------------------------------------------------
+Q: 
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.  
+Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
+You need to identify the corresponding pairs of objects in each image, and then distinguish their colors, dimensions, and shapes. 
+Define the shape and color of the object through these images. 
+Use the simple classification table below for the shape of the object. 
+You should match dimension and shape. For example, 3D_circle is not acceptable. 
+
+----- ----------------------------- ----------------------------------------------             
+Dim   Description                   Shape
+1D    related to lines or length    line
+2D    related to plane or flatness  rectangle, circle, loop, triangle, polygon
+3D    related to volume             cone, cube, cuboid, cylinder, polyhedron, pyramid, sphere
+----- ----------------------------- ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box:  # if nothing is in the box, leave this answer blank
+object out box: brown_3D_cuboid, black_3D_circle  # this is an example
+box: white_box # specify only the color of the box 
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+
+
+A: 
+Answer
+---
+object in box: black_3D_cylinder
+object out box: brown_3D_cuboid, white_2D_circle
+box: white_box
+---
+
+Descriptions about objects in the scene
+The images show a scene with several objects. The first image provides a top view, while the second image offers a side view. 
+
+1. The white box is located on the right side of the images. It is a 3D object with a lattice structure.
+2. Inside the white box, there is a black cylindrical object. This object is a 3D cylinder.
+3. Outside the box, there is a brown cuboid object, which appears to be a sponge. This object is a 3D cuboid.
+4. Also outside the box, there is a white circular object, which is flat and appears to be a lid or a disc. This object is a 2D circle.
+
+The objects are arranged on a flat surface, and the images capture the same scene from different perspectives, allowing for the identification and classification of the objects based on their shapes and colors.
+----------------------------------------------------------------------------------------------------
+

@@ -1,0 +1,19 @@
+The Init State
+| Index | Name              | Color | Shape         | Object Type | Pushed | Folded | In Bin Objects | Is Soft | Is Rigid | Is Fragile | Init Pose | In Box |
+|-------|-------------------|-------|---------------|-------------|--------|--------|----------------|---------|----------|------------|-----------|--------|
+| 0     | green_3D_cylinder | green | 3D_cylinder   | obj         | False  | False  | []             | False   | True     | True       | out_box   | False  |
+| 1     | red_3D_polyhedron | red   | 3D_polyhedron | obj         | False  | False  | []             | True    | False    | False      | out_box   | False  |
+| 2     | white_box         | white | box           | box         | False  | False  | []             | False   | False    | False      | box       | True   |
+
+
+The Goal State
+| Index | Name              | Color | Shape         | Object Type | Pushed | Folded | In Bin Objects | Is Soft | Is Rigid | Is Fragile | Init Pose | In Box |
+|-------|-------------------|-------|---------------|-------------|--------|--------|----------------|---------|----------|------------|-----------|--------|
+| 0     | green_3D_cylinder | green | 3D_cylinder   | obj         | False  | False  | []             | False   | True     | True       | in_box    | True   |
+| 1     | red_3D_polyhedron | red   | 3D_polyhedron | obj         | False  | False  | []             | True    | False    | False      | in_box    | True   |
+| 2     | white_box         | white | box           | box         | False  | False  | [0, 1]         | False   | False    | False      | box       | True   |
+
+
+		Initialize time:  1.3643
+		Planning time:  54.7716
+		Total time:  56.1359

@@ -1,0 +1,50 @@
+--------------  ---------------------------
+Project Time    2024-08-15 21:56:15.818105
+Task            bin_packing
+Exp_Name        instance17
+API JSON        setting.json
+Example Prompt  prompt_examples_python.json
+Max Predicates  2
+--------------  ---------------------------
+--------------------------------------------------
+Q: 
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.  
+Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
+You need to identify the corresponding pairs of objects in each image, and then distinguish their colors, dimensions, and shapes. 
+Define the shape and color of the object through these images. 
+Use the simple classification table below for the shape of the object. 
+You should match dimension and shape. For example, 3D_circle is not acceptable. 
+
+----- ----------------------------- ----------------------------------------------             
+Dim   Description                   Shape
+1D    related to lines or length    line
+2D    related to plane or flatness  rectangle, circle, loop, triangle, polygon
+3D    related to volume             cone, cube, cuboid, cylinder, polyhedron, pyramid, sphere
+----- ----------------------------- ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box:  # if nothing is in the box, leave this answer blank
+object out box: brown_3D_cuboid, black_3D_circle  # this is an example
+box: white_box # specify only the color of the box 
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+
+
+A: 
+Answer
+---
+object in box: white_2D_circle
+object out box: brown_3D_cuboid, white_2D_loop, black_2D_loop
+box: white_box
+---
+
+Descriptions about objects in the scene
+The images show a collection of objects from a top and side view. The objects include a white box, a brown cuboid, two loops (one white and one black), and a white circle. The white box is located on the right side of the images and has a lattice design. Inside the box, there is a white 2D circle, which appears to be a flat, circular object. Outside the box, there is a brown 3D cuboid, which is a rectangular prism with volume. Additionally, there are two loops: one is white and the other is black. These loops are flat and circular, classifying them as 2D loops. The brown cuboid is positioned on the left side of the images, while the white and black loops are placed near the center. The white loop is closer to the top, and the black loop is below it. The white box is positioned on the right side of the images, with the white circle inside it.
+----------------------------------------------------------------------------------------------------
+

@@ -1,0 +1,21 @@
+The Init State
+| Index | Name               | Shape         | Color  | Object Type | Pushed | Folded | In Bin Objects | Is Soft | Is Elastic | Is Rigid | In Box | Out Box |
+|-------|--------------------|---------------|--------|-------------|--------|--------|----------------|---------|------------|----------|--------|---------|
+| 0     | red_3D_polyhedron  | 3D_polyhedron | red    | obj         | False  | False  | []             | True    | False      | False    | False  | True    |
+| 1     | yellow_3D_cylinder | 3D_cylinder   | yellow | obj         | False  | False  | []             | False   | False      | True     | False  | True    |
+| 2     | white_2D_loop      | 2D_loop       | white  | obj         | False  | False  | []             | False   | True       | False    | False  | True    |
+| 3     | white_box          | box           | white  | box         | False  | False  | []             | False   | False      | False    | True   | False   |
+
+
+The Goal State
+| Index | Name               | Shape         | Color  | Object Type | Pushed | Folded | In Bin Objects | Is Soft | Is Elastic | Is Rigid | In Box | Out Box |
+|-------|--------------------|---------------|--------|-------------|--------|--------|----------------|---------|------------|----------|--------|---------|
+| 0     | red_3D_polyhedron  | 3D_polyhedron | red    | obj         | False  | False  | []             | True    | False      | False    | True   | False   |
+| 1     | yellow_3D_cylinder | 3D_cylinder   | yellow | obj         | False  | False  | []             | False   | False      | True     | True   | False   |
+| 2     | white_2D_loop      | 2D_loop       | white  | obj         | False  | False  | []             | False   | True       | False    | True   | False   |
+| 3     | white_box          | box           | white  | box         | False  | False  | [0, 1, 2]      | False   | False      | False    | True   | False   |
+
+
+		Initialize time:  1.3708
+		Planning time:  49.4105
+		Total time:  50.7813

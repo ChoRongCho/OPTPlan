@@ -1,0 +1,50 @@
+--------------  ---------------------------
+Project Time    2024-08-15 21:54:32.181541
+Task            bin_packing
+Exp_Name        instance7
+API JSON        setting.json
+Example Prompt  prompt_examples_python.json
+Max Predicates  2
+--------------  ---------------------------
+--------------------------------------------------
+Q: 
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.  
+Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
+You need to identify the corresponding pairs of objects in each image, and then distinguish their colors, dimensions, and shapes. 
+Define the shape and color of the object through these images. 
+Use the simple classification table below for the shape of the object. 
+You should match dimension and shape. For example, 3D_circle is not acceptable. 
+
+----- ----------------------------- ----------------------------------------------             
+Dim   Description                   Shape
+1D    related to lines or length    line
+2D    related to plane or flatness  rectangle, circle, loop, triangle, polygon
+3D    related to volume             cone, cube, cuboid, cylinder, polyhedron, pyramid, sphere
+----- ----------------------------- ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box:  # if nothing is in the box, leave this answer blank
+object out box: brown_3D_cuboid, black_3D_circle  # this is an example
+box: white_box # specify only the color of the box 
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+
+
+A: 
+Answer
+---
+object in box: red_3D_polyhedron
+object out box: yellow_2D_rectangle, brown_2D_rectangle, black_2D_loop
+box: white_box
+---
+
+Descriptions about objects in the scene
+The scene contains several objects both inside and outside a white box. Inside the white box, there is a red object that appears to be a 3D polyhedron. Outside the box, there are three objects: a yellow 2D rectangle, a brown 2D rectangle, and a black 2D loop. The yellow 2D rectangle is flat and positioned on the left side of the image. The brown 2D rectangle is also flat and located to the right of the yellow rectangle. The black 2D loop is positioned below the yellow rectangle and appears to be a closed loop. The white box itself is positioned on the right side of the image and contains the red 3D polyhedron. The objects are arranged on a flat surface, and the images provide both a top view and a side view of the scene, allowing for a clear identification of the shapes and colors of the objects.
+----------------------------------------------------------------------------------------------------
+

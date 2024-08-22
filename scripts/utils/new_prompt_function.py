@@ -45,6 +45,22 @@ Descriptions about the object in the scene
     def load_naming_message(self):
         """
         from images, the llm module makes judge of its shape and color
+-----------New Prompt1-------------------------------------------------------------------------------
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.
+Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
+You need to identify the corresponding pairs of objects in each image, and then distinguish their color, dimensions, and shape.
+Please identify the shapes, dimensions, and colors of the object based on these images according to the definitions in "[Definitions of dimensions and shapes]" below.
+Your answer must follow the naming convention which is "color_dimension_shape" (e.g., red_3D_cuboid or black_2D_ring).
+Ensure that there is no contradiction between the shape and dimension. For example, "3D" and "circle" are not compatible according to their definitions in "[Definitions of dimensions and shapes]".
+-----------------------------------------------------------------------------------------------------
+-----------New Prompt2-------------------------------------------------------------------------------
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.
+Each view captures the same scene, with the objects in the images corresponding one-to-one between the two views.
+You need to identify the corresponding pairs of objects in each image, then distinguish their colors, dimensions, and shapes.
+Please identify the shapes, dimensions, and colors of the object based on these images according to the definitions in "[Definitions of dimensions and shapes]" below.
+Your answer must follow the naming convention which is "color_dimension_shape" (e.g., red_3D_cuboid or black_2D_ring).
+Ensure that there is no contradiction between the shape and dimension. For example, "3D" and "circle" are not compatible according to their definitions in "[Definitions of dimensions and shapes]".
+-----------------------------------------------------------------------------------------------------
         """
         # Use 1D, 2D, 3D definition of ChatGPT
 
@@ -54,22 +70,28 @@ Descriptions about the object in the scene
                          "adhering strictly to the given classifications rather than relying on common sense."
 
         prompt = f"""
-The first image shows a side view of the objects, while the second image shows a top view.
-Please identify the shapes and colors of the objects based on these images. Use the simple classification table below to define the shape of the objects. 
-Ensure that the dimensions and shapes are correctly matched (e.g., "3D_circle" is not acceptable).
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.
+Each view captures the same scene, with the objects in the images corresponding one-to-one between the two views.
+You need to identify the corresponding pairs of objects in each image, then distinguish their colors, dimensions, and shapes.
+Please identify the shapes, dimensions, and colors of the object based on these images according to the definitions in "[Definitions of dimensions and shapes]" below.
+Your answer must follow the naming convention which is "color_dimension_shape" (e.g., red_3D_cuboid or black_2D_ring).
+Ensure that there is no contradiction between the shape and dimension. For example, "1D" and "loop" or "3D" and "circle" are not compatible according to their definitions in "[Definitions of dimensions and shapes]".
 
+[Definitions of dimensions and shapes]
 Dimension
 {self.def_dimension}
 
 Shape
 {self.def_shape}
 
+Your answer must use the template below:
+
 Please answer with the template below:
 ---template start---
 Answer
 ---
 object in box: # if nothing is in the box, leave this answer blank
-object out box: brown_3D_cuboid, black_3D_circle  # this is an example
+object out box: brown_3D_cuboid, black_2D_circle  # this is an example, also, don't add a box itself 
 box: white_box # specify only the color of the box 
 ---
 
@@ -86,7 +108,7 @@ You are an AI assistant responsible for converting the properties of objects int
 2. Use the template provided below.
 """
         prompt = f"We are going to generate an action sequence to perform the task, {self.task}, using Python which works similar to PDDL. " + \
-                 "Our goal is to define the types of objects and their predicates within the dataclass Object."
+                 "Our goal is to define the types of objects and their predicates within the dataclass Object. \n"
         prompt += "Here, we have the types, names, and properties of the objects recognized from the input images. We need to use this information to complete the Object class."
         prompt += f"{object_dict} \n\n"
         prompt += f"""from dataclasses import dataclass
@@ -116,20 +138,6 @@ class Object:
 """
         prompt += "However, we cannot complete a planning with this dataclass predicate alone" + \
                   f" which means that we have to add other predicates that fully describe {self.task} task. \n"
-
-        prompt += """
-Also you have to add predicates such as is_foldable, is_elastic, is_rigid, is_soft, and is_fragile. 
-You are free to add more predicates for bin_packing to class Object if necessary. 
-
-Please answer using the template below:
----template start---
-Answer:
-# only write a code here without example instantiation
-
-Reason:
-# Explain in less than 200 words and why you made such predicates
----template end---
-"""
 
         return system_message, prompt
 
@@ -219,8 +227,9 @@ class Robot:
 Please answer with the template below:
 ---template start---
 Answer:
-# only write a Robot python class here without example instantiation
-
+```python
+# only write a code here without example instantiation
+```
 Reason:
 # Explain in less than 300 words why you made such robot actions
 ---template end---
@@ -323,29 +332,34 @@ Please answer with the template below:
                    f"And this is the goal state table of all objects. \n{goal_state_table}\n\n")
 
         prompt += """
-    Please answer with the template below:
-    ---template start---
-    if __name__ == "__main__":
-        # First, using goal table, describe the initial state and final state of each object
-        ...
-        # Second, using given rules and object's states, make a task planning strategy
+Please answer with the template below:
+---template start---
 
-        # Third, make an action sequence. You should be aware of the robot action effects such as 'push' or 'out'. 
-        # a) Initialize the robot
-        robot = Robot()
-        # b) Define the box, this is an example. 
-        box = object5
+if __name__ == "__main__":
+    # First, using goal table, describe the initial state and final state of each object
+    ...
+    # Second, using given rules and object's states, make a task planning strategy
 
-        # Fourth, after making all actions, fill your reasons according to the rules
-        ...
+    # Third, make an action sequence. You should be aware of the robot action effects such as 'push' or 'out'. 
+    # a) Initialize the robot
+    robot = Robot()
+    # b) Define the box, this is an example. 
+    box = object5
 
-        # Finally, check if the goal state is satisfying goal state table. Use a template below. These are examples. 
-        assert object0.is_in_box == True or False
-        assert object1.is_in_box == True or False
-        # Don't include a box in the goal state. Only express objects.
-        ...
-        print("All task planning is done") 
-    ---template end---
+    # Fourth, after making all actions, fill your reasons according to the rules
+    ...
+
+    # Finally, check if the goal state is satisfying goal state table. Use a template below. These are examples. 
+    assert object0.is_in_box == True or False
+    assert object1.is_in_box == True or False
+    ...
+    # assert final_object.is_in_box == True or False
+    
+    # Don't include a box in the goal state. Only express objects.
+    ...
+    print("All task planning is done")
+     
+---template end---
     """
 
         return system_message, prompt

@@ -1,4 +1,5 @@
 import argparse
+import csv
 import os.path
 
 import cv2
@@ -202,3 +203,61 @@ def feedback_error_decoder(error):
     else:
         pass
 
+
+def save2csv(data, filename):
+    fieldnames = ['instance', 'out_box', 'in_box', 'Total_num']
+    with open(filename, 'w', newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+
+        # write a csv file
+        for i, (instance, objects) in enumerate(data.items(), start=1):
+            out_box_items = [obj for obj, state in objects.items() if state == "out_box"]
+            in_box_items = [obj for obj, state in objects.items() if state == "in_box"]
+
+            row = {
+                'instance': i,
+                'out_box': ', '.join(out_box_items),
+                'in_box': ', '.join(in_box_items),
+                'Total_num': int(len(out_box_items) + len(in_box_items))
+            }
+            writer.writerow(row)
+
+
+def crop_image(image_dir, xywh):
+    # get image and image.shape (h, w, c)
+    if type(image_dir) == str:
+        images = cv2.imread(image_dir)
+        real_h = images.shape[0]
+        real_w = images.shape[1]
+    elif type(image_dir) == np.ndarray:
+        images = image_dir
+        real_h = images.shape[0]
+        real_w = images.shape[1]
+    else:
+        print("insert directory or numpy array")
+        raise TypeError
+
+    x = xywh[0]
+    y = xywh[1]
+    w = xywh[2]
+    h = xywh[3]
+
+    # rotate if h > w
+    if real_h > real_w:
+        images = cv2.rotate(images, cv2.ROTATE_90_COUNTERCLOCKWISE)
+        real_h = images.shape[0]
+        real_w = images.shape[1]
+        pass
+
+    if x + w > real_w:
+        print("insert value under", real_w, image_dir)
+        raise ValueError
+    if y + h > real_h:
+        print("insert value under", real_h, image_dir)
+        raise ValueError
+
+    # cropped_image = images[y: y + h, x: x + w, :]
+    cropped_image = images[y: y + h, x: x + w]
+
+    return cropped_image

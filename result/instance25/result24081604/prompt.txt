@@ -1,0 +1,58 @@
+--------------  ---------------------------
+Project Time    2024-08-15 22:03:41.872890
+Task            bin_packing
+Exp_Name        instance25
+API JSON        setting.json
+Example Prompt  prompt_examples_python.json
+Max Predicates  2
+--------------  ---------------------------
+--------------------------------------------------
+Q: 
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.  
+Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
+You need to identify the corresponding pairs of objects in each image, and then distinguish their colors, dimensions, and shapes. 
+Define the shape and color of the object through these images. 
+Use the simple classification table below for the shape of the object. 
+You should match dimension and shape. For example, 3D_circle is not acceptable. 
+
+----- ----------------------------- ----------------------------------------------             
+Dim   Description                   Shape
+1D    related to lines or length    line
+2D    related to plane or flatness  rectangle, circle, loop, triangle, polygon
+3D    related to volume             cone, cube, cuboid, cylinder, polyhedron, pyramid, sphere
+----- ----------------------------- ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box:  # if nothing is in the box, leave this answer blank
+object out box: brown_3D_cuboid, black_3D_circle  # this is an example
+box: white_box # specify only the color of the box 
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+
+
+A: 
+Answer
+---
+object in box: transparent_3D_cylinder
+object out box: brown_3D_cuboid, transparent_2D_circle
+box: white_box
+---
+
+Descriptions about objects in the scene
+The images show a scene with several objects placed on a flat surface. In the first image, a top view is provided, while the second image offers a side view. The objects in the scene include a white box, a brown cuboid, a transparent circle, and a transparent cylinder.
+
+The white box is located towards the bottom right of the first image and towards the left in the second image. It is a 3D object with a lattice structure on its sides.
+
+The brown cuboid is positioned to the left of the white box in both images. It is a 3D object with a rectangular shape and a brown color.
+
+The transparent circle is located near the center of the first image and towards the bottom in the second image. It is a 2D object with a circular shape and a transparent color.
+
+Inside the white box, there is a transparent cylinder. This object is a 3D shape with a cylindrical form and a transparent color. It is visible through the lattice structure of the white box in both images.
+----------------------------------------------------------------------------------------------------
+

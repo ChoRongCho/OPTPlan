@@ -1,0 +1,10 @@
+
+
+		Initialize time:  1.3093
+		Planning time:  8.1339
+		Total time:  9.4432
+
+
+		Initialize time:  1.3572
+		Planning time:  9.7813
+		Total time:  11.1385

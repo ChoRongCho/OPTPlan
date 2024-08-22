@@ -1,0 +1,23 @@
+The Init State
+| Index | Name             | Shape       | Color | Object Type | Pushed | Folded | In Bin Objects | Is Rigid | Is Elastic | Is Soft | In Box | Out Box |
+|-------|------------------|-------------|-------|-------------|--------|--------|----------------|----------|------------|---------|--------|---------|
+| 0     | brown_3D_cuboid  | 3D_cuboid   | brown | obj         | False  | False  | N/A            | False    | True       | True    | False  | True    |
+| 1     | white_3D_cylinder| 3D_cylinder | white | obj         | False  | False  | N/A            | False    | True       | True    | False  | True    |
+| 2     | black_3D_cylinder| 3D_cylinder | black | obj         | False  | False  | N/A            | True     | False      | False   | True   | False   |
+| 3     | red_3D_cylinder  | 3D_cylinder | red   | obj         | False  | False  | N/A            | False    | True       | False   | True   | False   |
+| 4     | white_box        | box         | white | box         | N/A    | N/A    | []             | N/A      | N/A        | N/A     | N/A    | N/A     |
+
+
+The Goal State
+| Index | Name             | Shape       | Color | Object Type | Pushed | Folded | In Bin Objects | Is Rigid | Is Elastic | Is Soft | In Box | Out Box |
+|-------|------------------|-------------|-------|-------------|--------|--------|----------------|----------|------------|---------|--------|---------|
+| 0     | brown_3D_cuboid  | 3D_cuboid   | brown | obj         | False  | False  | N/A            | False    | True       | True    | True   | False   |
+| 1     | white_3D_cylinder| 3D_cylinder | white | obj         | False  | False  | N/A            | False    | True       | True    | True   | False   |
+| 2     | black_3D_cylinder| 3D_cylinder | black | obj         | False  | False  | N/A            | True     | False      | False   | True   | False   |
+| 3     | red_3D_cylinder  | 3D_cylinder | red   | obj         | False  | False  | N/A            | False    | True       | False   | True   | False   |
+| 4     | white_box        | box         | white | box         | N/A    | N/A    | [0, 1, 2, 3]   | N/A      | N/A        | N/A     | N/A    | N/A     |
+
+
+		Initialize time:  1.5398
+		Planning time:  41.9627
+		Total time:  43.5025

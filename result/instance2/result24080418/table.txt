@@ -1,0 +1,21 @@
+The Init State
+| Index | Name             | Shape       | Color | Object Type | Pushed | Folded | In Bin Objects | Is Rigid | Is Elastic | In Box | Out Box |
+|-------|------------------|-------------|-------|-------------|--------|--------|----------------|----------|------------|--------|---------|
+| 0     | black_3D_cylinder| 3D_cylinder | black | obj         | False  | False  | []             | True     | False      | False  | True    |
+| 1     | blue_2D_ring     | 2D_ring     | blue  | obj         | False  | False  | []             | False    | False      | False  | True    |
+| 2     | white_2D_ring    | 2D_ring     | white | obj         | False  | False  | []             | False    | True       | True   | False   |
+| 3     | white_box        | box         | white | box         | False  | False  | []             | False    | False      | True   | False   |
+
+
+The Goal State
+| Index | Name             | Shape       | Color | Object Type | Pushed | Folded | In Bin Objects | Is Rigid | Is Elastic | In Box | Out Box |
+|-------|------------------|-------------|-------|-------------|--------|--------|----------------|----------|------------|--------|---------|
+| 0     | black_3D_cylinder| 3D_cylinder | black | obj         | False  | False  | []             | True     | False      | True   | False   |
+| 1     | blue_2D_ring     | 2D_ring     | blue  | obj         | False  | False  | []             | False    | False      | True   | False   |
+| 2     | white_2D_ring    | 2D_ring     | white | obj         | False  | False  | []             | False    | True       | True   | False   |
+| 3     | white_box        | box         | white | box         | False  | False  | [0, 1, 2]      | False    | False      | True   | False   |
+
+
+		Initialize time:  1.4715
+		Planning time:  39.9796
+		Total time:  41.4512

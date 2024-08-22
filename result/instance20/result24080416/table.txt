@@ -1,0 +1,21 @@
+The Init State
+| Index | Name             | Shape       | Color  | Predicates                  | Init Pose | Pushed | Folded | In Bin Objects | Is Foldable | Is Rigid | Is Elastic | Is Soft | In Box | Is Packed |
+|-------|------------------|-------------|--------|-----------------------------|-----------|--------|--------|----------------|-------------|----------|------------|---------|--------|-----------|
+| 0     | brown_3D_cuboid  | 3D_cuboid   | brown  | is_soft, is_elastic         | out_box   | False  | False  | []             | False       | False    | True       | True    | False  | False     |
+| 1     | yellow_3D_cylinder| 3D_cylinder | yellow | is_rigid                    | out_box   | False  | False  | []             | False       | True     | False      | False   | False  | False     |
+| 2     | white_2D_circle  | 2D_circle   | white  | is_soft, is_foldable        | out_box   | False  | False  | []             | True        | False    | False      | True    | False  | False     |
+| 3     | white_box        | box         | white  |                             | box       | False  | False  | []             | False       | False    | False      | False   | False  | False     |
+
+
+The Goal State
+| Index | Name              | Shape       | Color  | Predicates                  | Init Pose | Pushed | Folded | In Bin Objects | Is Foldable | Is Rigid | Is Elastic | Is Soft | In Box | Is Packed |
+|-------|-------------------|-------------|--------|-----------------------------|-----------|--------|--------|----------------|-------------|----------|------------|---------|--------|-----------|
+| 0     | brown_3D_cuboid   | 3D_cuboid   | brown  | is_soft, is_elastic         | in_box    | False  | False  | []             | False       | False    | True       | True    | True   | True      |
+| 1     | yellow_3D_cylinder| 3D_cylinder | yellow | is_rigid                    | in_box    | False  | False  | []             | False       | True     | False      | False   | True   | True      |
+| 2     | white_2D_circle   | 2D_circle   | white  | is_soft, is_foldable        | in_box    | False  | True   | []             | True        | False    | False      | True    | True   | True      |
+| 3     | white_box         | box         | white  |                             | box       | False  | False  | [0, 1, 2]      | False       | False    | False      | False   | False  | False     |
+
+
+		Initialize time:  1.4208
+		Planning time:  83.914
+		Total time:  85.3349

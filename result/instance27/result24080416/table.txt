@@ -1,0 +1,21 @@
+The Init State
+| Index | Name                  | Shape       | Color       | Object Type | Pushed | Folded | In Bin Objects | Is Soft | Is Elastic | In Box | Is Transparent |
+|-------|-----------------------|-------------|-------------|-------------|--------|--------|----------------|---------|------------|--------|----------------|
+| 0     | transparent_3D_cylinder | 3D_cylinder | transparent | obj         | False  | False  | []             | False   | True       | False  | True           |
+| 1     | white_3D_cylinder     | 3D_cylinder | white       | obj         | False  | False  | []             | True    | True       | False  | False          |
+| 2     | transparent_2D_circle | 2D_circle   | transparent | obj         | False  | False  | []             | False   | True       | False  | True           |
+| 3     | white_box             | box         | white       | box         | False  | False  | []             | False   | False      | True   | False          |
+
+
+The Goal State
+| Index | Name                  | Shape       | Color       | Object Type | Pushed | Folded | In Bin Objects | Is Soft | Is Elastic | In Box | Is Transparent |
+|-------|-----------------------|-------------|-------------|-------------|--------|--------|----------------|---------|------------|--------|----------------|
+| 0     | transparent_3D_cylinder | 3D_cylinder | transparent | obj         | False  | False  | []             | False   | True       | True   | True           |
+| 1     | white_3D_cylinder     | 3D_cylinder | white       | obj         | False  | False  | []             | True    | True       | True   | False          |
+| 2     | transparent_2D_circle | 2D_circle   | transparent | obj         | False  | False  | []             | False   | True       | True   | True           |
+| 3     | white_box             | box         | white       | box         | False  | False  | [0, 1, 2]      | False   | False      | True   | False          |
+
+
+		Initialize time:  1.4574
+		Planning time:  42.7262
+		Total time:  44.1836

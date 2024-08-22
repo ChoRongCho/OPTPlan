@@ -1,0 +1,54 @@
+{
+    "0": {
+        "name": "yellow_2D_rectangle",
+        "shape": "2D_rectangle",
+        "color": "yellow",
+        "predicates": [
+            "is_foldable"
+        ],
+        "init_pose": "out_box"
+    },
+    "1": {
+        "name": "transparent_3D_cylinder",
+        "shape": "3D_cylinder",
+        "color": "transparent",
+        "predicates": [
+            "is_elastic"
+        ],
+        "init_pose": "out_box"
+    },
+    "2": {
+        "name": "red_3D_polyhedron",
+        "shape": "3D_polyhedron",
+        "color": "red",
+        "predicates": [
+            "is_soft"
+        ],
+        "init_pose": "in_box"
+    },
+    "3": {
+        "name": "orange_2D_rectangle",
+        "shape": "2D_rectangle",
+        "color": "orange",
+        "predicates": [
+            "is_foldable"
+        ],
+        "init_pose": "in_box"
+    },
+    "4": {
+        "name": "green_2D_rectangle",
+        "shape": "2D_rectangle",
+        "color": "green",
+        "predicates": [
+            "is_foldable"
+        ],
+        "init_pose": "in_box"
+    },
+    "5": {
+        "name": "white_box",
+        "shape": "box",
+        "color": "white",
+        "predicates": [],
+        "init_pose": "box"
+    }
+}

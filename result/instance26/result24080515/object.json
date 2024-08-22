@@ -1,0 +1,37 @@
+{
+    "0": {
+        "name": "red_3D_polyhedron",
+        "shape": "3D_polyhedron",
+        "color": "red",
+        "predicates": [
+            "is_soft"
+        ],
+        "init_pose": "out_box"
+    },
+    "1": {
+        "name": "transparent_3D_cylinder",
+        "shape": "3D_cylinder",
+        "color": "transparent",
+        "predicates": [
+            "is_elastic"
+        ],
+        "init_pose": "out_box"
+    },
+    "2": {
+        "name": "white_2D_circle",
+        "shape": "2D_circle",
+        "color": "white",
+        "predicates": [
+            "is_fragile",
+            "is_foldable"
+        ],
+        "init_pose": "out_box"
+    },
+    "3": {
+        "name": "white_box",
+        "shape": "box",
+        "color": "white",
+        "predicates": [],
+        "init_pose": "box"
+    }
+}

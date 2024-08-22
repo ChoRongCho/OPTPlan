@@ -16,26 +16,29 @@ class PromptSet:
         system_message = f"You are a vision AI that describes the shape and color of an object for {self.task}. " + \
                          "You should look at a picture of given objects and explain their size and color." + \
                          "Also, classify objects using the given classification table rather than your common sense."
-        prompt = "The first image is when you see the object from the side " + \
-                 "and the next image is when you see the object from the top. \n" + \
-                 "Define the shape and color of the object through this image. \n" + \
-                 "Use the simple classification table below for the shape of the object. \n" + \
-                 "You should match dimension and shape. For example, 3D_circle is not acceptable. \n\n" + \
-                 """
+
+        prompt = """
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.  
+Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
+You need to identify the corresponding pairs of objects in each image, and then distinguish their colors, dimensions, and shapes. 
+Define the shape and color of the object through these images. 
+Use the simple classification table below for the shape of the object. 
+You should match dimension and shape. For example, 3D_circle is not acceptable. 
+
 ----- ----------------------------- ----------------------------------------------             
 Dim   Description                   Shape
-1D    related to lines or length    linear
-2D    related to plane or flatness  rectangle, circle, ring
-3D    related to volume             cube, cuboid, cylinder, cone, polyhedron, etc
+1D    related to lines or length    line
+2D    related to plane or flatness  rectangle, circle, loop, triangle, polygon
+3D    related to volume             cone, cube, cuboid, cylinder, polyhedron, pyramid, sphere
 ----- ----------------------------- ----------------------------------------------
 
 Please answer with the template below:
 
 Answer
 ---
-object in box: # if there is nothing, fill it blank
+object in box:  # if nothing is in the box, leave this answer blank
 object out box: brown_3D_cuboid, black_3D_circle  # this is an example
-box: white_box # only color
+box: white_box # specify only the color of the box 
 ---
 
 Descriptions about objects in the scene
@@ -56,9 +59,9 @@ Descriptions about objects in the scene
                  """
 ----- ----------------------------- ----------------------------------------------             
 Dim   Description                   Shape
-1D    related to lines or length    linear
-2D    related to plane or flatness  rectangle, circle, ring
-3D    related to volume             cube, cuboid, cylinder, cone, polyhedron, etc
+1D    related to lines or length    line
+2D    related to plane or flatness  rectangle, circle, ring, triangle, polygon
+3D    related to volume             cone, cube, cuboid, cylinder, polyhedron, pyramid, sphere
 ----- ----------------------------- ----------------------------------------------
 
 Please answer with the template below:

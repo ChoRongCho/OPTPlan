@@ -1,0 +1,50 @@
+--------------  ---------------------------
+Project Time    2024-08-15 22:06:09.587869
+Task            bin_packing
+Exp_Name        instance4
+API JSON        setting.json
+Example Prompt  prompt_examples_python.json
+Max Predicates  2
+--------------  ---------------------------
+--------------------------------------------------
+Q: 
+The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.  
+Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
+You need to identify the corresponding pairs of objects in each image, and then distinguish their colors, dimensions, and shapes. 
+Define the shape and color of the object through these images. 
+Use the simple classification table below for the shape of the object. 
+You should match dimension and shape. For example, 3D_circle is not acceptable. 
+
+----- ----------------------------- ----------------------------------------------             
+Dim   Description                   Shape
+1D    related to lines or length    line
+2D    related to plane or flatness  rectangle, circle, loop, triangle, polygon
+3D    related to volume             cone, cube, cuboid, cylinder, polyhedron, pyramid, sphere
+----- ----------------------------- ----------------------------------------------
+
+Please answer with the template below:
+
+Answer
+---
+object in box:  # if nothing is in the box, leave this answer blank
+object out box: brown_3D_cuboid, black_3D_circle  # this is an example
+box: white_box # specify only the color of the box 
+---
+
+Descriptions about objects in the scene
+*your descriptions in 200 words
+
+
+
+A: 
+Answer
+---
+object in box: yellow_3D_cuboid
+object out box: white_2D_loop, black_2D_loop
+box: white_box
+---
+
+Descriptions about objects in the scene
+The images show a scene with several objects and a white box. The white box has a lattice design and contains a yellow 3D cuboid object. Outside the box, there are two loop-shaped objects. One is white and the other is black. The white loop is positioned closer to the top of the images, while the black loop is closer to the bottom. The loops are flat and can be classified as 2D objects. The yellow cuboid inside the box has a volume and can be classified as a 3D object. The white box is positioned towards the right side of the images. The scene also includes some mechanical components, but they are not the focus of the classification.
+----------------------------------------------------------------------------------------------------
+

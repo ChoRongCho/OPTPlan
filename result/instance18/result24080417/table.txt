@@ -1,0 +1,19 @@
+The Init State
+| Index | Name            | Shape      | Color | Object Type | Pushed | Folded | In Bin Objects | Is Elastic | Is Soft | In Box | Out Box |
+|-------|-----------------|------------|-------|-------------|--------|--------|----------------|------------|---------|--------|---------|
+| 0     | brown_3D_cuboid | 3D_cuboid  | brown | obj         | False  | False  | []             | True       | True    | False  | True    |
+| 1     | black_2D_loop   | 2D_loop    | black | obj         | False  | False  | []             | True       | True    | True   | False   |
+| 2     | white_box       | box        | white | box         | False  | False  | []             | False      | False   | True   | False   |
+
+
+The Goal State
+| Index | Name            | Shape      | Color | Object Type | Pushed | Folded | In Bin Objects | Is Elastic | Is Soft | In Box | Out Box |
+|-------|-----------------|------------|-------|-------------|--------|--------|----------------|------------|---------|--------|---------|
+| 0     | brown_3D_cuboid | 3D_cuboid  | brown | obj         | False  | False  | []             | True       | True    | True   | False   |
+| 1     | black_2D_loop   | 2D_loop    | black | obj         | False  | False  | []             | True       | True    | True   | False   |
+| 2     | white_box       | box        | white | box         | False  | False  | [0, 1]         | False      | False   | True   | False   |
+
+
+		Initialize time:  1.342
+		Planning time:  33.4728
+		Total time:  34.8148

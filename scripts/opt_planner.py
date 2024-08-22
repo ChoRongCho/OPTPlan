@@ -40,10 +40,11 @@ class OPTPlanner:
         self.result_dir = os.path.join(args.result_dir, self.exp_name, "result" + self.exp_number)
 
         # domain path
-        self.image_side = os.path.join(self.data_dir, self.task, "planning", self.exp_name, f"side_observation.png")
-        self.image_top = os.path.join(self.data_dir, self.task, "planning", self.exp_name, f"top_observation.png")
-        self.domain_image = [self.image_side, self.image_top]
-        self.task_json = os.path.join(self.data_dir, self.task, "planning", self.exp_name, "instructions.json")
+        self.image_side = os.path.join(self.data_dir, self.task, "planning_new_cropped", self.exp_name, f"side_observation.png")
+        self.image_top = os.path.join(self.data_dir, self.task, "planning_new_cropped", self.exp_name, f"top_observation.png")
+        self.domain_image = [self.image_top, self.image_side]
+        # self.task_json = os.path.join(self.data_dir, self.task, "planning", self.exp_name, "instructions.json")
+        self.task_json = os.path.join(self.json_dir, "task_instruction.json")
 
         # json_dir
         self.api_json = os.path.join(self.json_dir, args.api_json)
@@ -60,7 +61,7 @@ class OPTPlanner:
         self.robot_data = self.get_json_data(self.robot_json)
         self.task_data = self.get_json_data(self.task_json)
 
-        self.task_description = self.task_data["task_description"]
+        self.task_description = self.task_data["goals"]
         self.api_key, self.setting = self.get_api_key()
 
         # Initialize Class for planning
@@ -342,6 +343,14 @@ Reason:
 
         planning_python_script = extract_code(answer, "python\n")
         return planning_python_script
+
+    def only_detection(self):
+        detected_object_dict, detected_object_list = self.detect_object()
+        active_predicates, object_dict = self.get_predicates(detected_object_dict, random_mode=self.random_mode)
+        if self.is_save:
+            self.check_result_folder()
+            self.log_conversation()
+        return active_predicates, object_dict
 
     def make_plan(self):
         # detect Object and make action predicates for objects
