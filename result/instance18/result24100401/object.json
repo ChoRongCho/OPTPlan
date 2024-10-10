@@ -1,0 +1,29 @@
+{
+    "0": {
+        "name": "blue_2D_triangle",
+        "shape": "2D_triangle",
+        "color": "blue",
+        "predicates": [
+            "is_plastic"
+        ],
+        "init_pose": "out_box"
+    },
+    "1": {
+        "name": "yellow_3D_cylinder",
+        "shape": "3D_cylinder",
+        "color": "yellow",
+        "predicates": [
+            "is_rigid"
+        ],
+        "init_pose": "out_box"
+    },
+    "2": {
+        "name": "black_3D_cylinder",
+        "shape": "3D_cylinder",
+        "color": "black",
+        "predicates": [
+            "is_rigid"
+        ],
+        "init_pose": "out_box"
+    }
+}

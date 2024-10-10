@@ -18,7 +18,7 @@ class PromptSet:
                          "adhering strictly to the given classifications rather than relying on common sense."
 
         prompt = f"""
-The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.
+The first image shows a top view of objects (the one which is the closest to the center of the image) while the second image shows a side view of them.
 Please identify the shapes, dimensions, and colors of the object based on these images according to the definitions in "[Definitions of dimensions and shapes]" below.
 Your answer must follow the naming convention which is "color_dimension_shape" (e.g., red_3D_cuboid or black_2D_ring).
 Ensure that there is no contradiction between the shape and dimension. For example, "3D" and "circle" are not compatible according to their definitions in "[Definitions of dimensions and shapes]".
@@ -42,26 +42,50 @@ Descriptions about the object in the scene
 """
         return system_message, prompt
 
-    def load_naming_message(self):
-        """
-        from images, the llm module makes judge of its shape and color
------------New Prompt1-------------------------------------------------------------------------------
-The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.
-Each view captures the same scene, and the objects appearing in the images correspond one-to-one between the two images.
-You need to identify the corresponding pairs of objects in each image, and then distinguish their color, dimensions, and shape.
-Please identify the shapes, dimensions, and colors of the object based on these images according to the definitions in "[Definitions of dimensions and shapes]" below.
-Your answer must follow the naming convention which is "color_dimension_shape" (e.g., red_3D_cuboid or black_2D_ring).
-Ensure that there is no contradiction between the shape and dimension. For example, "3D" and "circle" are not compatible according to their definitions in "[Definitions of dimensions and shapes]".
------------------------------------------------------------------------------------------------------
------------New Prompt2-------------------------------------------------------------------------------
+    def load_spatial_relationships(self):
+        system_message = f"You are a vision AI designed to describe the spatial relationships of the objects. "
+        message = """ 
 The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.
 Each view captures the same scene, with the objects in the images corresponding one-to-one between the two views.
-You need to identify the corresponding pairs of objects in each image, then distinguish their colors, dimensions, and shapes.
-Please identify the shapes, dimensions, and colors of the object based on these images according to the definitions in "[Definitions of dimensions and shapes]" below.
-Your answer must follow the naming convention which is "color_dimension_shape" (e.g., red_3D_cuboid or black_2D_ring).
-Ensure that there is no contradiction between the shape and dimension. For example, "3D" and "circle" are not compatible according to their definitions in "[Definitions of dimensions and shapes]".
------------------------------------------------------------------------------------------------------
-        """
+I will provide you with images that have bounding boxes drawn around the objects and its logits. 
+However, unfortunately, these images can occasionally contain errors. 
+Therefore, you need to make accurate judgments about the objects' positions and relationships. 
+Additionally, the white lines represent the relationships between the bounding boxes, so think of this as a graph.
+
+Based on the spatial information from this graph, you should be able to recognize the same objects. 
+Please describe the given environment based on these images.      
+
+Your answer must use the template below:
+
+Please answer with the template below:
+---template start---
+### Objects and Their Descriptions:
+# top view
+|  top index  | descriptions  
+|      1      |  
+|      2      |
+  
+# side view
+|  side index  | descriptions
+|       1      |  
+|       2      |
+
+# Find same objects in both views 
+
+
+### Spatial Relationships:
+
+### Critical bounding box errors Description:
+# if there is any critical error such as wrong bonding box and additional bounding box, describe here 
+
+---template end---
+
+  
+"""
+
+        return system_message, message
+
+    def load_naming_message(self):
         # Use 1D, 2D, 3D definition of ChatGPT
 
         system_message = f"You are a vision AI designed to describe the shape and color of objects for {self.task}. " + \
@@ -70,10 +94,8 @@ Ensure that there is no contradiction between the shape and dimension. For examp
                          "adhering strictly to the given classifications rather than relying on common sense."
 
         prompt = f"""
-The first image shows a top view of an object (the one which is the closest to the center of the image) while the second image shows a side view of them.
-Each view captures the same scene, with the objects in the images corresponding one-to-one between the two views.
-You need to identify the corresponding pairs of objects in each image, then distinguish their colors, dimensions, and shapes.
-Please identify the shapes, dimensions, and colors of the object based on these images according to the definitions in "[Definitions of dimensions and shapes]" below.
+Now that you've obtained the spatial information of the objects, you need to describe each object's shape, color, and dimensions.
+And for clarity, I will provide the original images. Please identify the shapes, dimensions, and colors of the object based on these images according to the definitions in "[Definitions of dimensions and shapes]" below.
 Your answer must follow the naming convention which is "color_dimension_shape" (e.g., red_3D_cuboid or black_2D_ring).
 Ensure that there is no contradiction between the shape and dimension. For example, "1D" and "loop" or "3D" and "circle" are not compatible according to their definitions in "[Definitions of dimensions and shapes]".
 
@@ -90,9 +112,7 @@ Please answer with the template below:
 ---template start---
 Answer
 ---
-object in box: # if nothing is in the box, leave this answer blank
-object out box: brown_3D_cuboid, black_2D_circle  # this is an example, also, don't add a box itself 
-box: white_box # specify only the color of the box 
+object: red_3D_polyhedron, yellow_3D_cuboid, ... # if there are duplicate objects, add '_N' at the end, e.g., red_3D_cuboid_2.
 ---
 
 Descriptions about objects in the scene
@@ -123,18 +143,25 @@ class Object:
     shape: str
     object_type: str  # box or obj
     
-    # Basic effect predicates for obj
+    # physical state of an object
     pushed: bool
     folded: bool
-    
-    # Predicates for box
-    in_bin_objects: list
+    in_bin: bool
     
     # Object physical properties 
     
     # pre-conditions and effects for {self.task} task planning (max: {max_predicates})
+
+@dataclass
+class Box:
+    # Basic dataclass
+    index: int
+    name: str
     
-    
+    # Predicates for box
+    object_type: str  # box or obj
+    in_bin_objects: list
+
 """
         prompt += "However, we cannot complete a planning with this dataclass predicate alone" + \
                   f" which means that we have to add other predicates that fully describe {self.task} task. \n"
@@ -153,10 +180,14 @@ Based on the action definitions, write the pre-conditions and effects of the act
 Be sure to follow the template below.
 """
 
-        prompt = "Our current task is to create actions for the robot, similar to the domain file in PDDL. The parts corresponding to the types of objects and predicates are provided as a class object, as shown below."
+        prompt = ("Our current task is to create actions for the robot, similar to the domain file in PDDL. "
+                  "The parts corresponding to the types of objects and predicates are provided as a class object, as shown below.")
         prompt += f"""{object_class_python_script}\n\n"""
 
-        prompt += ("Our goal is to define the pre-conditions and effects for the robot's actions, similar to how they are done in PDDL. Definitions of pre-conditions and effects in natural language are provided in each action in the basic Robot class below. Please refer to them to creat actions.")
+        prompt += ("Our goal is to define the pre-conditions and effects for the robot's actions, similar to how they are done in PDDL. \n"
+                   "Definitions of pre-conditions and effects in natural language are provided in each action in the basic "
+                   "Robot class below. Please refer to them to create actions.")
+
         prompt += f"""
 class Robot:
     def __init__(self,
@@ -189,32 +220,31 @@ class Robot:
     def pick(self, obj, bin):
         # make a pre-conditions for actions using if-else phrase
         # Action Description: {robot_action["pick"]}
-        # Rules: {task_instruction["pick"]}
         print(f"Pick obj.name")
         print(f"Cannot Pick obj.name")
         
     def place(self, obj, bin):
         # Action Description: {robot_action["place"]}
-        # Rules: {task_instruction["place"]}
         print(f"Place obj.name in bin.name")
+        print(f"Cannot Place obj.name")
         bin.in_bin_objects.append(obj)
     
     def push(self, obj, bin): 
         # Action Description: {robot_action["push"]}
-        # Rules: {task_instruction["push"]}
         print(f"Push obj.name")
+        print(f"Cannot Push obj.name")
         obj.pushed
     
     def fold(self, obj, bin):
         # Action Description: {robot_action["fold"]}
-        # Rules: {task_instruction["fold"]}
         print(f"Fold obj.name")
+        print(f"Cannot Fold obj.name")
         obj.folded
     
     def out(self, obj, bin):
         # Action Description: {robot_action["out"]}
-        # Rules: {task_instruction["out"]}
         print(f"Out obj.name from bin.name")
+        print(f"Cannot Out obj.name")
         bin.in_bin_objects.remove(obj)
         \n\n"""
 
@@ -229,9 +259,23 @@ Please answer with the template below:
 Answer:
 ```python
 # only write a code here without example instantiation
+class Robot:
+    def __init__(self, ...):
+        ...    
+    def state_handempty(self):
+        ...
+    def state_holding(self, objects):
+        ...  
+    def state_base(self):
+        ...
 ```
 Reason:
 # Explain in less than 300 words why you made such robot actions
+1. pick
+2. place
+3. push
+4. fold
+5. out
 ---template end---
 """
         return system_message, prompt
@@ -253,14 +297,17 @@ Reason:
 Please answer with the template below:
 ---template start---
 ### 1. Init Table
-# fill your table
+# fill your table using objects predicates
 
 ### 2. Python Codes
 # make init state into python code
 # don't include the object classes or robot class, make only objects and bin 
-# example 
+# example  
+```python
 object0 = Object(index=0, name='black_3D_cuboid', color='black', shape='3D_cuboid', ...)
 object1 = Object(index=1, name='white_2D_circle', color='white', shape='2D_circle', ...)
+box = Box()
+```
 ...
 
 ### 3. Notes:
@@ -331,32 +378,23 @@ Please answer with the template below:
         prompt += (f"\nThis is the initial state table of all objects. \n{init_state_table}\n\n"
                    f"And this is the goal state table of all objects. \n{goal_state_table}\n\n")
 
-        prompt += """
+        prompt += f"""
 Please answer with the template below:
 ---template start---
 
 if __name__ == "__main__":
-    # First, using goal table, describe the initial state and final state of each object
-    ...
-    # Second, using given rules and object's states, make a task planning strategy
-
-    # Third, make an action sequence. You should be aware of the robot action effects such as 'push' or 'out'. 
+    # First, using given rules and object's states, make a task planning strategy
+    
+    # Second, make an action sequence. You should be aware of the robot action effects such as 'push' or 'out'. 
     # a) Initialize the robot
     robot = Robot()
     # b) Define the box, this is an example. 
     box = object5
 
-    # Fourth, after making all actions, fill your reasons according to the rules
+    # Third, after making all actions, fill your reasons according to the rules
     ...
-
-    # Finally, check if the goal state is satisfying goal state table. Use a template below. These are examples. 
-    assert object0.is_in_box == True or False
-    assert object1.is_in_box == True or False
-    ...
-    # assert final_object.is_in_box == True or False
     
-    # Don't include a box in the goal state. Only express objects.
-    ...
+    # Finally, add this code    
     print("All task planning is done")
      
 ---template end---
@@ -374,8 +412,7 @@ if __name__ == "__main__":
 This code consists of four parts below.
 1. Object Class (Start with [@dataclass])
 2. Robot Class (Start with [class Robot:])
-3. Initial State (Start with [object0 = Object(...) ])
-4. Planning State (Start with [if __name__ == "__main__":])
+3. Planning State (Start with [if __name__ == "__main__":])
 
 And this is a result of the code.
 {planning_output}
@@ -401,7 +438,7 @@ f) Are there unnecessary actions?
 Here, I'll give you a template.
 
 # Wrong Part (Choose one from an error description) 
-1. Object Class / 2. Robot Class / 3. Initial State / 4. Planning State
+1. Object Class / 2. Robot Class / 3. Planning State
 
 # Analysis using given error
 # a) 
@@ -411,7 +448,11 @@ Here, I'll give you a template.
 # e) 
 # f)
 
-# Modified Code (Make the part only)
+# Modified Code (Make the error part only)
+```python
+# part 2 (example)
+
+```
 ---template end---
 
 """

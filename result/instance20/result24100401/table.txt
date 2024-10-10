@@ -1,0 +1,21 @@
+The Init State
+| Index | Name             | Shape      | Color | Predicates                      | Init Pose |
+|-------|------------------|------------|-------|---------------------------------|-----------|
+| 0     | brown_3D_cuboid  | 3D_cuboid  | brown | is_compressible                 | out_box   |
+| 1     | brown_3D_cylinder| 3D_cylinder| brown | is_compressible                 | out_box   |
+| 2     | black_1D_line    | 1D_line    | black | is_bendable                     | out_box   |
+| 3     | green_1D_line    | 1D_line    | green | is_plastic                      | out_box   |
+
+
+The Goal State
+| Index | Name             | Shape      | Color | Predicates                      | Goal Pose |
+|-------|------------------|------------|-------|---------------------------------|-----------|
+| 0     | brown_3D_cuboid  | 3D_cuboid  | brown | is_compressible                 | in_box    |
+| 1     | brown_3D_cylinder| 3D_cylinder| brown | is_compressible                 | in_box    |
+| 2     | black_1D_line    | 1D_line    | black | is_bendable                     | in_box    |
+| 3     | green_1D_line    | 1D_line    | green | is_plastic                      | out_box   |
+
+
+		Initialize time:  1.3568
+		Planning time:  34.3292
+		Total time:  35.6859

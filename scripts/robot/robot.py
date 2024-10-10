@@ -1,6 +1,5 @@
 import random
 
-import numpy as np
 from tabulate import tabulate
 
 

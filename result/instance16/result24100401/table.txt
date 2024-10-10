@@ -1,0 +1,23 @@
+The Init State
+| Index | Name               | Shape        | Color  | Object Type | Pushed | Folded | In Bin | Is Foldable | Is Bendable | Is Plastic | Is Compressible | Is Rigid | Is Out Box | Is Placed |
+|-------|--------------------|--------------|--------|-------------|--------|--------|--------|-------------|-------------|------------|-----------------|----------|------------|-----------|
+| 0     | green_1D_line      | 1D_line      | green  | obj         | False  | False  | False  | False       | False       | True       | False           | False    | True       | False     |
+| 1     | yellow_3D_cylinder | 3D_cylinder  | yellow | obj         | False  | False  | False  | False       | False       | False      | False           | True     | True       | False     |
+| 2     | white_2D_loop      | 2D_loop      | white  | obj         | False  | False  | False  | True        | False       | False      | False           | False    | True       | False     |
+| 3     | brown_3D_cylinder  | 3D_cylinder  | brown  | obj         | False  | False  | False  | False       | False       | False      | True            | False    | True       | False     |
+| 4     | black_1D_line      | 1D_line      | black  | obj         | False  | False  | False  | False       | True        | False      | False           | False    | True       | False     |
+
+
+The Goal State
+| Index | Name               | Shape        | Color  | Object Type | Pushed | Folded | In Bin | Is Foldable | Is Bendable | Is Plastic | Is Compressible | Is Rigid | Is Out Box | Is Placed |
+|-------|--------------------|--------------|--------|-------------|--------|--------|--------|-------------|-------------|------------|-----------------|----------|------------|-----------|
+| 0     | green_1D_line      | 1D_line      | green  | obj         | False  | False  | True   | False       | False       | True       | False           | False    | False      | True      |
+| 1     | yellow_3D_cylinder | 3D_cylinder  | yellow | obj         | False  | False  | True   | False       | False       | False      | False           | True     | False      | True      |
+| 2     | white_2D_loop      | 2D_loop      | white  | obj         | False  | False  | True   | True        | False       | False      | False           | False    | False      | True      |
+| 3     | brown_3D_cylinder  | 3D_cylinder  | brown  | obj         | False  | False  | True   | False       | False       | False      | True            | False    | False      | True      |
+| 4     | black_1D_line      | 1D_line      | black  | obj         | False  | False  | True   | False       | True        | False      | False           | False    | False      | True      |
+
+
+		Initialize time:  1.3231
+		Planning time:  39.6274
+		Total time:  40.9505

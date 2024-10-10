@@ -52,6 +52,8 @@ def parse_input(answer):
             objects_in_box = line.split(": ")[1].split(", ")
         elif line.startswith("box:" or " box:"):
             bin_content = line.split(": ")[1].split(", ")
+        elif line.startswith("object:"):
+            objects_out_box = line.split(": ")[1].split(", ")
 
     objects_out_box = [obj for obj in objects_out_box if obj]
     objects_in_box = [obj for obj in objects_in_box if obj]
@@ -205,7 +207,7 @@ def feedback_error_decoder(error):
 
 
 def save2csv(data, filename):
-    fieldnames = ['instance', 'out_box', 'in_box', 'Total_num']
+    fieldnames = ['instance', '1', '2', '3', '4', '5', '6', 'Total_num']
     with open(filename, 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
@@ -213,13 +215,24 @@ def save2csv(data, filename):
         # write a csv file
         for i, (instance, objects) in enumerate(data.items(), start=1):
             out_box_items = [obj for obj, state in objects.items() if state == "out_box"]
-            in_box_items = [obj for obj, state in objects.items() if state == "in_box"]
+            # in_box_items = [obj for obj, state in objects.items() if state == "in_box"]
+
+            rows = []
+            for index in range(len(out_box_items)):
+                rows.append(out_box_items[index])
+            for dummy in range(6-len(out_box_items)):
+                rows.append(0)
 
             row = {
                 'instance': i,
-                'out_box': ', '.join(out_box_items),
-                'in_box': ', '.join(in_box_items),
-                'Total_num': int(len(out_box_items) + len(in_box_items))
+                '1': rows[0],
+                '2': rows[1],
+                '3': rows[2],
+                '4': rows[3],
+                '5': rows[4],
+                '6': rows[5],
+                # 'in_box': ', '.join(in_box_items),
+                'Total_num': int(len(out_box_items))
             }
             writer.writerow(row)
 

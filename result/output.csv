@@ -1,5 +1,0 @@
-instance,out_box,in_box,Total_num
-1,"brown_3D_cuboid, black_2D_circle, blue_2D_loop",,3
-2,"white_2D_loop, black_3D_cylinder",black_2D_loop,3
-3,"red_3D_polyhedron, yellow_3D_cylinder, white_2D_loop",,3
-4,"white_2D_loop, black_2D_loop",yellow_3D_cuboid,3

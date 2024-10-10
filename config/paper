@@ -1,0 +1,19 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+We will show the image when the robot does the action 'fold' on the object to verify the object is foldable or elastic.
+The third image shows the robot just before it grabs an object. The fourth image is after it is completely folded. The fifth image shows after the robot leaves it hand on the object.
+If the end of the robot gripper that holds the object touches on the opposite side of the object(see image 3 and 4), the object is not rigid.
+If the object return to its original shape after the robot lets go of the object(3 and 5), the object is Pliable, else it is foldable.
+Does this object have foldable or pliable properties?

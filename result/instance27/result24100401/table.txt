@@ -1,0 +1,21 @@
+The Init State
+| Index | Name              | Shape       | Color | Object Type | Pushed | Folded | In Bin | Is Compressible | Is Bendable | Is Rigid | Is Heavy | Is Fragile |
+|-------|-------------------|-------------|-------|-------------|--------|--------|--------|-----------------|-------------|----------|----------|------------|
+| 0     | black_3D_cylinder | 3D_cylinder | black | obj         | False  | False  | False  | False           | False       | True     | False    | False      |
+| 1     | brown_3D_cylinder | 3D_cylinder | brown | obj         | False  | False  | False  | True            | False       | False    | False    | False      |
+| 2     | black_1D_line     | 1D_line     | black | obj         | False  | False  | False  | False           | True        | False    | False    | False      |
+| 3     | yellow_3D_cuboid  | 3D_cuboid   | yellow| obj         | False  | False  | False  | True            | False       | False    | False    | False      |
+
+
+The Goal State
+| Index | Name              | Shape       | Color | Object Type | Pushed | Folded | In Bin | Is Compressible | Is Bendable | Is Rigid | Is Heavy | Is Fragile |
+|-------|-------------------|-------------|-------|-------------|--------|--------|--------|-----------------|-------------|----------|----------|------------|
+| 0     | black_3D_cylinder | 3D_cylinder | black | obj         | False  | False  | True   | False           | False       | True     | False    | False      |
+| 1     | brown_3D_cylinder | 3D_cylinder | brown | obj         | False  | False  | True   | True            | False       | False    | False    | False      |
+| 2     | black_1D_line     | 1D_line     | black | obj         | False  | True   | True   | False           | True        | False    | False    | False      |
+| 3     | yellow_3D_cuboid  | 3D_cuboid   | yellow| obj         | False  | False  | True   | True            | False       | False    | False    | False      |
+
+
+		Initialize time:  1.3617
+		Planning time:  33.4698
+		Total time:  34.8315

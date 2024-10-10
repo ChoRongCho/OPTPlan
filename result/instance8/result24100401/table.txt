@@ -1,0 +1,21 @@
+The Init State
+| Index | Name             | Shape       | Color  | Pushed | Folded | In Bin | Is Compressible | Is Foldable | Is Plastic | Is Rigid | Is 2D | Is 3D |
+|-------|------------------|-------------|--------|--------|--------|--------|-----------------|-------------|------------|----------|-------|-------|
+| 0     | white_2D_circle  | 2D_circle   | white  | False  | False  | False  | False           | True        | False      | False    | True  | False |
+| 1     | brown_3D_cuboid  | 3D_cuboid   | brown  | False  | False  | False  | True            | False       | False      | False    | False | True  |
+| 2     | yellow_3D_cylinder| 3D_cylinder| yellow | False  | False  | False  | False           | False       | False      | True     | False | True  |
+| 3     | green_1D_line    | 1D_line     | green  | False  | False  | False  | False           | False       | True       | False    | False | False |
+
+
+The Goal State
+| Index | Name             | Shape       | Color  | Pushed | Folded | In Bin | Is Compressible | Is Foldable | Is Plastic | Is Rigid | Is 2D | Is 3D |
+|-------|------------------|-------------|--------|--------|--------|--------|-----------------|-------------|------------|----------|-------|-------|
+| 0     | white_2D_circle  | 2D_circle   | white  | False  | True   | True   | False           | True        | False      | False    | True  | False |
+| 1     | brown_3D_cuboid  | 3D_cuboid   | brown  | False  | False  | True   | True            | False       | False      | False    | False | True  |
+| 2     | yellow_3D_cylinder| 3D_cylinder| yellow | False  | False  | True   | False           | False       | False      | True     | False | True  |
+| 3     | green_1D_line    | 1D_line     | green  | False  | False  | True   | False           | False       | True       | False    | False | False |
+
+
+		Initialize time:  1.2899
+		Planning time:  32.7062
+		Total time:  33.9961

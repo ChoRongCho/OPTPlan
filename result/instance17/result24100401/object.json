@@ -1,0 +1,29 @@
+{
+    "0": {
+        "name": "beige_1D_line",
+        "shape": "1D_line",
+        "color": "beige",
+        "predicates": [
+            "is_rigid"
+        ],
+        "init_pose": "out_box"
+    },
+    "1": {
+        "name": "white_2D_circle",
+        "shape": "2D_circle",
+        "color": "white",
+        "predicates": [
+            "is_foldable"
+        ],
+        "init_pose": "out_box"
+    },
+    "2": {
+        "name": "red_3D_polyhedron",
+        "shape": "3D_polyhedron",
+        "color": "red",
+        "predicates": [
+            "is_compressible"
+        ],
+        "init_pose": "out_box"
+    }
+}

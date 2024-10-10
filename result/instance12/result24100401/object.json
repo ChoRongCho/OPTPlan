@@ -1,0 +1,29 @@
+{
+    "0": {
+        "name": "yellow_2D_rectangle",
+        "shape": "2D_rectangle",
+        "color": "yellow",
+        "predicates": [
+            "is_foldable"
+        ],
+        "init_pose": "out_box"
+    },
+    "1": {
+        "name": "blue_2D_triangle",
+        "shape": "2D_triangle",
+        "color": "blue",
+        "predicates": [
+            "is_plastic"
+        ],
+        "init_pose": "out_box"
+    },
+    "2": {
+        "name": "blue_3D_polyhedron",
+        "shape": "3D_polyhedron",
+        "color": "blue",
+        "predicates": [
+            "is_plastic"
+        ],
+        "init_pose": "out_box"
+    }
+}

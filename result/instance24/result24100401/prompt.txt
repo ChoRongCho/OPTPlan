@@ -1,0 +1,616 @@
+--------------  ---------------------------
+Project Time    2024-10-04 10:38:21.384602
+Task            bin_packing
+Exp_Name        instance24
+API JSON        setting.json
+Example Prompt  prompt_examples_python.json
+Max Predicates  2
+--------------  ---------------------------
+--------------------------------------------------
+Q: We are going to generate an action sequence to perform the task, bin_packing, using Python which works similar to PDDL. Our goal is to define the types of objects and their predicates within the dataclass Object. 
+Here, we have the types, names, and properties of the objects recognized from the input images. We need to use this information to complete the Object class.{0: {'name': 'red_3D_polyhedron', 'shape': '3D_polyhedron', 'color': 'red', 'predicates': ['is_compressible'], 'init_pose': 'out_box'}, 1: {'name': 'brown_3D_cylinder', 'shape': '3D_cylinder', 'color': 'brown', 'predicates': ['is_compressible'], 'init_pose': 'out_box'}, 2: {'name': 'blue_2D_triangle', 'shape': '2D_triangle', 'color': 'blue', 'predicates': ['is_plastic'], 'init_pose': 'out_box'}} 
+
+from dataclasses import dataclass
+
+
+@dataclass
+class Object:
+    # Basic dataclass
+    index: int
+    name: str
+    color: str
+    shape: str
+    object_type: str  # box or obj
+    
+    # physical state of an object
+    pushed: bool
+    folded: bool
+    in_bin: bool
+    
+    # Object physical properties 
+    
+    # pre-conditions and effects for bin_packing task planning (max: 2)
+
+@dataclass
+class Box:
+    # Basic dataclass
+    index: int
+    name: str
+    
+    # Predicates for box
+    object_type: str  # box or obj
+    in_bin_objects: list
+
+However, we cannot complete a planning with this dataclass predicate alone which means that we have to add other predicates that fully describe bin_packing task. 
+Also you have to add predicates such as is_compressible, and is_plastic. 
+You are free to add more predicates for bin_packing to class Object if necessary. 
+Add more predicates needed for bin_packing to class Object. 
+
+Please answer using the template below:
+---template start---
+Answer:
+```python
+# only write a code here without example instantiation
+```
+Reason:
+# Explain in less than 200 words and why you made such predicates
+---template end---
+
+
+A: 
+from dataclasses import dataclass
+
+@dataclass
+class Object:
+    # Basic dataclass
+    index: int
+    name: str
+    color: str
+    shape: str
+    object_type: str  # box or obj
+    
+    # physical state of an object
+    pushed: bool
+    folded: bool
+    in_bin: bool
+    
+    # Object physical properties 
+    is_compressible: bool
+    is_plastic: bool
+    
+    # pre-conditions and effects for bin_packing task planning (max: 2)
+    is_2D: bool
+    is_3D: bool
+
+@dataclass
+class Box:
+    # Basic dataclass
+    index: int
+    name: str
+    
+    # Predicates for box
+    object_type: str  # box or obj
+    in_bin_objects: list
+----------------------------------------------------------------------------------------------------
+
+Q: Our current task is to create actions for the robot, similar to the domain file in PDDL. The parts corresponding to the types of objects and predicates are provided as a class object, as shown below.from dataclasses import dataclass
+
+@dataclass
+class Object:
+    # Basic dataclass
+    index: int
+    name: str
+    color: str
+    shape: str
+    object_type: str  # box or obj
+    
+    # physical state of an object
+    pushed: bool
+    folded: bool
+    in_bin: bool
+    
+    # Object physical properties 
+    is_compressible: bool
+    is_plastic: bool
+    
+    # pre-conditions and effects for bin_packing task planning (max: 2)
+    is_2D: bool
+    is_3D: bool
+
+@dataclass
+class Box:
+    # Basic dataclass
+    index: int
+    name: str
+    
+    # Predicates for box
+    object_type: str  # box or obj
+    in_bin_objects: list
+
+Our goal is to define the pre-conditions and effects for the robot's actions, similar to how they are done in PDDL. 
+Definitions of pre-conditions and effects in natural language are provided in each action in the basic Robot class below. Please refer to them to create actions.
+class Robot:
+    def __init__(self,
+                 name: str = "OpenManipulator",
+                 goal: str = None,
+                 actions: dict = None):
+        self.name = name
+        self.goal = goal
+        self.actions = actions
+    
+        self.robot_handempty = True
+        self.robot_now_holding = False
+        self.robot_base_pose = True
+    
+    # basic state
+    def state_handempty(self):
+        self.robot_handempty = True
+        self.robot_base_pose = False
+    
+    # basic state
+    def state_holding(self, objects):
+        self.robot_handempty = False
+        self.robot_now_holding = objects
+        self.robot_base_pose = False
+    
+    # basic state
+    def state_base(self):
+        self.robot_base_pose = True
+    
+    def pick(self, obj, bin):
+        # make a pre-conditions for actions using if-else phrase
+        # Action Description: pick an {object} not in the {bin}, it dose not include 'place' action
+        print(f"Pick obj.name")
+        print(f"Cannot Pick obj.name")
+        
+    def place(self, obj, bin):
+        # Action Description: place an {object} on the {bin or not bin}
+        print(f"Place obj.name in bin.name")
+        print(f"Cannot Place obj.name")
+        bin.in_bin_objects.append(obj)
+    
+    def push(self, obj, bin): 
+        # Action Description: push an {object} downward in the bin, hand must be empty when pushing
+        print(f"Push obj.name")
+        print(f"Cannot Push obj.name")
+        obj.pushed
+    
+    def fold(self, obj, bin):
+        # Action Description: fold an {object}, hand must be empty when folding
+        print(f"Fold obj.name")
+        print(f"Cannot Fold obj.name")
+        obj.folded
+    
+    def out(self, obj, bin):
+        # Action Description: pick an {object} in {bin} and place an {object} on platform. After the action, the robot hand is empty
+        print(f"Out obj.name from bin.name")
+        print(f"Cannot Out obj.name")
+        bin.in_bin_objects.remove(obj)
+        
+
+Please make more action pre-conditions and effect of the robot For example, if you place an object in hand, obj.in_bin=False. 
+However, if there are predicates that are mentioned in the rules but not in the object class, do not reflect those predictions in the rules.
+
+Please answer with the template below:
+---template start---
+Answer:
+```python
+# only write a code here without example instantiation
+class Robot:
+    def __init__(self, ...):
+        ...    
+    def state_handempty(self):
+        ...
+    def state_holding(self, objects):
+        ...  
+    def state_base(self):
+        ...
+```
+Reason:
+# Explain in less than 300 words why you made such robot actions
+1. pick
+2. place
+3. push
+4. fold
+5. out
+---template end---
+
+
+A: 
+```python
+# only write a code here without example instantiation
+class Robot:
+    def __init__(self, name: str = "OpenManipulator", goal: str = None, actions: dict = None):
+        self.name = name
+        self.goal = goal
+        self.actions = actions
+        self.robot_handempty = True
+        self.robot_now_holding = None
+        self.robot_base_pose = True
+
+    def state_handempty(self):
+        self.robot_handempty = True
+        self.robot_now_holding = None
+        self.robot_base_pose = False
+
+    def state_holding(self, objects):
+        self.robot_handempty = False
+        self.robot_now_holding = objects
+        self.robot_base_pose = False
+
+    def state_base(self):
+        self.robot_base_pose = True
+
+    def pick(self, obj, bin):
+        if self.robot_handempty and not obj.in_bin:
+            self.state_holding(obj)
+            print(f"Pick {obj.name}")
+        else:
+            print(f"Cannot Pick {obj.name}")
+
+    def place(self, obj, bin):
+        if self.robot_now_holding == obj:
+            self.state_handempty()
+            obj.in_bin = True
+            bin.in_bin_objects.append(obj)
+            print(f"Place {obj.name} in {bin.name}")
+        else:
+            print(f"Cannot Place {obj.name}")
+
+    def push(self, obj, bin):
+        if self.robot_handempty and obj.in_bin:
+            obj.pushed = True
+            print(f"Push {obj.name}")
+        else:
+            print(f"Cannot Push {obj.name}")
+
+    def fold(self, obj, bin):
+        if self.robot_handempty and obj.is_compressible:
+            obj.folded = True
+            print(f"Fold {obj.name}")
+        else:
+            print(f"Cannot Fold {obj.name}")
+
+    def out(self, obj, bin):
+        if obj in bin.in_bin_objects:
+            self.state_holding(obj)
+            bin.in_bin_objects.remove(obj)
+            self.state_handempty()
+            print(f"Out {obj.name} from {bin.name}")
+        else:
+            print(f"Cannot Out {obj.name}")
+```
+
+Reason:
+1. **Pick**: The precondition for picking an object is that the robot's hand must be empty and the object must not be in the bin. The effect is that the robot is now holding the object.
+2. **Place**: The precondition for placing an object is that the robot must be holding the object. The effect is that the object is placed in the bin, and the robot's hand becomes empty.
+3. **Push**: The precondition for pushing an object is that the robot's hand must be empty and the object must be in the bin. The effect is that the object is marked as pushed.
+4. **Fold**: The precondition for folding an object is that the robot's hand must be empty and the object must be compressible. The effect is that the object is marked as folded.
+5. **Out**: The precondition for taking an object out is that the object must be in the bin. The effect is that the object is removed from the bin, and the robot's hand becomes empty.
+----------------------------------------------------------------------------------------------------
+
+Q: We are now making initial state of the bin_packing. We get these information from the input images. 
+
+{0: {'name': 'red_3D_polyhedron', 'shape': '3D_polyhedron', 'color': 'red', 'predicates': ['is_compressible'], 'init_pose': 'out_box'}, 1: {'name': 'brown_3D_cylinder', 'shape': '3D_cylinder', 'color': 'brown', 'predicates': ['is_compressible'], 'init_pose': 'out_box'}, 2: {'name': 'blue_2D_triangle', 'shape': '2D_triangle', 'color': 'blue', 'predicates': ['is_plastic'], 'init_pose': 'out_box'}}
+from dataclasses import dataclass
+
+@dataclass
+class Object:
+    # Basic dataclass
+    index: int
+    name: str
+    color: str
+    shape: str
+    object_type: str  # box or obj
+    
+    # physical state of an object
+    pushed: bool
+    folded: bool
+    in_bin: bool
+    
+    # Object physical properties 
+    is_compressible: bool
+    is_plastic: bool
+    
+    # pre-conditions and effects for bin_packing task planning (max: 2)
+    is_2D: bool
+    is_3D: bool
+
+@dataclass
+class Box:
+    # Basic dataclass
+    index: int
+    name: str
+    
+    # Predicates for box
+    object_type: str  # box or obj
+    in_bin_objects: list
+
+Using the above information, Please organize the initial state of the domain in a table. 
+
+
+Please answer with the template below:
+---template start---
+### 1. Init Table
+# fill your table using objects predicates
+
+### 2. Python Codes
+# make init state into python code
+# don't include the object classes or robot class, make only objects and bin 
+# example  
+```python
+object0 = Object(index=0, name='black_3D_cuboid', color='black', shape='3D_cuboid', ...)
+object1 = Object(index=1, name='white_2D_circle', color='white', shape='2D_circle', ...)
+box = Box()
+```
+...
+
+### 3. Notes:
+# Fill your notes
+---template end---
+
+
+A: 
+---template start---
+
+### 1. Init Table
+
+| Index | Name               | Color | Shape         | Object Type | Pushed | Folded | In Bin | Is Compressible | Is Plastic | Is 2D | Is 3D |
+|-------|--------------------|-------|---------------|-------------|--------|--------|--------|-----------------|------------|-------|-------|
+| 0     | red_3D_polyhedron  | red   | 3D_polyhedron | obj         | False  | False  | False  | True            | False      | False | True  |
+| 1     | brown_3D_cylinder  | brown | 3D_cylinder   | obj         | False  | False  | False  | True            | False      | False | True  |
+| 2     | blue_2D_triangle   | blue  | 2D_triangle   | obj         | False  | False  | False  | False           | True       | True  | False |
+
+### 2. Python Codes
+
+```python
+object0 = Object(index=0, name='red_3D_polyhedron', color='red', shape='3D_polyhedron', object_type='obj', pushed=False, folded=False, in_bin=False, is_compressible=True, is_plastic=False, is_2D=False, is_3D=True)
+object1 = Object(index=1, name='brown_3D_cylinder', color='brown', shape='3D_cylinder', object_type='obj', pushed=False, folded=False, in_bin=False, is_compressible=True, is_plastic=False, is_2D=False, is_3D=True)
+object2 = Object(index=2, name='blue_2D_triangle', color='blue', shape='2D_triangle', object_type='obj', pushed=False, folded=False, in_bin=False, is_compressible=False, is_plastic=True, is_2D=True, is_3D=False)
+```
+
+### 3. Notes:
+
+- The initial state assumes that all objects are not pushed, folded, or in the bin.
+- The predicates 'is_compressible' and 'is_plastic' are used to determine the physical properties of the objects.
+- The 'is_2D' and 'is_3D' flags are set based on the shape of the objects.
+- The 'init_pose' from the input is interpreted as 'in_bin=False' since all objects are initially 'out_box'. 
+
+---template end---
+----------------------------------------------------------------------------------------------------
+
+Q: We are now making goal state of the bin_packing. Your goal is to redefine the goal state given in natural language into a table. 
+
+This is an init state table. 
+| Index | Name               | Color | Shape         | Object Type | Pushed | Folded | In Bin | Is Compressible | Is Plastic | Is 2D | Is 3D |
+|-------|--------------------|-------|---------------|-------------|--------|--------|--------|-----------------|------------|-------|-------|
+| 0     | red_3D_polyhedron  | red   | 3D_polyhedron | obj         | False  | False  | False  | True            | False      | False | True  |
+| 1     | brown_3D_cylinder  | brown | 3D_cylinder   | obj         | False  | False  | False  | True            | False      | False | True  |
+| 2     | blue_2D_triangle   | blue  | 2D_triangle   | obj         | False  | False  | False  | False           | True       | True  | False |
+
+Our goal is listed below. 
+Pack all the objects except the white ones.
+And, this is rules that when you do actions. 
+{'1': 'Before place a fragile or rigid object, compressible object should be in the box before. However, if there is no compressible object, place it. ', '2': "Don't push or fold plastic object. ", '3': 'If there is any foldable object, fold it before place it in the box', '4': 'Only push compressible objects after placing items in the bin.'}
+
+
+Using the above information, Please organize the goal state of the domain in a table. 
+
+
+Please answer with the template below:
+---template start---
+### 1. Goal Table
+# fill your table similar with initial state
+
+### 2. Notes:
+# Fill your notes
+---template end---
+
+
+A: 
+---template start---
+
+### 1. Goal Table
+
+| Index | Name               | Color | Shape         | Object Type | Pushed | Folded | In Bin | Is Compressible | Is Plastic | Is 2D | Is 3D |
+|-------|--------------------|-------|---------------|-------------|--------|--------|--------|-----------------|------------|-------|-------|
+| 0     | red_3D_polyhedron  | red   | 3D_polyhedron | obj         | False  | False  | True   | True            | False      | False | True  |
+| 1     | brown_3D_cylinder  | brown | 3D_cylinder   | obj         | False  | False  | True   | True            | False      | False | True  |
+| 2     | blue_2D_triangle   | blue  | 2D_triangle   | obj         | False  | True   | True   | False           | True       | True  | False |
+
+### 2. Notes:
+- All objects except white ones should be packed in the bin.
+- The red 3D polyhedron and brown 3D cylinder are compressible and should be placed in the bin.
+- The blue 2D triangle is plastic and should be folded before being placed in the bin.
+- The rules for actions have been followed: compressible objects are placed first, plastic objects are not pushed or folded unless specified, and foldable objects are folded before placement.
+
+---template end---
+----------------------------------------------------------------------------------------------------
+
+Q: This is the Object class, which defines both object types and predicates. 
+from dataclasses import dataclass
+
+@dataclass
+class Object:
+    # Basic dataclass
+    index: int
+    name: str
+    color: str
+    shape: str
+    object_type: str  # box or obj
+    
+    # physical state of an object
+    pushed: bool
+    folded: bool
+    in_bin: bool
+    
+    # Object physical properties 
+    is_compressible: bool
+    is_plastic: bool
+    
+    # pre-conditions and effects for bin_packing task planning (max: 2)
+    is_2D: bool
+    is_3D: bool
+
+@dataclass
+class Box:
+    # Basic dataclass
+    index: int
+    name: str
+    
+    # Predicates for box
+    object_type: str  # box or obj
+    in_bin_objects: list
+
+This is the Robot class, which includes pre-conditions and effects of actions. 
+class Robot:
+    def __init__(self, name: str = "OpenManipulator", goal: str = None, actions: dict = None):
+        self.name = name
+        self.goal = goal
+        self.actions = actions
+        self.robot_handempty = True
+        self.robot_now_holding = None
+        self.robot_base_pose = True
+
+    def state_handempty(self):
+        self.robot_handempty = True
+        self.robot_now_holding = None
+        self.robot_base_pose = False
+
+    def state_holding(self, objects):
+        self.robot_handempty = False
+        self.robot_now_holding = objects
+        self.robot_base_pose = False
+
+    def state_base(self):
+        self.robot_base_pose = True
+
+    def pick(self, obj, bin):
+        if self.robot_handempty and not obj.in_bin:
+            self.state_holding(obj)
+            print(f"Pick {obj.name}")
+        else:
+            print(f"Cannot Pick {obj.name}")
+
+    def place(self, obj, bin):
+        if self.robot_now_holding == obj:
+            self.state_handempty()
+            obj.in_bin = True
+            bin.in_bin_objects.append(obj)
+            print(f"Place {obj.name} in {bin.name}")
+        else:
+            print(f"Cannot Place {obj.name}")
+
+    def push(self, obj, bin):
+        if self.robot_handempty and obj.in_bin:
+            obj.pushed = True
+            print(f"Push {obj.name}")
+        else:
+            print(f"Cannot Push {obj.name}")
+
+    def fold(self, obj, bin):
+        if self.robot_handempty and obj.is_compressible:
+            obj.folded = True
+            print(f"Fold {obj.name}")
+        else:
+            print(f"Cannot Fold {obj.name}")
+
+    def out(self, obj, bin):
+        if obj in bin.in_bin_objects:
+            self.state_holding(obj)
+            bin.in_bin_objects.remove(obj)
+            self.state_handempty()
+            print(f"Out {obj.name} from {bin.name}")
+        else:
+            print(f"Cannot Out {obj.name}")
+
+This is the initial state represented in a python code. 
+object0 = Object(index=0, name='red_3D_polyhedron', color='red', shape='3D_polyhedron', object_type='obj', pushed=False, folded=False, in_bin=False, is_compressible=True, is_plastic=False, is_2D=False, is_3D=True)
+object1 = Object(index=1, name='brown_3D_cylinder', color='brown', shape='3D_cylinder', object_type='obj', pushed=False, folded=False, in_bin=False, is_compressible=True, is_plastic=False, is_2D=False, is_3D=True)
+object2 = Object(index=2, name='blue_2D_triangle', color='blue', shape='2D_triangle', object_type='obj', pushed=False, folded=False, in_bin=False, is_compressible=False, is_plastic=True, is_2D=True, is_3D=False)
+
+You must follow the rules: 
+{'1': 'Before place a fragile or rigid object, compressible object should be in the box before. However, if there is no compressible object, place it. ', '2': "Don't push or fold plastic object. ", '3': 'If there is any foldable object, fold it before place it in the box', '4': 'Only push compressible objects after placing items in the bin.'}
+Make an action sequence under the if __name__ == '__main__':. 
+You must make a correct action sequence. 
+An action sequence is incorrect if any of its actions with a conditional statement does not satisfy the if clause.
+
+This is the initial state table of all objects. 
+| Index | Name               | Color | Shape         | Object Type | Pushed | Folded | In Bin | Is Compressible | Is Plastic | Is 2D | Is 3D |
+|-------|--------------------|-------|---------------|-------------|--------|--------|--------|-----------------|------------|-------|-------|
+| 0     | red_3D_polyhedron  | red   | 3D_polyhedron | obj         | False  | False  | False  | True            | False      | False | True  |
+| 1     | brown_3D_cylinder  | brown | 3D_cylinder   | obj         | False  | False  | False  | True            | False      | False | True  |
+| 2     | blue_2D_triangle   | blue  | 2D_triangle   | obj         | False  | False  | False  | False           | True       | True  | False |
+
+And this is the goal state table of all objects. 
+| Index | Name               | Color | Shape         | Object Type | Pushed | Folded | In Bin | Is Compressible | Is Plastic | Is 2D | Is 3D |
+|-------|--------------------|-------|---------------|-------------|--------|--------|--------|-----------------|------------|-------|-------|
+| 0     | red_3D_polyhedron  | red   | 3D_polyhedron | obj         | False  | False  | True   | True            | False      | False | True  |
+| 1     | brown_3D_cylinder  | brown | 3D_cylinder   | obj         | False  | False  | True   | True            | False      | False | True  |
+| 2     | blue_2D_triangle   | blue  | 2D_triangle   | obj         | False  | True   | True   | False           | True       | True  | False |
+
+
+Please answer with the template below:
+---template start---
+
+if __name__ == "__main__":
+    # First, using given rules and object's states, make a task planning strategy
+    
+    # Second, make an action sequence. You should be aware of the robot action effects such as 'push' or 'out'. 
+    # a) Initialize the robot
+    robot = Robot()
+    # b) Define the box, this is an example. 
+    box = object5
+
+    # Third, after making all actions, fill your reasons according to the rules
+    ...
+    
+    # Finally, add this code    
+    print("All task planning is done")
+     
+---template end---
+    
+
+A: 
+```python
+if __name__ == "__main__":
+    # First, using given rules and object's states, make a task planning strategy
+    # Strategy:
+    # 1. Fold the blue_2D_triangle since it is foldable and should be folded before placing.
+    # 2. Place the red_3D_polyhedron in the box as it is compressible.
+    # 3. Place the brown_3D_cylinder in the box after the compressible object.
+    # 4. Place the folded blue_2D_triangle in the box.
+
+    # Second, make an action sequence. You should be aware of the robot action effects such as 'push' or 'out'. 
+    # a) Initialize the robot
+    robot = Robot()
+    # b) Define the box
+    box = Box(index=0, name='box', object_type='box', in_bin_objects=[])
+
+    # Action sequence
+    # Fold the blue_2D_triangle
+    robot.fold(object2, box)
+    
+    # Pick and place the red_3D_polyhedron
+    robot.pick(object0, box)
+    robot.place(object0, box)
+    
+    # Pick and place the brown_3D_cylinder
+    robot.pick(object1, box)
+    robot.place(object1, box)
+    
+    # Pick and place the folded blue_2D_triangle
+    robot.pick(object2, box)
+    robot.place(object2, box)
+
+    # Third, after making all actions, fill your reasons according to the rules
+    # 1. The blue_2D_triangle was folded before placing it in the box as per rule 3.
+    # 2. The red_3D_polyhedron, a compressible object, was placed first in the box as per rule 1.
+    # 3. The brown_3D_cylinder was placed after the compressible object as per rule 1.
+    # 4. The blue_2D_triangle was not pushed or folded after being placed, adhering to rule 2.
+
+    # Finally, add this code    
+    print("All task planning is done")
+```
+----------------------------------------------------------------------------------------------------
+

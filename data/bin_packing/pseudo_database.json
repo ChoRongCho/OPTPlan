@@ -1,0 +1,204 @@
+{
+  "bin_packing": {
+    "yellow_3D_cuboid": {
+      "index": 1,
+      "color": "yellow",
+      "dimension": "3D",
+      "shape": "cuboid",
+      "properties": [
+        "is_compressible"
+      ]
+    },
+    "brown_3D_cuboid": {
+      "index": 1,
+      "color": "yellow",
+      "dimension": "3D",
+      "shape": "cuboid",
+      "properties": [
+        "is_compressible"
+      ]
+    },
+    "brown_3D_cylinder": {
+      "index": 2,
+      "color": "brown",
+      "dimension": "3D",
+      "shape": "cylinder",
+      "properties": [
+        "is_compressible"
+      ]
+    },
+    "red_3D_polyhedron": {
+      "index": 3,
+      "color": "red",
+      "dimension": "3D",
+      "shape": "polyhedron",
+      "properties": [
+        "is_compressible"
+      ]
+    },
+    "black_3D_cylinder": {
+      "index": 4,
+      "color": "black",
+      "dimension": "3D",
+      "shape": "cylinder",
+      "properties": [
+        "is_rigid"
+      ]
+    },
+    "yellow_3D_cylinder": {
+      "index": 5,
+      "color": "yellow",
+      "dimension": "3D",
+      "shape": "cylinder",
+      "properties": [
+        "is_rigid"
+      ]
+    },
+    "yellow_2D_rectangle": {
+      "index": 6,
+      "color": "yellow",
+      "dimension": "2D",
+      "shape": "rectangle",
+      "properties": [
+        "is_foldable"
+      ]
+    },
+    "transparent_2D_circle": {
+      "index": 7,
+      "color": "transparent",
+      "dimension": "2D",
+      "shape": "circle",
+      "properties": [
+        "is_foldable"
+      ]
+    },
+    "white_2D_circle": {
+      "index": 7,
+      "color": "transparent",
+      "dimension": "2D",
+      "shape": "circle",
+      "properties": [
+        "is_foldable"
+      ]
+    },
+    "blue_2D_loop": {
+      "index": 8,
+      "color": "blue",
+      "dimension": "2D",
+      "shape": "loop",
+      "properties": [
+        "is_foldable"
+      ]
+    },
+    "white_2D_loop": {
+      "index": 9,
+      "color": "white",
+      "dimension": "2D",
+      "shape": "loop",
+      "properties": [
+        "is_foldable"
+      ]
+    },
+    "transparent_3D_cylinder": {
+      "index": 11,
+      "color": "transparent",
+      "dimension": "3D",
+      "shape": "cylinder",
+      "properties": [
+        "is_compressible"
+      ]
+    },
+    "white_3D_cylinder": {
+      "index": 11,
+      "color": "transparent",
+      "dimension": "3D",
+      "shape": "cylinder",
+      "properties": [
+        "is_compressible"
+      ]
+    },
+    "transparent_3D_cuboid": {
+      "index": 11,
+      "color": "transparent",
+      "dimension": "3D",
+      "shape": "cylinder",
+      "properties": [
+        "is_compressible"
+      ]
+    },
+    "green_3D_cylinder": {
+      "index": 12,
+      "color": "green",
+      "dimension": "3D",
+      "shape": "cylinder",
+      "properties": [
+        "is_rigid",
+        "is_fragile"
+      ]
+    },
+    "green_3D_cuboid": {
+      "index": 12,
+      "color": "green",
+      "dimension": "3D",
+      "shape": "cylinder",
+      "properties": [
+        "is_rigid",
+        "is_fragile"
+      ]
+    },
+    "black_1D_line": {
+      "index": 13,
+      "color": "black",
+      "dimension": "1D",
+      "shape": "linear",
+      "properties": [
+        "is_bendable"
+      ]
+    },
+    "beige_1D_line": {
+      "index": 14,
+      "color": "brown",
+      "dimension": "1D",
+      "shape": "linear",
+      "properties": [
+        "is_rigid"
+      ]
+    },
+    "gray_1D_line": {
+      "index": 14,
+      "color": "brown",
+      "dimension": "1D",
+      "shape": "linear",
+      "properties": [
+        "is_rigid"
+      ]
+    },
+    "green_1D_line": {
+    "index": 15,
+    "color": "green",
+    "dimension": "1D",
+    "shape": "linear",
+    "properties": [
+      "is_plastic"
+      ]
+    },
+    "blue_2D_triangle": {
+    "index": 16,
+    "color": "brown",
+    "dimension": "2D",
+    "shape": "triangle",
+    "properties": [
+      "is_plastic"
+      ]
+    },
+    "blue_3D_polyhedron": {
+    "index": 10,
+    "color": "brown",
+    "dimension": "3D",
+    "shape": "polyhedron",
+    "properties": [
+      "is_plastic"
+      ]
+    }
+  }
+}

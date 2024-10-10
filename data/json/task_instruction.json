@@ -8,12 +8,11 @@
       }
     },
     "rules": {
-      "place": "Before place a fragile or rigid object, soft object should be in the box if there is any soft objects. ",
-      "pick": "None",
-      "fold": "Fold objects only if they are foldable. ",
-      "push": "Only push soft objects after placing items in the bin.",
-      "out": "None"
+      "1": "Before place a fragile or rigid object, compressible object should be in the box before. However, if there is no compressible object, place it. ",
+      "2": "Don't push or fold plastic object. ",
+      "3": "If there is any foldable object, fold it before place it in the box",
+      "4": "Only push compressible objects after placing items in the bin."
     },
-    "goals": "Packing all objects into the box"
+    "goals": "Packing all objects into the box. "
   }
 }

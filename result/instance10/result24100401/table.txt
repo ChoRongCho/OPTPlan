@@ -1,0 +1,23 @@
+The Init State
+| Index | Name                  | Shape       | Color      | Object Type | Pushed | Folded | In Bin | Is Compressible | Is Foldable | Is Plastic | Is Rigid | Is Heavy | Is Fragile |
+|-------|-----------------------|-------------|------------|-------------|--------|--------|--------|-----------------|-------------|------------|----------|----------|------------|
+| 0     | transparent_2D_circle | 2D_circle   | transparent| obj         | False  | False  | False  | False           | True        | False      | False    | False    | False      |
+| 1     | black_3D_cylinder     | 3D_cylinder | black      | obj         | False  | False  | False  | False           | False       | False      | True     | False    | False      |
+| 2     | green_1D_line         | 1D_line     | green      | obj         | False  | False  | False  | False           | False       | True       | False    | False    | False      |
+| 3     | brown_3D_cuboid       | 3D_cuboid   | brown      | obj         | False  | False  | False  | True            | False       | False      | False    | False    | False      |
+| 4     | yellow_3D_cylinder    | 3D_cylinder | yellow     | obj         | False  | False  | False  | False           | False       | False      | True     | False    | False      |
+
+
+The Goal State
+| Index | Name                  | Shape       | Color      | Object Type | Pushed | Folded | In Bin | Is Compressible | Is Foldable | Is Plastic | Is Rigid | Is Heavy | Is Fragile |
+|-------|-----------------------|-------------|------------|-------------|--------|--------|--------|-----------------|-------------|------------|----------|----------|------------|
+| 0     | transparent_2D_circle | 2D_circle   | transparent| obj         | False  | False  | True   | False           | True        | False      | False    | False    | False      |
+| 1     | black_3D_cylinder     | 3D_cylinder | black      | obj         | False  | False  | True   | False           | False       | False      | True     | False    | False      |
+| 2     | green_1D_line         | 1D_line     | green      | obj         | False  | False  | False  | False           | True        | False      | False    | False    | False      |
+| 3     | brown_3D_cuboid       | 3D_cuboid   | brown      | obj         | False  | False  | True   | True            | False       | False      | False    | False    | False      |
+| 4     | yellow_3D_cylinder    | 3D_cylinder | yellow     | obj         | False  | False  | True   | False           | False       | False      | True     | False    | False      |
+
+
+		Initialize time:  1.3702
+		Planning time:  44.8299
+		Total time:  46.2001

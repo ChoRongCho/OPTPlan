@@ -1,6 +1,6 @@
 {
   "bin_packing": {
-    "name": "OpenManipulator",
+    "name": "UR5",
     "goal": "packing all object in the bin",
     "actions": {
       "pick": "pick an {object} not in the {bin}, it dose not include 'place' action",

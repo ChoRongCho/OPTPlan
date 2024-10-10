@@ -2,6 +2,7 @@ import json
 import os
 import re
 import subprocess
+import time
 from datetime import datetime
 
 from openai import OpenAI
@@ -40,9 +41,12 @@ class NewPlanner:
         self.result_dir = os.path.join(args.result_dir, self.exp_name, "result" + self.exp_number)
 
         # domain path
-        self.image_side = os.path.join(self.data_dir, self.task, "planning_new", self.exp_name, f"side_observation.png")
-        self.image_top = os.path.join(self.data_dir, self.task, "planning_new", self.exp_name, f"top_observation.png")
+        self.im_side = os.path.join(self.data_dir, self.task, "planning_v2", self.exp_name, f"side_observation.png")
+        self.im_top = os.path.join(self.data_dir, self.task, "planning_v2", self.exp_name, f"top_observation.png")
+        self.image_side = os.path.join(self.data_dir, self.task, "planning_v2", self.exp_name, f"annotated_side_observation.png")
+        self.image_top = os.path.join(self.data_dir, self.task, "planning_v2", self.exp_name, f"annotated_top_observation.png")
         self.domain_image = [self.image_top, self.image_side]
+        self.original_domain_image = [self.im_top, self.im_side]
 
         # json_dir
         self.api_json = os.path.join(self.json_dir, args.api_json)
@@ -81,10 +85,12 @@ class NewPlanner:
                                                  setting=self.setting,
                                                  version="text")
         self.grounding_dino = FindObjects(is_save=self.is_save)
+
         self.load_prompt = PromptSet(task=self.task, task_description=self.task_data["rules"], definition=self.definition)
         self.robot = RobotProve(name=self.robot_data["name"],
                                 goal=self.robot_data["goal"],
-                                actions=self.robot_data["actions"])
+                                actions=self.robot_data["actions"],
+                                gpt_interface=self.gpt_interface_vision)
 
         # init state, goal state, def_table
         self.state = {}
@@ -100,7 +106,7 @@ class NewPlanner:
 
         else:
             # use exist database
-            self.database = self.get_json_data(os.path.join(self.database_path, "all_database.json"))
+            self.database = self.get_json_data(os.path.join(self.database_path, "pseudo_database.json"))
 
     def print_args(self):
         self.table = [["Project Time", datetime.now()],
@@ -132,12 +138,18 @@ class NewPlanner:
             data = data[self.task]
         return data
 
-    def detect_object(self):
+    def detect_single_object(self):
         self.gpt_interface_vision.reset_message()
+        system_message, prompt = self.load_prompt.load_naming_module_single()
 
+    def detect_object(self):
+        # self.gpt_interface_vision.reset_message()
+        answer = self.detect_spatial_relationship()
+        time.sleep(1)
         system_message, prompt = self.load_prompt.load_naming_message()
-        self.gpt_interface_vision.add_message(role="user", content=system_message, image_url=self.domain_image)
-        self.gpt_interface_vision.add_message(role="user", content=prompt, image_url=self.domain_image)
+        self.gpt_interface_vision.add_message(role="assistant", content=answer, image_url=False)
+        self.gpt_interface_vision.add_message(role="system", content=system_message, image_url=False)
+        self.gpt_interface_vision.add_message(role="user", content=prompt, image_url=self.original_domain_image)
 
         for i in range(self.patience_repeat):
             try:
@@ -148,6 +160,17 @@ class NewPlanner:
                 return result_dict, result_list
             except:
                 raise Exception("Making expected answer went wrong. ")
+
+    def detect_spatial_relationship(self):
+        self.gpt_interface_vision.reset_message()
+        system_message, prompt = self.load_prompt.load_spatial_relationships()
+        self.gpt_interface_vision.add_message(role="system", content=system_message, image_url=False)
+        self.gpt_interface_vision.add_message(role="user", content=prompt, image_url=self.domain_image)
+        answer = self.gpt_interface_vision.run_prompt()
+
+        self.question.append(prompt)
+        self.answer.append(answer)
+        return answer
 
     def get_predicates(self, detected_object_dict, random_mode=True):
         """
@@ -166,7 +189,7 @@ class NewPlanner:
                 info["predicates"] = predicates
                 all_predicates += predicates
 
-        else:  # Do robot active prove
+        else:  # Do robot active validation
             for index, info in self.object_dict.items():
                 predicates = self.robot.get_object_predicates(self.database, info)
                 info["predicates"] = predicates
@@ -252,7 +275,7 @@ Reason:
             return result
 
         robot_class_python_script = extract_predicates(answer, "class Robot")
-
+        # print(robot_class_python_script)
         self.question.append(prompt)
         self.answer.append(answer)
         return robot_class_python_script
@@ -286,8 +309,8 @@ Reason:
             result = input_str[start:end].strip()
             return result
 
-        init_state_table = extract_table(answer, "1. Init Table\n")
-        init_state_code = extract_code(answer, "python")
+        init_state_table = extract_table(answer, "Init Table\n")
+        init_state_code = extract_code(answer, "```python\n")
         return init_state_table, init_state_code
 
     def get_goal_state(self, init_state_table):
@@ -349,33 +372,32 @@ Reason:
         planning_python_script = extract_code(answer, "python\n")
         return planning_python_script
 
-    def only_detection(self):
-        detected_object_dict, detected_object_list = self.detect_object()
-        active_predicates, object_dict = self.get_predicates(detected_object_dict, random_mode=self.random_mode)
-        if self.is_save:
-            self.check_result_folder()
-            self.log_conversation()
-        return active_predicates, object_dict
-
     def make_plan(self):
         # detect Object and make action predicates for objects
-        detected_object_dict, detected_object_list = self.detect_object()
+        detected_object_dict, _ = self.detect_object()
+        time.sleep(1)
+
         active_predicates, object_dict = self.get_predicates(detected_object_dict, random_mode=self.random_mode)
+        time.sleep(1)
 
         # integrate objects physical predicates to other predicates
         object_class_python_script = self.get_object_class(object_dict=object_dict,
                                                            active_predicates=active_predicates)
+        time.sleep(1)
 
         # make robot action conditions
         robot_class_python_script = self.get_robot_action_conditions(object_class_python_script)
+        time.sleep(1)
 
         # make an init state
         init_state_table, init_state_code = self.get_init_state(object_dict=object_dict,
                                                                 object_python=object_class_python_script,
                                                                 robot_python=robot_class_python_script)
+        time.sleep(1)
 
         # make a goal state
         goal_state_table = self.get_goal_state(init_state_table=init_state_table)
+        time.sleep(1)
 
         # direct planning from objects
         planning_python_script = self.planning_from_domain(object_class_python_script=object_class_python_script,
@@ -407,6 +429,81 @@ Reason:
 
             with open(os.path.join(self.result_dir, "object.json"), 'w') as file:
                 json.dump(object_dict, file, indent=4)
+
+    def only_detection(self):
+        detected_object_dict, detected_object_list = self.detect_object()
+        active_predicates, object_dict = self.get_predicates(detected_object_dict, random_mode=self.random_mode)
+        if self.is_save:
+            self.check_result_folder()
+            self.log_conversation()
+        return active_predicates, object_dict
+
+    def only_detection_2(self):
+        detected_object_dict, detected_object_list = self.detect_object()
+        active_predicates, object_dict = self.get_predicates(detected_object_dict, random_mode=self.random_mode)
+        if self.is_save:
+            self.check_result_folder()
+            self.log_conversation()
+        return detected_object_dict
+
+    def make_plan_2(self, dict_obj):
+        active_predicates, object_dict = self.get_predicates(dict_obj, random_mode=self.random_mode)
+        time.sleep(1)
+
+        # integrate objects physical predicates to other predicates
+        object_class_python_script = self.get_object_class(object_dict=object_dict,
+                                                           active_predicates=active_predicates)
+        time.sleep(1)
+
+        # make robot action conditions
+        robot_class_python_script = self.get_robot_action_conditions(object_class_python_script)
+        time.sleep(1)
+
+        # make an init state
+        init_state_table, init_state_code = self.get_init_state(object_dict=object_dict,
+                                                                object_python=object_class_python_script,
+                                                                robot_python=robot_class_python_script)
+        time.sleep(1)
+
+        # make a goal state
+        goal_state_table = self.get_goal_state(init_state_table=init_state_table)
+        time.sleep(1)
+
+        # direct planning from objects
+        planning_python_script = self.planning_from_domain(object_class_python_script=object_class_python_script,
+                                                           robot_class_python_script=robot_class_python_script,
+                                                           init_state_python_script=init_state_code,
+                                                           init_state_table=init_state_table,
+                                                           goal_state_table=goal_state_table)
+
+        if self.is_save:
+            self.check_result_folder()
+            self.log_conversation()
+            table_path = os.path.join(self.result_dir, "table.txt")
+            with open(table_path, "w") as file:
+                file.write("The Init State\n")
+                file.write(str(init_state_table) + "\n\n\n")
+                file.write("The Goal State\n")
+                file.write(str(goal_state_table) + "\n")
+                file.close()
+
+            file_path = os.path.join(self.result_dir, "planning.py")
+            with open(file_path, "w") as file:
+                file.write(str(object_class_python_script) + "\n\n\n")
+                file.write(str(robot_class_python_script) + "\n\n")
+                file.write("    def dummy(self):\n        pass\n\n\n")
+                file.write(" # Object Initial State\n")
+                file.write(str(init_state_code) + "\n\n")
+                file.write(str(planning_python_script) + "\n")
+                file.close()
+
+            with open(os.path.join(self.result_dir, "object.json"), 'w') as file:
+                json.dump(object_dict, file, indent=4)
+
+
+
+
+
 
     def log_conversation(self):
         # log question and answer
@@ -569,88 +666,104 @@ Reason:
             file.close()
 
     def initialize_database(self, object_num: int):
+        """
+        using exist database
+
+        [total_image]
+
+        :param object_num: the number of existing object data
+        :return:
+        """
+
         print(f"Making Database... {object_num} ")
         root = os.path.join(self.database_path, "property_search_database", f"obj{object_num}")
+
         data_path = list_file(root)
         data_path = sort_files(data_path)
+
         top = data_path[1]
         side = data_path[0]
+
         new_data_path = [top, side] + data_path[2:]
-        print(new_data_path)
         for i, file_name in enumerate(new_data_path):
             file_name = os.path.join(root, file_name)
             data_path[i] = file_name
 
-        is_push, is_fold, is_pull = False, False, False
-        for data_name in data_path:
-            if "push" in data_name:
-                is_push = True
-                continue
-            if "fold" in data_name:
-                is_fold = True
-                continue
-            if "pull" in data_name:
-                is_pull = True
-                continue
+        self.only_detection()
 
-        # Use LLMs for getting object name
-        system_message1, prompt1 = self.load_prompt.load_naming_module_single()
-        self.gpt_interface_vision.reset_message()
-        self.gpt_interface_vision.add_message(role="system", content=system_message1, image_url=False)
-        self.gpt_interface_vision.add_message(role="user", content=prompt1, image_url=data_path[:1])
-        answer1 = self.gpt_interface_vision.run_prompt()
 
-        def extract_name(input_str):
-            # extract Answer part
-            start = input_str.find("Answer:") + len("Answer:")
-            end = input_str.find("\n", start)
-            name = input_str[start:end].strip()
-            return name
 
-        object_name = extract_name(answer1)
 
-        # Use LLMs for object property verification
-        system_message2, prompt2 = self.load_prompt.load_verification_message([is_push, is_fold, is_pull],
-                                                                            object_name)
-        self.gpt_interface_vision.reset_message()
-        self.gpt_interface_vision.add_message(role="system", content=system_message2, image_url=False)
-        self.gpt_interface_vision.add_message(role="user", content=prompt2, image_url=data_path)
-        answer2 = self.gpt_interface_vision.run_prompt()
-
-        def extract_predicates(input_str, target):
-            # extract Answer part
-            start = input_str.find(target) + len(target)
-            end = input_str.find("\n", start)
-            is_predicate = input_str[start:end].strip()
-            return is_predicate
-
-        predicates = []
-        for target_pred in ["rigid", "soft", "foldable", "elastic", "flexible"]:
-            is_target = extract_predicates(answer2, target_pred)
-            if "True" in is_target:
-                predicates.append("is_" + target_pred)
-
-        def extract_attributes(obj_name):
-            """
-            obj_name = "red_2D_rectangle" color, dim, shape
-            """
-            color, dim, shape = obj_name.split('_', 2)
-            return color, dim, shape
-
-        color, dim, shape = extract_attributes(object_name)
-        object_data = {
-            object_name: {
-                "color": color,
-                "dimension": dim,
-                "shape": shape,
-                "properties": predicates
-            }
-        }
-        self.db.update(object_data)
-        self.question.append(prompt1)
-        self.question.append(prompt2)
-        self.answer.append(answer1)
-        self.answer.append(answer2)
+        # is_push, is_fold, is_pull = False, False, False
+        # for data_name in data_path:
+        #     if "push" in data_name:
+        #         is_push = True
+        #         continue
+        #     if "fold" in data_name:
+        #         is_fold = True
+        #         continue
+        #     if "pull" in data_name:
+        #         is_pull = True
+        #         continue
+        #
+        # # Use LLMs for getting object name
+        # system_message1, prompt1 = self.load_prompt.load_naming_module_single()
+        # self.gpt_interface_vision.reset_message()
+        # self.gpt_interface_vision.add_message(role="system", content=system_message1, image_url=False)
+        # self.gpt_interface_vision.add_message(role="user", content=prompt1, image_url=data_path[:1])
+        # answer1 = self.gpt_interface_vision.run_prompt()
+        #
+        # def extract_name(input_str):
+        #     # extract Answer part
+        #     start = input_str.find("Answer:") + len("Answer:")
+        #     end = input_str.find("\n", start)
+        #     name = input_str[start:end].strip()
+        #     return name
+        #
+        # object_name = extract_name(answer1)
+        #
+        # # Use LLMs for object property verification
+        # system_message2, prompt2 = self.load_prompt.load_verification_message([is_push, is_fold, is_pull],
+        #                                                                     object_name)
+        # self.gpt_interface_vision.reset_message()
+        # self.gpt_interface_vision.add_message(role="system", content=system_message2, image_url=False)
+        # self.gpt_interface_vision.add_message(role="user", content=prompt2, image_url=data_path)
+        # answer2 = self.gpt_interface_vision.run_prompt()
+        #
+        # def extract_predicates(input_str, target):
+        #     # extract Answer part
+        #     start = input_str.find(target) + len(target)
+        #     end = input_str.find("\n", start)
+        #     is_predicate = input_str[start:end].strip()
+        #     return is_predicate
+        #
+        # predicates = []
+        # for target_pred in ["rigid", "soft", "foldable", "elastic", "flexible"]:
+        #     is_target = extract_predicates(answer2, target_pred)
+        #     if "True" in is_target:
+        #         predicates.append("is_" + target_pred)
+        #
+        # def extract_attributes(obj_name):
+        #     """
+        #     obj_name = "red_2D_rectangle" color, dim, shape
+        #     """
+        #     color, dim, shape = obj_name.split('_', 2)
+        #     return color, dim, shape
+        #
+        # color, dim, shape = extract_attributes(object_name)
+        # object_data = {
+        #     object_name: {
+        #         "color": color,
+        #         "dimension": dim,
+        #         "shape": shape,
+        #         "properties": predicates
+        #     }
+        # }
+        # self.db.update(object_data)
+        # self.question.append(prompt1)
+        # self.question.append(prompt2)
+        # self.answer.append(answer1)
+        # self.answer.append(answer2)
 
     def save_db(self):
         with open(os.path.join(self.database_path, "database_new.json"), 'w') as file:

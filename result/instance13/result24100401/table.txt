@@ -1,0 +1,21 @@
+The Init State
+| Index | Name                  | Shape       | Color      | Object Type | Pushed | Folded | In Bin | Is Compressible | Is Foldable | Is Plastic | Is Rigid | Is Placed | Is Stable |
+|-------|-----------------------|-------------|------------|-------------|--------|--------|--------|-----------------|-------------|------------|----------|-----------|-----------|
+| 0     | transparent_3D_cuboid | 3D_cuboid   | transparent| obj         | False  | False  | False  | True            | False       | False      | False    | False     | False     |
+| 1     | blue_2D_triangle      | 2D_triangle | blue       | obj         | False  | False  | False  | False           | False       | True       | False    | False     | False     |
+| 2     | yellow_3D_cylinder    | 3D_cylinder | yellow     | obj         | False  | False  | False  | False           | False       | False      | True     | False     | False     |
+| 3     | white_2D_circle       | 2D_circle   | white      | obj         | False  | False  | False  | False           | True        | False      | False    | False     | False     |
+
+
+The Goal State
+| Index | Name                  | Shape       | Color      | Object Type | Pushed | Folded | In Bin | Is Compressible | Is Foldable | Is Plastic | Is Rigid | Is Placed | Is Stable |
+|-------|-----------------------|-------------|------------|-------------|--------|--------|--------|-----------------|-------------|------------|----------|-----------|-----------|
+| 0     | transparent_3D_cuboid | 3D_cuboid   | transparent| obj         | False  | False  | True   | True            | False       | False      | False    | True      | True      |
+| 1     | blue_2D_triangle      | 2D_triangle | blue       | obj         | False  | True   | True   | False           | False       | True       | False    | True      | True      |
+| 2     | yellow_3D_cylinder    | 3D_cylinder | yellow     | obj         | False  | False  | True   | False           | False       | False      | True     | True      | True      |
+| 3     | white_2D_circle       | 2D_circle   | white      | obj         | False  | False  | False  | False           | True        | False      | False    | False     | False     |
+
+
+		Initialize time:  1.3682
+		Planning time:  46.1746
+		Total time:  47.5428

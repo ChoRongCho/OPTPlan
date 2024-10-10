@@ -26,10 +26,11 @@
 
     "properties": [
     "is_fragile: the object is easily breakable or delicate.\n",
-    "is_rigid: the object is stiff and does not bend easily.\n",
-    "is_soft: the object is pliable and does not break down. this is only for 3D objects. \n",
-    "is_foldable: the object can be folded without being damaged.\n",
-    "is_elastic: the object can return to its original shape after being stretched or compressed.\n"
+    "is_rigid: the object is stiff and does not deform easily.\n",
+    "is_bendable: the 1D object can be flexed without breaking or cracking:. \n",
+    "is_foldable: the 2D object can be folded without being damaged.\n",
+    "is_compressible: the 3D object can pressed into a smaller space.\n",
+    "is_plastic: the object can be shaped and retains the new form.\n"
     ]
     }
 }
