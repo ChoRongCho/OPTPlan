@@ -3,11 +3,11 @@
     "name": "UR5",
     "goal": "packing all object in the bin",
     "actions": {
-      "pick": "pick an {object} not in the {bin}, it dose not include 'place' action",
-      "place": "place an {object} on the {bin or not bin}",
-      "push": "push an {object} downward in the bin, hand must be empty when pushing",
-      "fold": "fold an {object}, hand must be empty when folding",
-      "out": "pick an {object} in {bin} and place an {object} on platform. After the action, the robot hand is empty"
+      "pick": "pick an object not in the bin, it dose not include 'place' action",
+      "place": "place an object on the bin",
+      "push": "push a 3D compressible object (not bendable) downward in the bin, hand must be empty when pushing",
+      "fold": "fold a 2D foldable object (not bendalbe), hand must be empty when folding",
+      "out": "pick an object in bin and place an object on platform. After the action, the robot hand is empty"
     }
   },
   "blocksworld": {

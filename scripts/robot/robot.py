@@ -19,16 +19,21 @@ class Robot:
 
         self.active_predicates_list = ["is_fragile",
                                        "is_rigid",
-                                       "is_soft",
+                                       "is_bendable",
                                        "is_foldable",
-                                       "is_elastic"]
+                                       "is_compressible",
+                                       "is_plastic"]
 
         self.def_table = [["Predicates List", "Definition"],
-                          [self.active_predicates_list[0], "the fact of tending to break or be damaged easily"],
-                          [self.active_predicates_list[1], "the fact of being very strict and difficult to change"],
-                          [self.active_predicates_list[2], "the quality of changing shape easily when pressed"],
-                          [self.active_predicates_list[3], "the ability to bend easily without breaking"],
-                          [self.active_predicates_list[4], "the quality of returning to its original size and shape"]]
+                          [self.active_predicates_list[0], "the object is easily breakable or delicate."],
+                          [self.active_predicates_list[1], "the object is stiff and does not deform easily."],
+                          [self.active_predicates_list[2], "the 1D object can be flexed without breaking or cracking"],
+                          [self.active_predicates_list[3], "the 2D object can be folded without being damaged."],
+                          [self.active_predicates_list[4], "the 3D object can pressed into a smaller space."],
+                          [self.active_predicates_list[5], "the object can be shaped and retains the new form."]
+                          ]
+
+
 
     def print_definition_of_predicates(self):
         # print(tabulate(tabular_data=self.def_table, headers="firstrow", tablefmt="psql"))

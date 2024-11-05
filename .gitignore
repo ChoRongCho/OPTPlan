@@ -13,3 +13,5 @@ scripts/instance_generator
 scripts/visual_interpreting
 /data/temp_dataset
 /data/temp_dataset2
+result
+result_v2

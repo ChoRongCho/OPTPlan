@@ -58,7 +58,7 @@ class NewPythonPlanner(NewPlanner):
     def plan(self):
         self.make_plan()
 
-    def pseudo_plan(self):
+    def pseudo_plan(self, inst_num: int, obj_python_class):
         """
         test with random goal and constraints and without visual detection
         only for task planning
@@ -66,8 +66,8 @@ class NewPythonPlanner(NewPlanner):
         :return: planning code
         """
         task_data = self.task_data
-        task_data["goals"] = GOALS[self.exp_name - 1]
-        self.make_plan_2(DICT_LIST[self.exp_name - 1])
+        task_data["goals"] = GOALS[inst_num - 1]
+        self.make_plan_2(DICT_LIST[inst_num - 1])
 
     def run(self):
         file_path = os.path.join(self.result_dir, "planning.py")
@@ -95,3 +95,5 @@ class NewPythonPlanner(NewPlanner):
                 print("Re-Planning is done. ")
                 break
         print("Maximum replanning number exceeded. ")
+
+

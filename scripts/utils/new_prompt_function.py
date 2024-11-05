@@ -2,45 +2,14 @@ from scripts.utils.utils import int_to_ordinal
 
 
 class PromptSet:
-    def __init__(self, task, task_description, definition):
+    def __init__(self, task, constraints, definition):
         self.task = task
-        self.task_description = task_description
+        self.constraints = constraints
         self.definition = definition
 
         self.def_shape = "".join(self.definition["shape"])
         self.def_property = "".join(self.definition["properties"])
         self.def_dimension = "".join(self.definition["dimension"])
-
-    def load_naming_module_single(self):
-        system_message = f"You are a vision AI designed to describe the shape and color of objects for {self.task}. " + \
-                         "Analyze the given images of the objects and accurately describe their size and color. " + \
-                         "Use the provided classification table to categorize the objects, " + \
-                         "adhering strictly to the given classifications rather than relying on common sense."
-
-        prompt = f"""
-The first image shows a top view of objects (the one which is the closest to the center of the image) while the second image shows a side view of them.
-Please identify the shapes, dimensions, and colors of the object based on these images according to the definitions in "[Definitions of dimensions and shapes]" below.
-Your answer must follow the naming convention which is "color_dimension_shape" (e.g., red_3D_cuboid or black_2D_ring).
-Ensure that there is no contradiction between the shape and dimension. For example, "3D" and "circle" are not compatible according to their definitions in "[Definitions of dimensions and shapes]".
-
-[Definitions of dimensions and shapes]
-Dimension
-{self.def_dimension}
-
-Shape
-{self.def_shape}
-
-Your answer must use the template below:
-
-Please answer with the template below:
----template start---
-Answer: red_3D_cuboid, black_2D_ring or etc  # these are examples for your answer format
-
-Descriptions about the object in the scene
-*your descriptions in 200 words
----template end---
-"""
-        return system_message, prompt
 
     def load_spatial_relationships(self):
         system_message = f"You are a vision AI designed to describe the spatial relationships of the objects. "
@@ -94,8 +63,8 @@ Please answer with the template below:
                          "adhering strictly to the given classifications rather than relying on common sense."
 
         prompt = f"""
-Now that you've obtained the spatial information of the objects, you need to describe each object's shape, color, and dimensions.
-And for clarity, I will provide the original images. Please identify the shapes, dimensions, and colors of the object based on these images according to the definitions in "[Definitions of dimensions and shapes]" below.
+Now that you've obtained the spatial information of the objects, you need to describe shape, color, and dimension of each object.
+And for clarity, I will provide the original images. Please identify the shape, dimension, and color of each object based on these images according to the definitions in "[Definitions of dimensions and shapes]" below.
 Your answer must follow the naming convention which is "color_dimension_shape" (e.g., red_3D_cuboid or black_2D_ring).
 Ensure that there is no contradiction between the shape and dimension. For example, "1D" and "loop" or "3D" and "circle" are not compatible according to their definitions in "[Definitions of dimensions and shapes]".
 
@@ -151,44 +120,41 @@ class Object:
     # Object physical properties 
     
     # pre-conditions and effects for {self.task} task planning (max: {max_predicates})
-
-@dataclass
-class Box:
-    # Basic dataclass
-    index: int
-    name: str
-    
-    # Predicates for box
-    object_type: str  # box or obj
-    in_bin_objects: list
-
 """
         prompt += "However, we cannot complete a planning with this dataclass predicate alone" + \
                   f" which means that we have to add other predicates that fully describe {self.task} task. \n"
 
         return system_message, prompt
 
-    def load_prompt_robot_action(self,
-                                 object_class_python_script,
-                                 robot_action,
-                                 task_instruction):
-
+    def load_prompt_robot_action_prev(self, object_class_python_script):
         system_message = f"""
-You are an action designer responsible for strictly defining the preconditions and effects of the robot's actions for {self.task} task.
-When defining a robot action, you should refer exclusively to the given rules. 
-Based on the action definitions, write the pre-conditions and effects of the actions in Python scripts accordingly. 
-Be sure to follow the template below.
+Be sure to follow the template below, and follow the given action descriptions and constraints strictly.
 """
-
-        prompt = ("Our current task is to create actions for the robot, similar to the domain file in PDDL. "
-                  "The parts corresponding to the types of objects and predicates are provided as a class object, as shown below.")
-        prompt += f"""{object_class_python_script}\n\n"""
-
-        prompt += ("Our goal is to define the pre-conditions and effects for the robot's actions, similar to how they are done in PDDL. \n"
-                   "Definitions of pre-conditions and effects in natural language are provided in each action in the basic "
-                   "Robot class below. Please refer to them to create actions.")
+        prompt = ("Our goal is to define the pre-conditions and effects for the robot's actions, "
+                  "similar to how they are done in PDDL. \n")
 
         prompt += f"""
+{object_class_python_script}\n\n
+"""
+        prompt += "This is an object class we should refer. \n"
+        prompt += "Note that, a bendable object (1D) cannot be applied folding action to foldable object (2D)."
+        prompt += "Also, a bendable object (1D) cannot be applied pushing action compressible object (3D)."
+        prompt += "Are you ready to make a robot action? Answer in 200 words."
+
+        return system_message, prompt
+
+    def load_prompt_robot_action(self,
+                                 object_class_python_script,
+                                 robot_action):
+
+        system_message = f"""_"""
+
+        prompt = ("Now you have to make precondtions and effect of actions based on class Object."
+                  "Please refer to them to create actions. \n")
+
+        prompt += f"""
+{object_class_python_script}\n
+
 class Robot:
     def __init__(self,
                  name: str = "OpenManipulator",
@@ -229,16 +195,18 @@ class Robot:
         print(f"Cannot Place obj.name")
         bin.in_bin_objects.append(obj)
     
-    def push(self, obj, bin): 
+    def push(self, obj, bin):
+        # !!!Note1: bendable is not compressible. Do not apply pushing action to a 1D bendable object
         # Action Description: {robot_action["push"]}
         print(f"Push obj.name")
-        print(f"Cannot Push obj.name")
+        print(f"Cannot Push obj.name") # (if object is not compressible)
         obj.pushed
     
     def fold(self, obj, bin):
+        # !!!Note2: bendable is not foldable. Do not apply folding action to a 1D bendable object
         # Action Description: {robot_action["fold"]}
         print(f"Fold obj.name")
-        print(f"Cannot Fold obj.name")
+        print(f"Cannot Fold obj.name") # (if object is not foldable)
         obj.folded
     
     def out(self, obj, bin):
@@ -248,11 +216,17 @@ class Robot:
         bin.in_bin_objects.remove(obj)
         \n\n"""
 
+        prompt += "Additionally, you must satisfy the following constraints.\n"
+        for i, rule in enumerate(list(self.constraints.values())):
+            prompt += f"{i + 1}: {rule}\n"
+
         prompt += "Please make more action pre-conditions and effect of the robot "
         prompt += f"For example, if you place an object in hand, obj.in_bin=False. \n"
         prompt += "However, if there are predicates that are mentioned in the rules but not in the object class, " + \
                   "do not reflect those predictions in the rules."
         prompt += """
+!!!Note1: bendable is not compressible
+!!!Note2: bendable is not foldable
 
 Please answer with the template below:
 ---template start---
@@ -269,13 +243,6 @@ class Robot:
     def state_base(self):
         ...
 ```
-Reason:
-# Explain in less than 300 words why you made such robot actions
-1. pick
-2. place
-3. push
-4. fold
-5. out
 ---template end---
 """
         return system_message, prompt
@@ -286,7 +253,7 @@ Reason:
 
         system_message = ("You are going to organize the given content in a table. "
                           "These tasks are for defining initial states. ") + \
-                          "Also, you should follow the template below. "
+                         "Also, you should follow the template below. "
 
         prompt = f"We are now making initial state of the {self.task}. We get these information from the input images. \n\n"
         prompt += f"{object_dict}\n"
@@ -345,52 +312,52 @@ Please answer with the template below:
 
         return system_message, prompt
 
-    def load_prompt_planning(self,
-                             object_class_python_script: str,
-                             robot_class_python_script: str,
-                             init_state_python_script: str,
-                             init_state_table: str,
-                             goal_state_table: str,
-                             rules: dict):
-
-        system_message = (f"Your role is to create an action sequence for {self.task} similar to PDDL, "
-                          f"using the given Object class (which includes types and predicates), "
-                          f"the Robot class (which includes actions), as well as the initial and goal states."
-                          f"The action sequence consists of actions and must start from the initial state and end at the goal state."
-                          f"An action incurs a transition between states where each state describes objects using predicates and properties."
-                          f"The initial state will be provided as Python code, and you need to use the action functions "
-                          f"defined in the Robot class to generate an action sequence that reaches the goal state.")
-        system_message += "Also, you should follow the template below. "
-
-        prompt = "This is the Object class, which defines both object types and predicates. \n"
+    def load_prompt_planning_prev(self,
+                                  object_class_python_script: str,
+                                  robot_class_python_script: str,
+                                  init_state_python_script: str,
+                                  goal_state_table: str):
+        system_message = f"Don't fold bendable object"
+        prompt = "Refer this code. \n\n"
         prompt += f"{object_class_python_script}\n\n"
-        prompt += "This is the Robot class, which includes pre-conditions and effects of actions. \n"
         prompt += f"{robot_class_python_script}\n\n"
-        prompt += "This is the initial state represented in a python code. \n"
         prompt += f"{init_state_python_script}\n\n"
+        prompt += f"And this is the goal state table of all objects you should reach. \n{goal_state_table}\n\n"
+        prompt += "Note that, a bendable object (1D) cannot be applied folding action to foldable object (2D)."
+        prompt += "Also, a bendable object (1D) cannot be applied pushing action compressible object (3D)."
+        prompt += "Are you ready to make a plan? Answer in 200 words."
 
-        # prompt += f"Your goal is {self.task_description}. \n"
-        prompt += "You must follow the rules: \n"
-        prompt += f"{rules}\n"
+        return system_message, prompt
 
-        prompt += "Make an action sequence under the if __name__ == '__main__':. \nYou must make a correct action sequence. \n"
-        prompt += "An action sequence is incorrect if any of its actions with a conditional statement does not satisfy the if clause.\n"
-        prompt += (f"\nThis is the initial state table of all objects. \n{init_state_table}\n\n"
-                   f"And this is the goal state table of all objects. \n{goal_state_table}\n\n")
+    def load_prompt_planning(self):
+
+        system_message = f"_"
+        prompt = "Before start, you must follow the rules: \n"
+        for i, rule in enumerate(list(self.constraints.values())):
+            prompt += f"{i + 1}: {rule}\n"
 
         prompt += f"""
+# !!!Note1: Do not push a bendable or foldable object. Bendable, Foldable <= Cannot apply pushing action
+# !!!Note2: Do not fold a bendable or compressible object. Bendable, Compressible <= Cannot apply folding action
+# !!!Note3: You can do folding action only if robot hand is empty
+# Fold the black_1D_line since it is bendable <--- it is wrong!!!
+# Bendable is not foldable
+
 Please answer with the template below:
 ---template start---
 
 if __name__ == "__main__":
     # First, using given rules and object's states, make a task planning strategy
+    # Fold the black_1D_line since it is bendable <--- it is wrong!!!
     
-    # Second, make an action sequence. You should be aware of the robot action effects such as 'push' or 'out'. 
-    # a) Initialize the robot
-    robot = Robot()
-    # b) Define the box, this is an example. 
-    box = object5
-
+    # Second, make an action sequence.
+    # a) Initialize the robot and the box
+    # Fold the black_1D_line since it is bendable <--- it is wrong!!!
+    robot = Robot() 
+    box = Box(...)
+    
+    # b) Action sequence
+    
     # Third, after making all actions, fill your reasons according to the rules
     ...
     
@@ -398,7 +365,7 @@ if __name__ == "__main__":
     print("All task planning is done")
      
 ---template end---
-    """
+"""
 
         return system_message, prompt
 
@@ -460,7 +427,7 @@ Here, I'll give you a template.
         return system_message, prompt
 
     def load_prompt_planner_feedback(self, python_script, planning_output, task_instruction, robot_action):
-        prompt = f"We made a plan for a {self.task} and our goal is {self.task_description}. \n"
+        prompt = f"We made a plan for a {self.task} and our goal is {self.constraints}. \n"
         prompt += f"Below is the Python code for it. \n\n"
         prompt += python_script + " \n"
 
@@ -526,4 +493,179 @@ Reason:
             n += 3
             prompt += m3
         prompt += end_message
+        return system_message, prompt
+
+    def load_property_probing_message_1(self):
+        system_message = "You are good assistant. Don't make assumptions; just tell it like it is."
+        prompt = "Describe about the object centered in the scene\n1. \n2. \n3. "
+
+        return system_message, prompt
+
+    def load_property_probing_message_2(self, object_name: str, action: str, property_keys: dict, before_pos=False):
+
+        # property select code
+        positive = list(property_keys[action].keys())[0]
+        if action != "recover":
+            negative = list(property_keys["None"].keys())[0]
+
+        else:
+            positive = before_pos
+            negative = list(property_keys["recover"].keys())[0]
+
+        prompt = (f"We will now probe the physical properties of objects bia "
+                  f"the interaction between the manipulator and the objects.")
+
+        prompt += f"We will now probe the object's properties. \n"
+        prompt += f"""This defines the physical properties of object we are investigating.
+{self.def_property}
+ 
+In our case, we want to investigate about {positive} and {negative}. Are you ready?
+"""
+
+        return prompt
+
+    def load_property_probing_message_3(self, object_name: str, action: str, property_keys: dict,
+                                        before_pos=False) -> str:
+        prompt = f"The images are images of {object_name}. Please refer to this image and answer.\n"
+
+        # property select code
+        positive = list(property_keys[action].keys())[0]
+        if action != "recover":
+            negative = list(property_keys["None"].keys())[0]
+
+        else:
+            positive = before_pos
+            negative = list(property_keys["recover"].keys())[0]
+
+        n = 0
+        prompt += (
+            f"We will show you the image when the robot does the action {action} on the object to verify the object is whether {positive} or {negative}"
+            f"\nThe {int_to_ordinal(n + 1)} image is just before the robot {action} the object. \n"
+            f"The {int_to_ordinal(n + 2)} image is the image when the robot is {action} the object. \n"
+            f"If the object's shape has changed in the image, consider that '{positive}' occurred during {action} action."
+            f"Does this object have '{positive}' or '{negative}' properties? \n\n")
+
+        prompt += """
+---template start---
+1. Description of 1st image:
+    - 
+    
+2. Description of 2st image:
+    - 
+    
+3. Reasoning
+    -  
+    
+4. Result
+    - Property: ''
+
+---template end---
+"""
+        return prompt
+
+    def load_property_recover_message(self, object_name: str, action: str, property_keys: dict,
+                                      before_action=False) -> str:
+        prompt = f"The images are images of {object_name}. Please refer to this image and answer.\n"
+
+        # property select code
+        if action == "recover":
+            positive = list(property_keys[before_action].keys())[0]
+            negative = list(property_keys["recover"].keys())[0]
+        else:
+            raise ValueError
+
+        n = 0
+        prompt += (
+            f"We will show you the image when the robot does the action {action} on the object to verify the object is whether {positive} or {negative}"
+            f"\nThe {int_to_ordinal(n + 1)} image is just before the robot {before_action} the object. \n"
+            f"The {int_to_ordinal(n + 2)} image is the image when the robot is {before_action} the object. \n"
+            f"The {int_to_ordinal(n + 3)} image is the image after the robot is {action} the object. \n"
+            f"If the object's shape recovers from deformation in the image, consider that '{positive}' occurred during {action}."
+            f"Does this object have '{positive}' or '{negative}' properties? \n\n")
+
+        prompt += """
+---template start---
+1. Description of 1st image:
+    - 
+
+2. Description of 2st image:
+    - 
+
+3. Reasoning
+    - 
+
+4. Result
+    - Property: ''
+
+---template end---
+"""
+        return prompt
+
+    def load_prompt_vanilla_probing(self, obj_name=False, info=False):
+        system_message = "You are good assistant"
+        prompt = f"We will now probe the object's properties. \n"
+        prompt += f"""This table defines the physical properties of the object we are investigating.
+{self.def_property}
+        
+!Note1: we do not examine precise physical property of object but for {self.task}. This mean, when we investigate the properties of an object, we refer to its irreversibility rather than its physical feasibility
+What is the property of the object? (choose only one property)
+---template start---
+1. Reasoning
+    -  
+    
+2. Result
+    - Property: ''
+
+---template end---
+
+Keep the template!!!
+"""
+        if obj_name:
+            prompt = f"We will now probe the object's properties. \n"
+            prompt += f"""This table defines the physical properties of the object we are investigating.
+{self.def_property}
+
+!Note1: we do not examine precise physical property of object but for {self.task}. This mean, when we investigate the properties of an object, we refer to its irreversibility rather than its physical feasibility
+
+object name: {obj_name}
+info
+{info}
+
+With these prior knowledge of the object, determine the property of the object. (choose only one property)
+---template start---
+1. Reasoning
+    -  
+
+2. Result
+    - Property: ''
+
+---template end---
+"""
+        return system_message, prompt
+
+    def load_prompt_vanilla_three_image(self, obj_name, action: str):
+        system_message = "You are good assistant"
+        prompt = f"We will now probe the object's properties. \n"
+        prompt += f"""This table defines the physical properties of the object we are investigating.
+{self.def_property}
+
+!Note1: we do not examine precise physical property of object but for {self.task}. This mean, when we investigate the properties of an object, we refer to its irreversibility rather than its physical feasibility
+
+object name: {obj_name}
+info
+We will show you the three images when the robot does the action {action} on the object.
+The first image is just before the robot {action} the object.
+The second image is the image when the robot {action} the object.
+The last image is the image after the robot recovers the object.
+
+With these prior knowledge of the object, determine the property of the object. (choose only one property)
+---template start---
+1. Reasoning
+    -  
+
+2. Result
+    - Property: ''
+
+---template end---
+"""
         return system_message, prompt

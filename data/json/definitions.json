@@ -25,7 +25,6 @@
     "3D: Three-dimensional object\n"],
 
     "properties": [
-    "is_fragile: the object is easily breakable or delicate.\n",
     "is_rigid: the object is stiff and does not deform easily.\n",
     "is_bendable: the 1D object can be flexed without breaking or cracking:. \n",
     "is_foldable: the 2D object can be folded without being damaged.\n",

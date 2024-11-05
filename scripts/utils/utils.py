@@ -34,6 +34,7 @@ def parse_args_v2():
     parser.add_argument("--mkdb", type=bool, default=False, help="make database")
     parser.add_argument("--max_feedback", type=int, default=1, help="number of max replanning")
     parser.add_argument("--seed", type=int, default=42, help="random seed")
+    parser.add_argument("--image_version", type=int, default=1, help="image version")
 
     args = parser.parse_args()
     return args
@@ -71,6 +72,19 @@ def parse_input(answer):
     }
 
     return output_dict, unique_objects
+
+def parse_single_name(answer):
+    lines = answer.split('\n')
+    objects_out_box = []
+    for line in lines:
+        if line.startswith("object:"):
+            objects_out_box = line.split(": ")[1].split(", ")
+
+    objects_out_box = [obj for obj in objects_out_box if obj]
+    output_dict = {
+        "Object": objects_out_box
+    }
+    return output_dict
 
 
 def merge_image(name, image_dir):
@@ -117,10 +131,11 @@ def list_file(directory):
 
 def sort_files(file_list):
     keyword_order = {
-        'base': 0,
-        'push': 1,
-        'fold': 2,
-        'pull': 3
+        'top': 0,
+        'side': 1,
+        '1': 2,
+        '2': 3,
+        '3': 4
     }
 
     def get_keyword(file_name):
@@ -204,6 +219,24 @@ def feedback_error_decoder(error):
         pass
     else:
         pass
+
+def initialize_csv_file(filename):
+    with open(filename, mode='w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        fieldnames = ['instance', '1', '2', '3', '4', '5', '6', '7', 'Total_num']
+        writer.writerow(fieldnames)
+
+def save2csv_v2(instance, object_dict, filename):
+    objects = object_dict['Objects_out_box'] + object_dict['Objects_in_box'] + object_dict['Bin']
+    objects = objects[:7]
+    total_num = len(objects)
+    objects += ['-'] * (7 - len(objects))
+
+    row = [instance] + objects + [total_num]
+
+    with open(filename, mode='a', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        writer.writerow(row)
 
 
 def save2csv(data, filename):

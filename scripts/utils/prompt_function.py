@@ -286,7 +286,7 @@ object1 = Object(index=1, name='white_2D_circle', color='white', shape='2D_circl
 
         prompt += "if __name__ == '__main__':\n\t# packing all object in the box\n\t# make a plan\n"
 
-        # prompt += f"Your goal is {self.task_description}. \n"
+        # prompt += f"Your goal is {self.constraints}. \n"
         prompt += "You must follow the rules: \n"
         prompt += f"{rules}\n"
 

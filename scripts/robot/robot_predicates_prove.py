@@ -1,5 +1,4 @@
 import os
-import cv2
 
 from scripts.robot.robot import Robot
 from scripts.utils.utils import list_file, sort_files
@@ -21,7 +20,24 @@ class RobotProve(Robot):
         self.action_3d = "push"
         self.action_recover = "recover"
 
+        self.property_keys = {
+            "bend": {"is_bendable": False},
+            "fold": {"is_foldable": False},
+            "push": {"is_compressible": False},
+            "recover": {"is_plastic": False},
+            "None": {"is_rigid": False},
+        }
+
         self.data_path = "/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/predicates_prove"
+
+    def reset_update_keys(self):
+        self.property_keys = {
+            "bend": {"is_bendable": False},
+            "fold": {"is_foldable": False},
+            "push": {"is_compressible": False},
+            "recover": {"is_plastic": False},
+            "None": {"is_rigid": False},
+        }
 
     def get_object_predicates(self, database: dict, info: dict) -> list:
         target_name: str = info['name']
@@ -94,14 +110,27 @@ class RobotProve(Robot):
     def go_to_examine_space(self, target_name):
         print(f"Move {target_name}")
 
-    def probing_action(self, action):
-        # start streaming
-        print(action)
-        return True, False
-
-
-
-
-
-
-
+    # def probing_action(self, action, images=None):
+    #     """
+    #
+    #     self.update_keys = {
+    #         "bend": {"is_bendable": False},
+    #         "fold": {"is_foldable": False},
+    #         "push": {"is_compressible": False},
+    #         "recover": {"is_plastic": False},
+    #         "None": {"is_rigid": False},
+    #     }
+    #
+    #     :param action:
+    #     :param images:
+    #     :return:
+    #     """
+    #     if images is None:
+    #         pass
+    #
+    #     # robot.do_action
+    #     else:
+    #         positive_property = self.property_keys[action]
+    #         negative_property = self.property_keys["None"]
+    #
+    #     return True, False
