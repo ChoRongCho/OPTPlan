@@ -1,3 +1,5 @@
+"""dummy"""
+
 import torch
 import transformers
 from transformers import RagTokenizer, RagRetriever, RagTokenForGeneration

@@ -3,7 +3,7 @@ import os.path
 import random
 import time
 
-from scripts.python_planner import NewPythonPlanner
+from scripts.python_planner import PythonPlanner
 from scripts.utils.utils import parse_args_v2, save2csv, save2csv_v2, initialize_csv_file
 from example import DICT_LIST, GOALS, OBJS, PROPERTIES, OCPS
 
@@ -14,7 +14,7 @@ def probing_test():
     for i in range(1):
         args.exp_number = i + 1
         args.exp_name = 101
-        planner = NewPythonPlanner(args=args)
+        planner = PythonPlanner(args=args)
 
         source = f"/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/planning_v3_probe/obj{i+1}"
         obj_name = OBJS[i]
@@ -48,7 +48,7 @@ def probing_exp():
                 time.sleep(10)
                 args.exp_number = obj_idx
                 args.exp_name = 107 + mode + iteration*1000
-                planner = NewPythonPlanner(args=args)
+                planner = PythonPlanner(args=args)
                 obj_name = OBJS[obj_idx-1]
                 if mode == 0:
                     source = f"/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/planning_v3_probe/obj{obj_idx}"
@@ -115,7 +115,7 @@ def detect_objects_only():
             for i in range(1, test_num + 1):
                 # print(f"Start a number {i} experiment")
                 args.exp_name = i
-                planner = NewPythonPlanner(args=args)
+                planner = PythonPlanner(args=args)
 
                 # """-----------Detection Module-----------"""
                 object_dict = planner.only_detection_2()
@@ -136,7 +136,7 @@ def main_v2():
 
     inst_num = 38
     total_iter = 10
-    planner = NewPythonPlanner(args=args)
+    planner = PythonPlanner(args=args)
     # start
     for iter_num in range(24110001, 24110001 + total_iter):
         planner.exp_number = str(iter_num)
@@ -191,7 +191,7 @@ def main_v2():
 #             start_time = time.time()
 #
 #             # planner = PythonPlanner(args=args)
-#             planner = NewPythonPlanner(args=args)
+#             planner = PythonPlanner(args=args)
 #             time1 = time.time()
 #             planner.plan()
 #             time2 = time.time()
@@ -227,7 +227,7 @@ def plan_result():
 
     inst_num = 38
     total_iter = 10
-    planner = NewPythonPlanner(args=args)
+    planner = PythonPlanner(args=args)
 
     for iter_num in range(24110001, 24110001 + total_iter):
         planner.exp_number = str(iter_num)
@@ -250,7 +250,7 @@ def plan_result():
 
 def re_planning():
     args = parse_args_v2()
-    planner = NewPythonPlanner(args=args)
+    planner = PythonPlanner(args=args)
     planner.feedback()
 
 

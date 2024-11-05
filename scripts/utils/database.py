@@ -97,17 +97,3 @@ class Objects:
     color: str
     object_type: str
 
-#
-# @dataclass
-# class Domain:
-#     types: dict
-#     requirements: str
-#     predicates: str
-#     actions: dict
-#
-#
-# @dataclass
-# class Problem:
-#     objects: dict
-#     init_state: dict
-#     goal_state: dict

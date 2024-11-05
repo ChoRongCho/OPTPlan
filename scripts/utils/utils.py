@@ -27,7 +27,6 @@ def parse_args_v2():
 
     # json_dir
     parser.add_argument("--api_json", type=str, default=None, help="")
-    parser.add_argument("--example_prompt_json", type=str, default=None, help="")
     parser.add_argument("--robot_json", type=str, default=None, help="")
 
     # related to problem generation and refinement
