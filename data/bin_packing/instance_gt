@@ -1,0 +1,107 @@
+OBJS = [
+    "red_3D_cuboid",
+    "white_3D_cuboid",
+    "brown_3D_cuboid",
+    "blue_3D_cylinder",
+    "white_3D_cylinder",
+    "blue_2D_rectangle",
+    "yellow_2D_rectangle",
+    "transparent_2D_circle",
+    "beige_1D_linear",
+    "black_1D_linear",
+    "gray_1D_linear",
+    "red_3D_polyhedron",
+    "brown_3D_cylinder",
+    "green_3D_cylinder"
+]
+
+OBJS[0],OBJS[1],OBJS[13]
+OBJS[0],OBJS[1],OBJS[9],OBJS[11],OBJS[12]
+OBJS[0],OBJS[4],OBJS[5],OBJS[9]
+OBJS[0],OBJS[2],OBJS[3],OBJS[6],OBJS[12]
+OBJS[0],OBJS[2],OBJS[3],OBJS[8],OBJS[11]
+OBJS[0],OBJS[2],OBJS[4],OBJS[6],OBJS[10]
+OBJS[0],OBJS[2],OBJS[5],OBJS[12]
+OBJS[0],OBJS[3],OBJS[4],OBJS[5],OBJS[6],OBJS[10],OBJS[12]
+
+OBJS[0],OBJS[3],OBJS[7],OBJS[9]
+OBJS[0],OBJS[3],OBJS[8],OBJS[12],OBJS[13]
+OBJS[0],OBJS[3],OBJS[11],OBJS[12]]
+OBJS[0],OBJS[4],OBJS[8],OBJS[11],OBJS[13]
+OBJS[0],OBJS[5],OBJS[6],OBJS[12],OBJS[13]
+OBJS[1],OBJS[2],OBJS[3],OBJS[5],OBJS[8]
+OBJS[1],OBJS[2],OBJS[4],OBJS[5],OBJS[9],OBJS[12]
+OBJS[1],OBJS[2],OBJS[4],OBJS[6],OBJS[12]]
+
+OBJS[1],OBJS[3],OBJS[4],OBJS[8],OBJS[10]
+OBJS[1],OBJS[3],OBJS[5],OBJS[10]
+OBJS[1],OBJS[4],OBJS[7],OBJS[10],OBJS[13]
+OBJS[1],OBJS[4],OBJS[8],OBJS[11],OBJS[12]
+OBJS[1],OBJS[5],OBJS[6],OBJS[7],OBJS[12]
+OBJS[1],OBJS[10],OBJS[11],OBJS[13]
+OBJS[2],OBJS[3],OBJS[4],OBJS[6],OBJS[11]
+OBJS[2],OBJS[3],OBJS[5],OBJS[7],OBJS[11],OBJS[13]
+
+OBJS[2],OBJS[3],OBJS[9],OBJS[13]
+OBJS[2],OBJS[4],OBJS[7],OBJS[10],OBJS[12]
+OBJS[2],OBJS[4],OBJS[8],OBJS[12],OBJS[13]
+OBJS[2],OBJS[5],OBJS[9],OBJS[11],OBJS[13]
+OBJS[2],OBJS[6],OBJS[7],OBJS[11],OBJS[12]
+OBJS[3],OBJS[4],OBJS[7],OBJS[9],OBJS[11],OBJS[13]
+OBJS[3],OBJS[5],OBJS[9],OBJS[10],OBJS[13]
+OBJS[4],OBJS[5],OBJS[6],OBJS[7],OBJS[11],OBJS[12]
+
+OBJS[4],OBJS[8],OBJS[10]
+OBJS[4],OBJS[9],OBJS[11]
+OBJS[5],OBJS[7],OBJS[8],OBJS[9],OBJS[12],OBJS[13]
+OBJS[6],OBJS[8],OBJS[9],OBJS[10]
+OBJS[7],OBJS[8],OBJS[9],OBJS[10],OBJS[11],OBJS[12]
+OBJS[7],OBJS[9],OBJS[11],OBJS[13]
+
+---------------------------------------------------------------------
+
+
+    "Pack all the objects except the white ones.",
+    "Pack all the objects.",
+    "Pack all the objects except plastic ones.",
+    "Pack all the objects.",
+    "Pack all the objects except the 1D ones.",
+    "Pack all the objects except the red ones.",
+    "Pack all the objects except compressible ones.",
+    "Pack all the objects.",
+    "Pack all the objects except rigid ones.",
+    "Pack all the objects except green ones.",
+    "Pack all the objects.",
+    "Pack all the objects.",
+    "Pack all the objects except the 2D ones.",
+    "Pack all the objects.",
+    "Pack all the objects.",
+    "Pack all the objects.",
+    "Pack all the objects except rigid ones.",
+    "Pack all the objects except the 2D ones.",
+    "Pack all the objects.",
+    "Pack all the objects except red ones.",
+    "Pack all the objects.",
+    "Pack all the objects.",
+    "Pack all the objects except the blue ones.",
+    "Pack all the objects except the plastic ones.",
+    "Pack all the objects.",
+    "Pack all the objects except the foldable ones.",
+    "Pack all the objects.",
+    "Pack all the objects.",
+    "Pack all the objects except the 1D ones.",
+    "Pack all the objects.",
+    "Pack all the objects.",
+    "Pack all the objects.",
+    "Pack all the objects.",
+    "Pack all the objects.",
+    "Pack all the objects.",
+    "Pack all the objects.",
+    "Pack all the objects except the 2D ones.",
+    "Pack all the objects.",
+
+
+---------------------------------------------------------------------
+
+
+
