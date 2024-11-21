@@ -3,7 +3,8 @@ import os.path
 import random
 import time
 
-from scripts.python_planner import PythonPlanner
+# from scripts.python_planner import PythonPlanner
+from scripts.python_planner import PythonPlannerV2
 from scripts.utils.utils import parse_args_v2, save2csv, save2csv_v2, initialize_csv_file
 from example import DICT_LIST, GOALS, OBJS, PROPERTIES, OCPS
 
@@ -14,7 +15,7 @@ def probing_test():
     for i in range(1):
         args.exp_number = i + 1
         args.exp_name = 101
-        planner = PythonPlanner(args=args)
+        planner = PythonPlannerV2(args=args)
 
         source = f"/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/planning_v3_probe/obj{i+1}"
         obj_name = OBJS[i]
@@ -48,7 +49,7 @@ def probing_exp():
                 time.sleep(10)
                 args.exp_number = obj_idx
                 args.exp_name = 107 + mode + iteration*1000
-                planner = PythonPlanner(args=args)
+                planner = PythonPlannerV2(args=args)
                 obj_name = OBJS[obj_idx-1]
                 if mode == 0:
                     source = f"/home/changmin/PycharmProjects/OPTPlan/data/bin_packing/planning_v3_probe/obj{obj_idx}"
@@ -97,126 +98,49 @@ def probing_exp():
     print("vanilla inter", mode2_acc_list)
     print("Ours", mode3_acc_list)
 
+
 def detect_objects_only():
     args = parse_args_v2()
+    inst_num = 38
+    total_iter = 10
 
-    test_num = 38
-    test_start = 24102800
-    while True:
-        print(f"Start a {test_start}")
-        for exp_num in range(test_start+1, test_start+4):  # 3
-            args.image_version = exp_num - test_start
-            print(f"    Try {args.image_version}")
+    save_path = "/home/changmin/PycharmProjects/OPTPlan/result_detection"
+    planner = PythonPlannerV2(args=args)
+    planner.image_version = 3
 
-            result_csv_path = os.path.join(f"/home/changmin/PycharmProjects/OPTPlan/result", f"exp{exp_num}_results.csv")
+    # start
+    for iter_num in range(24140001, 24140001 + total_iter):
+        planner.exp_number = str(iter_num)
+        result_csv_path = os.path.join(save_path, f"exp{iter_num}_results.csv")
+        initialize_csv_file(result_csv_path)
 
-            initialize_csv_file(result_csv_path)
-            args.exp_number = exp_num
-            for i in range(1, test_num + 1):
-                # print(f"Start a number {i} experiment")
-                args.exp_name = i
-                planner = PythonPlanner(args=args)
+        for i in range(1, inst_num + 1):
+            print(f"\nStart a detection instance: {i}")
+            planner.exp_name = f"instance{i}"
 
-                # """-----------Detection Module-----------"""
-                object_dict = planner.only_detection_2()
-                save2csv_v2(instance=i, object_dict=object_dict, filename=result_csv_path)
-                time.sleep(3)
-                """--------------------------------------"""
-            time.sleep(10)
-        test_start += 100
-        if test_start == 24102800 + 400:
-            break
+            """set"""
+            planner.initiating_dir()
+            planner.result_dir = os.path.join(save_path, f"instance{i}")
+            planner.image_version = 3
+
+            object_dict = planner.only_detection()
+            save2csv_v2(instance=i, object_dict=object_dict, filename=result_csv_path)
+            time.sleep(0.4)
 
 
 def main_v2():
-    begin_time = time.time()
     args = parse_args_v2()
-    max_time = 0
-    min_time = 1000000000
-
-    inst_num = 38
-    total_iter = 10
-    planner = PythonPlanner(args=args)
+    inst_num = 37
+    total_iter = 1
+    planner = PythonPlannerV2(args=args)
     # start
-    for iter_num in range(24110001, 24110001 + total_iter):
+    for iter_num in range(24140001, 24140001 + total_iter):
         planner.exp_number = str(iter_num)
-        for i in range(1, inst_num + 1):
+        for i in range(37, inst_num + 1):
             print(f"\nStart a number {i} experiment")
             planner.exp_name = f"instance{i}"
-            start_time = time.time()
             planner.initiating_dir()
-            time1 = time.time()
-
-            planner.pseudo_plan(inst_num=i, obj_python_class=OCPS)
-            time2 = time.time()
-            table_path = os.path.join(planner.result_dir, "table.txt")
-            with open(table_path, 'a') as file:
-                file.write("\n\n")
-                file.write(f"\t\tInitialize time:  {round(time1 - start_time, 4)}\n")
-                file.write(f"\t\tPlanning time:  {round(time2 - time1, 4)}\n")
-                file.write(f"\t\tTotal time:  {round(time2 - start_time, 4)}\n")
-                file.close()
-
-            if time2 - time1 > max_time:
-                max_time = round(time2 - time1, 4)
-            if time2 - time1 < min_time:
-                min_time = round(time2 - time1, 4)
-
-        end_time = time.time()
-        time.sleep(10)
-
-        if iter_num == 24110001:
-            print("\n")
-            print("-" * 99)
-            print("\tTotal consumed time (s): ", round(end_time - begin_time, 4))
-            print("\tAverage consumed time (s): ", round((end_time - begin_time) / inst_num, 4))
-    print("Max Consumed Time: ", max_time)
-    print("Min Consumed Time: ", min_time)
-
-
-# def main():
-#     begin_time = time.time()
-#     args = parse_args_v2()
-#     max_time = 0
-#     min_time = 1000000000
-#     test_num = 2
-#     for j in range(24110100, 24110100):
-#         result_csv_path = os.path.join("/home/changmin/PycharmProjects/OPTPlan/result", f"exp{j}_results.csv")
-#         args.exp_number = j
-#         test_dict = {}
-#         for i in range(1, test_num + 1):  # 40
-#             print("-" * 50)
-#             print(f"Start a number {i} experiment")
-#             args.exp_name = i
-#             start_time = time.time()
-#
-#             # planner = PythonPlanner(args=args)
-#             planner = PythonPlanner(args=args)
-#             time1 = time.time()
-#             planner.plan()
-#             time2 = time.time()
-#
-#             table_path = os.path.join(planner.result_dir, "table.txt")
-#             with open(table_path, 'a') as file:
-#                 file.write("\n\n")
-#                 file.write(f"\t\tInitialize time:  {round(time1 - start_time, 4)}\n")
-#                 file.write(f"\t\tPlanning time:  {round(time2 - time1, 4)}\n")
-#                 file.write(f"\t\tTotal time:  {round(time2 - start_time, 4)}\n")
-#                 file.close()
-#
-#             if time2 - time1 > max_time:
-#                 max_time = round(time2 - time1, 4)
-#             if time2 - time1 < min_time:
-#                 min_time = round(time2 - time1, 4)
-#
-#         end_time = time.time()
-#         time.sleep(10)
-#         print("\n")
-#         print("-" * 99)
-#         print("\tTotal consumed time (s): ", round(end_time - begin_time, 4))
-#         print("\tAverage consumed time (s): ", round((end_time - begin_time) / test_num, 4))
-#     print("Max Consumed Time: ", max_time)
-#     print("Min Consumed Time: ", min_time)
+            planner.pseudo_plan(inst_num=i)
 
 
 def plan_result():
@@ -227,12 +151,11 @@ def plan_result():
 
     inst_num = 38
     total_iter = 10
-    planner = PythonPlanner(args=args)
+    planner = PythonPlannerV2(args=args)
 
-    for iter_num in range(24110001, 24110001 + total_iter):
+    for iter_num in range(24131001, 24131001 + total_iter):
         planner.exp_number = str(iter_num)
         for i in range(1, inst_num + 1):
-            # print(f"EXP {i}")
             planner.exp_name = f"instance{i}"
             planner.initiating_dir()
             planning_output = planner.run()
@@ -243,17 +166,19 @@ def plan_result():
                 positive += 1
         print(f"Iter{iter_num}: Positive:{positive}, Negative: {negative}, Total: {positive + negative}")
 
-    print(f"Positive Rate: {round(positive / (positive + negative) * 100, 4)}")
+    print(f"Positive Rate: {round(positive / (positive + negative) * 100, 4)}%")
     for ne_inst in negative_list:
         print(ne_inst)
 
 
 def re_planning():
     args = parse_args_v2()
-    planner = PythonPlanner(args=args)
+    planner = PythonPlannerV2(args=args)
     planner.feedback()
 
 
 if __name__ == '__main__':
-    main_v2()
+    detect_objects_only()
+    # main_v2()
+    # print("\n---Start validating---\n")
     # plan_result()

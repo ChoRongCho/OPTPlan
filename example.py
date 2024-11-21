@@ -186,39 +186,46 @@ GOALS = [
     "Pack all the objects.",
     "Pack all the objects except plastic ones.",
     "Pack all the objects.",
-    "Pack all the objects except the 1D ones.",
+    "Pack all the objects.",
+
     "Pack all the objects except the red ones.",
-    "Pack all the objects except compressible ones.",
+    "Pack all the objects.",
     "Pack all the objects.",
     "Pack all the objects except rigid ones.",
     "Pack all the objects except green ones.",
+
     "Pack all the objects.",
     "Pack all the objects.",
     "Pack all the objects except the 2D ones.",
     "Pack all the objects.",
     "Pack all the objects.",
+
     "Pack all the objects.",
     "Pack all the objects except rigid ones.",
     "Pack all the objects except the 2D ones.",
     "Pack all the objects.",
     "Pack all the objects except red ones.",
+
     "Pack all the objects.",
     "Pack all the objects.",
     "Pack all the objects except the blue ones.",
     "Pack all the objects except the plastic ones.",
     "Pack all the objects.",
+
     "Pack all the objects except the foldable ones.",
     "Pack all the objects.",
     "Pack all the objects.",
     "Pack all the objects except the 1D ones.",
     "Pack all the objects.",
+
     "Pack all the objects.",
     "Pack all the objects.",
     "Pack all the objects.",
     "Pack all the objects.",
     "Pack all the objects.",
+
     "Pack all the objects.",
-    "Pack all the objects except the 2D ones.",
+    "Pack all the objects. However do not pack the brown one.",
     "Pack all the objects.",
 ]
 
@@ -342,4 +349,4 @@ def main():
 
 if __name__ == '__main__':
     for obj_dict in DICT_LIST:
-        print(len(obj_dict["Objects_out_box"]))
+        print(obj_dict["Objects_out_box"])

@@ -8,10 +8,11 @@
       }
     },
     "rules": {
-      "1": "Before place a fragile or rigid object, compressible object should be in the box before. However, if there is no compressible object, place it. ",
-      "2": "Don't push or fold plastic object. ",
-      "3": "If there is any foldable object, fold it before place it in the box",
-      "4": "Only push compressible objects after placing items in the bin."
+      "1": "Before placing a plastic object, a compressible object should be in the box before. Non-plastic objects can be placed without any constraints. ",
+      "2": "Push all compressible objects after placing them in the box. ",
+      "3": "If there is a bendalbe object, bend it before placing it in the box. ",
+      "4": "If there is a foldable object, fold it before placing it in the box. ",
+      "5": "Do not bend, fold, or push a plastic object. "
     },
     "goals": "Packing all objects into the box. "
   }

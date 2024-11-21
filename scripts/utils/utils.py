@@ -17,13 +17,13 @@ def parse_args_v2():
     parser.add_argument("--is_random", type=int, default=0, help="save the response")
 
     # experiment setting
-    parser.add_argument("--max_predicates", type=int, default=2, help="number of predicates you want to generate")
+    parser.add_argument("--max_predicates", type=int, default=1, help="number of predicates you want to generate")
     parser.add_argument("--use_database", type=bool, default=True, help="use exist database")
 
     # additional path
-    parser.add_argument("--data_dir", type=str, default="/home/changmin/PycharmProjects/OPTPlan/data", help="")
-    parser.add_argument("--json_dir", type=str, default="/home/changmin/PycharmProjects/OPTPlan/data/json", help="")
-    parser.add_argument("--result_dir", type=str, default="/home/changmin/PycharmProjects/OPTPlan/result", help="")
+    parser.add_argument("--data_dir", type=str, default="data", help="")
+    parser.add_argument("--json_dir", type=str, default="data/json", help="")
+    parser.add_argument("--result_dir", type=str, default="result_planning", help="")
 
     # json_dir
     parser.add_argument("--api_json", type=str, default=None, help="")
@@ -39,7 +39,7 @@ def parse_args_v2():
     return args
 
 
-def parse_input(answer):
+def object_parsing(answer):
     objects_out_box = []
     objects_in_box = []
     bin_content = ""

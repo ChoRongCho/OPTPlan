@@ -10,7 +10,7 @@
     "rules": {
       "1": "Before place a plastic object, compressible object should be in the box before. However, if there is no compressible object, place it.",
       "2": "Don't push or fold plastic object.",
-      "3": "If there is any foldable object, fold it before place it in the box",
+      "3": "If there is any foldable object, fold it before placing it in the box",
       "4": "Only push compressible objects after placing items in the bin."
     },
     "goals": "Pack all the objects except the white ones."

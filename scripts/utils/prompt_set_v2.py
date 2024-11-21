@@ -12,6 +12,25 @@ class PromptSet:
         self.def_property = "".join(self.definition["properties"])
         self.def_dimension = "".join(self.definition["dimension"])
 
+        self.basic_robot_states = """
+class Action:
+    def __init__(self, name: str = "UR5"):
+        self.name = name    
+        self.robot_handempty = True
+        self.robot_now_holding = False
+
+    # basic state
+    def state_handempty(self):
+        self.robot_handempty = True
+        self.robot_now_holding = False
+
+    # basic state
+    def state_holding(self, obj):
+        self.robot_handempty = False
+        self.robot_now_holding = obj
+        
+"""
+
     def load_spatial_relationships(self):
         system_message = f"You are a vision AI designed to describe the spatial relationships of the objects. "
         message = """ 
@@ -34,7 +53,7 @@ Please answer with the template below:
 |  top index  | descriptions  
 |      1      |  
 |      2      |
-  
+
 # side view
 |  side index  | descriptions
 |       1      |  
@@ -50,7 +69,7 @@ Please answer with the template below:
 
 ---template end---
 
-  
+
 """
 
         return system_message, message
@@ -91,16 +110,15 @@ Descriptions about objects in the scene
 """
         return system_message, prompt
 
-    def load_prompt_object_class(self, object_dict: dict, max_predicates):
-        system_message = f"""
-You are an AI assistant responsible for converting the properties of objects into predicates.
-Predicates for object properties will be assigned Boolean values. Please follow these rules:
+    def load_prompt_object_class(self, object_dict, max_predicates):
+        system_message = f"""You are an AI assistant responsible for converting the properties of objects into predicates used in generating an action sequence for {self.task}. The predicates for object properties will be assigned Boolean values. Please follow these rules:
 1. Do not create more predicates than the given max_predicates.
 2. Use the template provided below.
 """
         prompt = "Our goal is to define the types of objects and their predicates within the dataclass Object. \n"
         prompt += ("Here, we have the types, names, and properties of the objects recognized from the input images. "
                    "We need to use this information to complete the Object class. \n")
+
         for i, values in zip(list(object_dict.keys()), list(object_dict.values())):
             obj_name = values["name"]
             obj_pred = values["predicates"]
@@ -116,13 +134,14 @@ class Object:
     color: str
     shape: str
     object_type: str  # box or obj
-    
-    # physical state of an object
+
+    # physical state of an object for {self.task}
     in_bin: bool
-    
+
     # Object physical properties 
     
-    # pre-conditions and effects for {self.task} task planning (max: {max_predicates})
+    # Additional predicates for bin_packing (max: {max_predicates})
+
 """
         prompt += "However, we cannot complete a planning with this dataclass predicate alone" + \
                   f" which means that we have to add other predicates that fully describe {self.task} task. \n"
@@ -137,92 +156,126 @@ class Object:
         prompt += f"""
 {object_class_python_script}\n\n
 """
-        prompt += "This is an object class we should refer. \n"
-        prompt += "What is the given predicates in this code? \n"
+        prompt += "This is the object class we should reference. \n"
+        prompt += "What are the `# Object physical properties` we need to consider? Please provide an answer in 100 words. \n"
         prompt += "1. \n2. \n3. \n..."
 
+        return system_message, prompt
+
+    def load_prompt_robot_action_primitives(self, primitive: str, object_class_ps):
+        system_message = ""
+        prompt = "This is Object class you have to use. \n\n"
+        prompt += object_class_ps
+
+        prompt += ("\nDefine the preconditions and effects of actions based on the `Object` class. "
+                   "Use these to create actions. \n")
+
+        for i, rule in enumerate(list(self.constraints.values())):
+            if primitive in rule.lower():
+                if i == 0:
+                    prompt += "Additionally, ensure the following constraints are satisfied: \n"
+                prompt += f"Constraint{i + 1}: {rule}\n"
+
+        prompt += ("\nHowever, if a physical property mentioned in the constraints does not exist in the `Object` class, "
+                   f"ignore that constraint and do not include it in `def {primitive}(self, obj, bin):`. "
+                   f"Just make the function output `print('{primitive}', obj.name)` without making any assumptions. \n")
+
+        prompt += f"""
+{self.basic_robot_states}
+
+Answer:
+```python
+    # only write a `def {primitive}` here without examples and `class Action`
+    def {primitive}(self, obj, bin):
+        # Action Description: {self.primitives[primitive]}
+        if obj meets constraints:  # <- Strictly follow this `if-else` format. Remember, simplicity is key.
+            print(f"{primitive} obj.name")
+            ...effect...
+        else:
+            print(f"Cannot {primitive} obj.name")
+```
+"""
         return system_message, prompt
 
     def load_prompt_robot_action(self,
                                  object_class_python_script):
 
-        system_message = f"""_"""
-
+        system_message = "_"
         prompt = ("Now you have to make precondtions and effect of actions based on class Object and given predicates."
                   "Please refer to them to create actions. \n")
-
         prompt += f"""
-class Robot:
+class Action:
     def __init__(self, name: str = "UR5"):
         self.name = name    
         self.robot_handempty = True
         self.robot_now_holding = False
-        self.robot_base_pose = True
-    
+
     # basic state
     def state_handempty(self):
         self.robot_handempty = True
-        self.robot_base_pose = False
-    
+
     # basic state
     def state_holding(self, objects):
         self.robot_handempty = False
         self.robot_now_holding = objects
-        self.robot_base_pose = False
-    
-    # basic state
-    def state_base(self):
-        self.robot_base_pose = True
-    
+
     def pick(self, obj, bin):
-        # make a pre-conditions for actions using if-else phrase
         # Action Description: {self.primitives["pick"]}
-        print(f"Pick obj.name")
-        print(f"Cannot Pick obj.name")
-        
+        if obj satisfies constraints:  # <- Strictly follow this `if-else` format.
+            print(f"Pick obj.name in bin.name")
+            # Do not insert another if-else phrase
+            ...effect...
+        else:
+            print(f"Cannot pick obj.name")
+
     def place(self, obj, bin):
         # Action Description: {self.primitives["place"]}
-        print(f"Place obj.name in bin.name")
-        print(f"Cannot Place obj.name")
-        bin.in_bin_objects.append(obj)
-    
+        if obj satisfies constraints:
+            print(f"Place obj.name in bin.name")
+            ...effect...
+        else:
+            print(f"Cannot place obj.name")
+        
     def bend(self, obj, bin):
         # Action Description: {self.primitives["bend"]}
-        print(f"Fold obj.name")
-        print(f"Cannot Fold obj.name")
-        
+        if obj satisfies constraints:
+            print(f"Bend obj.name in bin.name")
+            ...effect...
+        else:
+            print(f"Cannot bend obj.name")
+
     def fold(self, obj, bin):
         # Action Description: {self.primitives["fold"]}
-        print(f"Fold obj.name")
-        print(f"Cannot Fold obj.name")
-        
+        if obj satisfies constraints:
+            print(f"Fold obj.name in bin.name")
+            ...effect...
+        else:
+            print(f"Cannot fold obj.name")
+
     def push(self, obj, bin):
         # Action Description: {self.primitives["push"]}
-        print(f"Push obj.name")
-        print(f"Cannot Push obj.name")
-        
-    def out(self, obj, bin):
-        # Action Description: {self.primitives["out"]}
-        print(f"Out obj.name from bin.name")
-        print(f"Cannot Out obj.name")
-        bin.in_bin_objects.remove(obj)
-        \n\n"""
+        if obj satisfies constraints:
+            print(f"Push obj.name in bin.name")
+            ...effect...
+        else:
+            print(f"Cannot push obj.name")
+        \n"""
 
-        prompt += "Additionally, you must satisfy the following constraints. \n"
+        prompt += "Additionally, you must satisfy the following constraints.\n"
         for i, rule in enumerate(list(self.constraints.values())):
             prompt += f"{i + 1}: {rule}\n"
 
-        prompt += "Please make more action preconditions and effect of the robot "
+        prompt += "Please make more action pre-conditions and effect of the robot "
         prompt += f"For example, if a robot places an object in hand, obj.in_bin=False. \n"
-        prompt += "However, if there are predicates that are mentioned in the constraints but not in the class Object, " + \
-                  "do not reflect those constraints in preconditions. \n"
+        prompt += "However, if there are predicates that are mentioned in the rules but not in the object class, " + \
+                  "do not reflect those predictions in the rules."
         prompt += """
 Please answer with the template below:
 ---template start---
 Answer:
 ```python
 # only write a code here without example instantiation
-class Robot:
+class Action:
     def __init__(self, ...):
         ...    
     def state_handempty(self):
@@ -273,25 +326,29 @@ box = Box()
 
         return system_message, prompt
 
-    def load_prompt_goal_state(self, init_state_table, goals, rules):
-        system_message = "You are going to organize the given content in a table. These tasks are for defining a goal state. " + \
-                         "Also, you should follow the template below. "
+    def load_prompt_goal_state(self, dict_obj, goals):
+        system_message = ("We are going to organize the given content in a table. "
+                          "These tasks are for defining a goal state. "
+                          "Also, you should follow the template below. ")
 
-        prompt = (f"We are now making goal state of the {self.task}. "
-                  f"Your goal is to redefine the goal state given in natural language into a table. \n\n")
-        prompt += f"This is an init state table. \n"
-        prompt += f"{init_state_table}\n\n"
-        prompt += f"Our goal is listed below. \n"
+        prompt = (f"We currently defining the goal state for the {self.task}. "
+                  f"Your task is to translate the goal state provided in natural language into a table. \n\n")
+        prompt += f"This is a collection of target objects for the {self.task} task. \n"
+        prompt += f"{dict_obj}\n\n"
+        prompt += f"Our goal is as follows: \n"
         prompt += f"{goals}\n"
-        prompt += f"And, this is rules that when you do actions. \n"
-        prompt += f"{rules}\n\n"
 
-        prompt += "\nUsing the above information, Please organize the goal state of the domain in a table. \n\n"
+        prompt += "\nUsing the information, please organize the goal state of the domain into a table. \n\n"
         prompt += """
 Please answer with the template below:
 ---template start---
 ### 1. Goal Table
-# fill your table similar with initial state
+| Index | Name | State1 | State2 | ...
+|-------|------|--------|--------|-----
+|   0   |      |  True  |  False | ...
+|   1   |      |  True  |  True  | ...
+|   2   |      |  False |  False | ...
+|  ...  |  ..  |   ..   |   ..   | ...
 
 ### 2. Notes:
 # Fill your notes
@@ -306,62 +363,63 @@ Please answer with the template below:
                                   init_state_python_script: str,
                                   goal_state_table: str):
         system_message = f"You are a good assistant"
-        prompt = "Refer this code. \n\n"
+        prompt = ("Refer the following code containing the list of actions (class Action)"
+                  " and the set of initial states of objects which are defined in class Object. \n\n")
         prompt += f"{object_class_python_script}\n\n"
         prompt += f"{robot_class_python_script}\n\n"
         prompt += f"{init_state_python_script}\n\n"
-        prompt += f"And this is the goal state table of all objects you should reach. \n{goal_state_table}\n\n"
-        prompt += "Analyze actions and an initial state in 300 words"
+        prompt += f"And this is the table of goal states where all objects should reach. \n{goal_state_table}\n\n"
+        prompt += ("Fully understand the actions in the Action class and the initial states of all objects. "
+                   "Then tell me your understanding in 300 words.")
 
         return system_message, prompt
 
     def load_prompt_planning(self):
-
         system_message = f"_"
         prompt = "Before start, you must follow the rules: \n"
         for i, rule in enumerate(list(self.constraints.values())):
-            prompt += f"{i + 1}: {rule}\n"
+            prompt += f"{i+1}: {rule}\n"
 
-        prompt += "Also, we remind the robot actions: \n"
+        prompt += "\nAlso, we remind you the robot actions: \n"
         for pri, pri_def in zip(list(self.primitives.keys()), list(self.primitives.values())):
             prompt += f"{pri}: {pri_def}\n"
 
         prompt += f"""
-
+        
 
 Please answer with the template below:
 ---template start---
 
 if __name__ == "__main__":
-    # From initial state, remind object's key properties and available actions
-    # object1: is_rigid -> pick, place, out
-    # object2: is_foldable -> pick, place, fold, out 
-    # object3: is_compressible -> pick, place, push, out
+    # First, from initial state, recall the physical properties of objects and available actions:
+    # If object1.is_rigid is True, actions pick, place are applicable
+    # If object2.is_foldable is True, actions pick, place, fold are applicable
+    # If object3.is_compressible is True, actions pick, place, push are applicable
     # ...
-    # And rewrite goal states of all objects
+    # Rewrite the goal states of all objects given in the table in the following format.
     # object1: in_bin: True
     # object2: in_bin: False 
     # object3: in_bin: True
-    
-    # Second, using given rules and object's states, make a task planning strategy
-    # !!!Note: You can do folding action only if robot hand is empty
-    
+
+    # Second, find a task plan based on the given rules and the goal states of the objects.
+    # !!Note: Common Mistakes! pick -> fold -> place (x), fold -> pick -> place (o) 
+    # The robot can perform fold action only if robot hand is empty.
+
     # Third, make an action sequence.
     # a) Initialize the robot and the box
-    robot = Robot() 
+    action = Action() 
     box = Box(...)
-    
+
     # b) Action sequence
-    
-    # Fourth, after making all actions, fill your reasons according to the rules
+
+    # Fourth, after making all actions, provide your reasoning based on the given rules.
     ...
-    
+
     # Finally, add this code    
     print("All task planning is done")
-     
+
 ---template end---
 """
-
         return system_message, prompt
 
     def load_prompt_action_feedback(self, python_script, planning_output, rules, goals):
@@ -513,7 +571,7 @@ Reason:
         prompt += f"We will now probe the object's properties. \n"
         prompt += f"""This defines the physical properties of object we are investigating.
 {self.def_property}
- 
+
 In our case, we want to investigate about {positive} and {negative}. Are you ready?
 """
 
@@ -544,13 +602,13 @@ In our case, we want to investigate about {positive} and {negative}. Are you rea
 ---template start---
 1. Description of 1st image:
     - 
-    
+
 2. Description of 2st image:
     - 
-    
+
 3. Reasoning
     -  
-    
+
 4. Result
     - Property: ''
 
@@ -601,13 +659,13 @@ In our case, we want to investigate about {positive} and {negative}. Are you rea
         prompt = f"We will now probe the object's properties. \n"
         prompt += f"""This table defines the physical properties of the object we are investigating.
 {self.def_property}
-        
+
 !Note1: we do not examine precise physical property of object but for {self.task}. This mean, when we investigate the properties of an object, we refer to its irreversibility rather than its physical feasibility
 What is the property of the object? (choose only one property)
 ---template start---
 1. Reasoning
     -  
-    
+
 2. Result
     - Property: ''
 

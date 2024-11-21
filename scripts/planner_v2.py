@@ -10,13 +10,13 @@ from tabulate import tabulate
 
 from scripts.llm_interface.gpt_interface import GPTInterpreter
 from scripts.robot.robot_predicates_prove import RobotProve
-from scripts.utils.prompt_set import PromptSet
+from scripts.utils.prompt_set_v2 import PromptSet
 from scripts.utils.utils import object_parsing, list_file, sort_files, dict_parsing, parse_single_name
 from scripts.visual_interpreting.visual_interpreter import FindObjects
 from scripts.visual_interpreting.zero_shot_cl import ZeroClassifier
 
 
-class PlannerFramework:
+class PlannerFrameworkV2:
     def __init__(self, args):
 
         # task and experiment setting
@@ -30,15 +30,16 @@ class PlannerFramework:
 
         self.is_save = args.is_save
         self.max_predicates = args.max_predicates
-        self.patience_repeat = 1
+        self.patience_repeat = 3
         self.max_replanning = args.max_feedback
         self.planning_repeat = 0
         self.random_mode = args.is_random
 
-        self.im_v = [
-            ["side_observation.png", "top_observation.png"],
-            ["naive_annotated_side_observation.png", "naive_annotated_top_observation.png"],
-            ["annotated_side_observation.png", "annotated_top_observation.png"]
+        im_v = [
+            ["side_observation.png", "top_observation.png"],  # None: version 1
+            ["naive_annotated_side_observation.png", "naive_annotated_top_observation.png"],  # BB: version 2
+            ["connected_side_observation.png", "connected_top_observation.png"],  # Graph: version 3
+            ["annotated_side_observation.png", "annotated_top_observation.png"]  # BB+Graph: version 4
         ]
         self.image_version = args.image_version
 
@@ -48,25 +49,25 @@ class PlannerFramework:
         self.data_dir = args.data_dir
         self.result_dir = os.path.join(args.result_dir, self.exp_name, "result" + self.exp_number)
 
-        # domain path
-        self.im_side = os.path.join(self.data_dir, self.task, "planning_v3", self.exp_name, f"side_observation.png")
-        self.im_top = os.path.join(self.data_dir, self.task, "planning_v3", self.exp_name, f"top_observation.png")
-        self.image_side = os.path.join(self.data_dir, self.task, "planning_v3", self.exp_name,
-                                       self.im_v[self.image_version - 1][0])
-        self.image_top = os.path.join(self.data_dir, self.task, "planning_v3", self.exp_name,
-                                      self.im_v[self.image_version - 1][1])
-        self.task_json = os.path.join(self.data_dir, self.task, "planning_v3", self.exp_name, "task_instruction.json")
+        # image path
+        self.base_path = os.path.join(self.data_dir, self.task, "planning_v3", self.exp_name)
+        self.im_side = os.path.join(self.base_path, f"side_observation.png")
+        self.im_top = os.path.join(self.base_path, f"top_observation.png")
+        self.image_side = os.path.join(self.base_path, im_v[self.image_version - 1][0])
+        self.image_top = os.path.join(self.base_path, im_v[self.image_version - 1][1])
 
-        self.domain_image = [self.image_top, self.image_side]
+        # target image
+        self.detection_image = [self.image_top, self.image_side]
         self.original_domain_image = [self.im_top, self.im_side]
+
+        # self.task_json = os.path.join(self.base_path, "task_instruction.json")
+        self.task_json = os.path.join(self.json_dir, "task_instruction.json")
 
         # json_dir
         self.api_json = os.path.join(self.json_dir, args.api_json)
-        # self.example_json = os.path.join(self.json_dir, args.example_prompt_json)
         self.example_json = False
         self.robot_json = os.path.join(self.json_dir, args.robot_json)
         self.def_json = os.path.join(self.json_dir, "definitions.json")
-        # self.task_json = os.path.join(self.json_dir, "task_instruction.json")
 
         # additional path
         self.database_path = os.path.join(self.data_dir, self.task)
@@ -95,7 +96,6 @@ class PlannerFramework:
                                                  setting=self.setting,
                                                  version="text")
         self.grounding_dino = FindObjects(is_save=self.is_save)
-
         self.load_prompt = PromptSet(task=self.task, constraints=self.task_data["rules"],
                                      definition=self.definition,
                                      primitives=self.robot_data["actions"])
@@ -114,7 +114,7 @@ class PlannerFramework:
 
         if self.args.mkdb:
             # make Database using object image
-            for obj_num in range(1, 8):
+            for obj_num in range(1, 14):
                 self.initialize_database(obj_num)
             if args.is_save:
                 self.save_db()
@@ -122,6 +122,55 @@ class PlannerFramework:
         else:
             # use exist database
             self.database = self.get_json_data(os.path.join(self.database_path, "all_database.json"))
+
+    def initiating_dir(self):
+        """
+        initialize directory
+        :return:
+        """
+        self.result_dir = os.path.join(self.args.result_dir, self.exp_name, "result" + self.exp_number)
+        im_v = [
+            ["side_observation.png", "top_observation.png"],  # None: version 1
+            ["naive_annotated_side_observation.png", "naive_annotated_top_observation.png"],  # BB: version 2
+            ["connected_side_observation.png", "connected_top_observation.png"],  # Graph: version 3
+            ["annotated_side_observation.png", "annotated_top_observation.png"]  # BB+Graph: version 4
+        ]
+
+        # image path
+        self.base_path = os.path.join(self.data_dir, self.task, "planning_v3", self.exp_name)
+        self.im_side = os.path.join(self.base_path, f"side_observation.png")
+        self.im_top = os.path.join(self.base_path, f"top_observation.png")
+        self.image_side = os.path.join(self.base_path, im_v[self.image_version - 1][0])
+        self.image_top = os.path.join(self.base_path, im_v[self.image_version - 1][1])
+
+        # target image
+        self.detection_image = [self.image_top, self.image_side]
+        self.original_domain_image = [self.im_top, self.im_side]
+
+        # json_dir
+        # self.task_json = os.path.join(self.base_path, "task_instruction.json")
+        self.task_json = os.path.join(self.json_dir, "task_instruction.json")
+
+        # additional path
+        self.database_path = os.path.join(self.data_dir, self.task)
+        self.object_list = []
+        self.db = {}
+
+        # Initialize Class for planning
+        self.answer = []
+        self.question = []
+        self.table = []
+        self.anno_image = []
+        self.state = {}
+        self.print_args()
+        self.object_dict = {}
+
+    def check_result_folder(self):
+        if not os.path.exists(self.result_dir):
+            os.makedirs(self.result_dir)
+            print(f"Directory '{self.result_dir}' created successfully.")
+        else:
+            print(f"Directory '{self.result_dir}' already exists.")
 
     def print_args(self):
         self.table = [["Project Time", datetime.now()],
@@ -131,44 +180,6 @@ class PlannerFramework:
                       ["Max Predicates", self.args.max_predicates]]
         # print(tabulate(self.table))
         self.robot.print_definition_of_predicates()
-
-    def initiating_dir(self):
-        self.result_dir = os.path.join(self.args.result_dir, self.exp_name, "result" + self.exp_number)
-
-        # domain path
-        self.im_side = os.path.join(self.data_dir, self.task, "planning_v3", self.exp_name, f"side_observation.png")
-        self.im_top = os.path.join(self.data_dir, self.task, "planning_v3", self.exp_name, f"top_observation.png")
-        self.image_side = os.path.join(self.data_dir, self.task, "planning_v3", self.exp_name,
-                                       self.im_v[self.image_version - 1][0])
-        self.image_top = os.path.join(self.data_dir, self.task, "planning_v3", self.exp_name,
-                                      self.im_v[self.image_version - 1][1])
-        # self.task_json = os.path.join(self.data_dir, self.task, "planning_v3", self.exp_name, "task_instruction.json")
-
-        self.domain_image = [self.image_top, self.image_side]
-        self.original_domain_image = [self.im_top, self.im_side]
-
-        # json_dir
-        self.api_json = os.path.join(self.json_dir, self.args.api_json)
-        self.robot_json = os.path.join(self.json_dir, self.args.robot_json)
-        self.def_json = os.path.join(self.json_dir, "definitions.json")
-        self.task_json = os.path.join(self.json_dir, "task_instruction.json")
-
-        # additional path
-        self.database_path = os.path.join(self.data_dir, self.task)
-        self.object_list = []
-        self.db = {}
-
-        # read json data
-        self.robot_data = self.get_json_data(self.robot_json)
-        self.task_data = self.get_json_data(self.task_json)
-        self.definition = self.get_json_data(self.def_json)
-
-    def check_result_folder(self):
-        if not os.path.exists(self.result_dir):
-            os.makedirs(self.result_dir)
-            print(f"Directory '{self.result_dir}' created successfully.")
-        else:
-            print(f"Directory '{self.result_dir}' already exists.")
 
     def get_api_key(self):
         with open(self.api_json, "r") as file:
@@ -199,29 +210,31 @@ class PlannerFramework:
                 raise Exception("Making expected answer went wrong. ")
 
     def detect_object(self):
-        # self.gpt_interface_vision.reset_message()
+        self.gpt_interface_vision.reset_message()
         answer = self.detect_spatial_relationship()
-        time.sleep(1)
+        time.sleep(0.5)
+
         system_message, prompt = self.load_prompt.load_naming_message()
         self.gpt_interface_vision.add_message(role="assistant", content=answer, image_url=False)
         self.gpt_interface_vision.add_message(role="system", content=system_message, image_url=False)
         self.gpt_interface_vision.add_message(role="user", content=prompt, image_url=self.original_domain_image)
 
-        for i in range(self.patience_repeat):
+        for attempt in range(self.patience_repeat):
             try:
+                print(f"Try: {attempt}")
                 answer = self.gpt_interface_vision.run_prompt()
                 result_dict, result_list = object_parsing(answer=answer)
                 self.question.append(prompt)
                 self.answer.append(answer)
                 return result_dict, result_list
-            except:
-                raise Exception("Making expected answer went wrong. ")
+            except Exception as e:
+                if attempt == self.patience_repeat - 1:
+                    raise ValueError(f"Making expected answer went wrong. Try: {attempt}")
 
     def detect_spatial_relationship(self):
-        self.gpt_interface_vision.reset_message()
         system_message, prompt = self.load_prompt.load_spatial_relationships()
         self.gpt_interface_vision.add_message(role="system", content=system_message, image_url=False)
-        self.gpt_interface_vision.add_message(role="user", content=prompt, image_url=self.domain_image)
+        self.gpt_interface_vision.add_message(role="user", content=prompt, image_url=self.detection_image)
         answer = self.gpt_interface_vision.run_prompt()
 
         self.question.append(prompt)
@@ -256,8 +269,6 @@ class PlannerFramework:
         return active_predicates
 
     def get_object_class(self, object_dict, active_predicates):
-        self.gpt_interface_text.reset_message()
-
         # load prompt
         system_message, prompt = self.load_prompt.load_prompt_object_class(object_dict=object_dict,
                                                                            max_predicates=self.max_predicates)
@@ -272,7 +283,6 @@ class PlannerFramework:
         else:
             prompt += "We don't have to consider physical properties of the object."
 
-        prompt += "You are free to add more predicates for bin_packing to class Object if necessary. \n"
         prompt += f"Add more predicates needed for {self.task} to class Object. \n"
         prompt += """
 Please answer using the template below:
@@ -285,13 +295,13 @@ Reason:
 # Explain in less than 200 words and why you made such predicates
 ---template end---
 """
-        # add message
-        self.gpt_interface_text.add_message(role="system", content=system_message, image_url=False)
-        self.gpt_interface_text.add_message(role="user", content=prompt, image_url=False)
 
         # run prompt
-        for i in range(self.patience_repeat):
+        for attempt in range(self.patience_repeat):
             try:
+                self.gpt_interface_text.reset_message()
+                self.gpt_interface_text.add_message(role="system", content=system_message, image_url=False)
+                self.gpt_interface_text.add_message(role="user", content=prompt, image_url=False)
                 answer = self.gpt_interface_text.run_prompt()
 
                 def extract_predicates(input_str, target):
@@ -302,13 +312,14 @@ Reason:
 
                 object_class_python_script = extract_predicates(answer, "python\n")
                 object_class_python_script += """
-                
+
+
 @dataclass
 class Box:
     # Basic dataclass
     index: int
     name: str
-    
+
     # Predicates for box
     object_type: str  # box or obj
     in_bin_objects: list                
@@ -316,8 +327,35 @@ class Box:
                 self.question.append(prompt)
                 self.answer.append(object_class_python_script)
                 return object_class_python_script
+
             except:
-                raise Exception("Making expected answer went wrong. ")
+                if attempt == self.patience_repeat - 1:
+                    raise ValueError("Making expected answer went wrong. ")
+
+    def get_robot_action_conditions(self, object_class_python_script):
+        self.gpt_interface_text.reset_message()
+
+        # load prompt
+        system_message, prompt = self.load_prompt.load_prompt_robot_action(
+            object_class_python_script=object_class_python_script)
+
+        # add message
+        self.gpt_interface_text.add_message(role="system", content=system_message, image_url=False)
+        self.gpt_interface_text.add_message(role="user", content=prompt, image_url=False)
+
+        # run prompt
+        answer = self.gpt_interface_text.run_prompt()
+
+        def extract_predicates(input_str, target):
+            start = input_str.find(target)
+            end = input_str.find("```", start)
+            result = input_str[start:end].strip()
+            return result
+
+        robot_class_python_script = extract_predicates(answer, "class Robot")
+        self.question.append(prompt)
+        self.answer.append(answer)
+        return robot_class_python_script
 
     def get_robot_action_conditions_v2(self, object_class_python_script):
         self.gpt_interface_text.reset_message()
@@ -351,36 +389,57 @@ class Box:
         self.answer.append(answer)
         return robot_class_python_script
 
-    def get_robot_action_conditions(self, object_class_python_script):
+    def get_robot_action_v3(self, object_class_python_script):
         self.gpt_interface_text.reset_message()
-
-        # load prompt
-        system_message, prompt = self.load_prompt.load_prompt_robot_action(
-            object_class_python_script=object_class_python_script)
-
-        # add message
+        system_message, prompt1 = self.load_prompt.load_prompt_robot_action_prev(object_class_python_script)
         self.gpt_interface_text.add_message(role="system", content=system_message, image_url=False)
-        self.gpt_interface_text.add_message(role="user", content=prompt, image_url=False)
-
-        # run prompt
-        answer = self.gpt_interface_text.run_prompt()
+        self.gpt_interface_text.add_message(role="user", content=prompt1, image_url=False)
+        answer1 = self.gpt_interface_text.run_prompt()
+        self.question.append(prompt1)
+        self.answer.append(answer1)
 
         def extract_predicates(input_str, target):
-            start = input_str.find(target)
+            start = input_str.find(target) + len(target)
             end = input_str.find("```", start)
             result = input_str[start:end].strip()
             return result
 
-        robot_class_python_script = extract_predicates(answer, "class Robot")
-        # print(robot_class_python_script)
-        self.question.append(prompt)
-        self.answer.append(answer)
+        robot_class_python_script = self.load_prompt.basic_robot_states
+
+        pairs = {
+            "pick": "in_bin",
+            "place": "in_bin",
+            "bend": "is_bendable",
+            "push": "is_compressible",
+            "fold": "is_foldable",
+        }
+
+        for action in list(self.robot_data["actions"].keys()):
+            if pairs[action] in object_class_python_script:
+                self.gpt_interface_text.reset_message()
+
+                _, prompt = self.load_prompt.load_prompt_robot_action_primitives(action, object_class_python_script)
+                self.gpt_interface_text.add_message(role="system", content=system_message, image_url=False)
+                self.gpt_interface_text.add_message(role="user", content=prompt1, image_url=False)
+                self.gpt_interface_text.add_message(role="assistant", content=answer1, image_url=False)
+                self.gpt_interface_text.add_message(role="user", content=prompt, image_url=False)
+                answer = self.gpt_interface_text.run_prompt()
+
+                self.question.append(prompt)
+                self.answer.append(answer)
+
+                grounded_action_script = extract_predicates(answer, "```python\n")
+                robot_class_python_script += "    " + grounded_action_script
+                robot_class_python_script += "\n\n"
+                time.sleep(0.5)
+            else:
+                robot_class_python_script += f"    def {action}(self, obj, bin):\n        print('Cannot {action}')\n\n"
+
         return robot_class_python_script
 
     def get_init_state(self,
                        object_dict,
-                       object_python,
-                       robot_python):
+                       object_python):
 
         self.gpt_interface_text.reset_message()
         system_message, prompt = self.load_prompt.load_prompt_init_state(object_dict=object_dict,
@@ -410,13 +469,12 @@ class Box:
         init_state_code = extract_code(answer, "```python\n")
         return init_state_table, init_state_code
 
-    def get_goal_state(self, init_state_table):
+    def get_goal_state(self, dict_obj):
         self.gpt_interface_text.reset_message()
 
         # load prompt
-        system_message, prompt = self.load_prompt.load_prompt_goal_state(init_state_table,
-                                                                         self.task_data["goals"],
-                                                                         self.task_data["rules"])
+        system_message, prompt = self.load_prompt.load_prompt_goal_state(dict_obj,
+                                                                         self.task_data["goals"])
 
         # add message
         self.gpt_interface_text.add_message(role="system", content=system_message, image_url=False)
@@ -490,12 +548,12 @@ class Box:
         self.answer.append(answer)
 
         def extract_code(input_str, target):
-            start = input_str.find(target) + len(target)
+            start = input_str.find(target)
             end = input_str.find("```", start)
             result = input_str[start:end].strip()
             return result
 
-        planning_python_script = extract_code(answer, "python\n")
+        planning_python_script = extract_code(answer, "if __name")
         return planning_python_script
 
     def make_plan(self):
@@ -512,17 +570,17 @@ class Box:
         time.sleep(1)
 
         # make robot action conditions
-        robot_class_python_script = self.get_robot_action_conditions(object_class_python_script)
+        # robot_class_python_script = self.get_robot_action_conditions(object_class_python_script)
+        robot_class_python_script = self.get_robot_action_conditions_v2(object_class_python_script)
         time.sleep(1)
 
         # make an init state
         init_state_table, init_state_code = self.get_init_state(object_dict=object_dict,
-                                                                object_python=object_class_python_script,
-                                                                robot_python=robot_class_python_script)
+                                                                object_python=object_class_python_script)
         time.sleep(1)
 
         # make a goal state
-        goal_state_table = self.get_goal_state(init_state_table=init_state_table)
+        goal_state_table = self.get_goal_state(dict_obj=detected_object_dict)
         time.sleep(1)
 
         # direct planning from objects
@@ -544,9 +602,9 @@ class Box:
 
             file_path = os.path.join(self.result_dir, "planning.py")
             with open(file_path, "w") as file:
-                file.write(str(object_class_python_script) + "\n\n")
-                file.write(str(robot_class_python_script) + "\n\n")
-                file.write("    def dummy(self):\n        pass\n\n\n")
+                file.write(str(object_class_python_script) + "\n\n\n")
+                file.write(str(robot_class_python_script) + "\n")
+                file.write("    def dummy(self):\n        pass\n\n")
                 file.write(" # Object Initial State\n")
                 file.write(str(init_state_code) + "\n\n")
                 file.write(str(planning_python_script) + "\n")
@@ -557,33 +615,12 @@ class Box:
 
     def only_detection(self):
         detected_object_dict, detected_object_list = self.detect_object()
-        active_predicates, object_dict = self.get_predicates(detected_object_dict, random_mode=self.random_mode)
-        if self.is_save:
-            self.check_result_folder()
-            self.log_conversation()
-        return active_predicates, object_dict
-
-    def only_detection_2(self):
-        detected_object_dict, detected_object_list = self.detect_object()
         if self.is_save:
             self.check_result_folder()
             self.log_conversation()
         return detected_object_dict
 
-    def make_robot_action2(self, dict_obj):
-        active_predicates, object_dict = self.get_predicates(dict_obj, random_mode=self.random_mode)
-        time.sleep(0.5)
-
-        # integrate objects physical predicates to other predicates
-        object_class_python_script = self.get_object_class(object_dict=object_dict,
-                                                           active_predicates=active_predicates)
-        time.sleep(0.5)
-
-        # make robot action conditions
-        robot_class_python_script = self.get_robot_action_conditions(object_class_python_script)
-        time.sleep(0.5)
-
-    def make_plan_2(self, dict_obj):
+    def make_pseudo_plan(self, dict_obj):
         active_predicates = self.get_predicates(dict_obj, random_mode=self.random_mode)
         time.sleep(0.5)
 
@@ -592,18 +629,19 @@ class Box:
                                                            active_predicates=active_predicates)
         time.sleep(0.5)
 
-        # # make robot action conditions
-        robot_class_python_script = self.get_robot_action_conditions_v2(object_class_python_script)
+        # make robot action conditions
+        # robot_class_python_script = self.get_robot_action_conditions(object_class_python_script)
+        # robot_class_python_script = self.get_robot_action_conditions_v2(object_class_python_script)
+        robot_class_python_script = self.get_robot_action_v3(object_class_python_script)
         time.sleep(0.5)
 
         # make an init state
         init_state_table, init_state_code = self.get_init_state(object_dict=self.object_dict,
-                                                                object_python=object_class_python_script,
-                                                                robot_python=robot_class_python_script)
+                                                                object_python=object_class_python_script)
         time.sleep(0.5)
 
         # make a goal state
-        goal_state_table = self.get_goal_state(init_state_table=init_state_table)
+        goal_state_table = self.get_goal_state(dict_obj=dict_obj)
         time.sleep(0.5)
 
         # direct planning from objects
@@ -625,10 +663,10 @@ class Box:
 
             file_path = os.path.join(self.result_dir, "planning.py")
             with open(file_path, "w") as file:
-                file.write(str(object_class_python_script) + "\n\n\n")
-                file.write(str(robot_class_python_script) + "\n\n")
-                file.write("    def dummy(self):\n        pass\n\n\n")
-                file.write(" # Object Initial State\n")
+                file.write(str(object_class_python_script) + "\n")
+                file.write(str(robot_class_python_script))
+                file.write("    def dummy(self):\n        pass\n\n")
+                file.write("# Object Initial State\n")
                 file.write(str(init_state_code) + "\n\n")
                 file.write(str(planning_python_script) + "\n")
                 file.close()

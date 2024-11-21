@@ -10,7 +10,7 @@ class GPTInterpreter:
     def __init__(self,
                  api_key,
                  setting,
-                 example_data: dict,
+                 example_data: dict = False,
                  version: str = "text",
                  ):
 
